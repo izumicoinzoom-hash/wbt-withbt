@@ -1,7 +1,9 @@
 # デモ用 SPA: このフォルダ内の存在しないパスは demo の index.html に振り向ける
+# Xserver デプロイ用
 RewriteEngine On
 RewriteBase /kiyota/demo/
 RewriteRule ^index\.html$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . index.html [L]
+
