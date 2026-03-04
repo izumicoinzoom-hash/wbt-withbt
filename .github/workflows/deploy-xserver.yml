@@ -1,3 +1,42 @@
+name: Deploy to Xserver (FTP)
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'public_html/.htaccess'
+      - 'public_html/kiyota/**'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      FTP_SERVER: ${{ secrets.FTP_SERVER }}
+      FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+      FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+      FTP_REMOTE_DIR: ${{ secrets.FTP_REMOTE_DIR }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install lftp
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lftp
+
+      - name: Deploy .htaccess and kiyota via FTP
+        run: |
+          lftp -u "$FTP_USERNAME","$FTP_PASSWORD" "$FTP_SERVER" <<EOF
+          set ssl:verify-certificate no
+          set ftp:passive-mode true
+          cd "$FTP_REMOTE_DIR"
+          put -O . public_html/.htaccess
+          mirror -R public_html/kiyota kiyota
+          bye
+          EOF
+
 # GitHub に push すると Xserver の public_html にデプロイする
 # 必須: Secrets に SSH_PRIVATE_KEY, SSH_HOST, SSH_USER, DEPLOY_PATH
 # SSH_PORT は省略時 10022（Xserver 既定）を使用
