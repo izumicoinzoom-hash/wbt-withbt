@@ -1,0 +1,37 @@
+# GitHub に push すると Xserver の public_html にデプロイする
+# 必要な Secrets: SSH_PRIVATE_KEY, SSH_USER, SSH_HOST, DEPLOY_PATH, SSH_PORT
+name: Deploy to Xserver
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'public_html/.htaccess'
+      - 'public_html/kiyota/**'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts 2>/dev/null || true
+
+      - name: Deploy .htaccess to Xserver
+        run: |
+          rsync -avz -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }}" \
+            public_html/.htaccess \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_PATH }}/
+
+      - name: Deploy kiyota to Xserver
+        run: |
+          rsync -avz --delete -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }}" \
+            public_html/kiyota/ \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_PATH }}/kiyota/
