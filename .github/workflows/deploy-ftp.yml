@@ -1,0 +1,32 @@
+name: Deploy kiyota demo via FTP
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'public_html/kiyota/demo/**'
+      - 'public_html/kiyota/.htaccess'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy kiyota/demo to Xserver via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./public_html/
+          # FTP_REMOTE_DIR は /public_html など。末尾に / を付けてから kiyota/demo/ を連結
+          server-dir: ${{ format('{0}{1}', secrets.FTP_REMOTE_DIR, endsWith(secrets.FTP_REMOTE_DIR, '/') && 'kiyota/demo/' || '/kiyota/demo/') }}
+          # kiyota/demo 以下と .htaccess のみアップロード（他のファイルは無視）
+          include: |
+            .htaccess
+            kiyota/demo/**
+          dangerous-clean-slate: false
