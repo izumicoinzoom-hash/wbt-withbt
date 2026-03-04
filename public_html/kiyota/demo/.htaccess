@@ -1,5 +1,6 @@
 # デモ用 SPA: このフォルダ内の存在しないパスは demo の index.html に振り向ける
 # Xserver デプロイ用（2026-03-04 再デプロイ用コメント）
+# 追加再デプロイ用コメント（同じアプリを再送信）
 RewriteEngine On
 RewriteBase /kiyota/demo/
 RewriteRule ^index\.html$ - [L]
