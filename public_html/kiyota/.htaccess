@@ -1,0 +1,4 @@
+# /kiyota/ でアクセスした場合は /kiyota/demo/ へリダイレクト（工程管理アプリを表示）
+RewriteEngine On
+RewriteBase /kiyota/
+RewriteRule ^$ demo/ [L]
