@@ -1,22 +1,16 @@
-RewriteEngine On
-RewriteCond %{HTTPS} !on
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
-SetEnvIf Request_URI ".*" Ngx_Cache_AllCacheMode
-
-<IfModule mod_rewrite.c>
-RewriteEngine On
-RewriteCond %{HTTPS} !=on [NC]
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
-</IfModule>
+# 省略（既存の https 強制など）
 
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteBase /
 RewriteRule ^index\.php$ - [L]
-# ブライトボード（本番・デモ）は WordPress に渡さず、実ファイルを表示する
-RewriteCond %{REQUEST_URI} ^/kiyota
+
+# /kiyota と /demo は WordPress に渡さず、実ファイルを表示する
+RewriteCond %{REQUEST_URI} ^/kiyota [OR]
+RewriteCond %{REQUEST_URI} ^/demo
 RewriteRule ^ - [L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.php [L]
