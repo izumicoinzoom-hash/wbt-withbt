@@ -1,13 +1,7 @@
-# /kiyota/ で工程管理アプリ（SPA）を表示。存在しないパスは index.html に振り向ける
-<IfModule mod_authz_core.c>
-  Require all granted
-</IfModule>
-DirectoryIndex index.html
-<IfModule mod_rewrite.c>
+# デモ用 SPA: このフォルダ内の存在しないパスは demo の index.html に振り向ける
 RewriteEngine On
-RewriteBase /kiyota/
+RewriteBase /kiyota/demo/
 RewriteRule ^index\.html$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . index.html [L]
-</IfModule>
