@@ -12,9 +12,10 @@ RewriteRule ^$ /kiyota/ [R=302,L,QSA]
 
 RewriteRule ^index\.php$ - [L]
 
-# /kiyota と /demo は WordPress に渡さず、実ファイルを表示する
+# /kiyota, /demo, /demodeta は WordPress に渡さず、実ファイルを表示する
 RewriteCond %{REQUEST_URI} ^/kiyota [OR]
-RewriteCond %{REQUEST_URI} ^/demo
+RewriteCond %{REQUEST_URI} ^/demo [OR]
+RewriteCond %{REQUEST_URI} ^/demodeta
 RewriteRule ^ - [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f

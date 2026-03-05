@@ -7,6 +7,7 @@ on:
     paths:
       - 'public_html/.htaccess'
       - 'public_html/kiyota/**'
+      - 'public_html/demodeta/**'
   workflow_dispatch:
 
 jobs:
@@ -24,11 +25,12 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./public_html/
           server-dir: ${{ format('{0}{1}', secrets.FTP_REMOTE_DIR, endsWith(secrets.FTP_REMOTE_DIR, '/') && '' || '/') }}
-          # ルート .htaccess と /kiyota/ 直下のみデプロイ（index.html, assets, .htaccess, estimator 等）
+          # ルート .htaccess、kiyota、demodeta をデプロイ
           include: |
             .htaccess
             kiyota/.htaccess
             kiyota/index.html
             kiyota/assets/**
             kiyota/estimator/**
+            demodeta/**
           dangerous-clean-slate: false

@@ -1,0 +1,15 @@
+# デモ用 SPA: このフォルダ内の存在しないパスは demo の index.html に振り向ける
+# 403 対策: このディレクトリへのアクセスを明示的に許可
+<IfModule mod_authz_core.c>
+  Require all granted
+</IfModule>
+DirectoryIndex index.html
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /demodeta/demo/
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . index.html [L]
+</IfModule>
+
