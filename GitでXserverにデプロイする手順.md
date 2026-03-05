@@ -199,7 +199,7 @@ git push -u origin main
 
 ## 403 Forbidden が出る場合の確認
 
-**https://withbt.com/kiyota/demo/** で「403 Forbidden」になる場合は、次を順に確認してください。
+**https://withbt.com/kiyota/demo/** や **https://withbt.com/demodeta/demo/** で「403 Forbidden」になる場合は、次を順に確認してください。
 
 ### 1. FTP デプロイが実行されているか
 
@@ -209,19 +209,20 @@ git push -u origin main
 
 ### 2. サーバーにファイルがあるか
 
-- Xserver の **ファイル管理**（または FTP）で、**ドキュメントルート**（例: `withbt.com/public_html/`）の下に **`kiyota/demo/`** フォルダがあるか確認する。
+- Xserver の **ファイル管理**（または FTP）で、**ドキュメントルート**（例: `withbt.com/public_html/`）の下に **`kiyota/demo/`** や **`demodeta/demo/`** があるか確認する。
 - その中に **`index.html`** と **`assets`** フォルダがあるか確認する。
 - 無い場合は、FTP の **FTP_REMOTE_DIR**（Secret）が誤っている可能性がある。withbt.com のドキュメントルートが `withbt.com/public_html/` なら、**FTP_REMOTE_DIR** は **`withbt.com/public_html/`**（末尾スラッシュ可）にする。
 
-### 3. パーミッション
+### 3. パーミッション（統一推奨）
 
-- **ディレクトリ**: 705 または 755（読み＋実行が許可されていること）
-- **ファイル**（index.html など）: 644
-- Xserver のファイル管理で `kiyota` と `kiyota/demo` の権限を確認し、必要なら 705 や 755 に変更する。
+- **フォルダ（ディレクトリ）**: **705** に統一
+- **ファイル**（index.html など）: **604** に統一
+- Xserver のファイル管理で、次のディレクトリとその中身を上記に揃えると 403 になりにくい。  
+  **`kiyota`** と **`kiyota/demo`** 以下、**`demodeta`** と **`demodeta/demo`** 以下。
 
 ### 4. ルートの .htaccess が反映されているか
 
-- サーバー上の **ドキュメントルート直下の .htaccess** に、`/kiyota` を WordPress に渡さない設定が入っているか確認する（手順書の `public_html/.htaccess` と同じ内容）。
+- サーバー上の **ドキュメントルート直下の .htaccess** に、`/kiyota` と `/demodeta` を WordPress に渡さない設定が入っているか確認する（手順書の `public_html/.htaccess` と同じ内容）。
 
 ---
 
