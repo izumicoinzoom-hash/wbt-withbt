@@ -1,4 +1,4 @@
-name: Deploy kiyota demo via FTP
+name: Deploy kiyota via FTP
 
 on:
   push:
@@ -6,8 +6,7 @@ on:
       - main
     paths:
       - 'public_html/.htaccess'
-      - 'public_html/kiyota/demo/**'
-      - 'public_html/kiyota/.htaccess'
+      - 'public_html/kiyota/**'
   workflow_dispatch:
 
 jobs:
@@ -17,19 +16,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Deploy kiyota/demo to Xserver via FTP
+      - name: Deploy kiyota to Xserver via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./public_html/
-          # FTP_REMOTE_DIR は withbt.com/public_html/ など（末尾 / 推奨）。
-          # server-dir 直下に local-dir のパス構造（kiyota/demo/…）をそのまま展開する。
           server-dir: ${{ format('{0}{1}', secrets.FTP_REMOTE_DIR, endsWith(secrets.FTP_REMOTE_DIR, '/') && '' || '/') }}
-          # public_html/.htaccess、kiyota/.htaccess、kiyota/demo 以下をアップロード
+          # ルート .htaccess と /kiyota/ 直下のみデプロイ（index.html, assets, .htaccess, estimator 等）
           include: |
             .htaccess
             kiyota/.htaccess
-            kiyota/demo/**
+            kiyota/index.html
+            kiyota/assets/**
+            kiyota/estimator/**
           dangerous-clean-slate: false

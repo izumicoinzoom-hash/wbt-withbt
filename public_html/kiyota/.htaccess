@@ -1,2 +1,13 @@
-# 本番 https://withbt.com/kiyota/ 用。デモへのリダイレクトは行わない（本番に支障をきたさないため）。
-# デモは /kiyota/demo/ で別途公開。
+# /kiyota/ で工程管理アプリ（SPA）を表示。存在しないパスは index.html に振り向ける
+<IfModule mod_authz_core.c>
+  Require all granted
+</IfModule>
+DirectoryIndex index.html
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /kiyota/
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . index.html [L]
+</IfModule>
