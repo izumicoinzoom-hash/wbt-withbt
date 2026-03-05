@@ -27,8 +27,9 @@ jobs:
           # FTP_REMOTE_DIR は withbt.com/public_html/ など（末尾 / 推奨）。
           # server-dir 直下に local-dir のパス構造（kiyota/demo/…）をそのまま展開する。
           server-dir: ${{ format('{0}{1}', secrets.FTP_REMOTE_DIR, endsWith(secrets.FTP_REMOTE_DIR, '/') && '' || '/') }}
-          # public_html/.htaccess と public_html/kiyota/demo 以下のみアップロード（他のファイルは無視）
+          # public_html/.htaccess、kiyota/.htaccess、kiyota/demo 以下をアップロード
           include: |
             .htaccess
+            kiyota/.htaccess
             kiyota/demo/**
           dangerous-clean-slate: false
