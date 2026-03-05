@@ -1,4 +1,2 @@
-# /kiyota/ でアクセスした場合は /kiyota/demo/ へリダイレクト（ブラウザのURLを変えて相対パスを正しく解決）
-RewriteEngine On
-RewriteBase /kiyota/
-RewriteRule ^$ demo/ [R=302,L]
+# 本番 https://withbt.com/kiyota/ 用。デモへのリダイレクトは行わない（本番に支障をきたさないため）。
+# デモは /kiyota/demo/ で別途公開。

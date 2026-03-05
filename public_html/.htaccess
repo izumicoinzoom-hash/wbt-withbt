@@ -4,6 +4,12 @@
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteBase /
+
+# NFCタグ用: トップ(/)で nfcStandalone と nfcTaskId が付いていたら工程管理アプリ(/kiyota/)へリダイレクト
+RewriteCond %{QUERY_STRING} nfcStandalone=1 [NC]
+RewriteCond %{QUERY_STRING} nfcTaskId= [NC]
+RewriteRule ^$ /kiyota/ [R=302,L,QSA]
+
 RewriteRule ^index\.php$ - [L]
 
 # /kiyota と /demo は WordPress に渡さず、実ファイルを表示する
