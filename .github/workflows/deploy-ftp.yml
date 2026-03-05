@@ -5,6 +5,7 @@ on:
     branches:
       - main
     paths:
+      - 'public_html/.htaccess'
       - 'public_html/kiyota/demo/**'
       - 'public_html/kiyota/.htaccess'
   workflow_dispatch:

@@ -192,8 +192,36 @@ git push -u origin main
 
 ## 4. 動作確認
 
-1. GitHub の **Actions** タブで **Deploy to Xserver** が **緑（成功）** になっているか確認する。
+1. GitHub の **Actions** タブで **Deploy to Xserver**（または **Deploy kiyota demo via FTP**）が **緑（成功）** になっているか確認する。
 2. ブラウザで **https://withbt.com/kiyota/demo/** を開き、デモ画面が表示されるか確認する。
+
+---
+
+## 403 Forbidden が出る場合の確認
+
+**https://withbt.com/kiyota/demo/** で「403 Forbidden」になる場合は、次を順に確認してください。
+
+### 1. FTP デプロイが実行されているか
+
+- GitHub の **Actions** タブで **「Deploy kiyota demo via FTP」** が **緑（成功）** で実行されているか確認する。
+- **paths** で `public_html/kiyota/demo/**` や `public_html/.htaccess` を変更した push のときだけワークフローが動く。`.htaccess` だけの変更でもトリガーされるようにしてある。
+- 一度も動いていない場合は、**Actions** から **「Run workflow」** で手動実行する。
+
+### 2. サーバーにファイルがあるか
+
+- Xserver の **ファイル管理**（または FTP）で、**ドキュメントルート**（例: `withbt.com/public_html/`）の下に **`kiyota/demo/`** フォルダがあるか確認する。
+- その中に **`index.html`** と **`assets`** フォルダがあるか確認する。
+- 無い場合は、FTP の **FTP_REMOTE_DIR**（Secret）が誤っている可能性がある。withbt.com のドキュメントルートが `withbt.com/public_html/` なら、**FTP_REMOTE_DIR** は **`withbt.com/public_html/`**（末尾スラッシュ可）にする。
+
+### 3. パーミッション
+
+- **ディレクトリ**: 705 または 755（読み＋実行が許可されていること）
+- **ファイル**（index.html など）: 644
+- Xserver のファイル管理で `kiyota` と `kiyota/demo` の権限を確認し、必要なら 705 や 755 に変更する。
+
+### 4. ルートの .htaccess が反映されているか
+
+- サーバー上の **ドキュメントルート直下の .htaccess** に、`/kiyota` を WordPress に渡さない設定が入っているか確認する（手順書の `public_html/.htaccess` と同じ内容）。
 
 ---
 
