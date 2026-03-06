@@ -27,6 +27,7 @@ jobs:
             .user.ini
             *.html
             *.md
+            mail_to_owner.php
             images/**
             data/**
             kiyota/.htaccess
