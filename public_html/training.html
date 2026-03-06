@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>特定技能2号自動車整備研修 | WithBrightTomorrow</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            navy: '#0F172A',
+                            dark: '#020617',
+                            orange: '#EA580C',
+                            red: '#DC2626',
+                            slate: '#F1F5F9',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                        display: ['"Oswald"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #0F172A; color: #F8FAFC; }
+        .img-placeholder {
+            background-color: #1e293b;
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23334155' fill-opacity='0.4' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+            display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;
+        }
+        .img-placeholder img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; transition: 0.5s; }
+        .group:hover .img-placeholder img { opacity: 0.8; transform: scale(1.05); }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0F172A; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #EA580C; }
+        .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+        .bridge-connector { position: relative; height: 60px; width: 100%; display: flex; align-items: center; justify-content: center; z-index: 10; }
+        @media (min-width: 768px) { .bridge-connector { height: auto; width: 100px; } }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-orange selection:text-white">
+
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 bg-brand-navy/90 backdrop-blur-md border-b border-slate-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <a href="index.html" class="flex items-center space-x-2 hover:opacity-80 transition cursor-pointer">
+                        <div class="bg-brand-orange p-1 rounded text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        </div>
+                        <span class="font-sans font-bold text-xl tracking-tight text-white">WithBrightTomorrow</span>
+                    </a>
+                </div>
+                
+                <div class="flex md:hidden items-center gap-3">
+                    <a href="login.html" class="text-slate-300 hover:text-white transition text-sm font-medium">会員ログイン</a>
+                    <a href="download.html" class="bg-brand-orange hover:bg-orange-600 text-white px-3 py-2 rounded-md font-bold text-xs transition whitespace-nowrap">資料DL</a>
+                </div>
+                <div class="hidden md:flex space-x-8 items-center gap-12">
+                    <div class="flex space-x-8 items-center">
+                        <a href="#problem" class="text-slate-300 hover:text-white transition text-sm font-medium">課題</a>
+                        <a href="#gallery" class="text-slate-300 hover:text-white transition text-sm font-medium">研修風景</a>
+                        <a href="#curriculum" class="text-slate-300 hover:text-white transition text-sm font-medium">カリキュラム</a>
+                        <a href="login.html" class="text-slate-300 hover:text-white transition text-sm font-medium">会員ログイン</a>
+                    </div>
+                    <div class="flex items-center gap-6">
+                        <a href="tel:096-357-7144" class="flex items-center gap-2 group">
+                            <div class="bg-slate-700 p-2 rounded-full text-brand-orange group-hover:bg-brand-orange group-hover:text-white transition-colors">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-[10px] text-slate-400 leading-none">お電話でのお問い合わせ</div>
+                                <div class="text-lg font-bold font-mono text-white group-hover:text-brand-orange transition-colors">096-357-7144</div>
+                            </div>
+                        </a>
+                        <a href="download.html" class="bg-brand-orange hover:bg-orange-600 text-white px-4 py-2 rounded-md font-bold text-sm transition shadow-lg shadow-orange-900/20 transform hover:-translate-y-0.5 whitespace-nowrap">
+                            資料ダウンロード
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="img-placeholder w-full h-full">
+                <img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?q=80&w=2832&auto=format&fit=crop" alt="[整備工場の背景画像]" class="w-full h-full object-cover">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-navy/95 via-brand-navy/80 to-brand-navy/60"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-up">
+            <span class="inline-block py-1 px-3 rounded-full bg-slate-800/80 border border-slate-500 text-brand-orange font-mono text-xs md:text-sm mb-6 tracking-widest backdrop-blur-sm">
+                FOR AUTOMOTIVE INDUSTRY LEADERS
+            </span>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-sans font-black tracking-tight leading-tight mb-6 text-shadow-lg">
+                その実習生を、<br/>
+                <span class="text-white">現場のリーダーへ。</span>
+            </h1>
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-slate-200 font-light drop-shadow-md leading-relaxed">
+                インドネシア人整備士特化。<br>
+                特定技能2号合格率<span class="text-brand-orange font-bold font-mono text-2xl">No.1</span>の<br>
+                企業向け研修プログラム。
+            </p>
+            
+            <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+                <a href="download.html" class="px-8 py-4 bg-brand-orange text-white rounded-lg font-bold text-lg shadow-lg shadow-orange-900/50 flex items-center justify-center gap-2 hover:bg-orange-600 transition transform hover:scale-105">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    カリキュラム資料をDL
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="problem" class="py-24 bg-brand-dark relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-16 fade-up">
+                <h2 class="text-3xl font-bold font-sans text-white mb-4 border-l-4 border-brand-red pl-4">
+                    「5年の壁」による<br class="md:hidden" />損失を防ぐ
+                </h2>
+                <p class="text-slate-400 text-lg leading-relaxed">
+                    特定技能1号の期限で<br class="md:hidden" />帰国してしまう。<br>
+                    人材流出コストは甚大です。<br>
+                    私たちはそれを<br class="md:hidden" />「長期雇用のチャンス」に変えます。
+                </p>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-0 items-stretch">
+                <div class="flex-1 bg-slate-900/80 border border-slate-700 rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none p-8 fade-up relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition">
+                        <svg class="w-32 h-32 text-brand-red" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                    </div>
+                    <div class="text-brand-red font-bold tracking-widest text-sm mb-4">CURRENT STATE</div>
+                    <h3 class="text-2xl font-bold text-white mb-6">技術とコストの流出</h3>
+                    <ul class="space-y-4 text-slate-400">
+                        <li class="flex items-start gap-3">
+                            <span class="text-brand-red text-xl">✕</span>
+                            <div>
+                                <strong class="text-slate-200">5年で帰国必須</strong>
+                                <p class="text-sm">特定技能1号の<br class="md:hidden" />在留期限満了</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-brand-red text-xl">✕</span>
+                            <div>
+                                <strong class="text-slate-200">指示待ち作業</strong>
+                                <p class="text-sm">日本語能力の<br class="md:hidden" />限界による停滞</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bridge-connector bg-slate-800 md:bg-transparent fade-up">
+                    <div class="hidden md:flex items-center justify-center h-full w-full relative">
+                        <div class="absolute inset-y-0 -left-1 w-8 bg-slate-900 clip-path-chevron-right"></div>
+                        <div class="h-16 w-16 bg-brand-orange text-white rounded-full flex items-center justify-center shadow-lg z-20 animate-pulse border-4 border-brand-dark">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </div>
+                    </div>
+                    <div class="md:hidden flex items-center justify-center py-4 w-full">
+                        <div class="h-12 w-12 bg-brand-orange text-white rounded-full flex items-center justify-center shadow-lg z-20">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex-1 bg-gradient-to-br from-brand-navy to-blue-900 border border-brand-orange rounded-b-2xl md:rounded-r-2xl md:rounded-bl-none p-8 fade-up relative overflow-hidden group shadow-[0_0_30px_rgba(234,88,12,0.15)]">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition">
+                        <svg class="w-32 h-32 text-brand-orange" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    </div>
+                    <div class="text-brand-orange font-bold tracking-widest text-sm mb-4">FUTURE GOAL</div>
+                    <h3 class="text-2xl font-bold text-white mb-6">リーダーとして定着</h3>
+                    <ul class="space-y-4 text-slate-200">
+                        <li class="flex items-start gap-3">
+                            <div class="bg-brand-orange/20 p-1 rounded text-brand-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                            <div>
+                                <strong class="text-white">特定2号で無期限雇用</strong>
+                                <p class="text-sm text-slate-300">家族帯同も可能になり、<br class="md:hidden" />生活基盤が安定</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="bg-brand-orange/20 p-1 rounded text-brand-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg></div>
+                            <div>
+                                <strong class="text-white">新人指導・通訳</strong>
+                                <p class="text-sm text-slate-300">母国語で後輩を教える<br class="md:hidden" />プレイングマネージャーへ</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-24 bg-slate-950">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 fade-up">
+                <span class="text-brand-orange font-mono text-sm tracking-wider">TRAINING ATMOSPHERE</span>
+                <h2 class="text-3xl font-bold text-white mt-2">実際の研修風景</h2>
+                <p class="text-slate-400 mt-4 leading-relaxed">
+                    真剣な眼差しと、<br class="md:hidden" />活気あるコミュニケーション。<br>
+                    現場と同じ緊張感で学ぶ<br class="md:hidden" />「実戦形式」の空間です。
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 h-96">
+                <div class="group relative rounded-xl overflow-hidden shadow-lg fade-up" style="transition-delay: 100ms;">
+                    <div class="img-placeholder w-full h-full">
+                        <img src="https://images.unsplash.com/photo-1544531586-fde5298cdd40?q=80&w=2940&auto=format&fit=crop" alt="[写真: 教室での熱心な講義風景]" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+                        <span class="text-brand-orange text-xs font-bold font-mono">THEORY</span>
+                        <h3 class="text-white font-bold text-lg">専門用語の徹底習得</h3>
+                    </div>
+                </div>
+                <div class="group relative rounded-xl overflow-hidden shadow-lg md:col-span-1 fade-up" style="transition-delay: 200ms;">
+                    <div class="img-placeholder w-full h-full">
+                        <img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?q=80&w=2940&auto=format&fit=crop" alt="[写真: エンジンルームを覗き込む整備風景]" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+                        <span class="text-brand-orange text-xs font-bold font-mono">PRACTICAL</span>
+                        <h3 class="text-white font-bold text-lg">故障探求の実践</h3>
+                    </div>
+                </div>
+                <div class="group relative rounded-xl overflow-hidden shadow-lg fade-up" style="transition-delay: 300ms;">
+                    <div class="img-placeholder w-full h-full">
+                        <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2832&auto=format&fit=crop" alt="[写真: 講師と笑顔で話す受講生]" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+                        <span class="text-brand-orange text-xs font-bold font-mono">MENTORING</span>
+                        <h3 class="text-white font-bold text-lg">母国語サポート</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="solution" class="py-24 bg-brand-navy">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-up">
+                <span class="text-brand-orange font-mono text-sm tracking-wider">WHY CHOOSE US</span>
+                <h2 class="text-3xl md:text-5xl font-sans font-bold text-white mt-2">
+                    現場発想の、<br/>合格エンジニアリング。
+                </h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-6 h-auto md:h-[600px]">
+                <div class="md:col-span-2 md:row-span-1 bg-slate-800 border border-slate-700 rounded-xl p-8 relative overflow-hidden flex flex-col justify-center transition hover:border-brand-orange hover:-translate-y-1 fade-up">
+                    <div class="flex items-baseline gap-4 relative z-10">
+                        <span class="text-6xl md:text-8xl font-display font-bold text-brand-orange tracking-tighter">92%</span>
+                        <span class="text-xl text-white font-bold">Pass Rate</span>
+                    </div>
+                    <p class="text-slate-400 mt-2 relative z-10 max-w-lg leading-relaxed">
+                        業界平均を大きく上回る合格率。<br class="md:hidden" />過去問の徹底分析と、<br class="md:hidden" />独自の反復学習メソッドが、<br class="md:hidden" />合格への最短ルートを作ります。
+                    </p>
+                </div>
+                <div class="md:col-span-1 md:row-span-2 rounded-xl relative overflow-hidden group fade-up bg-slate-800">
+                    <div class="absolute inset-0 img-placeholder">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=2776&auto=format&fit=crop" alt="[写真: インドネシア人講師]" class="w-full h-full object-cover opacity-50 group-hover:opacity-60 transition">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent p-6 flex flex-col justify-end">
+                        <div class="bg-brand-red/90 w-fit px-3 py-1 rounded text-white text-xs font-bold mb-4">ID / JP Speaker</div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Native Instructor</h3>
+                        <p class="text-slate-200 text-sm leading-relaxed mb-4">
+                            「細かいニュアンスが<br class="md:hidden" />伝わらない」という壁を解消。<br>
+                            インドネシア人専任講師が<br class="md:hidden" />母国語でメンタル面まで<br class="md:hidden" />サポートします。
+                        </p>
+                    </div>
+                </div>
+                <div class="md:col-span-1 md:row-span-1 bg-slate-800 border border-slate-700 rounded-xl p-6 relative overflow-hidden transition hover:border-brand-orange hover:-translate-y-1 fade-up">
+                    <div class="flex items-center gap-3 mb-4">
+                        <svg class="text-brand-orange" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                        <h3 class="text-xl font-bold text-white">Practical & Logic</h3>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        学科（論理）と実技（故障診断）の<br class="md:hidden" />バランスを重視。<br>
+                        現場で活きる「考える力」を<br class="md:hidden" />養います。
+                    </p>
+                </div>
+                <div class="md:col-span-1 md:row-span-1 bg-slate-800 border border-slate-700 rounded-xl p-6 relative overflow-hidden transition hover:border-brand-orange hover:-translate-y-1 fade-up">
+                    <div class="flex items-center gap-3 mb-4">
+                        <svg class="text-brand-orange" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        <h3 class="text-xl font-bold text-white">Online & On-site</h3>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        平日夜間のオンライン講義と、<br class="md:hidden" />週末の集中実技講習。<br>
+                        業務を止めずに受講可能な<br class="md:hidden" />ハイブリッド型カリキュラム。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-12 bg-gradient-to-r from-slate-900 to-brand-navy border-t border-slate-800">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <div class="inline-block bg-brand-red text-white text-xs font-bold px-3 py-1 rounded-full mb-4 animate-pulse">
+                期間限定キャンペーン
+            </div>
+            <h2 class="text-2xl md:text-3xl font-bold text-white mb-2">
+                特定技能2号合格カリキュラム<br class="md:hidden" />一式導入パッケージ
+            </h2>
+            <div class="flex flex-col md:flex-row items-center justify-center gap-2 mb-6">
+                <span class="text-slate-400 line-through text-sm">通常価格 ¥250,000</span>
+                <span class="text-brand-orange font-bold text-3xl">¥60,000 <span class="text-sm text-white">(税別)</span></span>
+            </div>
+            <p class="text-slate-400 text-sm mb-8 max-w-2xl mx-auto leading-relaxed">
+                カリキュラム詳細、動画ライブラリ、<br class="md:hidden" />助成金申請テンプレートなど、<br>
+                合格に必要なツールを全てセットにした<br class="md:hidden" />特別プランです。
+            </p>
+            <a href="campaign.html" class="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-navy rounded-lg font-bold text-lg hover:bg-brand-orange hover:text-white transition-all transform hover:scale-105 shadow-lg">
+                キャンペーン詳細・お申し込みはこちら
+                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </a>
+        </div>
+    </section>
+
+    <footer class="bg-slate-950 py-12 pb-20 pl-24 md:pl-4 border-t border-slate-800 text-slate-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex items-center justify-center space-x-2 mb-4">
+                <div class="bg-brand-orange/20 p-1 rounded text-brand-orange">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </div>
+                <span class="font-bold text-white text-lg">WithBrightTomorrow</span>
+            </div>
+            <p class="mb-4">Engineering Bridge - 特定技能2号自動車整備研修</p>
+            <p class="mb-2"><a href="index.html" class="text-brand-orange hover:underline">トップページ</a></p>
+            <div class="text-xs text-slate-600">
+                &copy; 2026 WithBrightTomorrow Inc. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    navbar.classList.add('shadow-lg');
+                } else {
+                    navbar.classList.remove('shadow-lg');
+                }
+            });
+        });
+    </script>
+
+    <style>
+        .goog-te-banner-frame.skiptranslate { display: none !important; }
+        body { top: 0px !important; }
+        
+        #lang-toggle-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px; 
+            z-index: 9999;
+            background: linear-gradient(135deg, #DC2626 0%, #991b1b 100%); 
+            color: white;
+            border: 2px solid white;
+            border-radius: 50px;
+            padding: 10px 20px;
+            font-family: 'Oswald', sans-serif;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        #lang-toggle-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+        }
+        #lang-toggle-btn:active {
+            transform: scale(0.95);
+        }
+    </style>
+
+    <div id="google_translate_element" style="display:none;"></div>
+
+    <button id="lang-toggle-btn" onclick="toggleLanguage()">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path></svg>
+        <span id="lang-text">INDONESIA</span>
+    </button>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'ja', 
+                includedLanguages: 'id,ja',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE, 
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script type="text/javascript">
+        function toggleLanguage() {
+            const cookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
+            let currentLang = '/ja/ja'; 
+            
+            if (cookie) {
+                currentLang = cookie.split('=')[1];
+            }
+
+            let newLang = '';
+            if (currentLang.includes('/id')) {
+                newLang = '/ja/ja'; 
+            } else {
+                newLang = '/ja/id'; 
+            }
+
+            document.cookie = `googtrans=${newLang}; path=/; domain=${window.location.hostname}`;
+            document.cookie = `googtrans=${newLang}; path=/;`;
+            window.location.reload();
+        }
+
+        window.addEventListener('load', function() {
+            const cookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
+            const btnText = document.getElementById('lang-text');
+            const btn = document.getElementById('lang-toggle-btn');
+            
+            if (cookie && cookie.includes('/id')) {
+                btnText.textContent = "JAPANESE"; 
+                btn.style.background = "linear-gradient(135deg, #0F172A 0%, #1e293b 100%)"; 
+            } else {
+                btnText.textContent = "INDONESIA"; 
+                btn.style.background = "linear-gradient(135deg, #DC2626 0%, #991b1b 100%)"; 
+            }
+        });
+    </script>
+</body>
+</html>

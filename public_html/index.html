@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WithBright Tomorrow | 明るい明日と共に</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            navy: '#0F172A',
+                            dark: '#020617',
+                            orange: '#EA580C',
+                            red: '#DC2626',
+                            slate: '#F1F5F9',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                        display: ['"Oswald"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #0F172A; color: #F8FAFC; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0F172A; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #EA580C; }
+        .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+        .card-link { transition: all 0.25s; }
+        .card-link:hover { border-color: #EA580C; transform: translateY(-4px); box-shadow: 0 20px 40px -12px rgba(234, 88, 12, 0.25); }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-orange selection:text-white">
+
+    <nav class="fixed top-0 w-full z-50 bg-brand-navy/95 backdrop-blur-md border-b border-slate-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center space-x-2 hover:opacity-80 transition">
+                    <div class="bg-brand-orange p-1 rounded text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                    </div>
+                    <span class="font-sans font-bold text-xl tracking-tight text-white">WithBright Tomorrow</span>
+                </a>
+                <div class="flex items-center gap-4 md:gap-8">
+                    <a href="#identity" class="text-slate-300 hover:text-white text-sm font-medium hidden sm:inline">私たちについて</a>
+                    <a href="#services" class="text-slate-300 hover:text-white text-sm font-medium hidden sm:inline">サービス</a>
+                    <a href="login.html" class="text-slate-300 hover:text-white text-sm font-medium">会員ログイン</a>
+                    <a href="tel:096-357-7144" class="flex items-center gap-2 text-slate-300 hover:text-brand-orange transition">
+                        <span class="font-mono font-bold text-white">096-357-7144</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="relative min-h-[70vh] flex items-center justify-center pt-20 pb-16 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-900/80 to-brand-navy z-0"></div>
+        <div class="relative z-10 max-w-5xl mx-auto px-4 text-center fade-up">
+            <span class="inline-block py-1 px-4 rounded-full bg-brand-orange/20 border border-brand-orange text-brand-orange font-mono text-xs md:text-sm mb-6 tracking-widest">
+                Mission · Vision · Value
+            </span>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-sans font-black tracking-tight text-white mb-6 leading-tight">
+                WithBright<br/>
+                <span class="text-brand-orange">Tomorrow</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-300 font-light max-w-2xl mx-auto">
+                明るい明日と共に。<br/>
+                現場の不条理をテクノロジーと情熱で解体し、自動車業界に『明るい明日』を実装する。
+            </p>
+        </div>
+    </section>
+
+    <!-- OUR IDENTITY -->
+    <section id="identity" class="py-20 md:py-28 bg-brand-dark">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl md:text-3xl font-bold text-white mb-4 border-l-4 border-brand-orange pl-4 fade-up">
+                OUR IDENTITY｜社名に込めた想い
+            </h2>
+            <p class="text-slate-300 text-lg leading-relaxed fade-up">
+                <strong class="text-white">「WithBright Tomorrow（明るい明日と共に）」</strong><br/>
+                代表の「兼明（Bright）」と、妻の「あすか（Tomorrow）」。私たちの社名には、ただの言葉遊びではない、家族への愛と「明日を明るくする」という揺るぎない覚悟が込められています。現場の孤独や業界の不条理に共に立ち向かい、関わるすべての人たちの未来を明るく照らす。それが私たちの存在意義です。
+            </p>
+        </div>
+    </section>
+
+    <!-- MISSION -->
+    <section class="py-20 md:py-28 bg-brand-navy border-t border-slate-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl md:text-3xl font-bold text-white mb-4 border-l-4 border-brand-red pl-4 fade-up">
+                MISSION｜私たちが果たすべき使命
+            </h2>
+            <p class="text-slate-300 text-lg leading-relaxed fade-up">
+                現場の「不条理」をテクノロジーと情熱で解体し、自動車業界に『明るい明日』を実装する。属人化した工程、保険会社主導のレバレート搾取、知識不足による見積もり漏れ、そして人材の流出。私たちは、現場を苦しめるこれらの「不条理」に対して、<strong class="text-white">現場発想の「DXツール」</strong>と、<strong class="text-white">泥臭い「リアルな知見」</strong>の両輪で立ち向かいます。全国の社長たちを救い、業界の未来を明るく照らすことが、私たちの使命です。
+            </p>
+        </div>
+    </section>
+
+    <!-- VISION -->
+    <section class="py-20 md:py-28 bg-slate-950 border-t border-slate-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl md:text-3xl font-bold text-white mb-4 border-l-4 border-brand-orange pl-4 fade-up">
+                VISION｜私たちが目指す未来の景色
+            </h2>
+            <p class="text-slate-300 text-lg leading-relaxed fade-up">
+                国境もアナログの壁も越え、正当な利益と誇りが循環する<strong class="text-brand-orange">「次世代スマート・ファクトリー」の標準</strong>を創る。私たちが目指すのは、スマホ一つで現場がスムーズに回り、国籍に関係なく優秀なリーダーが育つ業界です。正しい見積もりと交渉でしっかり利益を出し、社長が潤うことでスタッフに還元され、最終的にエンドユーザーへ最高のサービスが提供される。そんな「正しい循環」が生まれる業界のニュースタンダードを、私たちが創り出します。
+            </p>
+        </div>
+    </section>
+
+    <!-- VALUE -->
+    <section class="py-20 md:py-28 bg-brand-dark border-t border-slate-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl md:text-3xl font-bold text-white mb-8 border-l-4 border-brand-orange pl-4 fade-up">
+                VALUE｜私たちの行動指針（DNA）
+            </h2>
+            <p class="text-brand-orange font-bold text-lg mb-8 fade-up">【 情の伝播（Spread the "JO"） 】</p>
+            <p class="text-slate-400 mb-12 fade-up">私たちは、3つの「情」を自ら体現し、業界全体へ伝染させていきます。</p>
+            
+            <div class="space-y-10 md:space-y-12">
+                <div class="bg-slate-800/60 border border-slate-700 rounded-xl p-6 md:p-8 fade-up card-link">
+                    <h3 class="text-xl font-bold text-white mb-2">1. 信情（Heart）：愛と伴走の心をもつ</h3>
+                    <p class="text-slate-400 leading-relaxed">孤独に戦う社長や、言葉の壁に直面する外国人材の悩みに本気で寄り添います。ただシステムやノウハウを売るのではなく、「共に未来を良くするパートナー」として、人としての情を大切にします。</p>
+                </div>
+                <div class="bg-slate-800/60 border border-slate-700 rounded-xl p-6 md:p-8 fade-up card-link">
+                    <h3 class="text-xl font-bold text-white mb-2">2. 実情（Real）：現場の「泥臭い真実」で戦う</h3>
+                    <p class="text-slate-400 leading-relaxed">机上の空論は語りません。自らの現場で見聞きし、実践して効果があった「生の情報（正しい指数、交渉術、本当に使えるシステム）」だけを武器にし、業界のリアルをアップデートします。</p>
+                </div>
+                <div class="bg-slate-800/60 border border-slate-700 rounded-xl p-6 md:p-8 fade-up card-link">
+                    <h3 class="text-xl font-bold text-white mb-2">3. 熱情（Excitement）：ワクワクする変化を仕掛ける</h3>
+                    <p class="text-slate-400 leading-relaxed">DX化や新しい人材の受け入れを「やらされる面倒なこと」ではなく、「未来が明るくなるワクワクする挑戦」へと変えていきます。ホワイトボードがスマホに変わるような、現場の熱量が高まる仕掛けを作り続けます。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- サービス・リンク -->
+    <section id="services" class="py-20 md:py-28 bg-brand-navy border-t border-slate-800">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl md:text-3xl font-bold text-white mb-2 text-center fade-up">サービス</h2>
+            <p class="text-slate-400 text-center mb-12 fade-up">現場と明日を照らす、私たちの取り組み</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="training.html" class="card-link block bg-slate-800/80 border-2 border-slate-700 rounded-xl p-6 hover:border-brand-orange">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="bg-brand-orange/20 p-2 rounded-lg">
+                            <svg class="w-6 h-6 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">特定技能2号 自動車整備研修</h3>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed">インドネシア人整備士特化。合格率No.1の企業向け研修プログラム。実習生を現場のリーダーへ。</p>
+                    <span class="inline-block mt-4 text-brand-orange font-bold text-sm">詳細を見る →</span>
+                </a>
+
+                <a href="campaign.html" class="card-link block bg-slate-800/80 border-2 border-slate-700 rounded-xl p-6 hover:border-brand-orange">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="bg-brand-red/20 p-2 rounded-lg">
+                            <svg class="w-6 h-6 text-brand-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">キャンペーン</h3>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed">特定技能2号合格カリキュラム一式導入パッケージ。期間限定特別価格でご提供。</p>
+                    <span class="inline-block mt-4 text-brand-orange font-bold text-sm">詳細を見る →</span>
+                </a>
+
+                <a href="download.html" class="card-link block bg-slate-800/80 border-2 border-slate-700 rounded-xl p-6 hover:border-brand-orange">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="bg-brand-orange/20 p-2 rounded-lg">
+                            <svg class="w-6 h-6 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">資料ダウンロード</h3>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed">カリキュラム資料・導入ガイドなど、ご活用いただける資料をダウンロードできます。</p>
+                    <span class="inline-block mt-4 text-brand-orange font-bold text-sm">資料をDL →</span>
+                </a>
+
+                <a href="curriculum.html" class="card-link block bg-slate-800/80 border-2 border-slate-700 rounded-xl p-6 hover:border-brand-orange">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="bg-slate-600/50 p-2 rounded-lg">
+                            <svg class="w-6 h-6 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">カリキュラム</h3>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed">研修カリキュラムの全体像。16項目の学習体系をご確認いただけます。</p>
+                    <span class="inline-block mt-4 text-brand-orange font-bold text-sm">詳細を見る →</span>
+                </a>
+
+                <a href="kiyota/" class="card-link block bg-slate-800/80 border-2 border-slate-700 rounded-xl p-6 hover:border-brand-orange">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="bg-slate-600/50 p-2 rounded-lg">
+                            <svg class="w-6 h-6 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">工程管理アプリ</h3>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed">現場の工程をスマホで管理。清田自動車向け工程管理・タスク管理ツール。</p>
+                    <span class="inline-block mt-4 text-brand-orange font-bold text-sm">アプリを開く →</span>
+                </a>
+
+                <a href="brightboard-demo.html" class="card-link block bg-slate-800/80 border-2 border-slate-700 rounded-xl p-6 hover:border-brand-orange">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="bg-slate-600/50 p-2 rounded-lg">
+                            <svg class="w-6 h-6 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">ブライトボード デモ</h3>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed">デジタルホワイトボードのデモンストレーション。現場の見える化を体験。</p>
+                    <span class="inline-block mt-4 text-brand-orange font-bold text-sm">デモを見る →</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 bg-gradient-to-r from-slate-900 to-brand-navy border-t border-slate-800">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <p class="text-slate-400 mb-6">お問い合わせはお気軽に</p>
+            <a href="tel:096-357-7144" class="inline-flex items-center gap-3 px-8 py-4 bg-brand-orange text-white rounded-lg font-bold text-lg hover:bg-orange-600 transition">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                096-357-7144
+            </a>
+        </div>
+    </section>
+
+    <footer class="bg-slate-950 py-12 border-t border-slate-800 text-slate-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex items-center justify-center space-x-2 mb-4">
+                <div class="bg-brand-orange/20 p-1 rounded text-brand-orange">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </div>
+                <span class="font-bold text-white text-lg">WithBright Tomorrow</span>
+            </div>
+            <p class="text-xs text-slate-600">© WithBright Tomorrow Inc.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.08 });
+            document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
