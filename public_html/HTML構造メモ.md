@@ -4,8 +4,9 @@
 
 | ファイル | 役割 |
 |----------|------|
-| **index.html** | 会社トップ（WBT MVV・サービス一覧・各ページへのリンク） |
-| **training.html** | 特定技能2号自動車整備研修 LP（旧 index の内容） |
+| **index.html** | 会社トップ（商品売り込みメイン・サービスを上から順に詳しく紹介） |
+| **about.html** | 会社概要（私たちについて・Mission・Vision・Value の全文） |
+| **training.html** | 特定技能2号自動車整備研修 LP |
 | campaign.html | キャンペーン・お申し込み |
 | download.html | 資料ダウンロード |
 | login.html | 会員ログイン |
@@ -23,10 +24,10 @@
 
 ## リンクの流れ
 
-- **トップ (index.html)** → 私たちについて（MVV）／サービス（training, campaign, download, curriculum, kiyota/, brightboard-demo など）
-- **各ページ** → ロゴ／「TOP」クリックで **index.html**（会社トップ）に戻る
-- **研修LP** → training.html から campaign.html, download.html, login.html などへ
+- **トップ (index.html)** → ヒーロー（売り込み）／サービス紹介（1〜6を順に詳しく）／会社概要は about.html へ
+- **会社概要 (about.html)** → MVV 全文・トップへ戻るリンク
+- **各ページ** → ロゴ／「TOP」で **index.html**、ナビに「会社概要」で about.html
 
 ## 参考
 
-- 会社の Mission / Vision / Value は `WBT/WBTMVV.md` を参照して index.html に反映済み。
+- 会社の Mission / Vision / Value は `WBT/WBTMVV.md` を参照。全文は about.html に掲載。
