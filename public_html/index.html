@@ -40,13 +40,13 @@
             display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;
         }
         .img-placeholder img { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; transition: 0.5s; }
-        .section-bg img { opacity: 0.2; }
-        .section-bg:hover img { opacity: 0.28; }
-        .mvv-section .mvv-overlay { background: linear-gradient(180deg, rgba(15,23,42,0.94) 0%, rgba(15,23,42,0.92) 50%, rgba(2,6,23,0.95) 100%); }
+        .section-bg img { opacity: 0.42; }
+        .section-bg:hover img { opacity: 0.5; }
+        .mvv-section .mvv-overlay { background: linear-gradient(180deg, rgba(15,23,42,0.82) 0%, rgba(15,23,42,0.78) 50%, rgba(2,6,23,0.85) 100%); }
         .mvv-section .mvv-text { color: #E2E8F0; }
         .mvv-section .mvv-text strong { color: #F8FAFC; }
         .mvv-section .mvv-label { letter-spacing: 0.2em; font-size: 0.7rem; color: #EA580C; font-weight: 700; }
-        .mvv-section .mvv-card { background: rgba(30, 41, 59, 0.6); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(148, 163, 184, 0.15); }
+        .mvv-section .mvv-card { background: rgba(15, 23, 42, 0.88); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(148, 163, 184, 0.2); }
         .mvv-section .mvv-card:hover { border-color: rgba(234, 88, 12, 0.3); }
         .mvv-section .value-card { border-left: 4px solid #EA580C; transition: all 0.3s ease; }
         .mvv-section .value-card:hover { border-left-color: #F97316; box-shadow: 0 10px 40px -10px rgba(234, 88, 12, 0.2); }
@@ -208,74 +208,79 @@
     <!-- サービス・リンク -->
     <section id="services" class="py-20 md:py-28 bg-brand-navy border-t border-slate-800">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-2xl md:text-3xl font-bold text-white mb-2 text-center fade-up">サービス</h2>
-            <p class="text-slate-400 text-center mb-12 fade-up">現場と明日を照らす、私たちの取り組み</p>
+            <h2 class="text-2xl md:text-4xl font-bold text-white mb-2 text-center fade-up">サービス</h2>
+            <p class="text-slate-300 text-center mb-4 fade-up">あなたの現場を、次のステージへ。</p>
+            <p class="text-slate-500 text-sm text-center mb-12 fade-up">選ばれている理由がここにあります</p>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <a href="training.html" class="card-link block bg-slate-800/80 border-2 border-slate-700 rounded-xl p-6 hover:border-brand-orange">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="bg-brand-orange/20 p-2 rounded-lg">
+                <a href="training.html" class="card-link group block bg-gradient-to-b from-slate-800 to-slate-800/90 border-2 border-slate-600 rounded-2xl p-6 hover:border-brand-orange hover:from-slate-700/90 hover:to-slate-800 transition-all duration-300">
+                    <span class="inline-block px-2.5 py-0.5 rounded-full bg-brand-orange/30 text-brand-orange text-xs font-bold mb-3">合格率 No.1</span>
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="bg-brand-orange/20 p-2.5 rounded-xl group-hover:bg-brand-orange/30 transition-colors">
                             <svg class="w-6 h-6 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
                         </div>
                         <h3 class="text-lg font-bold text-white">特定技能2号 自動車整備研修</h3>
                     </div>
-                    <p class="text-slate-400 text-sm leading-relaxed">インドネシア人整備士特化。合格率No.1の企業向け研修プログラム。実習生を現場のリーダーへ。</p>
-                    <span class="inline-block mt-4 text-brand-orange font-bold text-sm">詳細を見る →</span>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4">実習生を<strong class="text-white">現場のリーダー</strong>に。インドネシア人整備士特化の企業向けプログラムで、人材流出を防ぎ、戦力化を実現。</p>
+                    <span class="inline-flex items-center gap-1 text-brand-orange font-bold text-sm group-hover:gap-2 transition-all">資料請求・相談はこちら <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></span>
                 </a>
 
-                <a href="campaign.html" class="card-link block bg-slate-800/80 border-2 border-slate-700 rounded-xl p-6 hover:border-brand-orange">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="bg-brand-red/20 p-2 rounded-lg">
+                <a href="campaign.html" class="card-link group block bg-gradient-to-b from-slate-800 to-slate-800/90 border-2 border-brand-red/40 rounded-2xl p-6 hover:border-brand-red hover:shadow-lg hover:shadow-red-900/20 transition-all duration-300 relative overflow-hidden">
+                    <span class="absolute top-4 right-4 px-2.5 py-0.5 rounded-full bg-brand-red text-white text-xs font-bold animate-pulse">期間限定</span>
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="bg-brand-red/20 p-2.5 rounded-xl">
                             <svg class="w-6 h-6 text-brand-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/></svg>
                         </div>
                         <h3 class="text-lg font-bold text-white">キャンペーン</h3>
                     </div>
-                    <p class="text-slate-400 text-sm leading-relaxed">特定技能2号合格カリキュラム一式導入パッケージ。期間限定特別価格でご提供。</p>
-                    <span class="inline-block mt-4 text-brand-orange font-bold text-sm">詳細を見る →</span>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-2">合格に必要な一式を<strong class="text-white">特別価格</strong>で。カリキュラム・動画・助成金テンプレートまでまとめて導入。</p>
+                    <p class="text-brand-orange font-bold text-lg mb-4">¥60,000<span class="text-slate-400 font-normal text-sm line-through ml-2">¥250,000</span></p>
+                    <span class="inline-flex items-center gap-1 text-brand-red font-bold text-sm group-hover:gap-2 transition-all">今すぐ申し込む <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></span>
                 </a>
 
-                <a href="download.html" class="card-link block bg-slate-800/80 border-2 border-slate-700 rounded-xl p-6 hover:border-brand-orange">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="bg-brand-orange/20 p-2 rounded-lg">
+                <a href="download.html" class="card-link group block bg-gradient-to-b from-slate-800 to-slate-800/90 border-2 border-slate-600 rounded-2xl p-6 hover:border-brand-orange transition-all duration-300">
+                    <span class="inline-block px-2.5 py-0.5 rounded-full bg-slate-600/50 text-slate-300 text-xs font-bold mb-3">無料</span>
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="bg-brand-orange/20 p-2.5 rounded-xl group-hover:bg-brand-orange/30 transition-colors">
                             <svg class="w-6 h-6 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                         </div>
                         <h3 class="text-lg font-bold text-white">資料ダウンロード</h3>
                     </div>
-                    <p class="text-slate-400 text-sm leading-relaxed">カリキュラム資料・導入ガイドなど、ご活用いただける資料をダウンロードできます。</p>
-                    <span class="inline-block mt-4 text-brand-orange font-bold text-sm">資料をDL →</span>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4">カリキュラム概要・導入の流れを<strong class="text-white">今すぐ</strong>手に。登録不要でダウンロード可能。</p>
+                    <span class="inline-flex items-center gap-1 text-brand-orange font-bold text-sm group-hover:gap-2 transition-all">無料で資料を取る <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></span>
                 </a>
 
-                <a href="curriculum.html" class="card-link block bg-slate-800/80 border-2 border-slate-700 rounded-xl p-6 hover:border-brand-orange">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="bg-slate-600/50 p-2 rounded-lg">
+                <a href="curriculum.html" class="card-link group block bg-gradient-to-b from-slate-800 to-slate-800/90 border-2 border-slate-600 rounded-2xl p-6 hover:border-brand-orange transition-all duration-300">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="bg-slate-600/50 p-2.5 rounded-xl group-hover:bg-slate-500/50 transition-colors">
                             <svg class="w-6 h-6 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
                         </div>
                         <h3 class="text-lg font-bold text-white">カリキュラム</h3>
                     </div>
-                    <p class="text-slate-400 text-sm leading-relaxed">研修カリキュラムの全体像。16項目の学習体系をご確認いただけます。</p>
-                    <span class="inline-block mt-4 text-brand-orange font-bold text-sm">詳細を見る →</span>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4"><strong class="text-white">16項目</strong>の学習体系で、学科・実技の全体像を把握。研修導入前の検討資料として。</p>
+                    <span class="inline-flex items-center gap-1 text-brand-orange font-bold text-sm group-hover:gap-2 transition-all">カリキュラムを見る <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></span>
                 </a>
 
-                <a href="brightboard-kouteikanri.html" class="card-link block bg-slate-800/80 border-2 border-slate-700 rounded-xl p-6 hover:border-brand-orange">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="bg-slate-600/50 p-2 rounded-lg">
+                <a href="brightboard-kouteikanri.html" class="card-link group block bg-gradient-to-b from-slate-800 to-slate-800/90 border-2 border-slate-600 rounded-2xl p-6 hover:border-brand-orange transition-all duration-300">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="bg-slate-600/50 p-2.5 rounded-xl group-hover:bg-slate-500/50 transition-colors">
                             <svg class="w-6 h-6 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
                         </div>
                         <h3 class="text-lg font-bold text-white">工程管理アプリ</h3>
                     </div>
-                    <p class="text-slate-400 text-sm leading-relaxed">鈑金・整備向け工程管理システムの説明。機能・料金・導入の流れをご紹介。</p>
-                    <span class="inline-block mt-4 text-brand-orange font-bold text-sm">説明を見る →</span>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4">鈑金・整備の<strong class="text-white">工程を見える化</strong>。スマホで進捗管理し、属人化を防ぐ。機能・料金・導入の流れを解説。</p>
+                    <span class="inline-flex items-center gap-1 text-brand-orange font-bold text-sm group-hover:gap-2 transition-all">説明を見る <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></span>
                 </a>
 
-                <a href="demodeta/demo/" class="card-link block bg-slate-800/80 border-2 border-slate-700 rounded-xl p-6 hover:border-brand-orange">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="bg-slate-600/50 p-2 rounded-lg">
+                <a href="demodeta/demo/" class="card-link group block bg-gradient-to-b from-slate-800 to-slate-800/90 border-2 border-slate-600 rounded-2xl p-6 hover:border-brand-orange transition-all duration-300">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="bg-slate-600/50 p-2.5 rounded-xl group-hover:bg-slate-500/50 transition-colors">
                             <svg class="w-6 h-6 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                         </div>
                         <h3 class="text-lg font-bold text-white">ブライトボード デモ</h3>
                     </div>
-                    <p class="text-slate-400 text-sm leading-relaxed">デジタルホワイトボードのデモンストレーション。現場の見える化を体験。</p>
-                    <span class="inline-block mt-4 text-brand-orange font-bold text-sm">デモを見る →</span>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4"><strong class="text-white">その場で体験</strong>。デジタルホワイトボードで現場の見える化を体感。導入前のイメージづくりに。</p>
+                    <span class="inline-flex items-center gap-1 text-brand-orange font-bold text-sm group-hover:gap-2 transition-all">デモを体験する <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></span>
                 </a>
             </div>
         </div>
