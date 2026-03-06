@@ -1,13 +1,9 @@
-name: Deploy kiyota via FTP
+name: Deploy to Xserver via FTP
 
 on:
   push:
     branches:
       - main
-    paths:
-      - 'public_html/.htaccess'
-      - 'public_html/kiyota/**'
-      - 'public_html/demodeta/**'
   workflow_dispatch:
 
 jobs:
@@ -17,7 +13,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Deploy kiyota to Xserver via FTP
+      - name: Deploy public_html to Xserver via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
@@ -25,12 +21,18 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./public_html/
           server-dir: ${{ format('{0}{1}', secrets.FTP_REMOTE_DIR, endsWith(secrets.FTP_REMOTE_DIR, '/') && '' || '/') }}
-          # ルート .htaccess、kiyota、demodeta をデプロイ
+          # トップ・研修LP・kiyota・demodeta など指定パスのみデプロイ（WordPress等は除外）
           include: |
             .htaccess
+            .user.ini
+            *.html
+            *.md
+            images/**
+            data/**
             kiyota/.htaccess
             kiyota/index.html
             kiyota/assets/**
             kiyota/estimator/**
+            kiyota/demo/**
             demodeta/**
           dangerous-clean-slate: false
