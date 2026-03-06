@@ -266,10 +266,23 @@
     <script>
         var submitted = false;
 
-        // 資料請求送信時に通知先（izumi.coinzoom@gmail.com）へメール送信
+        // 資料請求送信時に Formspree 経由で izumi.coinzoom@gmail.com へメール送信
+        // 設定: https://formspree.io で izumi.coinzoom@gmail.com で登録 → 新規フォーム作成 → フォームIDを下に貼り付け
+        var FORMSPREE_FORM_ID = 'xwvregbe';
+
         document.getElementById('customForm').addEventListener('submit', function() {
-            var formData = new FormData(this);
-            fetch('mail_to_owner.php', { method: 'POST', body: formData, keepalive: true }).catch(function() {});
+            var form = this;
+            if (FORMSPREE_FORM_ID && FORMSPREE_FORM_ID !== 'YOUR_FORMSPREE_FORM_ID') {
+                var fd = new FormData();
+                fd.append('company', form.querySelector('[name="entry.373753415"]').value);
+                fd.append('name', form.querySelector('[name="entry.681605283"]').value);
+                fd.append('email', form.querySelector('[name="entry.521760541"]').value);
+                fd.append('telephone', form.querySelector('[name="entry.961659553"]').value);
+                fd.append('issue', form.querySelector('[name="entry.1630095653"]').value);
+                fd.append('_replyto', form.querySelector('[name="entry.521760541"]').value);
+                fd.append('_subject', '[WithBrightTomorrow] 資料請求: ' + form.querySelector('[name="entry.373753415"]').value);
+                fetch('https://formspree.io/f/' + FORMSPREE_FORM_ID, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' }, keepalive: true }).catch(function() {});
+            }
         });
 
         // ========== Google Drive 連携 ==========
