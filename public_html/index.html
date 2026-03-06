@@ -34,6 +34,14 @@
     </script>
     <style>
         body { background-color: #0F172A; color: #F8FAFC; }
+        .img-placeholder {
+            background-color: #1e293b;
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23334155' fill-opacity='0.4' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+            display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;
+        }
+        .img-placeholder img { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; transition: 0.5s; }
+        .section-bg img { opacity: 0.25; }
+        .section-bg:hover img { opacity: 0.35; }
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0F172A; }
         ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
@@ -69,7 +77,12 @@
 
     <!-- Hero -->
     <section class="relative min-h-[70vh] flex items-center justify-center pt-20 pb-16 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-b from-slate-900/80 to-brand-navy z-0"></div>
+        <div class="absolute inset-0 z-0">
+            <div class="img-placeholder w-full h-full">
+                <img src="images/wbt-hero-bg.png" alt="WithBright Tomorrow - 明るい明日と共に" class="w-full h-full object-cover">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-b from-brand-navy/90 via-brand-navy/75 to-brand-navy"></div>
+        </div>
         <div class="relative z-10 max-w-5xl mx-auto px-4 text-center fade-up">
             <span class="inline-block py-1 px-4 rounded-full bg-brand-orange/20 border border-brand-orange text-brand-orange font-mono text-xs md:text-sm mb-6 tracking-widest">
                 Mission · Vision · Value
@@ -86,8 +99,14 @@
     </section>
 
     <!-- OUR IDENTITY -->
-    <section id="identity" class="py-20 md:py-28 bg-brand-dark">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="identity" class="relative py-20 md:py-28 bg-brand-dark overflow-hidden">
+        <div class="absolute inset-0 z-0 section-bg">
+            <div class="img-placeholder w-full h-full">
+                <img src="images/wbt-identity.png" alt="" class="w-full h-full object-cover" aria-hidden="true">
+            </div>
+            <div class="absolute inset-0 bg-brand-dark/85"></div>
+        </div>
+        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-2xl md:text-3xl font-bold text-white mb-4 border-l-4 border-brand-orange pl-4 fade-up">
                 OUR IDENTITY｜社名に込めた想い
             </h2>
@@ -99,8 +118,14 @@
     </section>
 
     <!-- MISSION -->
-    <section class="py-20 md:py-28 bg-brand-navy border-t border-slate-800">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section class="relative py-20 md:py-28 bg-brand-navy border-t border-slate-800 overflow-hidden">
+        <div class="absolute inset-0 z-0 section-bg">
+            <div class="img-placeholder w-full h-full">
+                <img src="images/wbt-mission.png" alt="" class="w-full h-full object-cover" aria-hidden="true">
+            </div>
+            <div class="absolute inset-0 bg-brand-navy/88"></div>
+        </div>
+        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-2xl md:text-3xl font-bold text-white mb-4 border-l-4 border-brand-red pl-4 fade-up">
                 MISSION｜私たちが果たすべき使命
             </h2>
@@ -111,8 +136,14 @@
     </section>
 
     <!-- VISION -->
-    <section class="py-20 md:py-28 bg-slate-950 border-t border-slate-800">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section class="relative py-20 md:py-28 bg-slate-950 border-t border-slate-800 overflow-hidden">
+        <div class="absolute inset-0 z-0 section-bg">
+            <div class="img-placeholder w-full h-full">
+                <img src="images/wbt-vision.png" alt="" class="w-full h-full object-cover" aria-hidden="true">
+            </div>
+            <div class="absolute inset-0 bg-slate-950/88"></div>
+        </div>
+        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-2xl md:text-3xl font-bold text-white mb-4 border-l-4 border-brand-orange pl-4 fade-up">
                 VISION｜私たちが目指す未来の景色
             </h2>
@@ -123,8 +154,14 @@
     </section>
 
     <!-- VALUE -->
-    <section class="py-20 md:py-28 bg-brand-dark border-t border-slate-800">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section class="relative py-20 md:py-28 bg-brand-dark border-t border-slate-800 overflow-hidden">
+        <div class="absolute inset-0 z-0 section-bg">
+            <div class="img-placeholder w-full h-full">
+                <img src="images/wbt-value.png" alt="" class="w-full h-full object-cover" aria-hidden="true">
+            </div>
+            <div class="absolute inset-0 bg-brand-dark/88"></div>
+        </div>
+        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-2xl md:text-3xl font-bold text-white mb-8 border-l-4 border-brand-orange pl-4 fade-up">
                 VALUE｜私たちの行動指針（DNA）
             </h2>
