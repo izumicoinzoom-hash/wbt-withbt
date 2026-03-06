@@ -40,8 +40,11 @@
             display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;
         }
         .img-placeholder img { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; transition: 0.5s; }
-        .section-bg img { opacity: 0.25; }
-        .section-bg:hover img { opacity: 0.35; }
+        .section-bg img { opacity: 0.2; }
+        .section-bg:hover img { opacity: 0.28; }
+        .mvv-section .mvv-overlay { background: rgba(15, 23, 42, 0.92); }
+        .mvv-section .mvv-text { color: #E2E8F0; }
+        .mvv-section .mvv-text strong { color: #F8FAFC; }
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0F172A; }
         ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
@@ -99,18 +102,18 @@
     </section>
 
     <!-- OUR IDENTITY -->
-    <section id="identity" class="relative py-20 md:py-28 bg-brand-dark overflow-hidden">
+    <section id="identity" class="mvv-section relative py-20 md:py-28 bg-brand-dark overflow-hidden">
         <div class="absolute inset-0 z-0 section-bg">
             <div class="img-placeholder w-full h-full">
                 <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2400&auto=format&fit=crop" alt="" class="w-full h-full object-cover" aria-hidden="true">
             </div>
-            <div class="absolute inset-0 bg-brand-dark/85"></div>
+            <div class="absolute inset-0 mvv-overlay"></div>
         </div>
         <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-2xl md:text-3xl font-bold text-white mb-4 border-l-4 border-brand-orange pl-4 fade-up">
                 OUR IDENTITY｜社名に込めた想い
             </h2>
-            <p class="text-slate-300 text-lg leading-relaxed fade-up">
+            <p class="mvv-text text-lg leading-relaxed fade-up">
                 <strong class="text-white">「WithBright Tomorrow（明るい明日と共に）」</strong><br/>
                 私たちの社名には「明日を明るくする」という揺るぎない覚悟が込められています。現場の孤独や業界の不条理に共に立ち向かい、関わるすべての人たちの未来を明るく照らす。それが私たちの存在意義です。
             </p>
@@ -118,68 +121,68 @@
     </section>
 
     <!-- MISSION -->
-    <section class="relative py-20 md:py-28 bg-brand-navy border-t border-slate-800 overflow-hidden">
+    <section class="mvv-section relative py-20 md:py-28 bg-brand-navy border-t border-slate-800 overflow-hidden">
         <div class="absolute inset-0 z-0 section-bg">
             <div class="img-placeholder w-full h-full">
                 <img src="https://images.unsplash.com/photo-1581090700227-1e37b190418e?q=80&w=2400&auto=format&fit=crop" alt="" class="w-full h-full object-cover" aria-hidden="true">
             </div>
-            <div class="absolute inset-0 bg-brand-navy/88"></div>
+            <div class="absolute inset-0 mvv-overlay"></div>
         </div>
         <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-2xl md:text-3xl font-bold text-white mb-4 border-l-4 border-brand-red pl-4 fade-up">
                 MISSION｜私たちが果たすべき使命
             </h2>
-            <p class="text-slate-300 text-lg leading-relaxed fade-up">
+            <p class="mvv-text text-lg leading-relaxed fade-up">
                 現場の「不条理」をテクノロジーと情熱で解体し、自動車業界に『明るい明日』を実装する。属人化した工程、保険会社主導のレバレート搾取、知識不足による見積もり漏れ、そして人材の流出。私たちは、現場を苦しめるこれらの「不条理」に対して、<strong class="text-white">現場発想の「DXツール」</strong>と、<strong class="text-white">泥臭い「リアルな知見」</strong>の両輪で立ち向かいます。全国の社長たちを救い、業界の未来を明るく照らすことが、私たちの使命です。
             </p>
         </div>
     </section>
 
     <!-- VISION -->
-    <section class="relative py-20 md:py-28 bg-slate-950 border-t border-slate-800 overflow-hidden">
+    <section class="mvv-section relative py-20 md:py-28 bg-slate-950 border-t border-slate-800 overflow-hidden">
         <div class="absolute inset-0 z-0 section-bg">
             <div class="img-placeholder w-full h-full">
-                <img src="https://images.unsplash.com/photo-1553413077-190f305dfc15?q=80&w=2400&auto=format&fit=crop" alt="" class="w-full h-full object-cover" aria-hidden="true">
+                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2400&auto=format&fit=crop" alt="未来のオフィス・働く風景" class="w-full h-full object-cover" aria-hidden="true">
             </div>
-            <div class="absolute inset-0 bg-slate-950/88"></div>
+            <div class="absolute inset-0 mvv-overlay"></div>
         </div>
         <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-2xl md:text-3xl font-bold text-white mb-4 border-l-4 border-brand-orange pl-4 fade-up">
                 VISION｜私たちが目指す未来の景色
             </h2>
-            <p class="text-slate-300 text-lg leading-relaxed fade-up">
+            <p class="mvv-text text-lg leading-relaxed fade-up">
                 国境もアナログの壁も越え、正当な利益と誇りが循環する<strong class="text-brand-orange">「次世代スマート・ファクトリー」の標準</strong>を創る。私たちが目指すのは、スマホ一つで現場がスムーズに回り、国籍に関係なく優秀なリーダーが育つ業界です。正しい見積もりと交渉でしっかり利益を出し、社長が潤うことでスタッフに還元され、最終的にエンドユーザーへ最高のサービスが提供される。そんな「正しい循環」が生まれる業界のニュースタンダードを、私たちが創り出します。
             </p>
         </div>
     </section>
 
     <!-- VALUE -->
-    <section class="relative py-20 md:py-28 bg-brand-dark border-t border-slate-800 overflow-hidden">
+    <section class="mvv-section relative py-20 md:py-28 bg-brand-dark border-t border-slate-800 overflow-hidden">
         <div class="absolute inset-0 z-0 section-bg">
             <div class="img-placeholder w-full h-full">
                 <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2832&auto=format&fit=crop" alt="" class="w-full h-full object-cover" aria-hidden="true">
             </div>
-            <div class="absolute inset-0 bg-brand-dark/88"></div>
+            <div class="absolute inset-0 mvv-overlay"></div>
         </div>
         <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-2xl md:text-3xl font-bold text-white mb-8 border-l-4 border-brand-orange pl-4 fade-up">
                 VALUE｜私たちの行動指針（DNA）
             </h2>
             <p class="text-brand-orange font-bold text-lg mb-8 fade-up">【 情の伝播（Spread the "JO"） 】</p>
-            <p class="text-slate-400 mb-12 fade-up">私たちは、3つの「情」を自ら体現し、業界全体へ伝染させていきます。</p>
+            <p class="mvv-text mb-12 fade-up">私たちは、3つの「情」を自ら体現し、業界全体へ伝染させていきます。</p>
             
             <div class="space-y-10 md:space-y-12">
-                <div class="bg-slate-800/60 border border-slate-700 rounded-xl p-6 md:p-8 fade-up card-link">
+                <div class="bg-slate-800/80 border border-slate-600 rounded-xl p-6 md:p-8 fade-up card-link">
                     <h3 class="text-xl font-bold text-white mb-2">1. 信情（Heart）：愛と伴走の心をもつ</h3>
-                    <p class="text-slate-400 leading-relaxed">孤独に戦う社長や、言葉の壁に直面する外国人材の悩みに本気で寄り添います。ただシステムやノウハウを売るのではなく、「共に未来を良くするパートナー」として、人としての情を大切にします。</p>
+                    <p class="mvv-text leading-relaxed">孤独に戦う社長や、言葉の壁に直面する外国人材の悩みに本気で寄り添います。ただシステムやノウハウを売るのではなく、「共に未来を良くするパートナー」として、人としての情を大切にします。</p>
                 </div>
-                <div class="bg-slate-800/60 border border-slate-700 rounded-xl p-6 md:p-8 fade-up card-link">
+                <div class="bg-slate-800/80 border border-slate-600 rounded-xl p-6 md:p-8 fade-up card-link">
                     <h3 class="text-xl font-bold text-white mb-2">2. 実情（Real）：現場の「泥臭い真実」で戦う</h3>
-                    <p class="text-slate-400 leading-relaxed">机上の空論は語りません。自らの現場で見聞きし、実践して効果があった「生の情報（正しい指数、交渉術、本当に使えるシステム）」だけを武器にし、業界のリアルをアップデートします。</p>
+                    <p class="mvv-text leading-relaxed">机上の空論は語りません。自らの現場で見聞きし、実践して効果があった「生の情報（正しい指数、交渉術、本当に使えるシステム）」だけを武器にし、業界のリアルをアップデートします。</p>
                 </div>
-                <div class="bg-slate-800/60 border border-slate-700 rounded-xl p-6 md:p-8 fade-up card-link">
+                <div class="bg-slate-800/80 border border-slate-600 rounded-xl p-6 md:p-8 fade-up card-link">
                     <h3 class="text-xl font-bold text-white mb-2">3. 熱情（Excitement）：ワクワクする変化を仕掛ける</h3>
-                    <p class="text-slate-400 leading-relaxed">DX化や新しい人材の受け入れを「やらされる面倒なこと」ではなく、「未来が明るくなるワクワクする挑戦」へと変えていきます。ホワイトボードがスマホに変わるような、現場の熱量が高まる仕掛けを作り続けます。</p>
+                    <p class="mvv-text leading-relaxed">DX化や新しい人材の受け入れを「やらされる面倒なこと」ではなく、「未来が明るくなるワクワクする挑戦」へと変えていきます。ホワイトボードがスマホに変わるような、現場の熱量が高まる仕掛けを作り続けます。</p>
                 </div>
             </div>
         </div>
