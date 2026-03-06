@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@300;400;500;700;900&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -46,6 +46,13 @@
         ::-webkit-scrollbar-thumb:hover { background: #EA580C; }
         .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
         .fade-up.visible { opacity: 1; transform: translateY(0); }
+        .axis-card { transition: transform 0.35s ease, box-shadow 0.35s ease; }
+        .axis-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -12px rgba(0,0,0,0.4); }
+        .hero-glow { text-shadow: 0 0 60px rgba(234, 88, 12, 0.15); }
+        .btn-primary { background: linear-gradient(135deg, #EA580C 0%, #C2410C 100%); box-shadow: 0 4px 20px -4px rgba(234, 88, 12, 0.4); }
+        .btn-primary:hover { box-shadow: 0 8px 28px -4px rgba(234, 88, 12, 0.5); }
+        .btn-outline { border: 2px solid rgba(248, 250, 252, 0.25); }
+        .btn-outline:hover { border-color: rgba(248, 250, 252, 0.5); background: rgba(248, 250, 252, 0.06); }
     </style>
 </head>
 <body class="antialiased selection:bg-brand-orange selection:text-white">
@@ -71,132 +78,129 @@
         </div>
     </nav>
 
-    <!-- Hero：両軸を並列に -->
-    <section class="relative min-h-[70vh] flex items-center justify-center pt-20 pb-16 overflow-hidden">
+    <!-- Hero：訴求＋おしゃれ -->
+    <section class="relative min-h-[85vh] flex items-center justify-center pt-24 pb-20 overflow-hidden">
         <div class="absolute inset-0 z-0">
             <div class="img-placeholder w-full h-full">
-                <img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?q=80&w=2832&auto=format&fit=crop" alt="WithBright Tomorrow" class="w-full h-full object-cover">
+                <img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?q=80&w=2832&auto=format&fit=crop" alt="" class="w-full h-full object-cover">
             </div>
-            <div class="absolute inset-0 bg-gradient-to-b from-brand-navy/90 via-brand-navy/75 to-brand-navy"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-brand-navy/92 via-brand-navy/80 to-brand-navy"></div>
+            <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(234,88,12,0.12),transparent)]"></div>
         </div>
         <div class="relative z-10 max-w-5xl mx-auto px-4 text-center fade-up">
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-sans font-black tracking-tight text-white mb-6 leading-tight">
-                WithBright<br/>
-                <span class="text-brand-orange">Tomorrow</span>
+            <p class="text-brand-orange font-mono text-xs md:text-sm tracking-[0.3em] uppercase mb-6 opacity-90">WithBright Tomorrow</p>
+            <h1 class="text-3xl md:text-5xl lg:text-6xl font-sans font-black tracking-tight text-white mb-6 leading-[1.2] hero-glow">
+                人材不足も、<br class="sm:hidden"/>現場の属人化も。<br/>
+                <span class="text-brand-orange">その先に、明るい明日を。</span>
             </h1>
-            <p class="text-lg md:text-xl text-slate-300 font-light max-w-2xl mx-auto mb-4">
-                資格取得と現場DX。二つの軸で、現場の明日を照らす。
+            <p class="text-slate-400 text-base md:text-lg max-w-2xl mx-auto mb-10 font-light leading-relaxed">
+                「資格取得」で人を残し、「工程管理」で現場の生産性を高める。二つの軸で、現場の課題に応えます。
             </p>
-            <div class="flex flex-wrap justify-center gap-3 mb-8">
-                <span class="inline-block py-1.5 px-4 rounded-full bg-brand-orange/20 border border-brand-orange text-brand-orange text-sm font-medium">特定技能2号（資格取得）</span>
-                <span class="inline-block py-1.5 px-4 rounded-full bg-slate-600/50 border border-slate-500 text-slate-300 text-sm font-medium">BrightBoard（工程管理）</span>
-            </div>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#axis-qualification" class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-brand-orange text-white rounded-xl font-bold hover:bg-orange-600 transition">資格取得のサービス</a>
-                <a href="#axis-brightboard" class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-slate-700 text-white rounded-xl font-bold hover:bg-slate-600 transition border border-slate-600">BrightBoard のサービス</a>
+                <a href="#axis-qualification" class="btn-primary inline-flex items-center justify-center gap-2 px-8 py-4 text-white rounded-xl font-bold text-base hover:opacity-95 transition">
+                    人材不足の解決 → 資格取得
+                </a>
+                <a href="#axis-brightboard" class="btn-outline inline-flex items-center justify-center gap-2 px-8 py-4 text-white rounded-xl font-bold text-base transition">
+                    現場の生産性 → 工程管理
+                </a>
             </div>
-            <p class="mt-6 text-slate-500 text-sm">
-                <a href="about.html" class="text-brand-orange hover:underline">会社概要</a>（ミッション・ビジョン・バリュー）
+            <p class="mt-10 text-slate-500 text-sm">
+                <a href="about.html" class="text-slate-400 hover:text-brand-orange transition">会社概要</a>
             </p>
         </div>
     </section>
 
-    <!-- サービス：両軸＋拡張性のある構成 -->
-    <section id="services" class="py-16 md:py-24 bg-brand-navy border-t border-slate-800">
+    <!-- 軸1: 人材不足の解決の延長 ＝ 資格取得 -->
+    <section id="services" class="py-20 md:py-28 bg-brand-navy border-t border-slate-800">
+        <span id="axis-qualification" class="block -mt-28 pt-28" aria-hidden="true"></span>
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-2xl md:text-3xl font-bold text-white mb-2 text-center fade-up">サービス</h2>
-            <p class="text-slate-400 text-center mb-12 fade-up">二つの軸を中心に、今後もサービスを拡充していきます。</p>
-
-            <div class="grid md:grid-cols-2 gap-10 md:gap-12 lg:gap-16">
-                <!-- 軸1: 特定技能2号（資格取得） -->
-                <div id="axis-qualification" class="fade-up">
-                    <div class="flex items-center gap-3 mb-6">
-                        <span class="flex items-center justify-center w-10 h-10 rounded-xl bg-brand-orange/20 text-brand-orange font-bold">1</span>
-                        <h3 class="text-xl md:text-2xl font-bold text-white">特定技能2号（資格取得）</h3>
-                    </div>
-                    <p class="text-slate-300 text-sm md:text-base mb-6 leading-relaxed">
-                        インドネシア人材の特定技能2号試験合格を支援。研修・教材・キャンペーンで、現場のリーダー育成と無期限雇用の道をサポートします。
-                    </p>
-                    <ul class="space-y-4">
-                        <li class="flex items-start gap-3">
-                            <span class="text-brand-orange mt-0.5">›</span>
-                            <div>
-                                <a href="training.html" class="text-white font-medium hover:text-brand-orange transition">特定技能2号 自動車整備研修</a>
-                                <p class="text-slate-400 text-sm">合格率No.1の企業向けプログラム</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-brand-orange mt-0.5">›</span>
-                            <div>
-                                <a href="campaign.html" class="text-white font-medium hover:text-brand-orange transition">一式パッケージ（キャンペーン）</a>
-                                <p class="text-slate-400 text-sm">¥60,000～ カリキュラム・動画・助成金テンプレート</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-brand-orange mt-0.5">›</span>
-                            <div>
-                                <a href="download.html" class="text-white font-medium hover:text-brand-orange transition">資料ダウンロード</a>
-                                <p class="text-slate-400 text-sm">無料で概要・導入の流れをダウンロード</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-brand-orange mt-0.5">›</span>
-                            <div>
-                                <a href="curriculum.html" class="text-white font-medium hover:text-brand-orange transition">カリキュラム（16項目）</a>
-                                <p class="text-slate-400 text-sm">学科・実技の学習体系一覧</p>
-                            </div>
-                        </li>
-                    </ul>
-                    <a href="download.html" class="inline-flex items-center gap-2 mt-6 text-brand-orange font-bold hover:underline">
-                        無料資料を請求する <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                    </a>
-                </div>
-
-                <!-- 軸2: BrightBoard（工程管理） -->
-                <div id="axis-brightboard" class="fade-up">
-                    <div class="flex items-center gap-3 mb-6">
-                        <span class="flex items-center justify-center w-10 h-10 rounded-xl bg-slate-600/50 text-slate-300 font-bold border border-slate-500">2</span>
-                        <h3 class="text-xl md:text-2xl font-bold text-white">BrightBoard（工程管理）</h3>
-                    </div>
-                    <p class="text-slate-300 text-sm md:text-base mb-6 leading-relaxed">
-                        鈑金・整備現場の工程を見える化。デジタルホワイトボードで進捗を共有し、属人化を防ぎます。
-                    </p>
-                    <ul class="space-y-4">
-                        <li class="flex items-start gap-3">
-                            <span class="text-slate-400 mt-0.5">›</span>
-                            <div>
-                                <a href="brightboard-kouteikanri.html" class="text-white font-medium hover:text-brand-orange transition">工程管理アプリの説明</a>
-                                <p class="text-slate-400 text-sm">機能・料金・導入の流れ</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-slate-400 mt-0.5">›</span>
-                            <div>
-                                <a href="demodeta/demo/" class="text-white font-medium hover:text-brand-orange transition">BrightBoard デモ</a>
-                                <p class="text-slate-400 text-sm">その場で体験</p>
-                            </div>
-                        </li>
-                    </ul>
-                    <a href="demodeta/demo/" class="inline-flex items-center gap-2 mt-6 text-brand-orange font-bold hover:underline">
-                        デモを体験する <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                    </a>
-                </div>
+            <div class="text-center mb-14 fade-up">
+                <span class="inline-block py-1.5 px-4 rounded-full bg-brand-orange/20 text-brand-orange text-xs font-bold tracking-wider uppercase mb-4">人材不足の解決の延長に</span>
+                <h2 class="text-2xl md:text-4xl font-bold text-white mb-4">資格取得</h2>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto">
+                    「人がいない」「育てても帰国してしまう」— その解決の先に、<strong class="text-white">特定技能2号</strong>の資格取得があります。人を残し、現場のリーダーとして定着させる。私たちが強みとする研修・教材で、無期限雇用への道を開きます。
+                </p>
             </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <a href="training.html" class="axis-card fade-up block rounded-2xl p-6 md:p-8 bg-slate-800/60 border border-slate-700 hover:border-brand-orange/40">
+                    <div class="w-12 h-12 rounded-xl bg-brand-orange/20 flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">特定技能2号 研修</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">合格率No.1の企業向けプログラム。現場のリーダー育成。</p>
+                    <span class="text-brand-orange font-bold text-sm inline-flex items-center gap-1">詳しく見る <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></span>
+                </a>
+                <a href="campaign.html" class="axis-card fade-up block rounded-2xl p-6 md:p-8 bg-slate-800/60 border border-slate-700 hover:border-brand-orange/40">
+                    <div class="w-12 h-12 rounded-xl bg-brand-red/20 flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-brand-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">一式パッケージ</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">キャンペーン価格でカリキュラム・動画・助成金テンプレートを一式導入。</p>
+                    <span class="text-brand-orange font-bold text-sm inline-flex items-center gap-1">申し込む <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></span>
+                </a>
+                <a href="download.html" class="axis-card fade-up block rounded-2xl p-6 md:p-8 bg-slate-800/60 border border-slate-700 hover:border-brand-orange/40">
+                    <div class="w-12 h-12 rounded-xl bg-brand-orange/20 flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">資料ダウンロード</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">無料で概要・導入の流れをダウンロード。まずはここから。</p>
+                    <span class="text-brand-orange font-bold text-sm inline-flex items-center gap-1">無料で請求 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></span>
+                </a>
+                <a href="curriculum.html" class="axis-card fade-up block rounded-2xl p-6 md:p-8 bg-slate-800/60 border border-slate-700 hover:border-brand-orange/40">
+                    <div class="w-12 h-12 rounded-xl bg-slate-600/50 flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">カリキュラム</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">16項目の学習体系。学科・実技の全体像を把握。</p>
+                    <span class="text-brand-orange font-bold text-sm inline-flex items-center gap-1">一覧を見る <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></span>
+                </a>
+            </div>
+            <div class="text-center mt-10 fade-up">
+                <a href="training.html" class="btn-primary inline-flex items-center justify-center gap-2 px-8 py-4 text-white rounded-xl font-bold text-base">特定技能2号の詳細ページへ</a>
+            </div>
+        </div>
+    </section>
 
-            <!-- 拡張用：今後のサービス -->
-            <div class="fade-up mt-16 pt-12 border-t border-slate-700">
-                <h3 class="text-lg font-bold text-slate-400 mb-4">その他のサービス</h3>
-                <p class="text-slate-500 text-sm">今後も現場の課題に合わせたサービスを追加予定です。</p>
+    <!-- 軸2: 現場の生産性を高める ＝ 工程管理（BrightBoard） -->
+    <section id="axis-brightboard" class="py-20 md:py-28 bg-slate-950 border-t border-slate-800">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14 fade-up">
+                <span class="inline-block py-1.5 px-4 rounded-full bg-slate-600/50 text-slate-300 text-xs font-bold tracking-wider uppercase mb-4">現場の生産性を高める</span>
+                <h2 class="text-2xl md:text-4xl font-bold text-white mb-4">工程管理</h2>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto">
+                    「誰が何をやっているか分からない」「属人化で回りづらい」— 鈑金・整備現場の工程を<strong class="text-white">見える化</strong>し、進捗を共有。スマホで使える<strong class="text-brand-orange">BrightBoard</strong>で、ムダを減らし、生産性を上げます。
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <a href="brightboard-kouteikanri.html" class="axis-card fade-up block rounded-2xl p-8 md:p-10 bg-slate-800/60 border border-slate-700 hover:border-slate-500">
+                    <div class="w-14 h-14 rounded-2xl bg-slate-600/50 flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">BrightBoard とは</h3>
+                    <p class="text-slate-400 leading-relaxed mb-6">機能・料金・導入の流れを解説。工程の見える化で属人化を防ぎ、現場の生産性を高めます。</p>
+                    <span class="text-brand-orange font-bold inline-flex items-center gap-1">説明ページへ <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></span>
+                </a>
+                <a href="demodeta/demo/" class="axis-card fade-up block rounded-2xl p-8 md:p-10 bg-slate-800/60 border border-slate-700 hover:border-slate-500">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-orange/20 flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">デモを体験</h3>
+                    <p class="text-slate-400 leading-relaxed mb-6">その場で BrightBoard を触って体感。導入前のイメージづくりに。</p>
+                    <span class="text-brand-orange font-bold inline-flex items-center gap-1">デモページへ <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></span>
+                </a>
+            </div>
+            <div class="text-center mt-10 fade-up">
+                <a href="brightboard-kouteikanri.html" class="btn-outline inline-flex items-center justify-center gap-2 px-8 py-4 text-white rounded-xl font-bold text-base">工程管理アプリ BrightBoard の詳細ページへ</a>
             </div>
         </div>
     </section>
 
     <!-- CTA -->
-    <section class="py-16 bg-gradient-to-r from-slate-900 to-brand-navy border-t border-slate-800">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <p class="text-slate-400 mb-6">お問い合わせはお気軽に</p>
-            <a href="tel:096-357-7144" class="inline-flex items-center gap-3 px-8 py-4 bg-brand-orange text-white rounded-lg font-bold text-lg hover:bg-orange-600 transition">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+    <section class="py-20 bg-gradient-to-b from-brand-navy to-slate-950 border-t border-slate-800">
+        <div class="max-w-4xl mx-auto px-4 text-center fade-up">
+            <p class="text-slate-400 mb-2 font-medium">お問い合わせはお気軽に</p>
+            <a href="tel:096-357-7144" class="inline-flex items-center gap-3 px-10 py-4 bg-brand-orange text-white rounded-xl font-bold text-lg hover:bg-orange-600 transition shadow-lg shadow-orange-900/20">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
                 096-357-7144
             </a>
         </div>
