@@ -48,86 +48,38 @@
                     </div>
                     <span class="font-sans font-bold text-xl tracking-tight text-white">WithBright Tomorrow</span>
                 </a>
-                <div class="flex items-center gap-4 md:gap-8">
-                    <a href="index.html#services" class="text-slate-300 hover:text-white text-sm font-medium">サービス</a>
-                    <a href="login.html" class="text-slate-300 hover:text-white text-sm font-medium">会員ログイン</a>
+                <div class="flex items-center gap-3 md:gap-6 text-sm">
+                    <a href="#mission" class="text-slate-300 hover:text-white font-medium">ミッション</a>
+                    <a href="#vision" class="text-slate-300 hover:text-white font-medium">ビジョン</a>
+                    <a href="#value" class="text-slate-300 hover:text-white font-medium">バリュー</a>
+                    <a href="#company-info" class="text-slate-300 hover:text-white font-medium">会社概要</a>
+                    <a href="index.html#services" class="text-slate-300 hover:text-white font-medium hidden sm:inline">サービス</a>
+                    <a href="login.html" class="text-slate-300 hover:text-white font-medium">会員ログイン</a>
                     <a href="tel:096-357-7144" class="font-mono font-bold text-white hover:text-brand-orange transition">096-357-7144</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <header class="pt-24 pb-12 bg-brand-dark border-b border-slate-800">
+    <header class="pt-24 pb-8 bg-brand-dark border-b border-slate-800">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 class="text-3xl md:text-4xl font-bold text-white fade-up">会社概要</h1>
-            <p class="text-slate-400 mt-2 fade-up">私たちについて・Mission・Vision・Value</p>
+            <p class="text-slate-400 mt-2 fade-up">ミッション・ビジョン・バリューから会社情報まで</p>
+            <!-- ページ内ナビ：ミッション→ビジョン→バリュー→会社概要 -->
+            <nav class="mt-6 flex flex-wrap gap-2 md:gap-4 text-sm" aria-label="ページ内リンク">
+                <a href="#mission" class="text-brand-orange font-medium hover:underline">ミッション</a>
+                <span class="text-slate-600">/</span>
+                <a href="#vision" class="text-slate-300 hover:text-white hover:underline">ビジョン</a>
+                <span class="text-slate-600">/</span>
+                <a href="#value" class="text-slate-300 hover:text-white hover:underline">バリュー</a>
+                <span class="text-slate-600">/</span>
+                <a href="#company-info" class="text-slate-300 hover:text-white hover:underline">会社概要</a>
+            </nav>
         </div>
     </header>
 
-    <!-- 会社情報 -->
-    <section class="py-12 md:py-16 bg-brand-navy border-b border-slate-800">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mvv-card rounded-2xl p-6 md:p-8 fade-up">
-                <h2 class="text-xl font-bold text-white mb-6">会社情報</h2>
-                <dl class="space-y-4 text-slate-300">
-                    <div>
-                        <dt class="text-sm font-bold text-brand-orange mb-1">会社名（商号）</dt>
-                        <dd class="text-white">合同会社 WithBright Tomorrow</dd>
-                    </div>
-                    <div>
-                        <dt class="text-sm font-bold text-brand-orange mb-1">代表者名</dt>
-                        <dd class="text-white">清田 兼明（代表社員）</dd>
-                    </div>
-                    <div>
-                        <dt class="text-sm font-bold text-brand-orange mb-1">住所</dt>
-                        <dd>〒861-4101 熊本県熊本市南区近見7-12-20</dd>
-                    </div>
-                    <div>
-                        <dt class="text-sm font-bold text-brand-orange mb-1">電話番号</dt>
-                        <dd><a href="tel:096-357-7144" class="text-white hover:text-brand-orange transition font-mono">096-357-7144</a></dd>
-                    </div>
-                    <div>
-                        <dt class="text-sm font-bold text-brand-orange mb-1">メールアドレス</dt>
-                        <dd><a href="mailto:izumi.coinzoom@gmail.com" class="text-white hover:text-brand-orange transition break-all">izumi.coinzoom@gmail.com</a></dd>
-                    </div>
-                    <div>
-                        <dt class="text-sm font-bold text-brand-orange mb-1">事業内容</dt>
-                        <dd>特定技能2号（自動車整備）に係る研修・人材育成、現場向け工程管理ツール（BrightBoard）の提供、関連する教材・コンテンツの制作・販売</dd>
-                    </div>
-                    <div>
-                        <dt class="text-sm font-bold text-brand-orange mb-2">Googleマップ</dt>
-                        <dd>
-                            <div class="rounded-xl overflow-hidden border border-slate-600 bg-slate-800/50 aspect-video max-w-2xl">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3341.878!2d130.689!3d32.758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z5qCD5pyo55yM5qCD5pyo5biC5Z-O5Z-O6Zeu!5e0!3m2!1sja!2sjp" width="100%" height="100%" style="border:0; min-height:280px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="合同会社 WithBright Tomorrow 所在地"></iframe>
-                            </div>
-                            <p class="mt-2 text-sm"><a href="https://www.google.com/maps/search/?api=1&query=%E7%86%8A%E6%9C%AC%E7%9C%8C%E7%86%8A%E6%9C%AC%E5%B8%82%E5%8D%97%E5%8C%BA%E8%BF%91%E8%A6%8B7-12-20" class="text-brand-orange hover:underline" target="_blank" rel="noopener">Googleマップで開く（熊本県熊本市南区近見7-12-20）</a></p>
-                        </dd>
-                    </div>
-                </dl>
-            </div>
-        </div>
-    </section>
-
-    <section class="mvv-section relative py-16 md:py-24 bg-brand-dark overflow-hidden">
-        <div class="absolute inset-0 z-0 section-bg">
-            <div class="img-placeholder w-full h-full">
-                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2400&auto=format&fit=crop" alt="" class="w-full h-full object-cover" aria-hidden="true">
-            </div>
-            <div class="absolute inset-0 mvv-overlay"></div>
-        </div>
-        <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <p class="mvv-label fade-up mb-2">OUR IDENTITY</p>
-            <h2 class="text-2xl md:text-3xl font-bold text-white mb-6 fade-up">社名に込めた想い</h2>
-            <div class="mvv-card rounded-2xl p-6 md:p-8 fade-up">
-                <p class="mvv-text text-lg leading-relaxed">
-                    <strong class="text-white">「WithBright Tomorrow（明るい明日と共に）」</strong><br/><br/>
-                    私たちの社名には「明日を明るくする」という揺るぎない覚悟が込められています。現場の孤独や業界の不条理に共に立ち向かい、関わるすべての人たちの未来を明るく照らす。それが私たちの存在意義です。
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <section class="mvv-section relative py-16 md:py-24 bg-brand-navy border-t border-slate-800 overflow-hidden">
+    <!-- 1. ミッション -->
+    <section id="mission" class="mvv-section relative py-14 md:py-20 bg-brand-navy border-b border-slate-800 overflow-hidden">
         <div class="absolute inset-0 z-0 section-bg">
             <div class="img-placeholder w-full h-full">
                 <img src="https://images.unsplash.com/photo-1581090700227-1e37b190418e?q=80&w=2400&auto=format&fit=crop" alt="" class="w-full h-full object-cover" aria-hidden="true">
@@ -136,16 +88,17 @@
         </div>
         <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <p class="mvv-label fade-up mb-2" style="color: #F87171;">MISSION</p>
-            <h2 class="text-2xl md:text-3xl font-bold text-white mb-6 fade-up">私たちが果たすべき使命</h2>
+            <h2 class="text-xl md:text-2xl font-bold text-white mb-4 fade-up">私たちが果たすべき使命</h2>
             <div class="mvv-card rounded-2xl p-6 md:p-8 fade-up">
-                <p class="mvv-text text-lg leading-relaxed">
+                <p class="mvv-text text-base md:text-lg leading-relaxed">
                     現場の「不条理」をテクノロジーと情熱で解体し、自動車業界に『明るい明日』を実装する。属人化した工程、保険会社主導のレバレート搾取、知識不足による見積もり漏れ、そして人材の流出。私たちは、現場を苦しめるこれらの「不条理」に対して、<strong class="text-white">現場発想の「DXツール」</strong>と、<strong class="text-white">泥臭い「リアルな知見」</strong>の両輪で立ち向かいます。全国の社長たちを救い、業界の未来を明るく照らすことが、私たちの使命です。
                 </p>
             </div>
         </div>
     </section>
 
-    <section class="mvv-section relative py-16 md:py-24 bg-slate-950 border-t border-slate-800 overflow-hidden">
+    <!-- 2. ビジョン -->
+    <section id="vision" class="mvv-section relative py-14 md:py-20 bg-slate-950 border-b border-slate-800 overflow-hidden">
         <div class="absolute inset-0 z-0 section-bg">
             <div class="img-placeholder w-full h-full">
                 <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2400&auto=format&fit=crop" alt="" class="w-full h-full object-cover" aria-hidden="true">
@@ -154,16 +107,17 @@
         </div>
         <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <p class="mvv-label fade-up mb-2">VISION</p>
-            <h2 class="text-2xl md:text-3xl font-bold text-white mb-6 fade-up">私たちが目指す未来の景色</h2>
+            <h2 class="text-xl md:text-2xl font-bold text-white mb-4 fade-up">私たちが目指す未来の景色</h2>
             <div class="mvv-card rounded-2xl p-6 md:p-8 fade-up">
-                <p class="mvv-text text-lg leading-relaxed">
+                <p class="mvv-text text-base md:text-lg leading-relaxed">
                     国境もアナログの壁も越え、正当な利益と誇りが循環する<strong class="text-brand-orange">「次世代スマート・ファクトリー」の標準</strong>を創る。私たちが目指すのは、スマホ一つで現場がスムーズに回り、国籍に関係なく優秀なリーダーが育つ業界です。正しい見積もりと交渉でしっかり利益を出し、社長が潤うことでスタッフに還元され、最終的にエンドユーザーへ最高のサービスが提供される。そんな「正しい循環」が生まれる業界のニュースタンダードを、私たちが創り出します。
                 </p>
             </div>
         </div>
     </section>
 
-    <section class="mvv-section relative py-16 md:py-24 bg-brand-dark border-t border-slate-800 overflow-hidden">
+    <!-- 3. バリュー -->
+    <section id="value" class="mvv-section relative py-14 md:py-20 bg-brand-dark border-b border-slate-800 overflow-hidden">
         <div class="absolute inset-0 z-0 section-bg">
             <div class="img-placeholder w-full h-full">
                 <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2832&auto=format&fit=crop" alt="" class="w-full h-full object-cover" aria-hidden="true">
@@ -172,28 +126,28 @@
         </div>
         <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <p class="mvv-label fade-up mb-2">VALUE</p>
-            <h2 class="text-2xl md:text-3xl font-bold text-white mb-3 fade-up">私たちの行動指針（DNA）</h2>
-            <p class="text-brand-orange font-bold text-sm md:text-base tracking-wide mb-10 fade-up">【 情の伝播（Spread the "JO"） 】</p>
-            <p class="mvv-text mb-10 fade-up">私たちは、3つの「情」を自ら体現し、業界全体へ伝染させていきます。</p>
-            <div class="space-y-6 md:space-y-8">
-                <div class="value-card mvv-card rounded-2xl p-6 md:p-8 fade-up flex gap-4 md:gap-6">
+            <h2 class="text-xl md:text-2xl font-bold text-white mb-2 fade-up">私たちの行動指針（DNA）</h2>
+            <p class="text-brand-orange font-bold text-sm md:text-base tracking-wide mb-6 fade-up">【 情の伝播（Spread the "JO"） 】</p>
+            <p class="mvv-text mb-8 fade-up">私たちは、3つの「情」を自ら体現し、業界全体へ伝染させていきます。</p>
+            <div class="space-y-5 md:space-y-6">
+                <div class="value-card mvv-card rounded-2xl p-5 md:p-6 fade-up flex gap-4">
                     <div class="value-num rounded-xl flex items-center justify-center flex-shrink-0">1</div>
                     <div>
-                        <h3 class="text-lg md:text-xl font-bold text-white mb-2">信情（Heart）<span class="text-slate-400 font-normal text-base">— 愛と伴走の心をもつ</span></h3>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-1">信情（Heart）<span class="text-slate-400 font-normal text-sm">— 愛と伴走の心をもつ</span></h3>
                         <p class="mvv-text leading-relaxed text-sm md:text-base">孤独に戦う社長や、言葉の壁に直面する外国人材の悩みに本気で寄り添います。ただシステムやノウハウを売るのではなく、「共に未来を良くするパートナー」として、人としての情を大切にします。</p>
                     </div>
                 </div>
-                <div class="value-card mvv-card rounded-2xl p-6 md:p-8 fade-up flex gap-4 md:gap-6">
+                <div class="value-card mvv-card rounded-2xl p-5 md:p-6 fade-up flex gap-4">
                     <div class="value-num rounded-xl flex items-center justify-center flex-shrink-0">2</div>
                     <div>
-                        <h3 class="text-lg md:text-xl font-bold text-white mb-2">実情（Real）<span class="text-slate-400 font-normal text-base">— 現場の「泥臭い真実」で戦う</span></h3>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-1">実情（Real）<span class="text-slate-400 font-normal text-sm">— 現場の「泥臭い真実」で戦う</span></h3>
                         <p class="mvv-text leading-relaxed text-sm md:text-base">机上の空論は語りません。自らの現場で見聞きし、実践して効果があった「生の情報（正しい指数、交渉術、本当に使えるシステム）」だけを武器にし、業界のリアルをアップデートします。</p>
                     </div>
                 </div>
-                <div class="value-card mvv-card rounded-2xl p-6 md:p-8 fade-up flex gap-4 md:gap-6">
+                <div class="value-card mvv-card rounded-2xl p-5 md:p-6 fade-up flex gap-4">
                     <div class="value-num rounded-xl flex items-center justify-center flex-shrink-0">3</div>
                     <div>
-                        <h3 class="text-lg md:text-xl font-bold text-white mb-2">熱情（Excitement）<span class="text-slate-400 font-normal text-base">— ワクワクする変化を仕掛ける</span></h3>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-1">熱情（Excitement）<span class="text-slate-400 font-normal text-sm">— ワクワクする変化を仕掛ける</span></h3>
                         <p class="mvv-text leading-relaxed text-sm md:text-base">DX化や新しい人材の受け入れを「やらされる面倒なこと」ではなく、「未来が明るくなるワクワクする挑戦」へと変えていきます。ホワイトボードがスマホに変わるような、現場の熱量が高まる仕掛けを作り続けます。</p>
                     </div>
                 </div>
@@ -201,7 +155,37 @@
         </div>
     </section>
 
-    <section class="py-12 bg-brand-navy border-t border-slate-800">
+    <!-- 4. 会社概要（会社情報） -->
+    <section id="company-info" class="py-14 md:py-20 bg-brand-navy border-b border-slate-800">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-xl md:text-2xl font-bold text-white mb-6 fade-up">会社概要</h2>
+            <div class="mvv-card rounded-2xl p-6 md:p-8 fade-up">
+                <dl class="grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-x-6 gap-y-5 text-slate-300">
+                    <dt class="text-sm font-bold text-brand-orange sm:pt-0.5">会社名（商号）</dt>
+                    <dd class="text-white mb-0">合同会社 WithBright Tomorrow</dd>
+                    <dt class="text-sm font-bold text-brand-orange sm:pt-0.5">代表者名</dt>
+                    <dd class="text-white mb-0">清田 兼明（代表社員）</dd>
+                    <dt class="text-sm font-bold text-brand-orange sm:pt-0.5">住所</dt>
+                    <dd class="mb-0">〒861-4101 熊本県熊本市南区近見7-12-20</dd>
+                    <dt class="text-sm font-bold text-brand-orange sm:pt-0.5">電話番号</dt>
+                    <dd class="mb-0"><a href="tel:096-357-7144" class="text-white hover:text-brand-orange transition font-mono">096-357-7144</a></dd>
+                    <dt class="text-sm font-bold text-brand-orange sm:pt-0.5">メールアドレス</dt>
+                    <dd class="mb-0"><a href="mailto:izumi.coinzoom@gmail.com" class="text-white hover:text-brand-orange transition break-all">izumi.coinzoom@gmail.com</a></dd>
+                    <dt class="text-sm font-bold text-brand-orange sm:pt-0.5">事業内容</dt>
+                    <dd class="mb-0">特定技能2号（自動車整備）に係る研修・人材育成、現場向け工程管理ツール（BrightBoard）の提供、関連する教材・コンテンツの制作・販売</dd>
+                </dl>
+                <div class="mt-8 pt-6 border-t border-slate-700">
+                    <dt class="text-sm font-bold text-brand-orange mb-2">Googleマップ</dt>
+                    <div class="rounded-xl overflow-hidden border border-slate-600 bg-slate-800/50 aspect-video max-w-2xl">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3341.878!2d130.689!3d32.758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z5qCD5pyo55yM5qCD5pyo5biC5Z-O5Z-O6Zeu!5e0!3m2!1sja!2sjp" width="100%" height="100%" style="border:0; min-height:280px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="合同会社 WithBright Tomorrow 所在地"></iframe>
+                    </div>
+                    <p class="mt-2 text-sm"><a href="https://www.google.com/maps/search/?api=1&query=%E7%86%8A%E6%9C%AC%E7%9C%8C%E7%86%8A%E6%9C%AC%E5%B8%82%E5%8D%97%E5%8C%BA%E8%BF%91%E8%A6%8B7-12-20" class="text-brand-orange hover:underline" target="_blank" rel="noopener">Googleマップで開く（熊本県熊本市南区近見7-12-20）</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-12 bg-brand-dark border-t border-slate-800">
         <div class="max-w-4xl mx-auto px-4 text-center">
             <a href="index.html" class="inline-flex items-center gap-2 text-brand-orange font-bold hover:underline">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
