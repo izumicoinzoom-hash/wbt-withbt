@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BrightBoard デモ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              blue: '#2563eb'
+            }
+          },
+          fontFamily: {
+            sans: ['"Noto Sans JP"', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: "Noto Sans JP", system-ui, sans-serif; }
+    .scrollbar-thin::-webkit-scrollbar { height: 6px; width: 6px; }
+    .scrollbar-thin::-webkit-scrollbar-thumb { background: #9ca3af; border-radius: 4px; }
+    .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-900">
+  <div class="min-h-screen flex flex-col">
+    <!-- ヘッダー（App.jsx のヘッダーを簡略模倣） -->
+    <header class="bg-white border-b border-gray-200 flex items-center justify-between px-6 py-2 shadow-sm">
+      <div class="flex items-center gap-3">
+        <span class="text-lg font-bold text-gray-800">BrightBoard</span>
+        <span id="demo-board-label" class="text-sm text-gray-500">〈入庫〉予約管理（Planning）</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <button id="demo-switch-board" class="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm border border-gray-300 text-gray-700 hover:bg-gray-50">
+          ボード切り替え（デモ）
+        </button>
+        <button id="demo-create-card" class="px-4 py-2 rounded-lg bg-brand-blue text-white text-sm font-medium hover:bg-blue-600">
+          カード作成
+        </button>
+        <button class="flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm border border-gray-300 text-gray-700 hover:bg-gray-50">
+          🔍 検索
+        </button>
+      </div>
+    </header>
+
+    <div class="flex flex-1 overflow-hidden">
+      <!-- 左側アイコンバー（レイアウト / 代車 / 設定 などの簡易版） -->
+      <aside class="w-12 bg-white border-r border-gray-200 flex flex-col items-center py-4 gap-6 shadow-sm">
+        <button id="btn-view-board" class="w-8 h-8 rounded-lg flex items-center justify-center text-gray-500 hover:bg-gray-100 text-xs border border-transparent data-[active=true]:bg-blue-50 data-[active=true]:text-blue-600 data-[active=true]:border-blue-400" data-active="true" title="カンバンボード">
+          ■
+        </button>
+        <button id="btn-view-gantt" class="w-8 h-8 rounded-lg flex items-center justify-center text-gray-400 hover:bg-gray-100 text-xs border border-transparent" title="代車・レンタカー貸出表">
+          🚗
+        </button>
+        <button id="btn-view-planning" class="w-8 h-8 rounded-lg flex items-center justify-center text-gray-400 hover:bg-gray-100 text-xs border border-transparent" title="入庫予約">
+          📅
+        </button>
+        <button class="mt-auto w-8 h-8 rounded-lg flex items-center justify-center text-gray-400 hover:bg-gray-100 text-xs border border-transparent" title="設定（デモ）">
+          ⚙
+        </button>
+      </aside>
+
+      <!-- メインビュー -->
+      <main class="flex-1 flex overflow-hidden bg-gray-50">
+        <!-- ボードビュー: 鈑金ボード / 入庫ボード風をタブで切り替え -->
+        <section id="view-board" class="flex-1 flex flex-col overflow-hidden flex">
+          <div class="flex flex-1 min-h-0">
+          <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+          <div class="flex items-center justify-between px-4 pt-3 pb-1 bg-gray-50 border-b border-gray-200">
+            <div class="flex items-center gap-2 text-sm">
+              <button id="tab-planning" class="px-3 py-1.5 rounded-full bg-blue-50 text-blue-600 font-medium border border-blue-200">
+                〈入庫〉予約管理（Planning）
+              </button>
+              <button id="tab-body" class="px-3 py-1.5 rounded-full text-gray-600 hover:bg-gray-100 border border-transparent">
+                〈鈑金〉工程管理（Body）
+              </button>
+            </div>
+            <p class="text-xs text-gray-500 hidden sm:block">
+              本番アプリと同じレイアウトを簡易的に再現したデモです（ドラッグ＆ドロップなしの静的版）。
+            </p>
+          </div>
+
+          <!-- Planning ボード（ドラッグ＆ドロップ対応） -->
+          <div id="board-planning" class="flex-1 overflow-x-auto overflow-y-hidden p-4 bg-gray-100 scrollbar-thin">
+            <div class="flex gap-2 h-full w-full min-w-[1100px]">
+              <!-- カラム: 入庫日未定〜入庫済み -->
+              <div class="flex flex-col min-w-[140px] bg-gray-200 rounded-md overflow-hidden">
+                <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 flex items-center justify-between text-xs font-medium text-gray-700">
+                  <span>入庫日未定</span><span class="text-gray-400" data-pl-count="unscheduled">0</span>
+                </div>
+                <div class="flex-1 p-2 space-y-2 overflow-y-auto scrollbar-thin bb-planning-column" data-pl-column="unscheduled"></div>
+              </div>
+              <div class="flex flex-col min-w-[140px] bg-gray-200 rounded-md overflow-hidden">
+                <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 flex items-center justify-between text-xs font-medium text-gray-700">
+                  <span>月</span><span class="text-gray-400" data-pl-count="mon">0</span>
+                </div>
+                <div class="flex-1 p-2 space-y-2 overflow-y-auto scrollbar-thin bb-planning-column" data-pl-column="mon"></div>
+              </div>
+              <div class="flex flex-col min-w-[140px] bg-gray-200 rounded-md overflow-hidden">
+                <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 flex items-center justify-between text-xs font-medium text-gray-700">
+                  <span>火</span><span class="text-gray-400" data-pl-count="tue">0</span>
+                </div>
+                <div class="flex-1 p-2 space-y-2 overflow-y-auto scrollbar-thin bb-planning-column" data-pl-column="tue"></div>
+              </div>
+              <!-- 水 -->
+              <div class="flex flex-col min-w-[180px] bg-gray-200 rounded-md overflow-hidden">
+                <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 flex items-center justify-between text-xs font-medium text-gray-700">
+                  <span>水</span><span class="text-gray-400" data-pl-count="wed">2</span>
+                </div>
+                <div class="flex-1 p-2 space-y-2 overflow-y-auto scrollbar-thin bb-planning-column" data-pl-column="wed">
+                  <article class="bb-card-planning bg-white rounded-xl border border-gray-200 shadow-sm px-3 py-2 text-xs cursor-move" data-card-id="p1" data-detail-title="アルファード S1" data-detail-customer="花田様" data-detail-inout="IN03/04 OUT03/08" data-detail-note="バンパー交換＋塗装。代車あり。">
+                    <div class="flex justify-between gap-2 mb-1">
+                      <div class="min-w-0">
+                        <p class="font-semibold text-gray-900 truncate">アルファード S1 | 花田様</p>
+                        <p class="text-[11px] text-gray-600 truncate">IN03/04 OUT03/08</p>
+                      </div>
+                    </div>
+                    <div class="flex gap-1 mt-1">
+                      <span class="w-2 h-2 rounded-full border border-gray-300"></span>
+                      <span class="w-2 h-2 rounded-full border border-gray-300"></span>
+                      <span class="w-2 h-2 rounded-full border border-gray-300"></span>
+                      <span class="w-2 h-2 rounded-full border border-gray-300"></span>
+                    </div>
+                  </article>
+                  <article class="bb-card-planning bg-white rounded-xl border border-gray-200 shadow-sm px-3 py-2 text-xs cursor-move" data-card-id="p2" data-detail-title="アルファード S1" data-detail-customer="花田様" data-detail-inout="IN03/04 OUT03/08" data-detail-note="鈑金・塗装。代車手配済み。">
+                    <div class="flex justify-between gap-2 mb-1">
+                      <div class="min-w-0">
+                        <p class="font-semibold text-gray-900 truncate">アルファード S1 | 花田様</p>
+                        <p class="text-[11px] text-gray-600 truncate">IN03/04 OUT03/08</p>
+                      </div>
+                    </div>
+                    <div class="flex gap-1 mt-1">
+                      <span class="w-2 h-2 rounded-full border border-gray-300 bg-yellow-300"></span>
+                      <span class="w-2 h-2 rounded-full border border-gray-300 bg-yellow-300"></span>
+                      <span class="w-2 h-2 rounded-full border border-gray-300"></span>
+                      <span class="w-2 h-2 rounded-full border border-gray-300"></span>
+                    </div>
+                  </article>
+                </div>
+              </div>
+              <!-- 木 -->
+              <div class="flex flex-col min-w-[180px] bg-gray-200 rounded-md overflow-hidden">
+                <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 flex items-center justify-between text-xs font-medium text-gray-700">
+                  <span>木</span><span class="text-gray-400" data-pl-count="thu">1</span>
+                </div>
+                <div class="flex-1 p-2 space-y-2 overflow-y-auto scrollbar-thin bb-planning-column" data-pl-column="thu">
+                  <article class="bb-card-planning bg-white rounded-xl border border-gray-200 shadow-sm px-3 py-2 text-xs cursor-move" data-card-id="p3" data-detail-title="Note 青 500 あ3518" data-detail-customer="山田太郎" data-detail-inout="IN03/05 OUT03/08" data-detail-note="フロントバンパー交換。">
+                    <div class="min-w-0">
+                      <p class="font-semibold text-gray-900 truncate">Note 青 | 500 あ3518</p>
+                      <p class="text-[11px] text-gray-600 truncate">IN03/05 OUT03/08</p>
+                    </div>
+                    <div class="flex gap-1 mt-1">
+                      <span class="w-2 h-2 rounded-full border border-gray-300"></span>
+                      <span class="w-2 h-2 rounded-full border border-gray-300 bg-green-400"></span>
+                      <span class="w-2 h-2 rounded-full border border-gray-300"></span>
+                    </div>
+                  </article>
+                </div>
+              </div>
+              <!-- 金〜日 -->
+              <div class="flex flex-col min-w-[140px] bg-gray-200 rounded-md overflow-hidden">
+                <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 flex items-center justify-between text-xs font-medium text-gray-700">
+                  <span>金</span><span class="text-gray-400" data-pl-count="fri">0</span>
+                </div>
+                <div class="flex-1 p-2 space-y-2 overflow-y-auto scrollbar-thin bb-planning-column" data-pl-column="fri"></div>
+              </div>
+              <div class="flex flex-col min-w-[140px] bg-gray-200 rounded-md overflow-hidden">
+                <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 flex items-center justify-between text-xs font-medium text-gray-700">
+                  <span>土</span><span class="text-gray-400" data-pl-count="sat">0</span>
+                </div>
+                <div class="flex-1 p-2 space-y-2 overflow-y-auto scrollbar-thin bb-planning-column" data-pl-column="sat"></div>
+              </div>
+              <div class="flex flex-col min-w-[140px] bg-gray-200 rounded-md overflow-hidden">
+                <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 flex items-center justify-between text-xs font-medium text-gray-700">
+                  <span>日</span><span class="text-gray-400" data-pl-count="sun">0</span>
+                </div>
+                <div class="flex-1 p-2 space-y-2 overflow-y-auto scrollbar-thin bb-planning-column" data-pl-column="sun"></div>
+              </div>
+              <!-- 入庫済み -->
+              <div class="flex flex-col min-w-[180px] bg-gray-200 rounded-md overflow-hidden">
+                <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 flex items-center justify-between text-xs font-medium text-gray-700">
+                  <span>入庫済み</span><span class="text-gray-400" data-pl-count="received">1</span>
+                </div>
+                <div class="flex-1 p-2 space-y-2 overflow-y-auto scrollbar-thin bb-planning-column" data-pl-column="received">
+                  <article class="bb-card-planning bg-white rounded-xl border border-gray-200 shadow-sm px-3 py-2 text-xs cursor-move" data-card-id="p4" data-detail-title="ワゴンR 223" data-detail-customer="下田様" data-detail-inout="IN02/18 OUT02/20" data-detail-note="入庫済み・納車完了。">
+                    <div class="min-w-0">
+                      <p class="font-semibold text-gray-900 truncate">ワゴンR 223 | 下田様</p>
+                      <p class="text-[11px] text-gray-600 truncate">IN02/18 OUT02/20</p>
+                    </div>
+                    <div class="flex gap-1 mt-1">
+                      <span class="w-2 h-2 rounded-full border border-gray-300"></span>
+                      <span class="w-2 h-2 rounded-full border border-gray-300"></span>
+                      <span class="w-2 h-2 rounded-full border border-gray-300"></span>
+                      <span class="w-2 h-2 rounded-full border border-gray-300"></span>
+                    </div>
+                  </article>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Body ボード -->
+          <div id="board-body" class="hidden flex-1 overflow-x-auto overflow-y-hidden p-4 bg-gray-100 scrollbar-thin">
+            <div class="flex gap-2 h-full w-full min-w-[1100px]">
+              <!-- 鈑金Waiting / 鈑金中 / 鈑金完了P待ち / 組付け / 組付完了2列 -->
+              <div class="flex flex-col min-w-[180px] bg-gray-200 rounded-md overflow-hidden">
+                <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 text-xs font-medium text-gray-700 flex justify-between">
+                  <span>鈑金 (Waiting)</span><span class="text-gray-400" data-body-count="wait">3</span>
+                </div>
+                <div class="flex-1 p-2 space-y-2 overflow-y-auto scrollbar-thin bb-body-column" data-body-column="wait">
+                  <article class="bb-card-body bg-white rounded-xl border border-gray-200 shadow-sm px-3 py-2 text-xs cursor-move" data-body-id="b1" data-detail-title="スペーシア 1122" data-detail-customer="水谷" data-detail-inout="IN02/28 OUT03/10" data-detail-note="鈑金＋塗装。代車 N-BOX（軽）。">
+                    <p class="font-semibold text-gray-900 truncate">スペーシア 1122 | 水谷</p>
+                    <p class="text-[11px] text-gray-600">IN02/28 OUT03/10</p>
+                  </article>
+                  <article class="bb-card-body bg-sky-100 rounded-xl border border-sky-300 shadow-sm px-3 py-2 text-xs cursor-move" data-body-id="b2" data-detail-title="CX-5 ****" data-detail-customer="永野" data-detail-inout="IN02/28 OUT03/10" data-detail-note="左リアドア鈑金。代協。レンタカー枠A。">
+                    <p class="font-semibold text-gray-900 truncate">CK-5 **** | 永野</p>
+                    <p class="text-[11px] text-gray-600">IN02/28 OUT03/10</p>
+                  </article>
+                  <article class="bb-card-body bg-yellow-100 rounded-xl border border-yellow-300 shadow-sm px-3 py-2 text-xs cursor-move" data-body-id="b3" data-detail-title="A3 930" data-detail-customer="栗田" data-detail-inout="IN02/27 OUT03/12" data-detail-note="鈑金作業。">
+                    <p class="font-semibold text-gray-900 truncate">A3 930 | 栗田</p>
+                    <p class="text-[11px] text-gray-600">IN02/27 OUT03/12</p>
+                  </article>
+                </div>
+              </div>
+              <div class="flex flex-col min-w-[180px] bg-gray-200 rounded-md overflow-hidden">
+                <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 text-xs font-medium text-gray-700 flex justify-between">
+                  <span>鈑金中</span><span class="text-gray-400" data-body-count="doing">2</span>
+                </div>
+                <div class="flex-1 p-2 space-y-2 overflow-y-auto scrollbar-thin bb-body-column" data-body-column="doing">
+                  <article class="bb-card-body bg-white rounded-xl border border-gray-200 shadow-sm px-3 py-2 text-xs cursor-move" data-body-id="b4" data-detail-title="プリウス 853" data-detail-customer="浅谷" data-detail-inout="IN02/27 OUT" data-detail-note="鈑金中。塗装ブース待ち。">
+                    <p class="font-semibold text-gray-900 truncate">プリウス 853 | 浅谷</p>
+                    <p class="text-[11px] text-gray-600">IN02/27 OUT</p>
+                  </article>
+                  <article class="bb-card-body bg-sky-100 rounded-xl border border-sky-300 shadow-sm px-3 py-2 text-xs cursor-move" data-body-id="b5" data-detail-title="ノート 3903" data-detail-customer="試合さん" data-detail-inout="IN03/01 OUT03/26" data-detail-note="フロントバンパー交換。ワゴンR代車。">
+                    <p class="font-semibold text-gray-900 truncate">ノート 3903 | 試合さん</p>
+                    <p class="text-[11px] text-gray-600">IN03/01 OUT03/26</p>
+                  </article>
+                </div>
+              </div>
+              <div class="flex flex-col min-w-[180px] bg-gray-200 rounded-md overflow-hidden">
+                <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 text-xs font-medium text-gray-700 flex justify-between">
+                  <span>鈑金完了 P待ち</span><span class="text-gray-400" data-body-count="pwait">2</span>
+                </div>
+                <div class="flex-1 p-2 space-y-2 overflow-y-auto scrollbar-thin bb-body-column" data-body-column="pwait">
+                  <article class="bb-card-body bg-yellow-100 rounded-xl border border-yellow-300 shadow-sm px-3 py-2 text-xs cursor-move" data-body-id="b6" data-detail-title="クラウン 8520" data-detail-customer="赤塚" data-detail-inout="IN02/26 OUT" data-detail-note="鈑金完了。塗装P待ち。シエンタ代車。部品1点入荷待ち。">
+                    <p class="font-semibold text-gray-900 truncate">クラウン 8520 | 赤塚</p>
+                    <p class="text-[11px] text-gray-600">IN02/26 OUT</p>
+                  </article>
+                  <article class="bb-card-body bg-yellow-100 rounded-xl border border-yellow-300 shadow-sm px-3 py-2 text-xs cursor-move" data-body-id="b7" data-detail-title="タント 7019" data-detail-customer="平田" data-detail-inout="IN02/27 OUT03/04" data-detail-note="組付け待ち。本日納車予定。">
+                    <p class="font-semibold text-gray-900 truncate">タント 7019 | 平田</p>
+                    <p class="text-[11px] text-gray-600">IN02/27 OUT03/04</p>
+                  </article>
+                </div>
+              </div>
+              <div class="flex flex-col min-w-[180px] bg-gray-200 rounded-md overflow-hidden">
+                <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 text-xs font-medium text-gray-700 flex justify-between">
+                  <span>組付け</span><span class="text-gray-400" data-body-count="assembly">0</span>
+                </div>
+                <div class="flex-1 p-2 space-y-2 overflow-y-auto scrollbar-thin bb-body-column" data-body-column="assembly"></div>
+              </div>
+              <div class="flex flex-col min-w-[180px] bg-gray-200 rounded-md overflow-hidden">
+                <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 text-xs font-medium text-gray-700 flex justify-between">
+                  <span>組付完了（磨無 &amp; 磨完了）</span><span class="text-gray-400" data-body-count="done">1</span>
+                </div>
+                <div class="flex-1 p-2 space-y-2 overflow-y-auto scrollbar-thin bb-body-column" data-body-column="done">
+                  <article class="bb-card-body bg-white rounded-xl border border-gray-200 shadow-sm px-3 py-2 text-xs cursor-move" data-body-id="b8" data-detail-title="ハスラー 327" data-detail-customer="赤坂" data-detail-inout="IN02/25 OUT" data-detail-note="組付完了（磨無＆磨完了）。">
+                    <p class="font-semibold text-gray-900 truncate">ハスラー 327 | 赤坂</p>
+                    <p class="text-[11px] text-gray-600">IN02/25 OUT</p>
+                  </article>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+          <!-- カード詳細パネル（クリック時に表示） -->
+          <aside id="card-detail-panel" class="hidden w-80 flex-shrink-0 border-l border-gray-200 bg-white overflow-y-auto flex flex-col">
+            <div class="p-4 border-b border-gray-200 flex items-center justify-between">
+              <span class="text-sm font-medium text-gray-700">カード詳細</span>
+              <button id="btn-close-detail" type="button" class="text-gray-400 hover:text-gray-600 text-lg leading-none">&times;</button>
+            </div>
+            <div id="card-detail-body" class="p-4 text-sm text-gray-800 space-y-3">
+              <p class="text-gray-500 text-xs">カードをクリックするとここに詳細が表示されます。</p>
+            </div>
+          </aside>
+          </div>
+        </section>
+
+        <!-- 代車・レンタカー貸出状況ビュー（簡易） -->
+        <section id="view-gantt" class="hidden flex-1 flex-col overflow-hidden">
+          <div class="flex items-center justify-between px-4 pt-3 pb-1 bg-gray-50 border-b border-gray-200">
+            <h2 class="text-sm font-medium text-gray-800">代車・レンタカー 貸出状況</h2>
+            <button id="btn-open-calendar-modal" class="px-3 py-1.5 rounded-lg border border-gray-300 text-sm text-gray-700 hover:bg-gray-50">
+              Googleカレンダーイベント作成（デモ）
+            </button>
+          </div>
+          <div class="flex-1 overflow-auto p-4 bg-gray-100 scrollbar-thin">
+            <table class="min-w-[900px] text-xs text-gray-800 border-collapse bg-white rounded-md overflow-hidden shadow-sm">
+              <thead>
+                <tr class="bg-gray-50">
+                  <th class="border border-gray-200 px-3 py-2 text-left w-40">車両</th>
+                  <th class="border border-gray-200 px-3 py-2 text-center">3/1 日</th>
+                  <th class="border border-gray-200 px-3 py-2 text-center">3/2 月</th>
+                  <th class="border border-gray-200 px-3 py-2 text-center">3/3 火</th>
+                  <th class="border border-gray-200 px-3 py-2 text-center">3/4 水</th>
+                  <th class="border border-gray-200 px-3 py-2 text-center">3/5 木</th>
+                  <th class="border border-gray-200 px-3 py-2 text-center">3/6 金</th>
+                  <th class="border border-gray-200 px-3 py-2 text-center">3/7 土</th>
+                  <th class="border border-gray-200 px-3 py-2 text-center">3/8 日</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="border border-gray-200 px-3 py-2">
+                    <div class="font-medium">ワゴンR 9092</div>
+                    <div class="text-[11px] text-gray-500">軽自動車</div>
+                  </td>
+                  <td class="border border-gray-200 px-3 py-2"></td>
+                  <td class="border border-gray-200 px-3 py-2"></td>
+                  <td class="border border-gray-200 px-3 py-2 bg-blue-100 text-blue-700 text-left">安田 オディオオイ</td>
+                  <td class="border border-gray-200 px-3 py-2"></td>
+                  <td class="border border-gray-200 px-3 py-2"></td>
+                  <td class="border border-gray-200 px-3 py-2"></td>
+                  <td class="border border-gray-200 px-3 py-2"></td>
+                  <td class="border border-gray-200 px-3 py-2"></td>
+                </tr>
+                <tr>
+                  <td class="border border-gray-200 px-3 py-2">
+                    <div class="font-medium">ミライース 1152</div>
+                    <div class="text-[11px] text-gray-500">軽自動車</div>
+                  </td>
+                  <td class="border border-gray-200 px-3 py-2"></td>
+                  <td class="border border-gray-200 px-3 py-2 bg-blue-100 text-blue-700 text-left">花田 アルファード</td>
+                  <td class="border border-gray-200 px-3 py-2 bg-blue-100 text-blue-700"></td>
+                  <td class="border border-gray-200 px-3 py-2"></td>
+                  <td class="border border-gray-200 px-3 py-2"></td>
+                  <td class="border border-gray-200 px-3 py-2"></td>
+                  <td class="border border-gray-200 px-3 py-2"></td>
+                  <td class="border border-gray-200 px-3 py-2"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 入庫予約リンクからのカード作成モーダル（デモ） -->
+        <section id="view-planning" class="hidden flex-1 flex-col overflow-hidden">
+          <div class="flex items-center justify-between px-4 pt-3 pb-1 bg-gray-50 border-b border-gray-200">
+            <h2 class="text-sm font-medium text-gray-800">Googleカレンダー連携デモ</h2>
+          </div>
+          <div class="flex-1 flex items-center justify-center bg-gray-100">
+            <p class="text-sm text-gray-600">
+              本番では、Googleカレンダー側からのリンクで「入庫予約 → カード作成」画面が開きます。<br />
+              このデモでは、ヘッダーの「カード作成」ボタンから簡易フォームを開いて、カード追加の流れのみ体験できます。
+            </p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- カード作成モーダル（デモ用簡易版） -->
+    <div id="modal-create" class="fixed inset-0 bg-black/40 hidden items-center justify-center z-40">
+      <div class="bg-white rounded-xl shadow-2xl max-w-lg w-full mx-4 text-sm border border-gray-200 flex flex-col max-h-[90vh]">
+        <header class="px-4 py-3 border-b border-gray-200 flex items-center justify-between">
+          <h2 class="font-semibold text-gray-800 text-sm">新規カード作成（デモ）</h2>
+          <button id="btn-close-create" class="text-gray-400 hover:text-gray-600 text-xl leading-none">&times;</button>
+        </header>
+        <div class="px-4 py-3 space-y-3 overflow-y-auto flex-1">
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-xs text-gray-600 mb-1">メーカー</label>
+              <select id="form-maker" class="w-full border border-gray-300 rounded px-2 py-1.5 text-xs bg-white">
+                <option value="">選択してください</option>
+                <option value="トヨタ">トヨタ</option>
+                <option value="日産">日産</option>
+                <option value="ホンダ">ホンダ</option>
+                <option value="マツダ">マツダ</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs text-gray-600 mb-1">車種</label>
+              <input id="form-car" type="text" class="w-full border border-gray-300 rounded px-2 py-1.5 text-xs" placeholder="例: アルファード" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs text-gray-600 mb-1">ナンバー</label>
+            <input id="form-number" type="text" class="w-full border border-gray-300 rounded px-2 py-1.5 text-xs" placeholder="例: 熊本500 あ1234" />
+          </div>
+          <div>
+            <label class="block text-xs text-gray-600 mb-1">顧客名</label>
+            <input id="form-assignee" type="text" class="w-full border border-gray-300 rounded px-2 py-1.5 text-xs" placeholder="例: 花田 太郎" />
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-xs text-gray-600 mb-1">入庫日</label>
+              <input id="form-indate" type="date" class="w-full border border-gray-300 rounded px-2 py-1.5 text-xs" />
+            </div>
+            <div>
+              <label class="block text-xs text-gray-600 mb-1">出庫予定日</label>
+              <input id="form-outdate" type="date" class="w-full border border-gray-300 rounded px-2 py-1.5 text-xs" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs text-gray-600 mb-1">メモ</label>
+            <textarea id="form-note" rows="2" class="w-full border border-gray-300 rounded px-2 py-1.5 text-xs resize-none" placeholder="作業内容など"></textarea>
+          </div>
+        </div>
+        <footer class="px-4 py-3 border-t border-gray-200 flex justify-end gap-2">
+          <button id="btn-cancel-create" class="px-3 py-1.5 rounded border border-gray-300 text-xs text-gray-700 hover:bg-gray-50">キャンセル</button>
+          <button id="btn-submit-create" class="px-3 py-1.5 rounded bg-brand-blue text-white text-xs font-semibold hover:bg-blue-600">作成する（デモ）</button>
+        </footer>
+      </div>
+    </div>
+
+    <!-- Googleカレンダー用モーダル（デモ） -->
+    <div id="modal-calendar" class="fixed inset-0 bg-black/40 hidden items-center justify-center z-40">
+      <div class="bg-white rounded-xl shadow-2xl max-w-md w-full mx-4 text-sm border border-gray-200 flex flex-col">
+        <header class="px-4 py-3 border-b border-gray-200 flex items-center justify-between">
+          <h2 class="font-semibold text-gray-800 text-sm">Googleカレンダーにイベントを作成（デモ）</h2>
+          <button id="btn-close-calendar" class="text-gray-400 hover:text-gray-600 text-xl leading-none">&times;</button>
+        </header>
+        <div class="px-4 py-3 space-y-3">
+          <p class="text-xs text-gray-500">
+            入庫予定のお客様名・車種・ナンバー・入庫日を入力すると、<br />
+            実際の BrightBoard では Googleカレンダーに「入庫予定」イベントを作成します。<br />
+            このデモでは連携の流れのみを確認できます。
+          </p>
+          <div>
+            <label class="block text-xs text-gray-600 mb-1">お客様名</label>
+            <input type="text" class="w-full border border-gray-300 rounded px-2 py-1.5 text-xs" value="花田 太郎" />
+          </div>
+          <div>
+            <label class="block text-xs text-gray-600 mb-1">車種</label>
+            <input type="text" class="w-full border border-gray-300 rounded px-2 py-1.5 text-xs" value="アルファード" />
+          </div>
+          <div>
+            <label class="block text-xs text-gray-600 mb-1">ナンバー</label>
+            <input type="text" class="w-full border border-gray-300 rounded px-2 py-1.5 text-xs" value="熊本500 あ1234" />
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-xs text-gray-600 mb-1">入庫日</label>
+              <input type="date" class="w-full border border-gray-300 rounded px-2 py-1.5 text-xs" value="2026-03-04" />
+            </div>
+            <div>
+              <label class="block text-xs text-gray-600 mb-1">入庫時刻</label>
+              <input type="time" class="w-full border border-gray-300 rounded px-2 py-1.5 text-xs" value="09:00" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs text-gray-600 mb-1">固定URL（イベント説明・BrightBoardカード紐付け用）</label>
+            <input type="text" class="w-full border border-gray-300 rounded px-2 py-1.5 text-xs" value="https://withbbt.com/kiyota/" />
+          </div>
+        </div>
+        <footer class="px-4 py-3 border-t border-gray-200 flex justify-end gap-2">
+          <button id="btn-calendar-create" class="px-3 py-1.5 rounded bg-brand-blue text-white text-xs font-semibold hover:bg-blue-600">Googleカレンダーイベントを作成（デモ）</button>
+          <button id="btn-calendar-close2" class="px-3 py-1.5 rounded border border-gray-300 text-xs text-gray-700 hover:bg-gray-50">閉じる</button>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const demoBoardLabel = document.getElementById('demo-board-label');
+    const viewBoard = document.getElementById('view-board');
+    const viewGantt = document.getElementById('view-gantt');
+    const viewPlanning = document.getElementById('view-planning');
+    const btnBoard = document.getElementById('btn-view-board');
+    const btnGantt = document.getElementById('btn-view-gantt');
+    const btnPlanning = document.getElementById('btn-view-planning');
+    const tabPlanning = document.getElementById('tab-planning');
+    const tabBody = document.getElementById('tab-body');
+    const boardPlanning = document.getElementById('board-planning');
+    const boardBody = document.getElementById('board-body');
+
+    function setSidebarActive(target) {
+      [btnBoard, btnGantt, btnPlanning].forEach(btn => {
+        if (!btn) return;
+        const active = btn === target;
+        btn.dataset.active = active ? 'true' : 'false';
+        btn.classList.toggle('text-blue-600', active);
+        btn.classList.toggle('border-blue-400', active);
+        btn.classList.toggle('bg-blue-50', active);
+        btn.classList.toggle('text-gray-500', !active);
+      });
+    }
+
+    function showMainView(name) {
+      viewBoard.classList.add('hidden');
+      viewGantt.classList.add('hidden');
+      viewPlanning.classList.add('hidden');
+      if (name === 'board') {
+        viewBoard.classList.remove('hidden');
+        demoBoardLabel.textContent = boardBody.classList.contains('hidden')
+          ? '〈入庫〉予約管理（Planning）'
+          : '〈鈑金〉工程管理（Body）';
+      } else if (name === 'gantt') {
+        viewGantt.classList.remove('hidden');
+        demoBoardLabel.textContent = '代車・レンタカー 貸出状況';
+      } else {
+        viewPlanning.classList.remove('hidden');
+        demoBoardLabel.textContent = '〈入庫〉予約管理（Planning） - カレンダー連携';
+      }
+    }
+
+    btnBoard.addEventListener('click', () => { setSidebarActive(btnBoard); showMainView('board'); });
+    btnGantt.addEventListener('click', () => { setSidebarActive(btnGantt); showMainView('gantt'); });
+    btnPlanning.addEventListener('click', () => { setSidebarActive(btnPlanning); showMainView('planning'); });
+
+    tabPlanning.addEventListener('click', () => {
+      tabPlanning.classList.add('bg-blue-50', 'text-blue-600', 'border-blue-200');
+      tabBody.classList.remove('bg-blue-50', 'text-blue-600', 'border-blue-200');
+      boardPlanning.classList.remove('hidden');
+      boardBody.classList.add('hidden');
+      demoBoardLabel.textContent = '〈入庫〉予約管理（Planning）';
+    });
+    tabBody.addEventListener('click', () => {
+      tabBody.classList.add('bg-blue-50', 'text-blue-600', 'border-blue-200');
+      tabPlanning.classList.remove('bg-blue-50', 'text-blue-600', 'border-blue-200');
+      boardBody.classList.remove('hidden');
+      boardPlanning.classList.add('hidden');
+      demoBoardLabel.textContent = '〈鈑金〉工程管理（Body）';
+    });
+
+    // --- カード詳細パネル（クリックで表示） ---
+    const cardDetailPanel = document.getElementById('card-detail-panel');
+    const cardDetailBody = document.getElementById('card-detail-body');
+    const btnCloseDetail = document.getElementById('btn-close-detail');
+    let selectedCard = null;
+    let justDragged = false;
+
+    function showCardDetail(card) {
+      if (!cardDetailPanel || !cardDetailBody) return;
+      const title = card.getAttribute('data-detail-title') || 'カード';
+      const customer = card.getAttribute('data-detail-customer') || '';
+      const inout = card.getAttribute('data-detail-inout') || '';
+      const note = card.getAttribute('data-detail-note') || '';
+      if (selectedCard) selectedCard.classList.remove('ring-2', 'ring-blue-500');
+      selectedCard = card;
+      card.classList.add('ring-2', 'ring-blue-500');
+      cardDetailBody.innerHTML = `
+        <dl class="space-y-2 text-xs">
+          <div><dt class="text-gray-500 font-medium">車両・識別</dt><dd class="text-gray-900 mt-0.5">${title}</dd></div>
+          <div><dt class="text-gray-500 font-medium">顧客名</dt><dd class="text-gray-900 mt-0.5">${customer || '―'}</dd></div>
+          <div><dt class="text-gray-500 font-medium">入庫・出庫</dt><dd class="text-gray-900 mt-0.5">${inout || '―'}</dd></div>
+          <div><dt class="text-gray-500 font-medium">メモ</dt><dd class="text-gray-900 mt-0.5 whitespace-pre-wrap">${note || '―'}</dd></div>
+        </dl>
+        <p class="text-gray-400 text-[11px] mt-4">※ デモでは表示のみ。本番ではここから編集・NFC連携が可能です。</p>
+      `;
+      cardDetailPanel.classList.remove('hidden');
+      cardDetailPanel.classList.add('flex');
+    }
+
+    function closeCardDetail() {
+      if (selectedCard) {
+        selectedCard.classList.remove('ring-2', 'ring-blue-500');
+        selectedCard = null;
+      }
+      if (cardDetailPanel) {
+        cardDetailPanel.classList.add('hidden');
+        cardDetailPanel.classList.remove('flex');
+      }
+      if (cardDetailBody) {
+        cardDetailBody.innerHTML = '<p class="text-gray-500 text-xs">カードをクリックするとここに詳細が表示されます。</p>';
+      }
+    }
+
+    if (btnCloseDetail) btnCloseDetail.addEventListener('click', closeCardDetail);
+
+    // --- ドラッグ＆ドロップ（Planning / Body） ---
+    let draggingCard = null;
+    let draggingType = null;
+
+    function updatePlanningCounts() {
+      document.querySelectorAll('.bb-planning-column').forEach(col => {
+        const key = col.getAttribute('data-pl-column');
+        const countSpan = document.querySelector(`[data-pl-count="${key}"]`);
+        if (countSpan) countSpan.textContent = String(col.querySelectorAll('.bb-card-planning').length);
+      });
+    }
+
+    function updateBodyCounts() {
+      document.querySelectorAll('.bb-body-column').forEach(col => {
+        const key = col.getAttribute('data-body-column');
+        const map = { wait: 'wait', doing: 'doing', pwait: 'pwait', assembly: 'assembly', done: 'done' };
+        const span = document.querySelector(`[data-body-count="${map[key]}"]`);
+        if (span) span.textContent = String(col.querySelectorAll('.bb-card-body').length);
+      });
+    }
+
+    function setupDnD() {
+      document.querySelectorAll('.bb-card-planning').forEach(card => {
+        card.draggable = true;
+        card.addEventListener('dragstart', e => {
+          draggingCard = card;
+          draggingType = 'planning';
+          e.dataTransfer.effectAllowed = 'move';
+        });
+        card.addEventListener('dragend', () => {
+          draggingCard = null;
+          draggingType = null;
+          justDragged = true;
+          setTimeout(() => { justDragged = false; }, 150);
+        });
+        card.addEventListener('click', () => {
+          if (justDragged) return;
+          showCardDetail(card);
+        });
+      });
+      document.querySelectorAll('.bb-card-body').forEach(card => {
+        card.draggable = true;
+        card.addEventListener('dragstart', e => {
+          draggingCard = card;
+          draggingType = 'body';
+          e.dataTransfer.effectAllowed = 'move';
+        });
+        card.addEventListener('dragend', () => {
+          draggingCard = null;
+          draggingType = null;
+          justDragged = true;
+          setTimeout(() => { justDragged = false; }, 150);
+        });
+        card.addEventListener('click', () => {
+          if (justDragged) return;
+          showCardDetail(card);
+        });
+      });
+      document.querySelectorAll('.bb-planning-column').forEach(col => {
+        col.addEventListener('dragover', e => {
+          if (draggingType !== 'planning') return;
+          e.preventDefault();
+          col.classList.add('ring-2', 'ring-blue-300');
+        });
+        col.addEventListener('dragleave', () => {
+          col.classList.remove('ring-2', 'ring-blue-300');
+        });
+        col.addEventListener('drop', e => {
+          if (draggingType !== 'planning' || !draggingCard) return;
+          e.preventDefault();
+          col.classList.remove('ring-2', 'ring-blue-300');
+          col.appendChild(draggingCard);
+          updatePlanningCounts();
+        });
+      });
+      document.querySelectorAll('.bb-body-column').forEach(col => {
+        col.addEventListener('dragover', e => {
+          if (draggingType !== 'body') return;
+          e.preventDefault();
+          col.classList.add('ring-2', 'ring-blue-300');
+        });
+        col.addEventListener('dragleave', () => {
+          col.classList.remove('ring-2', 'ring-blue-300');
+        });
+        col.addEventListener('drop', e => {
+          if (draggingType !== 'body' || !draggingCard) return;
+          e.preventDefault();
+          col.classList.remove('ring-2', 'ring-blue-300');
+          col.appendChild(draggingCard);
+          updateBodyCounts();
+        });
+      });
+      updatePlanningCounts();
+      updateBodyCounts();
+    }
+
+    // カード作成モーダル
+    const modalCreate = document.getElementById('modal-create');
+    const btnCreate = document.getElementById('demo-create-card');
+    const btnCloseCreate = document.getElementById('btn-close-create');
+    const btnCancelCreate = document.getElementById('btn-cancel-create');
+    const btnSubmitCreate = document.getElementById('btn-submit-create');
+
+    function openCreateModal() {
+      modalCreate.classList.remove('hidden');
+      modalCreate.classList.add('flex');
+      const today = new Date().toISOString().slice(0, 10);
+      document.getElementById('form-indate').value = today;
+    }
+    function closeCreateModal() {
+      modalCreate.classList.add('hidden');
+      modalCreate.classList.remove('flex');
+    }
+    btnCreate.addEventListener('click', () => { showMainView('board'); openCreateModal(); });
+    btnCloseCreate.addEventListener('click', closeCreateModal);
+    btnCancelCreate.addEventListener('click', closeCreateModal);
+    btnSubmitCreate.addEventListener('click', () => {
+      alert('デモ用のため、実際のカードデータ作成は行いません。\n本番ではここから Firestore にカードを登録します。');
+      closeCreateModal();
+    });
+
+    // カレンダーモーダル
+    const modalCalendar = document.getElementById('modal-calendar');
+    const btnOpenCalendarModal = document.getElementById('btn-open-calendar-modal');
+    const btnCloseCalendar = document.getElementById('btn-close-calendar');
+    const btnCalendarCreate = document.getElementById('btn-calendar-create');
+    const btnCalendarClose2 = document.getElementById('btn-calendar-close2');
+
+    function openCalendarModal() {
+      modalCalendar.classList.remove('hidden');
+      modalCalendar.classList.add('flex');
+    }
+    function closeCalendarModal() {
+      modalCalendar.classList.add('hidden');
+      modalCalendar.classList.remove('flex');
+    }
+    btnOpenCalendarModal.addEventListener('click', openCalendarModal);
+    btnCloseCalendar.addEventListener('click', closeCalendarModal);
+    btnCalendarClose2.addEventListener('click', closeCalendarModal);
+    btnCalendarCreate.addEventListener('click', () => {
+      alert('デモ用のため、実際の Googleカレンダー API 呼び出しは行いません。');
+      closeCalendarModal();
+    });
+
+    // 初期表示
+    showMainView('board');
+    setupDnD();
+  </script>
+</body>
+</html>
+

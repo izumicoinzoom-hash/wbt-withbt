@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BrightBoard 実機デモビュー</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              blue: '#2563eb',
+              navy: '#0f172a'
+            }
+          },
+          fontFamily: {
+            sans: ['"Noto Sans JP"', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body { font-family: "Noto Sans JP", system-ui, sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100">
+  <div class="min-h-screen flex flex-col">
+    <!-- ヘッダー -->
+    <header class="bg-slate-900/95 border-b border-slate-800 px-4 sm:px-6 py-3 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3 min-w-0">
+        <div class="h-9 w-9 rounded-lg bg-blue-600 flex items-center justify-center text-white text-sm font-bold shadow-lg shadow-blue-900/40">
+          BB
+        </div>
+        <div class="min-w-0">
+          <p class="text-sm sm:text-base font-semibold text-white truncate">
+            BrightBoard 実機デモ環境
+          </p>
+          <p class="text-[11px] sm:text-xs text-slate-300 truncate">
+            実際の BrightBoard とほぼ同じ UI を体験できます（デモ用テスト環境または本番相当環境）。
+          </p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <a href="brightboard-kouteikanri.html" class="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-slate-700 text-[11px] sm:text-xs text-slate-200 hover:bg-slate-800">
+          LPに戻る
+        </a>
+        <button
+          id="btn-open-newtab"
+          class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-[11px] sm:text-xs font-semibold text-white shadow-md shadow-blue-900/40"
+        >
+          新しいタブで開く
+        </button>
+      </div>
+    </header>
+
+    <!-- 注意書き -->
+    <section class="bg-slate-900/80 border-b border-slate-800 px-4 sm:px-6 py-2 text-[11px] sm:text-xs text-slate-300 space-y-1">
+      <p>
+        ※ 下の枠には、実際の BrightBoard アプリケーション（デモ用サーバーまたは本番相当サーバー）が埋め込まれます。
+      </p>
+      <p>
+        ※ 本番の URL を利用する場合は、個人情報や実データの閲覧権限にご注意ください。必要に応じてテスト用テナント／ダミーデータ環境をご利用ください。
+      </p>
+    </section>
+
+    <!-- 実機 iframe 埋め込みエリア -->
+    <main class="flex-1 min-h-0 bg-slate-950">
+      <div class="h-full w-full">
+        <iframe
+          id="brightboard-frame"
+          src="https://withbt.com/kiyota/demo/"
+          title="BrightBoard Demo"
+          class="w-full h-[calc(100vh-120px)] sm:h-[calc(100vh-112px)] border-0 bg-white"
+        ></iframe>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      const btn = document.getElementById('btn-open-newtab');
+      const frame = document.getElementById('brightboard-frame');
+      if (!btn || !frame) return;
+
+      btn.addEventListener('click', () => {
+        const url = frame.getAttribute('src') || 'https://withbt.com/kiyota/demo/';
+        window.open(url, '_blank', 'noopener,noreferrer');
+      });
+    })();
+  </script>
+</body>
+</html>
+

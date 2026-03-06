@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>鈑金・整備向け工程管理システム | WithBrightTomorrow</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          brand: {
+            navy: '#0F172A',
+            dark: '#020617',
+            orange: '#EA580C',
+            red: '#DC2626',
+            slate: '#F1F5F9',
+          }
+        },
+        fontFamily: {
+          sans: ['"Noto Sans JP"', 'sans-serif'],
+          mono: ['"JetBrains Mono"', 'monospace'],
+          display: ['"Oswald"', 'sans-serif'],
+        }
+      }
+    }
+  }
+  </script>
+  <style>
+    body { background-color: #020617; color: #E5E7EB; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #020617; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #EA580C; }
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity .7s ease-out, transform .7s ease-out; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .img-placeholder {
+      background-color: #1e293b;
+      background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23334155' fill-opacity='0.4' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+      display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;
+    }
+    .img-placeholder img { width: 100%; height: 100%; object-fit: cover; transition: .5s; }
+  </style>
+</head>
+<body class="antialiased selection:bg-brand-orange selection:text-white">
+
+  <!-- ナビゲーション -->
+  <nav class="fixed top-0 w-full z-50 bg-black/70 backdrop-blur border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <a href="index.html" class="flex items-center space-x-2 hover:opacity-80 transition">
+          <div class="bg-brand-orange p-1 rounded text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <span class="font-sans font-bold text-lg text-white">WithBrightTomorrow</span>
+        </a>
+        <div class="flex items-center gap-4 text-sm">
+          <a href="#plans" class="hidden md:inline-block text-slate-300 hover:text-white transition">料金プラン</a>
+          <a href="#features" class="hidden md:inline-block text-slate-300 hover:text-white transition">主な機能</a>
+          <a href="mailto:info@withbrighttomorrow.com" class="bg-brand-orange hover:bg-orange-600 text-white px-3 py-2 rounded-md font-bold transition text-xs sm:text-sm">
+            導入相談・デモ依頼
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ヒーロー（背景画像つき） -->
+  <section class="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <div class="img-placeholder w-full h-full">
+        <img src="https://images.unsplash.com/photo-1581090700227-1e37b190418e?q=80&w=2400&auto=format&fit=crop" alt="[整備工場内でノートPC画面を見ながら作業指示を確認する整備士のイメージ]" class="w-full h-full object-cover">
+      </div>
+      <div class="absolute inset-0 bg-gradient-to-r from-brand-navy/95 via-brand-navy/80 to-brand-navy/60"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-up">
+      <span class="inline-block py-1 px-3 rounded-full bg-slate-800/80 border border-slate-500 text-brand-orange font-mono text-xs md:text-sm mb-6 tracking-widest backdrop-blur-sm">
+        FOR BODYSHOP WORKFLOW LEADERS
+      </span>
+      <h1 class="text-3xl md:text-5xl lg:text-6xl font-sans font-black tracking-tight leading-tight mb-6 text-shadow-lg">
+        ホワイトボードから、<br/>
+        <span class="text-white">未来的な工程管理ダッシュボードへ。</span>
+      </h1>
+      <p class="mt-4 max-w-2xl mx-auto text-base md:text-xl text-slate-200 font-light drop-shadow-md leading-relaxed">
+        清田自動車で日々使われている、鈑金・塗装・代車・NFC連携まで含んだ
+        実戦仕様の工程管理システムを、他社様向けにも提供します。<br class="hidden md:inline" />
+        PC 間でリアルタイム同期される「BrightBoard」が、現場の一体感を生み出します。
+      </p>
+
+      <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+        <a href="brightboard-demo-live.html" class="px-8 py-4 bg-brand-orange text-white rounded-lg font-bold text-lg shadow-lg shadow-orange-900/50 flex items-center justify-center gap-2 hover:bg-orange-600 transition transform hover:scale-105 active:scale-95">
+          ブラウザでデモを体験する
+        </a>
+        <a href="#plans" class="px-8 py-4 bg-transparent border border-slate-600 hover:border-white text-slate-200 hover:text-white rounded-lg font-medium text-sm sm:text-base transform hover:scale-105 active:scale-95 transition">
+          料金プランを見る
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 主な特長 -->
+  <section id="features" class="py-16 bg-brand-dark">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl sm:text-3xl font-bold text-white mb-8 border-l-4 border-brand-orange pl-4">
+        現場で磨かれた主な機能
+      </h2>
+      <div class="grid gap-6 md:grid-cols-3 text-sm">
+        <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5">
+          <div class="text-brand-orange text-xs font-bold mb-2">工程管理</div>
+          <h3 class="text-white font-semibold mb-2 text-base">鈑金・塗装・納車まで一目で見える</h3>
+          <p class="text-slate-300 leading-relaxed">
+            入庫管理・鈑金ボード・塗装ボード・納車ボードを、ホワイトボード感覚で操作可能。
+            列やステータスも現場の流れに合わせて柔軟にカスタマイズできます。
+          </p>
+        </div>
+        <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5">
+          <div class="text-brand-orange text-xs font-bold mb-2">代車管理</div>
+          <h3 class="text-white font-semibold mb-2 text-base">ガントチャートで代車・レンタカーを一元管理</h3>
+          <p class="text-slate-300 leading-relaxed">
+            代車マスタとガントチャートが連動し、「いつ・どの車が・どの顧客に」出ているかを直感的に把握。
+            代車マスタは複数PC間でリアルタイム同期されます。
+          </p>
+        </div>
+        <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5">
+          <div class="text-brand-orange text-xs font-bold mb-2">NFC・Google連携</div>
+          <h3 class="text-white font-semibold mb-2 text-base">スマホ＋NFCタグでステータス変更</h3>
+          <p class="text-slate-300 leading-relaxed">
+            バインダーに貼った NFCタグをスマホでかざすだけで、対象車両の現在列を表示し、
+            ワンタップで「B待ち」「B中」「本日納車」などへ移動できます。
+            Google アカウントによるログインやスプレッドシート連携にも対応。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 画面イメージギャラリー -->
+  <section class="py-24 bg-slate-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12 fade-up">
+        <span class="text-brand-orange font-mono text-sm tracking-wider">DASHBOARD GALLERY</span>
+        <h2 class="text-3xl font-bold text-white mt-2">BrightBoard のイメージ</h2>
+        <p class="text-slate-400 mt-4 leading-relaxed text-sm sm:text-base">
+          実際の工程ボードや代車ガントチャート、<br class="md:hidden" />
+          NFCタグ運用の雰囲気をイメージしやすいように、参考イメージを並べました。
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 h-96">
+        <div class="group relative rounded-xl overflow-hidden shadow-lg fade-up" style="transition-delay: 80ms;">
+          <div class="img-placeholder w-full h-full">
+            <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=2400&auto=format&fit=crop" alt="[写真: PC画面に表示されたダッシュボードとグラフ]" class="w-full h-full object-cover group-hover:scale-105">
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+            <span class="text-brand-orange text-xs font-bold font-mono">KANBAN VIEW</span>
+            <h3 class="text-white font-bold text-lg">工程ボード全体の俯瞰</h3>
+          </div>
+        </div>
+        <div class="group relative rounded-xl overflow-hidden shadow-lg fade-up" style="transition-delay: 180ms;">
+          <div class="img-placeholder w-full h-full">
+            <img src="images/mechanic-tablet-workflow.png" alt="[写真: 車の前でタブレットを使って車両情報を確認する整備士]" class="w-full h-full object-cover group-hover:scale-105">
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+            <span class="text-brand-orange text-xs font-bold font-mono">REAL WORK</span>
+            <h3 class="text-white font-bold text-lg">現場と連動するステータス変更</h3>
+          </div>
+        </div>
+        <div class="group relative rounded-xl overflow-hidden shadow-lg fade-up" style="transition-delay: 260ms;">
+          <div class="img-placeholder w-full h-full">
+            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2400&auto=format&fit=crop" alt="[写真: オフィスで複数のPCを使いながら打ち合わせをするチーム]" class="w-full h-full object-cover group-hover:scale-105">
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+            <span class="text-brand-orange text-xs font-bold font-mono">TEAM VIEW</span>
+            <h3 class="text-white font-bold text-lg">複数PC・複数拠点での共有</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 料金プラン -->
+  <section id="plans" class="py-16 bg-gradient-to-b from-brand-dark to-black">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl sm:text-3xl font-bold text-white mb-3 border-l-4 border-brand-orange pl-4">
+        料金プラン（たたき台）
+      </h2>
+      <p class="text-slate-300 text-sm mb-8">
+        貴社の規模やカスタマイズ範囲に応じて個別にお見積りいたします。<br class="hidden sm:inline">
+        下記はあくまで目安の「考え方」です。
+      </p>
+
+      <div class="grid gap-6 md:grid-cols-2">
+        <!-- 売り切り＋保守 -->
+        <div class="bg-slate-900/80 border border-slate-700 rounded-2xl p-6 flex flex-col">
+          <div class="text-xs font-mono tracking-widest text-slate-400 mb-2">PLAN A</div>
+          <h3 class="text-xl font-bold text-white mb-2">買い切り ＋ 保守サポート</h3>
+          <p class="text-slate-300 text-sm mb-4">
+            一度導入費をお支払いいただき、その後は比較的ライトな月額でサポートを受けるモデルです。
+          </p>
+          <div class="bg-slate-800/70 rounded-xl p-4 mb-4 text-sm">
+            <div class="flex items-baseline gap-2 mb-2">
+              <span class="text-slate-300">導入費（目安）</span>
+              <span class="text-2xl font-bold text-white">50〜60万円 / 社</span>
+            </div>
+            <ul class="list-disc list-inside text-slate-300 space-y-1">
+              <li>貴社専用 Firebase・ドメインの環境構築</li>
+              <li>代車マスタ・列構成などの初期設定</li>
+              <li>Google ログイン・権限設定</li>
+              <li>オンラインでの操作説明 1 回</li>
+            </ul>
+          </div>
+          <div class="bg-slate-800/50 rounded-xl p-4 text-sm mb-4">
+            <div class="flex items-baseline gap-2 mb-2">
+              <span class="text-slate-300">保守費用（目安）</span>
+              <span class="text-xl font-bold text-white">1〜2万円 / 月</span>
+            </div>
+            <ul class="list-disc list-inside text-slate-300 space-y-1">
+              <li>致命的な不具合・障害の対応</li>
+              <li>ブラウザ・スマホOS・Firebase の仕様変更への追従</li>
+              <li>軽微な文言変更・画面調整（月◯回まで）</li>
+              <li>メール・チャットでの質問対応</li>
+            </ul>
+          </div>
+          <p class="text-[11px] text-slate-500 mt-auto">
+            ※ 実際の金額は、利用規模・ユーザー数・必要なカスタマイズ範囲をお伺いした上でお見積りいたします。
+          </p>
+        </div>
+
+        <!-- サブスク -->
+        <div class="bg-gradient-to-br from-brand-navy to-slate-900 border border-brand-orange/60 rounded-2xl p-6 flex flex-col shadow-[0_0_35px_rgba(234,88,12,0.25)]">
+          <div class="flex items-center justify-between mb-2">
+            <div>
+              <div class="text-xs font-mono tracking-widest text-brand-orange mb-1">PLAN B</div>
+              <h3 class="text-xl font-bold text-white">サブスクリプション（月額制）</h3>
+            </div>
+            <span class="px-2 py-1 rounded-full bg-brand-orange/20 text-brand-orange text-[11px] font-semibold">継続改善向き</span>
+          </div>
+          <p class="text-slate-200 text-sm mb-4">
+            月額でご利用いただきながら、機能改善や運用見直しもセットで伴走するモデルです。
+          </p>
+
+          <div class="bg-slate-900/60 rounded-xl p-4 mb-4 text-sm">
+            <div class="flex items-baseline gap-2 mb-2">
+              <span class="text-slate-300">ベーシック（目安）</span>
+              <span class="text-2xl font-bold text-white">月額 3万円 / 社</span>
+            </div>
+            <ul class="list-disc list-inside text-slate-300 space-y-1">
+              <li>専用環境構築（初期費用: 10万円程度を想定）</li>
+              <li>工程管理・代車管理・NFC・Google連携のフル利用</li>
+              <li>不具合・障害対応</li>
+              <li>月1回程度のアップデート・軽微な改善</li>
+              <li>メール・チャットでの質問対応</li>
+            </ul>
+          </div>
+
+          <div class="bg-slate-900/40 rounded-xl p-4 mb-4 text-sm">
+            <div class="flex items-baseline gap-2 mb-2">
+              <span class="text-slate-300">プレミアム（例）</span>
+              <span class="text-xl font-bold text-white">月額 5万円 / 社</span>
+            </div>
+            <ul class="list-disc list-inside text-slate-300 space-y-1">
+              <li>現場ヒアリング＋列構成・運用ルールの設計支援</li>
+              <li>四半期ごとのオンラインレビュー（30〜60分）</li>
+              <li>毎月◯時間までの軽微なカスタマイズ込み</li>
+              <li>簡易レポート（入庫台数・代車稼働状況など）の共有</li>
+            </ul>
+          </div>
+
+          <p class="text-[11px] text-slate-400 mt-auto">
+            ※ サブスクプランは、工場の規模・拠点数・ユーザー数を踏まえて個別にご提案いたします。
+          </p>
+        </div>
+      </div>
+
+      <!-- オプション -->
+      <div class="mt-10">
+        <h3 class="text-lg font-bold text-white mb-3">オプション例</h3>
+        <div class="grid gap-4 md:grid-cols-3 text-sm">
+          <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-4">
+            <div class="text-brand-orange text-xs font-bold mb-1">NFCスターターパック</div>
+            <p class="text-slate-300">
+              NFCタグ・カードリーダー一式と、初期書き込みサポートをセットでご提供。
+              バインダー運用がすぐに始められます。
+            </p>
+          </div>
+          <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-4">
+            <div class="text-brand-orange text-xs font-bold mb-1">帳票・レポート連携</div>
+            <p class="text-slate-300">
+              Google スプレッドシートや既存の管理表と連携し、入庫台数・売上見込み・代車稼働率などの見える化を支援します。
+            </p>
+          </div>
+          <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-4">
+            <div class="text-brand-orange text-xs font-bold mb-1">現場研修・運用コンサル</div>
+            <p class="text-slate-300">
+              初回のオンサイト研修や、工程の見直し・ボード設計の相談など、
+              「ツール導入だけで終わらせない」ための支援もご用意できます。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- お問い合わせ誘導 -->
+  <section class="py-16 bg-black border-t border-slate-800">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold text-white mb-4">
+        まずはデモ環境で、実際の画面をご覧ください。
+      </h2>
+      <p class="text-slate-300 text-sm mb-6">
+        清田自動車で運用している実データに近いダミーデータを使って、<br class="hidden sm:inline">
+        カードの流れ・代車の動き・NFC連携のイメージをご確認いただけます。
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+        <a href="mailto:info@withbrighttomorrow.com" class="px-6 py-3 bg-brand-orange hover:bg-orange-600 text-white font-bold rounded-md text-sm shadow-lg shadow-orange-900/40">
+          デモ・お見積りの相談をする
+        </a>
+        <a href="tel:096-357-7144" class="px-6 py-3 border border-slate-600 hover:border-white text-slate-200 hover:text-white rounded-md text-sm">
+          お電話で相談（096-357-7144）
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-6 bg-black border-t border-slate-800 text-center text-xs text-slate-500">
+    <p>&copy; WithBrightTomorrow. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
+
+  <footer class="mt-16 py-6 bg-black/80 border-t border-slate-800 text-center text-xs text-slate-500">
+    <p>&copy; WithBrightTomorrow. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
+
