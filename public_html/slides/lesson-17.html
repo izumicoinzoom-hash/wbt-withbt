@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第17回 電気回路の基礎と回路図読解</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<style>
+:root {
+  --bg: #0F172A;
+  --accent: #EA580C;
+  --text: #F8FAFC;
+  --card: #1E293B;
+}
+.reveal { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Noto Sans JP', sans-serif; }
+.reveal h1, .reveal h2, .reveal h3 { color: var(--text); text-transform: none; }
+.reveal h1 { font-size: 1.8em; }
+.reveal h2 { font-size: 1.4em; border-bottom: 3px solid var(--accent); padding-bottom: 0.3em; display: inline-block; }
+.reveal .accent { color: var(--accent); font-weight: bold; }
+.reveal .card { background: var(--card); border-radius: 12px; padding: 1.2em; margin: 0.5em 0; text-align: left; }
+.reveal table { margin: 0 auto; border-collapse: collapse; font-size: 0.7em; }
+.reveal th { background: var(--accent); color: #fff; padding: 0.5em 1em; }
+.reveal td { background: var(--card); padding: 0.5em 1em; border: 1px solid #334155; }
+.reveal .quiz-answer { color: #22C55E; font-weight: bold; }
+.reveal .subtitle { color: #94A3B8; font-size: 0.6em; display: block; margin-top: 0.3em; }
+.reveal ul, .reveal ol { display: block; text-align: left; margin-left: 1em; }
+.reveal li { margin-bottom: 0.4em; font-size: 0.85em; }
+.reveal pre { background: var(--card); border-radius: 8px; padding: 1em; font-size: 0.55em; text-align: left; }
+.reveal .emoji { font-size: 1.2em; }
+.reveal .highlight-box { background: var(--card); border-left: 4px solid var(--accent); padding: 0.8em 1.2em; margin: 0.5em 0; border-radius: 0 8px 8px 0; text-align: left; }
+@media print { .reveal { background: #fff !important; color: #000 !important; } }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- スライド1: タイトル -->
+<section>
+  <h1>第17回<br>電気回路の基礎と回路図読解</h1>
+  <span class="subtitle">Dasar Rangkaian Listrik dan Membaca Diagram Rangkaian</span>
+  <p style="margin-top:1.5em; color:#94A3B8;">WBT 特定技能2号・整備士2級 講座</p>
+</section>
+
+<!-- スライド2: 今日の目標 -->
+<section>
+  <h2>今日の目標</h2>
+  <div class="card">
+    <ol>
+      <li><span class="accent">オームの法則</span>（電圧・電流・抵抗）を理解する<br><span class="subtitle">Memahami Hukum Ohm (tegangan, arus, hambatan)</span></li>
+      <li><span class="accent">直列回路と並列回路</span>の違いを説明できる<br><span class="subtitle">Dapat menjelaskan perbedaan rangkaian seri dan paralel</span></li>
+      <li><span class="accent">回路図記号</span>を読み取り、配線図を追える<br><span class="subtitle">Dapat membaca simbol rangkaian dan mengikuti diagram kabel</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- スライド3: 前回の振り返り -->
+<section>
+  <h2>前回の振り返り（第16回）</h2>
+  <div class="card">
+    <ul>
+      <li>中間確認テスト2を実施（第10〜15回の範囲）</li>
+      <li>エンジン基礎・動力伝達装置・制動装置の復習</li>
+      <li>シリンダーヘッド分解・キャリパーO/Hの実技ポイント</li>
+    </ul>
+  </div>
+  <p style="color:#94A3B8; font-size:0.7em;">今回から<span class="accent">電装ブロック</span>に入ります！</p>
+</section>
+
+<!-- スライド4: オームの法則 -->
+<section>
+  <h2>オームの法則</h2>
+  <div class="card">
+    <p style="text-align:center; font-size:1.4em;">
+      <span class="accent">V = I x R</span>
+    </p>
+    <table style="margin-top:0.8em;">
+      <tr><th>記号</th><th>名前</th><th>単位</th><th>Bahasa</th></tr>
+      <tr><td><span class="accent">V</span></td><td>電圧（でんあつ）</td><td>ボルト [V]</td><td>Tegangan</td></tr>
+      <tr><td><span class="accent">I</span></td><td>電流（でんりゅう）</td><td>アンペア [A]</td><td>Arus</td></tr>
+      <tr><td><span class="accent">R</span></td><td>抵抗（ていこう）</td><td>オーム [Ω]</td><td>Hambatan</td></tr>
+    </table>
+  </div>
+  <p style="font-size:0.7em; color:#94A3B8;">例: 12V電源、抵抗4Ω → 電流 = 12÷4 = <span class="accent">3A</span></p>
+</section>
+
+<!-- スライド5: 直列回路と並列回路 -->
+<section>
+  <h2>直列回路と並列回路</h2>
+  <div style="display:flex; gap:1em; justify-content:center; flex-wrap:wrap;">
+    <div class="card" style="flex:1; min-width:280px;">
+      <h3 style="color:var(--accent);">直列回路 (Seri)</h3>
+      <pre style="font-size:0.6em;">
+  +──[R1]──[R2]──[R3]──+
+  |                      |
+ [電源 12V]             GND
+      </pre>
+      <ul>
+        <li>電流はどこでも<span class="accent">同じ</span></li>
+        <li>R合計 = R1 + R2 + R3</li>
+        <li>1つ切れると<span class="accent">全部消える</span></li>
+      </ul>
+    </div>
+    <div class="card" style="flex:1; min-width:280px;">
+      <h3 style="color:var(--accent);">並列回路 (Paralel)</h3>
+      <pre style="font-size:0.6em;">
+      +──[R1]──+
+      |         |
+  +───┤         ├───+
+  |   |         |   |
+  |   +──[R2]──+   |
+  |                 |
+ [電源 12V]        GND
+      </pre>
+      <ul>
+        <li>電圧はどこでも<span class="accent">同じ</span></li>
+        <li>1/R合計 = 1/R1 + 1/R2</li>
+        <li>1つ切れても<span class="accent">他は動く</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- スライド6: 回路図記号 -->
+<section>
+  <h2>回路図記号一覧</h2>
+  <table>
+    <tr><th>記号</th><th>日本語</th><th>Bahasa</th><th>説明</th></tr>
+    <tr><td>─/\/\/─</td><td>抵抗</td><td>Hambatan</td><td>電流を制限する</td></tr>
+    <tr><td>──|├──</td><td>コンデンサ</td><td>Kapasitor</td><td>電気を蓄える</td></tr>
+    <tr><td>──▷|──</td><td>ダイオード</td><td>Dioda</td><td>一方向に電流を流す</td></tr>
+    <tr><td>──/ ──</td><td>スイッチ</td><td>Sakelar</td><td>回路を開閉する</td></tr>
+    <tr><td>──(M)──</td><td>モーター</td><td>Motor</td><td>電気→回転運動</td></tr>
+    <tr><td>──(L)──</td><td>ランプ</td><td>Lampu</td><td>照明・警告灯</td></tr>
+    <tr><td>─┤F├─</td><td>ヒューズ</td><td>Sekring</td><td>過電流保護</td></tr>
+  </table>
+</section>
+
+<!-- スライド7: 配線図（ハーネス図）の読み方 -->
+<section>
+  <h2>配線図（ハーネス図）の読み方</h2>
+  <div class="card">
+    <pre style="font-size:0.55em;">
+  [バッテリー 12V]
+       |
+    ┤F├ (30A ヒューズ)
+       |
+    ─/ ─ (イグニッション SW)
+       |
+    ┬──────────────────┬
+    |                    |
+  [ヘッドライト左]    [ヘッドライト右]
+    |                    |
+    ┴──────────────────┴
+       |
+      GND (アース)
+    </pre>
+  </div>
+  <div class="highlight-box">
+    <span class="accent">読み方のコツ：</span>電源（+）からアース（-）に向かって上から下へ追う
+  </div>
+</section>
+
+<!-- スライド8: 実務での活用 -->
+<section>
+  <h2>実務での電気回路知識</h2>
+  <div class="card">
+    <ul>
+      <li><span class="accent">テスターの使い方：</span>電圧測定は並列、電流測定は直列に接続</li>
+      <li><span class="accent">断線チェック：</span>導通テスト（抵抗値0Ω近く＝正常）</li>
+      <li><span class="accent">ショート発見：</span>ヒューズが飛ぶ→配線図で該当回路を追う</li>
+      <li><span class="accent">電圧降下テスト：</span>接触不良を発見する手法</li>
+    </ul>
+  </div>
+  <div class="highlight-box">
+    <span class="accent">整備現場：</span>「ランプが点かない」→ 電源→ヒューズ→スイッチ→バルブ→アースの順で確認
+  </div>
+</section>
+
+<!-- スライド9: 重要用語一覧 -->
+<section>
+  <h2>重要用語一覧</h2>
+  <table>
+    <tr><th>日本語（読み仮名）</th><th>Bahasa Indonesia</th></tr>
+    <tr><td>電圧（でんあつ）</td><td>Tegangan</td></tr>
+    <tr><td>電流（でんりゅう）</td><td>Arus listrik</td></tr>
+    <tr><td>抵抗（ていこう）</td><td>Hambatan</td></tr>
+    <tr><td>直列回路（ちょくれつかいろ）</td><td>Rangkaian seri</td></tr>
+    <tr><td>並列回路（へいれつかいろ）</td><td>Rangkaian paralel</td></tr>
+    <tr><td>回路図（かいろず）</td><td>Diagram rangkaian</td></tr>
+    <tr><td>ハーネス図（はーねすず）</td><td>Diagram kabel/harness</td></tr>
+    <tr><td>ヒューズ</td><td>Sekring</td></tr>
+    <tr><td>導通（どうつう）</td><td>Kontinuitas</td></tr>
+    <tr><td>アース</td><td>Ground</td></tr>
+  </table>
+</section>
+
+<!-- スライド10: 確認クイズ -->
+<section>
+  <h2>確認クイズ</h2>
+  <div class="card">
+    <p><strong>Q1. 12Vの電源に6Ωの抵抗を接続した場合、流れる電流は？</strong></p>
+    <ol type="A">
+      <li>0.5A</li>
+      <li>1A</li>
+      <li>2A</li>
+      <li>72A</li>
+    </ol>
+    <p class="fragment quiz-answer">正解: C. 2A（V=IR → I=V/R=12/6=2A）</p>
+  </div>
+  <div class="card" style="margin-top:0.5em;">
+    <p><strong>Q2. 並列回路の特徴として正しいものは？</strong></p>
+    <ol type="A">
+      <li>各抵抗に流れる電流は同じ</li>
+      <li>1つの抵抗が切れると全部消える</li>
+      <li>各抵抗にかかる電圧は同じ</li>
+      <li>合成抵抗は各抵抗の合計になる</li>
+    </ol>
+    <p class="fragment quiz-answer">正解: C. 各抵抗にかかる電圧は同じ</p>
+  </div>
+</section>
+
+<!-- スライド11: まとめ -->
+<section>
+  <h2>まとめ</h2>
+  <div class="card">
+    <ul>
+      <li><span class="accent">オームの法則</span> V=IR で電圧・電流・抵抗の関係を計算できる</li>
+      <li><span class="accent">直列回路</span>は電流が同じ、<span class="accent">並列回路</span>は電圧が同じ</li>
+      <li><span class="accent">回路図記号</span>を覚えて配線図を上から下へ追えるようにする</li>
+      <li>故障診断では電源→ヒューズ→スイッチ→負荷→アースの順に確認</li>
+    </ul>
+  </div>
+  <p style="color:#94A3B8; font-size:0.7em;">次回: バッテリー・始動・充電系</p>
+</section>
+
+<!-- スライド12: 宿題 -->
+<section>
+  <h2>宿題</h2>
+  <div class="card" style="text-align:center;">
+    <p style="font-size:1.1em;"><span class="accent">homework.html?lesson=17</span> にアクセスして<br>3問解いてください</p>
+    <p style="color:#94A3B8; font-size:0.8em; margin-top:1em;">次回までに提出しましょう！<br>Selesaikan 3 soal sebelum pelajaran berikutnya!</p>
+  </div>
+</section>
+
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  transition: 'slide',
+  pdfSeparateFragments: false
+});
+if (location.search.match(/print-pdf/gi)) {
+  document.documentElement.classList.add('print-pdf');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第21回 故障診断②（スキャンツール実習・記録）</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<style>
+:root {
+  --bg: #0F172A;
+  --accent: #EA580C;
+  --text: #F8FAFC;
+  --card: #1E293B;
+}
+.reveal { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Noto Sans JP', sans-serif; }
+.reveal h1, .reveal h2, .reveal h3 { color: var(--text); text-transform: none; }
+.reveal h1 { font-size: 1.8em; }
+.reveal h2 { font-size: 1.4em; border-bottom: 3px solid var(--accent); padding-bottom: 0.3em; display: inline-block; }
+.reveal .accent { color: var(--accent); font-weight: bold; }
+.reveal .card { background: var(--card); border-radius: 12px; padding: 1.2em; margin: 0.5em 0; text-align: left; }
+.reveal table { margin: 0 auto; border-collapse: collapse; font-size: 0.7em; }
+.reveal th { background: var(--accent); color: #fff; padding: 0.5em 1em; }
+.reveal td { background: var(--card); padding: 0.5em 1em; border: 1px solid #334155; }
+.reveal .quiz-answer { color: #22C55E; font-weight: bold; }
+.reveal .subtitle { color: #94A3B8; font-size: 0.6em; display: block; margin-top: 0.3em; }
+.reveal ul, .reveal ol { display: block; text-align: left; margin-left: 1em; }
+.reveal li { margin-bottom: 0.4em; font-size: 0.85em; }
+.reveal pre { background: var(--card); border-radius: 8px; padding: 1em; font-size: 0.55em; text-align: left; }
+.reveal .highlight-box { background: var(--card); border-left: 4px solid var(--accent); padding: 0.8em 1.2em; margin: 0.5em 0; border-radius: 0 8px 8px 0; text-align: left; }
+@media print { .reveal { background: #fff !important; color: #000 !important; } }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- スライド1: タイトル -->
+<section>
+  <h1>第21回<br>故障診断②<br>スキャンツール実習・記録</h1>
+  <span class="subtitle">Diagnosis Kerusakan 2: Praktik Scan Tool dan Pencatatan</span>
+  <p style="margin-top:1.5em; color:#94A3B8;">WBT 特定技能2号・整備士2級 講座</p>
+</section>
+
+<!-- スライド2: 今日の目標 -->
+<section>
+  <h2>今日の目標</h2>
+  <div class="card">
+    <ol>
+      <li><span class="accent">スキャンツール</span>の接続・起動・車種選択ができる<br><span class="subtitle">Dapat menghubungkan, menghidupkan, dan memilih kendaraan di scan tool</span></li>
+      <li><span class="accent">DTC読み取り・消去・再確認</span>の一連の操作を習得する<br><span class="subtitle">Menguasai operasi baca DTC, hapus, dan konfirmasi ulang</span></li>
+      <li><span class="accent">診断結果の記録</span>方法を理解する<br><span class="subtitle">Memahami cara mencatat hasil diagnosis</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- スライド3: 前回の振り返り -->
+<section>
+  <h2>前回の振り返り（第20回）</h2>
+  <div class="card">
+    <ul>
+      <li><span class="accent">OBD-II</span>：車載自己診断システム、DLCに接続</li>
+      <li><span class="accent">DTC</span>：5桁コード（P/B/C/U + 数字4桁）で故障を示す</li>
+      <li><span class="accent">診断フロー</span>：症状→DTC→データ→原因→修理→消去→記録</li>
+    </ul>
+  </div>
+  <p style="color:#94A3B8; font-size:0.7em;">今回は<span class="accent">実際にスキャンツールを使う</span>手順を学びます</p>
+</section>
+
+<!-- スライド4: スキャンツールの接続手順 -->
+<section>
+  <h2>スキャンツールの接続手順</h2>
+  <div class="card">
+    <pre style="font-size:0.6em; line-height:1.5;">
+  ┌─────────────────────────────┐
+  │ STEP 1: イグニッションOFF    │
+  │ (エンジン停止を確認)          │
+  └─────────────┬───────────────┘
+                ▼
+  ┌─────────────────────────────┐
+  │ STEP 2: DLCにケーブル接続    │
+  │ (運転席足元・16ピン)          │
+  └─────────────┬───────────────┘
+                ▼
+  ┌─────────────────────────────┐
+  │ STEP 3: イグニッションON     │
+  │ (エンジンはかけない)          │
+  └─────────────┬───────────────┘
+                ▼
+  ┌─────────────────────────────┐
+  │ STEP 4: ツール起動・車種選択  │
+  │ (メーカー→車種→年式→エンジン) │
+  └─────────────┬───────────────┘
+                ▼
+  ┌─────────────────────────────┐
+  │ STEP 5: 通信開始・診断メニュー│
+  │ (DTC読取/データリスト/etc.)   │
+  └─────────────────────────────┘
+    </pre>
+  </div>
+</section>
+
+<!-- スライド5: DTC読み取りの実習フロー -->
+<section>
+  <h2>DTC読み取り → 消去 → 再確認</h2>
+  <div class="card">
+    <pre style="font-size:0.55em; line-height:1.5;">
+  ┌──────────────────────────┐
+  │ DTC読み取り               │
+  │ 「故障コード一覧」を選択   │
+  └───────────┬──────────────┘
+              ▼
+  ┌──────────────────────────┐     ┌──────────────┐
+  │ DTCあり？                │─No→│ 異常なし      │
+  └───────────┬──────────────┘     │ (記録して終了) │
+         Yes  ▼                   └──────────────┘
+  ┌──────────────────────────┐
+  │ コード内容とフリーズ      │
+  │ フレームデータを記録       │
+  └───────────┬──────────────┘
+              ▼
+  ┌──────────────────────────┐
+  │ 原因を特定・修理実施      │
+  └───────────┬──────────────┘
+              ▼
+  ┌──────────────────────────┐
+  │ DTC消去                  │
+  │ 「コードクリア」を実行     │
+  └───────────┬──────────────┘
+              ▼
+  ┌──────────────────────────┐
+  │ 試運転して再確認          │
+  │ DTCが再発しないことを確認  │
+  └───────────┬──────────────┘
+              ▼
+  ┌──────────────────────────┐
+  │ 結果を記録・報告          │
+  └──────────────────────────┘
+    </pre>
+  </div>
+</section>
+
+<!-- スライド6: フリーズフレームデータ -->
+<section>
+  <h2>フリーズフレームデータ</h2>
+  <div class="card">
+    <p><span class="accent">フリーズフレーム</span> = DTCが記録された瞬間のセンサー値のスナップショット</p>
+    <table style="font-size:0.65em; margin-top:0.5em;">
+      <tr><th>項目</th><th>記録値</th><th>意味</th></tr>
+      <tr><td>DTC</td><td>P0301</td><td>1番シリンダー失火</td></tr>
+      <tr><td>エンジン回転数</td><td>2500 rpm</td><td>加速中に発生</td></tr>
+      <tr><td>車速</td><td>60 km/h</td><td>走行中に発生</td></tr>
+      <tr><td>水温</td><td>92℃</td><td>暖機後（正常）</td></tr>
+      <tr><td>エンジン負荷</td><td>78%</td><td>高負荷時に発生</td></tr>
+      <tr><td>燃料トリム</td><td>+15%</td><td>燃料増量中</td></tr>
+    </table>
+  </div>
+  <div class="highlight-box">
+    <span class="accent">ポイント：</span>フリーズフレームで「どんな状況で故障が起きたか」が分かる！
+  </div>
+</section>
+
+<!-- スライド7: 実習シナリオ -->
+<section>
+  <h2>実習シナリオ：エンジン不調の診断</h2>
+  <div class="card">
+    <pre style="font-size:0.55em; line-height:1.4;">
+  【お客様の訴え】「アイドリングが不安定で、加速時にガクつく」
+
+  STEP1: 症状確認 → アイドリング不安定を再現確認
+         ▼
+  STEP2: スキャンツール接続 → DTC読取
+         結果: P0301（1番シリンダー失火）
+         ▼
+  STEP3: フリーズフレーム確認
+         → 加速中(2500rpm/78%負荷)で発生
+         ▼
+  STEP4: データリスト確認
+         → 1番の噴射時間が他と異なる
+         ▼
+  STEP5: 原因特定
+         → 1番イグニッションコイルの抵抗値異常
+         ▼
+  STEP6: 修理 → 1番コイル交換
+         ▼
+  STEP7: DTC消去 → 試運転 → 再発なし
+         ▼
+  STEP8: 記録 → 整備記録簿に記載
+    </pre>
+  </div>
+</section>
+
+<!-- スライド8: 診断結果の記録方法 -->
+<section>
+  <h2>診断結果の記録方法</h2>
+  <div class="card">
+    <h3 style="color:var(--accent);">整備記録簿に記載する項目</h3>
+    <table style="font-size:0.65em;">
+      <tr><th>記載項目</th><th>記載例</th></tr>
+      <tr><td>日付・走行距離</td><td>2026/03/11 / 45,230km</td></tr>
+      <tr><td>お客様の訴え</td><td>アイドリング不安定・加速時ガクつき</td></tr>
+      <tr><td>検出DTC</td><td>P0301（1番シリンダー失火）</td></tr>
+      <tr><td>診断内容</td><td>1番IGコイル抵抗値異常（規定値外）</td></tr>
+      <tr><td>修理内容</td><td>1番イグニッションコイル交換</td></tr>
+      <tr><td>確認結果</td><td>DTC消去後、試運転10km 再発なし</td></tr>
+      <tr><td>担当者</td><td>整備士名・資格番号</td></tr>
+    </table>
+  </div>
+  <div class="highlight-box">
+    <span class="accent">重要：</span>記録は法的義務！正確に、漏れなく記載する
+  </div>
+</section>
+
+<!-- スライド9: 重要用語一覧 -->
+<section>
+  <h2>重要用語一覧</h2>
+  <table>
+    <tr><th>日本語（読み仮名）</th><th>Bahasa Indonesia</th></tr>
+    <tr><td>スキャンツール</td><td>Alat pemindai / Scan tool</td></tr>
+    <tr><td>DTC読み取り（よみとり）</td><td>Membaca DTC</td></tr>
+    <tr><td>コード消去（しょうきょ）</td><td>Menghapus kode</td></tr>
+    <tr><td>フリーズフレーム</td><td>Freeze frame</td></tr>
+    <tr><td>試運転（しうんてん）</td><td>Uji jalan</td></tr>
+    <tr><td>再発確認（さいはつかくにん）</td><td>Konfirmasi kekambuhan</td></tr>
+    <tr><td>整備記録簿（せいびきろくぼ）</td><td>Buku catatan perawatan</td></tr>
+    <tr><td>失火（しっか）</td><td>Misfire</td></tr>
+    <tr><td>接続（せつぞく）</td><td>Koneksi / sambungan</td></tr>
+    <tr><td>車種選択（しゃしゅせんたく）</td><td>Pemilihan jenis kendaraan</td></tr>
+  </table>
+</section>
+
+<!-- スライド10: 確認クイズ -->
+<section>
+  <h2>確認クイズ</h2>
+  <div class="card">
+    <p><strong>Q1. スキャンツールをDLCに接続する前にすべきことは？</strong></p>
+    <ol type="A">
+      <li>エンジンを高回転にする</li>
+      <li>バッテリーを外す</li>
+      <li>イグニッションをOFFにする</li>
+      <li>タイヤを外す</li>
+    </ol>
+    <p class="fragment quiz-answer">正解: C. イグニッションをOFFにする</p>
+  </div>
+  <div class="card" style="margin-top:0.5em;">
+    <p><strong>Q2. フリーズフレームデータとは何か？</strong></p>
+    <ol type="A">
+      <li>エンジンの設計図</li>
+      <li>DTCが記録された瞬間のセンサー値</li>
+      <li>車検証の情報</li>
+      <li>オイル交換の記録</li>
+    </ol>
+    <p class="fragment quiz-answer">正解: B. DTCが記録された瞬間のセンサー値</p>
+  </div>
+</section>
+
+<!-- スライド11: まとめ -->
+<section>
+  <h2>まとめ</h2>
+  <div class="card">
+    <ul>
+      <li><span class="accent">スキャンツール接続</span>：IG OFF→DLC接続→IG ON→車種選択→診断開始</li>
+      <li><span class="accent">DTC操作</span>：読み取り→フリーズフレーム確認→修理→消去→再確認</li>
+      <li><span class="accent">フリーズフレーム</span>で故障発生時の状況が分かる</li>
+      <li><span class="accent">記録</span>は法的義務。日付・DTC・修理内容・確認結果を正確に記載</li>
+      <li>特定2号実技試験でスキャンツール操作は<span class="accent">重要単元</span></li>
+    </ul>
+  </div>
+  <p style="color:#94A3B8; font-size:0.7em;">次回: 試験直前対策・総合模擬試験</p>
+</section>
+
+<!-- スライド12: 宿題 -->
+<section>
+  <h2>宿題</h2>
+  <div class="card" style="text-align:center;">
+    <p style="font-size:1.1em;"><span class="accent">homework.html?lesson=21</span> にアクセスして<br>3問解いてください</p>
+    <p style="color:#94A3B8; font-size:0.8em; margin-top:1em;">次回までに提出しましょう！<br>Selesaikan 3 soal sebelum pelajaran berikutnya!</p>
+  </div>
+</section>
+
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  transition: 'slide',
+  pdfSeparateFragments: false
+});
+if (location.search.match(/print-pdf/gi)) {
+  document.documentElement.classList.add('print-pdf');
+}
+</script>
+</body>
+</html>

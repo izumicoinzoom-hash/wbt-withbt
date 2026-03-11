@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>授業スライド一覧 | WBT特定2号塾</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            wbt: {
+              bg: '#0F172A',
+              accent: '#EA580C',
+              text: '#F8FAFC',
+              card: '#1E293B',
+              border: '#334155',
+              muted: '#94A3B8',
+            }
+          },
+          fontFamily: {
+            sans: ['Noto Sans JP', 'sans-serif'],
+          }
+        }
+      }
+    }
+    </script>
+    <style>
+        body { font-family: 'Noto Sans JP', sans-serif; }
+        .lesson-card {
+            transition: all 0.2s ease;
+        }
+        .lesson-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            border-color: #EA580C;
+        }
+        .block-tag {
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-wbt-bg text-wbt-text min-h-screen">
+    <div class="max-w-5xl mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="flex items-center justify-between mb-10">
+            <div>
+                <h1 class="text-2xl font-black tracking-tight">
+                    <span class="text-wbt-accent">WBT</span> 特定2号塾
+                </h1>
+                <p class="text-wbt-muted text-sm mt-1">授業スライド一覧（全22回）</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="../learning.html" class="text-sm text-wbt-muted hover:text-wbt-text transition-colors">学習メニュー</a>
+                <button id="logoutBtn" class="text-sm text-wbt-muted hover:text-red-400 border border-wbt-border rounded-full px-4 py-1.5 transition-colors">ログアウト</button>
+            </div>
+        </header>
+
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap gap-2 mb-8" id="filterTabs">
+            <button class="block-filter active text-xs font-semibold px-4 py-1.5 rounded-full border transition-colors" data-block="all">すべて</button>
+            <button class="block-filter text-xs font-semibold px-4 py-1.5 rounded-full border transition-colors" data-block="導入">導入</button>
+            <button class="block-filter text-xs font-semibold px-4 py-1.5 rounded-full border transition-colors" data-block="法規">法規</button>
+            <button class="block-filter text-xs font-semibold px-4 py-1.5 rounded-full border transition-colors" data-block="言語">言語</button>
+            <button class="block-filter text-xs font-semibold px-4 py-1.5 rounded-full border transition-colors" data-block="点検">点検</button>
+            <button class="block-filter text-xs font-semibold px-4 py-1.5 rounded-full border transition-colors" data-block="実技基礎">実技基礎</button>
+            <button class="block-filter text-xs font-semibold px-4 py-1.5 rounded-full border transition-colors" data-block="復習">復習</button>
+            <button class="block-filter text-xs font-semibold px-4 py-1.5 rounded-full border transition-colors" data-block="エンジン">エンジン</button>
+            <button class="block-filter text-xs font-semibold px-4 py-1.5 rounded-full border transition-colors" data-block="シャシ">シャシ</button>
+            <button class="block-filter text-xs font-semibold px-4 py-1.5 rounded-full border transition-colors" data-block="実技">実技</button>
+            <button class="block-filter text-xs font-semibold px-4 py-1.5 rounded-full border transition-colors" data-block="電装">電装</button>
+            <button class="block-filter text-xs font-semibold px-4 py-1.5 rounded-full border transition-colors" data-block="診断">診断</button>
+            <button class="block-filter text-xs font-semibold px-4 py-1.5 rounded-full border transition-colors" data-block="総仕上げ">総仕上げ</button>
+        </div>
+
+        <!-- Lesson Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="lessonGrid">
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        'use strict';
+
+        // Auth check
+        if (sessionStorage.getItem('wbt_logged_in') !== 'true') {
+            window.location.href = '../login.html';
+            return;
+        }
+
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            sessionStorage.clear();
+            window.location.href = '../login.html';
+        });
+
+        // Curriculum data
+        var lessons = [
+            { num: 1,  title: 'オリエンテーション・特定技能2号試験の全体像', block: '導入' },
+            { num: 2,  title: '道路運送車両法\u2460（目的・車両区分・車検制度）', block: '法規' },
+            { num: 3,  title: '道路運送車両法\u2461（特定整備制度・法規基礎）', block: '法規' },
+            { num: 4,  title: '整備主任者・責任とコンプライアンス', block: '法規' },
+            { num: 5,  title: '専門用語（日本語）基礎', block: '言語' },
+            { num: 6,  title: '法定点検\u2460（12ヶ月点検の手順・記録）', block: '点検' },
+            { num: 7,  title: '法定点検\u2461（24ヶ月点検・チェックリスト実習）', block: '点検' },
+            { num: 8,  title: '測定機器の取り扱い（ノギス・マイクロメーター）', block: '実技基礎' },
+            { num: 9,  title: '中間確認テスト\u2460・復習（第1〜8回）', block: '復習' },
+            { num: 10, title: 'ガソリン・ディーゼルエンジン基礎\u2460（構造・部品名称）', block: 'エンジン' },
+            { num: 11, title: 'ガソリン・ディーゼルエンジン基礎\u2461（燃焼・整備士試験対策）', block: 'エンジン' },
+            { num: 12, title: '動力伝達装置（AT／CVT／MT）', block: 'シャシ' },
+            { num: 13, title: '制動装置（ブレーキ・ABS）', block: 'シャシ' },
+            { num: 14, title: 'シリンダーヘッド分解・組立・トルク管理', block: '実技' },
+            { num: 15, title: 'ブレーキキャリパーO/H・足回り', block: '実技' },
+            { num: 16, title: '中間確認テスト\u2461・復習（第10〜15回）', block: '復習' },
+            { num: 17, title: '電気回路の基礎と回路図読解', block: '電装' },
+            { num: 18, title: 'バッテリー・始動・充電系', block: '電装' },
+            { num: 19, title: 'センサー・アクチュエーターとCAN通信', block: '電装' },
+            { num: 20, title: '故障診断\u2460（OBD・DTC・診断フロー）', block: '診断' },
+            { num: 21, title: '故障診断\u2461（スキャンツール実習・記録）', block: '診断' },
+            { num: 22, title: '試験直前対策・総合模擬試験', block: '総仕上げ' }
+        ];
+
+        var blockColors = {
+            '導入': 'bg-blue-500/20 text-blue-400 border-blue-500/30',
+            '法規': 'bg-purple-500/20 text-purple-400 border-purple-500/30',
+            '言語': 'bg-teal-500/20 text-teal-400 border-teal-500/30',
+            '点検': 'bg-green-500/20 text-green-400 border-green-500/30',
+            '実技基礎': 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
+            '復習': 'bg-gray-500/20 text-gray-400 border-gray-500/30',
+            'エンジン': 'bg-red-500/20 text-red-400 border-red-500/30',
+            'シャシ': 'bg-indigo-500/20 text-indigo-400 border-indigo-500/30',
+            '実技': 'bg-orange-500/20 text-orange-400 border-orange-500/30',
+            '電装': 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30',
+            '診断': 'bg-pink-500/20 text-pink-400 border-pink-500/30',
+            '総仕上げ': 'bg-amber-500/20 text-amber-400 border-amber-500/30'
+        };
+
+        var grid = document.getElementById('lessonGrid');
+        var currentFilter = 'all';
+
+        function renderLessons() {
+            grid.innerHTML = '';
+            lessons.forEach(function(lesson) {
+                if (currentFilter !== 'all' && lesson.block !== currentFilter) return;
+                var numStr = lesson.num < 10 ? '0' + lesson.num : '' + lesson.num;
+                var colorClass = blockColors[lesson.block] || 'bg-gray-500/20 text-gray-400';
+                var card = document.createElement('a');
+                card.href = 'lesson-' + numStr + '.html';
+                card.className = 'lesson-card block bg-wbt-card border border-wbt-border rounded-xl p-5 no-underline';
+                card.innerHTML =
+                    '<div class="flex items-start justify-between mb-3">' +
+                        '<span class="text-3xl font-black text-wbt-accent/30">' + numStr + '</span>' +
+                        '<span class="block-tag border ' + colorClass + '">' + lesson.block + '</span>' +
+                    '</div>' +
+                    '<h3 class="text-sm font-bold text-wbt-text leading-relaxed mb-2">' + lesson.title + '</h3>' +
+                    '<div class="flex items-center gap-2 text-xs text-wbt-muted">' +
+                        '<span>第' + lesson.num + '回</span>' +
+                        '<span class="text-wbt-border">|</span>' +
+                        '<span>30分</span>' +
+                    '</div>';
+                grid.appendChild(card);
+            });
+        }
+
+        // Filter tabs
+        document.getElementById('filterTabs').addEventListener('click', function(e) {
+            var btn = e.target.closest('.block-filter');
+            if (!btn) return;
+            currentFilter = btn.dataset.block;
+            document.querySelectorAll('.block-filter').forEach(function(b) {
+                if (b.dataset.block === currentFilter) {
+                    b.classList.add('active');
+                    b.style.background = '#EA580C';
+                    b.style.borderColor = '#EA580C';
+                    b.style.color = '#fff';
+                } else {
+                    b.classList.remove('active');
+                    b.style.background = '';
+                    b.style.borderColor = '#334155';
+                    b.style.color = '#94A3B8';
+                }
+            });
+            renderLessons();
+        });
+
+        // Initialize filter styles
+        document.querySelectorAll('.block-filter').forEach(function(b) {
+            if (b.dataset.block === 'all') {
+                b.style.background = '#EA580C';
+                b.style.borderColor = '#EA580C';
+                b.style.color = '#fff';
+            } else {
+                b.style.borderColor = '#334155';
+                b.style.color = '#94A3B8';
+            }
+        });
+
+        renderLessons();
+    })();
+    </script>
+</body>
+</html>

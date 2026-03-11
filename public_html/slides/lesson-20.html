@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第20回 故障診断①（OBD・DTC・診断フロー）</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<style>
+:root {
+  --bg: #0F172A;
+  --accent: #EA580C;
+  --text: #F8FAFC;
+  --card: #1E293B;
+}
+.reveal { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Noto Sans JP', sans-serif; }
+.reveal h1, .reveal h2, .reveal h3 { color: var(--text); text-transform: none; }
+.reveal h1 { font-size: 1.8em; }
+.reveal h2 { font-size: 1.4em; border-bottom: 3px solid var(--accent); padding-bottom: 0.3em; display: inline-block; }
+.reveal .accent { color: var(--accent); font-weight: bold; }
+.reveal .card { background: var(--card); border-radius: 12px; padding: 1.2em; margin: 0.5em 0; text-align: left; }
+.reveal table { margin: 0 auto; border-collapse: collapse; font-size: 0.7em; }
+.reveal th { background: var(--accent); color: #fff; padding: 0.5em 1em; }
+.reveal td { background: var(--card); padding: 0.5em 1em; border: 1px solid #334155; }
+.reveal .quiz-answer { color: #22C55E; font-weight: bold; }
+.reveal .subtitle { color: #94A3B8; font-size: 0.6em; display: block; margin-top: 0.3em; }
+.reveal ul, .reveal ol { display: block; text-align: left; margin-left: 1em; }
+.reveal li { margin-bottom: 0.4em; font-size: 0.85em; }
+.reveal pre { background: var(--card); border-radius: 8px; padding: 1em; font-size: 0.55em; text-align: left; }
+.reveal .highlight-box { background: var(--card); border-left: 4px solid var(--accent); padding: 0.8em 1.2em; margin: 0.5em 0; border-radius: 0 8px 8px 0; text-align: left; }
+@media print { .reveal { background: #fff !important; color: #000 !important; } }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- スライド1: タイトル -->
+<section>
+  <h1>第20回<br>故障診断①<br>OBD・DTC・診断フロー</h1>
+  <span class="subtitle">Diagnosis Kerusakan 1: OBD, DTC, dan Alur Diagnosis</span>
+  <p style="margin-top:1.5em; color:#94A3B8;">WBT 特定技能2号・整備士2級 講座</p>
+</section>
+
+<!-- スライド2: 今日の目標 -->
+<section>
+  <h2>今日の目標</h2>
+  <div class="card">
+    <ol>
+      <li><span class="accent">OBD-II</span>の概要と診断コネクター（DLC）を理解する<br><span class="subtitle">Memahami OBD-II dan konektor diagnostik (DLC)</span></li>
+      <li><span class="accent">DTC（故障コード）</span>の読み方を習得する<br><span class="subtitle">Menguasai cara membaca DTC (kode kerusakan)</span></li>
+      <li><span class="accent">診断フロー</span>（症状→確認→原因特定→修理→確認）を学ぶ<br><span class="subtitle">Mempelajari alur diagnosis (gejala → pemeriksaan → penyebab → perbaikan → konfirmasi)</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- スライド3: 前回の振り返り -->
+<section>
+  <h2>前回の振り返り（第19回）</h2>
+  <div class="card">
+    <ul>
+      <li><span class="accent">センサー</span>（入力）とアクチュエーター（出力）の役割</li>
+      <li><span class="accent">ECU</span>がセンサー情報を基に制御を判断する仕組み</li>
+      <li><span class="accent">CAN通信</span>で複数ECU間がデータ共有（CAN-H/CAN-L）</li>
+    </ul>
+  </div>
+  <p style="color:#94A3B8; font-size:0.7em;">今回は<span class="accent">故障診断</span>の基礎を学びます</p>
+</section>
+
+<!-- スライド4: OBD-IIとは -->
+<section>
+  <h2>OBD-IIとは</h2>
+  <div style="display:flex; gap:1em; justify-content:center; flex-wrap:wrap;">
+    <div class="card" style="flex:1; min-width:250px;">
+      <h3 style="color:var(--accent);">OBD-II概要</h3>
+      <ul>
+        <li><span class="accent">On-Board Diagnostics II</span></li>
+        <li>車載自己診断システム</li>
+        <li>排出ガス関連の異常を検知</li>
+        <li>国際標準規格</li>
+        <li>2006年以降の国産車は義務化</li>
+      </ul>
+    </div>
+    <div class="card" style="flex:1; min-width:250px;">
+      <h3 style="color:var(--accent);">DLC（診断コネクター）</h3>
+      <ul>
+        <li>16ピンの台形コネクター</li>
+        <li>運転席足元付近に設置</li>
+        <li>スキャンツールを接続する場所</li>
+        <li>全車共通の形状</li>
+      </ul>
+      <pre style="font-size:0.5em; text-align:center;">
+  ___________________
+ /  1  2  3  4  5  6  7  8  \
+|   9 10 11 12 13 14 15 16   |
+ \___________________________/
+     DLC 16ピンコネクター
+      </pre>
+    </div>
+  </div>
+</section>
+
+<!-- スライド5: DTCの読み方 -->
+<section>
+  <h2>DTC（故障コード）の読み方</h2>
+  <div class="card">
+    <p style="text-align:center; font-size:1.3em;"><span class="accent">P0301</span></p>
+    <table style="margin-top:0.5em;">
+      <tr><th>位置</th><th>値</th><th>意味</th></tr>
+      <tr><td>1文字目</td><td><span class="accent">P</span></td><td>パワートレイン（B=ボデー, C=シャシ, U=通信）</td></tr>
+      <tr><td>2文字目</td><td><span class="accent">0</span></td><td>国際共通コード（1=メーカー固有）</td></tr>
+      <tr><td>3文字目</td><td><span class="accent">3</span></td><td>サブシステム（3=点火系）</td></tr>
+      <tr><td>4-5文字目</td><td><span class="accent">01</span></td><td>具体的な故障（01=1番シリンダー）</td></tr>
+    </table>
+  </div>
+  <div class="highlight-box">
+    P0301 = <span class="accent">1番シリンダーの失火</span>（ミスファイア）
+  </div>
+</section>
+
+<!-- スライド6: 診断フローチャート -->
+<section>
+  <h2>診断フローチャート</h2>
+  <div class="card">
+    <pre style="font-size:0.6em; line-height:1.4;">
+  ┌─────────────────────────┐
+  │  1. 症状の確認            │
+  │  (お客様の話・再現確認)    │
+  └───────────┬─────────────┘
+              ▼
+  ┌─────────────────────────┐
+  │  2. DTC読み取り           │
+  │  (スキャンツールでDLC接続)  │
+  └───────────┬─────────────┘
+              ▼
+  ┌─────────────────────────┐
+  │  3. データリスト確認       │
+  │  (センサー値を正常値と比較) │
+  └───────────┬─────────────┘
+              ▼
+  ┌─────────────────────────┐
+  │  4. 原因の特定            │
+  │  (配線図・部品テスト)      │
+  └───────────┬─────────────┘
+              ▼
+  ┌─────────────────────────┐
+  │  5. 修理・部品交換        │
+  └───────────┬─────────────┘
+              ▼
+  ┌─────────────────────────┐
+  │  6. DTC消去・再発確認     │
+  │  (コード消去→試運転)      │
+  └───────────┬─────────────┘
+              ▼
+  ┌─────────────────────────┐
+  │  7. 記録・報告            │
+  │  (整備記録簿に記載)       │
+  └─────────────────────────┘
+    </pre>
+  </div>
+</section>
+
+<!-- スライド7: DTCコード例 -->
+<section>
+  <h2>よく出るDTCコード例</h2>
+  <table style="font-size:0.65em;">
+    <tr><th>コード</th><th>内容</th><th>考えられる原因</th></tr>
+    <tr><td><span class="accent">P0100</span></td><td>エアフローセンサー異常</td><td>センサー故障・配線断線</td></tr>
+    <tr><td><span class="accent">P0115</span></td><td>水温センサー異常</td><td>センサー故障・コネクター接触不良</td></tr>
+    <tr><td><span class="accent">P0300</span></td><td>ランダム失火検出</td><td>点火プラグ・コイル・燃料系</td></tr>
+    <tr><td><span class="accent">P0420</span></td><td>触媒効率低下</td><td>触媒劣化・O2センサー</td></tr>
+    <tr><td><span class="accent">P0500</span></td><td>車速センサー異常</td><td>センサー故障・配線</td></tr>
+    <tr><td><span class="accent">C0200</span></td><td>車輪速センサー異常</td><td>ABS関連・センサー汚れ</td></tr>
+    <tr><td><span class="accent">U0100</span></td><td>ECU間通信喪失</td><td>CAN通信線の断線・ショート</td></tr>
+  </table>
+  <div class="highlight-box">
+    <span class="accent">試験対策：</span>Pコードの3文字目でサブシステムが分かる！
+  </div>
+</section>
+
+<!-- スライド8: データリストの活用 -->
+<section>
+  <h2>データリストの活用</h2>
+  <div class="card">
+    <h3 style="color:var(--accent);">診断例：エンジン不調</h3>
+    <pre style="font-size:0.55em; line-height:1.5;">
+  DTC: P0115（水温センサー異常）
+
+  【データリスト確認】
+  ┌────────────────┬──────────┬──────────┐
+  │ 項目           │ 表示値    │ 正常値    │
+  ├────────────────┼──────────┼──────────┤
+  │ 水温           │ -40℃     │ 80〜95℃  │  ← 異常！
+  │ エンジン回転   │ 1200rpm  │ 700rpm   │  ← 高い
+  │ 噴射時間       │ 4.5ms    │ 2.5ms    │  ← 長い
+  └────────────────┴──────────┴──────────┘
+
+  → 水温が-40℃（最小値）＝断線の可能性
+  → ECUが「冷間」と判断し燃料を増量している
+  → 水温センサーの配線・コネクター・センサー本体を点検
+    </pre>
+  </div>
+</section>
+
+<!-- スライド9: 重要用語一覧 -->
+<section>
+  <h2>重要用語一覧</h2>
+  <table>
+    <tr><th>日本語（読み仮名）</th><th>Bahasa Indonesia</th></tr>
+    <tr><td>故障診断（こしょうしんだん）</td><td>Diagnosis kerusakan</td></tr>
+    <tr><td>故障コード / DTC</td><td>Kode kerusakan</td></tr>
+    <tr><td>診断コネクター / DLC</td><td>Konektor diagnostik</td></tr>
+    <tr><td>車載診断 / OBD</td><td>Diagnosis onboard</td></tr>
+    <tr><td>データリスト</td><td>Daftar data</td></tr>
+    <tr><td>失火（しっか）</td><td>Misfire</td></tr>
+    <tr><td>断線（だんせん）</td><td>Putus kabel</td></tr>
+    <tr><td>コード消去（しょうきょ）</td><td>Hapus kode</td></tr>
+    <tr><td>再発（さいはつ）</td><td>Kambuh / terulang</td></tr>
+    <tr><td>整備記録簿（せいびきろくぼ）</td><td>Buku catatan perawatan</td></tr>
+  </table>
+</section>
+
+<!-- スライド10: 確認クイズ -->
+<section>
+  <h2>確認クイズ</h2>
+  <div class="card">
+    <p><strong>Q1. DTC「P0301」の最初の「P」は何を意味するか？</strong></p>
+    <ol type="A">
+      <li>ボデー系</li>
+      <li>シャシ系</li>
+      <li>パワートレイン系</li>
+      <li>通信系</li>
+    </ol>
+    <p class="fragment quiz-answer">正解: C. パワートレイン系</p>
+  </div>
+  <div class="card" style="margin-top:0.5em;">
+    <p><strong>Q2. 診断フローの正しい順序はどれか？</strong></p>
+    <ol type="A">
+      <li>修理 → DTC読取 → 症状確認 → 記録</li>
+      <li>症状確認 → DTC読取 → 原因特定 → 修理 → 再発確認</li>
+      <li>DTC消去 → 修理 → 症状確認 → 記録</li>
+      <li>原因特定 → 症状確認 → 修理 → DTC読取</li>
+    </ol>
+    <p class="fragment quiz-answer">正解: B. 症状確認 → DTC読取 → 原因特定 → 修理 → 再発確認</p>
+  </div>
+</section>
+
+<!-- スライド11: まとめ -->
+<section>
+  <h2>まとめ</h2>
+  <div class="card">
+    <ul>
+      <li><span class="accent">OBD-II</span>は車載自己診断システム、DLCに接続して診断</li>
+      <li><span class="accent">DTC</span>は5桁のコード（P/B/C/U + 数字4桁）で故障内容を示す</li>
+      <li><span class="accent">診断フロー</span>：症状確認→DTC読取→データ確認→原因特定→修理→消去・再確認→記録</li>
+      <li><span class="accent">データリスト</span>で正常値と比較し異常箇所を絞り込む</li>
+    </ul>
+  </div>
+  <p style="color:#94A3B8; font-size:0.7em;">次回: 故障診断2（スキャンツール実習・記録）</p>
+</section>
+
+<!-- スライド12: 宿題 -->
+<section>
+  <h2>宿題</h2>
+  <div class="card" style="text-align:center;">
+    <p style="font-size:1.1em;"><span class="accent">homework.html?lesson=20</span> にアクセスして<br>3問解いてください</p>
+    <p style="color:#94A3B8; font-size:0.8em; margin-top:1em;">次回までに提出しましょう！<br>Selesaikan 3 soal sebelum pelajaran berikutnya!</p>
+  </div>
+</section>
+
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  transition: 'slide',
+  pdfSeparateFragments: false
+});
+if (location.search.match(/print-pdf/gi)) {
+  document.documentElement.classList.add('print-pdf');
+}
+</script>
+</body>
+</html>

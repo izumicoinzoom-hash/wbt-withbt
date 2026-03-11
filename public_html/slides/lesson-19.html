@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第19回 センサー・アクチュエーターとCAN通信</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<style>
+:root {
+  --bg: #0F172A;
+  --accent: #EA580C;
+  --text: #F8FAFC;
+  --card: #1E293B;
+}
+.reveal { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Noto Sans JP', sans-serif; }
+.reveal h1, .reveal h2, .reveal h3 { color: var(--text); text-transform: none; }
+.reveal h1 { font-size: 1.8em; }
+.reveal h2 { font-size: 1.4em; border-bottom: 3px solid var(--accent); padding-bottom: 0.3em; display: inline-block; }
+.reveal .accent { color: var(--accent); font-weight: bold; }
+.reveal .card { background: var(--card); border-radius: 12px; padding: 1.2em; margin: 0.5em 0; text-align: left; }
+.reveal table { margin: 0 auto; border-collapse: collapse; font-size: 0.7em; }
+.reveal th { background: var(--accent); color: #fff; padding: 0.5em 1em; }
+.reveal td { background: var(--card); padding: 0.5em 1em; border: 1px solid #334155; }
+.reveal .quiz-answer { color: #22C55E; font-weight: bold; }
+.reveal .subtitle { color: #94A3B8; font-size: 0.6em; display: block; margin-top: 0.3em; }
+.reveal ul, .reveal ol { display: block; text-align: left; margin-left: 1em; }
+.reveal li { margin-bottom: 0.4em; font-size: 0.85em; }
+.reveal pre { background: var(--card); border-radius: 8px; padding: 1em; font-size: 0.55em; text-align: left; }
+.reveal .highlight-box { background: var(--card); border-left: 4px solid var(--accent); padding: 0.8em 1.2em; margin: 0.5em 0; border-radius: 0 8px 8px 0; text-align: left; }
+@media print { .reveal { background: #fff !important; color: #000 !important; } }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- スライド1: タイトル -->
+<section>
+  <h1>第19回<br>センサー・アクチュエーターと<br>CAN通信</h1>
+  <span class="subtitle">Sensor, Aktuator, dan Komunikasi CAN</span>
+  <p style="margin-top:1.5em; color:#94A3B8;">WBT 特定技能2号・整備士2級 講座</p>
+</section>
+
+<!-- スライド2: 今日の目標 -->
+<section>
+  <h2>今日の目標</h2>
+  <div class="card">
+    <ol>
+      <li>主要な<span class="accent">センサー</span>の種類と役割を理解する<br><span class="subtitle">Memahami jenis dan fungsi sensor utama</span></li>
+      <li>主要な<span class="accent">アクチュエーター</span>の種類と役割を理解する<br><span class="subtitle">Memahami jenis dan fungsi aktuator utama</span></li>
+      <li><span class="accent">CAN通信</span>の仕組みとECU間のデータ共有を学ぶ<br><span class="subtitle">Mempelajari sistem komunikasi CAN dan berbagi data antar ECU</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- スライド3: 前回の振り返り -->
+<section>
+  <h2>前回の振り返り（第18回）</h2>
+  <div class="card">
+    <ul>
+      <li><span class="accent">バッテリー</span>：容量（Ah）とCCA、型式の読み方</li>
+      <li><span class="accent">始動回路</span>：スターター・リレーの仕組み</li>
+      <li><span class="accent">充電回路</span>：オルタネーター、正常充電電圧 13.5〜14.5V</li>
+    </ul>
+  </div>
+  <p style="color:#94A3B8; font-size:0.7em;">今回は<span class="accent">電子制御</span>の世界に入ります</p>
+</section>
+
+<!-- スライド4: センサーの種類と役割 -->
+<section>
+  <h2>主要センサー</h2>
+  <table>
+    <tr><th>センサー名</th><th>検出対象</th><th>役割</th></tr>
+    <tr><td><span class="accent">O2センサー</span></td><td>排気ガス中の酸素</td><td>空燃比フィードバック制御</td></tr>
+    <tr><td><span class="accent">水温センサー</span></td><td>冷却水温度</td><td>燃料噴射量・点火時期補正</td></tr>
+    <tr><td><span class="accent">クランク角センサー</span></td><td>クランク位置・回転数</td><td>点火時期・噴射タイミング</td></tr>
+    <tr><td><span class="accent">エアフローセンサー</span></td><td>吸入空気量</td><td>燃料噴射量の計算</td></tr>
+    <tr><td><span class="accent">スロットルポジション</span></td><td>スロットル開度</td><td>加速/減速の検出</td></tr>
+    <tr><td><span class="accent">ノックセンサー</span></td><td>ノッキング振動</td><td>点火時期の遅角制御</td></tr>
+  </table>
+</section>
+
+<!-- スライド5: アクチュエーターの種類と役割 -->
+<section>
+  <h2>主要アクチュエーター</h2>
+  <table>
+    <tr><th>アクチュエーター名</th><th>制御対象</th><th>役割</th></tr>
+    <tr><td><span class="accent">インジェクター</span></td><td>燃料噴射</td><td>ECUの信号で燃料を噴射</td></tr>
+    <tr><td><span class="accent">イグニッションコイル</span></td><td>点火</td><td>高電圧を発生させ点火</td></tr>
+    <tr><td><span class="accent">ISCバルブ</span></td><td>アイドリング回転</td><td>アイドル回転数を安定させる</td></tr>
+    <tr><td><span class="accent">EGRバルブ</span></td><td>排気再循環</td><td>NOx低減のため排気を戻す</td></tr>
+    <tr><td><span class="accent">VVTソレノイド</span></td><td>バルブタイミング</td><td>カムシャフト位相を変更</td></tr>
+  </table>
+  <div class="highlight-box">
+    <span class="accent">ポイント：</span>センサーは「情報を集める」、アクチュエーターは「動作を実行する」
+  </div>
+</section>
+
+<!-- スライド6: ECUの役割 -->
+<section>
+  <h2>ECU（電子制御ユニット）</h2>
+  <div class="card">
+    <pre style="font-size:0.6em;">
+  [センサー群]                    [アクチュエーター群]
+  水温センサー ──┐          ┌── インジェクター
+  O2センサー ───┤          ├── イグニッションコイル
+  クランク角 ───┤  [ECU]  ├── ISCバルブ
+  エアフロー ───┤  判断・  ├── EGRバルブ
+  スロットル ───┘  制御    └── VVTソレノイド
+
+  入力(センサー) → 演算(ECU) → 出力(アクチュエーター)
+    </pre>
+  </div>
+  <div class="highlight-box">
+    <span class="accent">整備士のポイント：</span>スキャンツールでセンサー値（データリスト）を読み取り、異常値を発見する
+  </div>
+</section>
+
+<!-- スライド7: CAN通信 -->
+<section>
+  <h2>CAN通信の仕組み</h2>
+  <div class="card">
+    <pre style="font-size:0.55em;">
+  ┌──────────┐  ┌──────────┐  ┌──────────┐
+  │ エンジンECU │  │ ABS ECU   │  │ メーターECU │
+  └─────┬────┘  └─────┬────┘  └─────┬────┘
+        │              │              │
+  ══════╪══════════════╪══════════════╪══════  CAN-H
+  ══════╪══════════════╪══════════════╪══════  CAN-L
+        │              │              │
+  ┌─────┴────┐  ┌─────┴────┐  ┌─────┴────┐
+  │ AT ECU    │  │ エアバッグECU│  │ ボデーECU  │
+  └──────────┘  └──────────┘  └──────────┘
+    </pre>
+  </div>
+  <div class="highlight-box">
+    <ul>
+      <li><span class="accent">CAN（Controller Area Network）</span>= ECU同士がデータを共有する通信規格</li>
+      <li>2本の線（<span class="accent">CAN-H</span> と <span class="accent">CAN-L</span>）で高速通信</li>
+      <li>1本が断線しても通信可能（ノイズに強い）</li>
+    </ul>
+  </div>
+</section>
+
+<!-- スライド8: スキャンツールでの確認 -->
+<section>
+  <h2>スキャンツールでのデータ確認</h2>
+  <div class="card">
+    <h3 style="color:var(--accent);">データリストの例</h3>
+    <table style="font-size:0.65em;">
+      <tr><th>項目</th><th>正常値</th><th>異常例</th></tr>
+      <tr><td>水温センサー</td><td>80〜95℃（暖機後）</td><td>-40℃表示 → 断線</td></tr>
+      <tr><td>O2センサー電圧</td><td>0.1〜0.9V（変動）</td><td>固定0.45V → 故障</td></tr>
+      <tr><td>エンジン回転数</td><td>650〜750rpm（アイドル）</td><td>不安定 → ISC系</td></tr>
+      <tr><td>吸入空気量</td><td>車種による基準値</td><td>異常値 → エアフロー故障</td></tr>
+    </table>
+  </div>
+  <div class="highlight-box">
+    <span class="accent">実務のコツ：</span>正常値を知っていることが故障発見の第一歩！
+  </div>
+</section>
+
+<!-- スライド9: 重要用語一覧 -->
+<section>
+  <h2>重要用語一覧</h2>
+  <table>
+    <tr><th>日本語（読み仮名）</th><th>Bahasa Indonesia</th></tr>
+    <tr><td>センサー</td><td>Sensor</td></tr>
+    <tr><td>アクチュエーター</td><td>Aktuator</td></tr>
+    <tr><td>電子制御ユニット（ECU）</td><td>Unit kontrol elektronik</td></tr>
+    <tr><td>CAN通信（きゃんつうしん）</td><td>Komunikasi CAN</td></tr>
+    <tr><td>データリスト</td><td>Daftar data</td></tr>
+    <tr><td>空燃比（くうねんぴ）</td><td>Rasio udara-bahan bakar</td></tr>
+    <tr><td>インジェクター</td><td>Injektor</td></tr>
+    <tr><td>スロットル</td><td>Throttle</td></tr>
+    <tr><td>噴射（ふんしゃ）</td><td>Injeksi</td></tr>
+    <tr><td>信号（しんごう）</td><td>Sinyal</td></tr>
+  </table>
+</section>
+
+<!-- スライド10: 確認クイズ -->
+<section>
+  <h2>確認クイズ</h2>
+  <div class="card">
+    <p><strong>Q1. エンジンECUにとって「入力」にあたるものはどれか？</strong></p>
+    <ol type="A">
+      <li>インジェクター</li>
+      <li>イグニッションコイル</li>
+      <li>水温センサー</li>
+      <li>ISCバルブ</li>
+    </ol>
+    <p class="fragment quiz-answer">正解: C. 水温センサー（センサー＝入力、アクチュエーター＝出力）</p>
+  </div>
+  <div class="card" style="margin-top:0.5em;">
+    <p><strong>Q2. CAN通信で使用される信号線は何本か？</strong></p>
+    <ol type="A">
+      <li>1本</li>
+      <li>2本</li>
+      <li>4本</li>
+      <li>8本</li>
+    </ol>
+    <p class="fragment quiz-answer">正解: B. 2本（CAN-HとCAN-L）</p>
+  </div>
+</section>
+
+<!-- スライド11: まとめ -->
+<section>
+  <h2>まとめ</h2>
+  <div class="card">
+    <ul>
+      <li><span class="accent">センサー</span>は車両状態の情報をECUに伝える（入力）</li>
+      <li><span class="accent">アクチュエーター</span>はECUの指令を実行する（出力）</li>
+      <li><span class="accent">ECU</span>はセンサー情報を基に最適な制御を判断する頭脳</li>
+      <li><span class="accent">CAN通信</span>で複数のECU間がデータを共有（2本線・高速）</li>
+      <li><span class="accent">データリスト</span>で正常値と比較して異常を発見する</li>
+    </ul>
+  </div>
+  <p style="color:#94A3B8; font-size:0.7em;">次回: 故障診断1（OBD・DTC・診断フロー）</p>
+</section>
+
+<!-- スライド12: 宿題 -->
+<section>
+  <h2>宿題</h2>
+  <div class="card" style="text-align:center;">
+    <p style="font-size:1.1em;"><span class="accent">homework.html?lesson=19</span> にアクセスして<br>3問解いてください</p>
+    <p style="color:#94A3B8; font-size:0.8em; margin-top:1em;">次回までに提出しましょう！<br>Selesaikan 3 soal sebelum pelajaran berikutnya!</p>
+  </div>
+</section>
+
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  transition: 'slide',
+  pdfSeparateFragments: false
+});
+if (location.search.match(/print-pdf/gi)) {
+  document.documentElement.classList.add('print-pdf');
+}
+</script>
+</body>
+</html>

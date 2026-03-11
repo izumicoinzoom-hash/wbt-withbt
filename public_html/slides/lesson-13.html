@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第13回 制動装置（ブレーキ・ABS） - WBT特定2号塾</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<style>
+:root{--bg:#0F172A;--accent:#EA580C;--text:#F8FAFC;--card:#1E293B}
+.reveal{background:var(--bg);color:var(--text);font-family:'Segoe UI','Hiragino Sans',sans-serif}
+.reveal h1,.reveal h2,.reveal h3{color:var(--text);text-transform:none}
+.reveal h1{font-size:1.8em}
+.reveal h2{font-size:1.4em}
+.reveal h3{font-size:1.2em}
+.reveal .accent{color:var(--accent);font-weight:bold}
+.reveal .card{background:var(--card);border-radius:12px;padding:24px;margin:12px 0;text-align:left}
+.reveal .card-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.reveal ul{text-align:left}
+.reveal li{margin:8px 0;font-size:0.9em}
+.reveal .quiz-box{background:var(--card);border-left:4px solid var(--accent);border-radius:8px;padding:20px;margin:16px 0;text-align:left}
+.reveal .answer{color:#22C55E;font-weight:bold;margin-top:12px}
+.reveal .subtitle{font-size:0.7em;color:#94A3B8;margin-top:8px}
+.reveal .tag{display:inline-block;background:var(--accent);color:#fff;padding:4px 12px;border-radius:999px;font-size:0.6em;margin-bottom:12px}
+.reveal table{margin:0 auto;border-collapse:collapse;font-size:0.7em}
+.reveal th{background:var(--accent);color:#fff;padding:8px 16px}
+.reveal td{padding:8px 16px;border-bottom:1px solid #334155}
+@media print{.reveal .slide-background{background:var(--bg)!important}}
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- スライド1: タイトル -->
+<section>
+<p class="tag">第13回 / Pelajaran 13</p>
+<h1>制動装置</h1>
+<h3>ブレーキ・ABS</h3>
+<p class="subtitle">Sistem Pengereman - Rem & ABS</p>
+</section>
+
+<!-- スライド2: 今日の目標 -->
+<section>
+<h2>今日の目標 / Tujuan Hari Ini</h2>
+<div class="card">
+<ol>
+<li><span class="accent">油圧ブレーキ</span>の構成と仕組みを理解する<br><small>Memahami struktur dan mekanisme rem hidrolik</small></li>
+<li><span class="accent">ディスクブレーキとドラムブレーキ</span>の違いを説明できる<br><small>Dapat menjelaskan perbedaan rem cakram dan rem drum</small></li>
+<li><span class="accent">ABS・ESC</span>の役割とセンサーを理解する<br><small>Memahami fungsi ABS, ESC, dan sensor-sensornya</small></li>
+</ol>
+</div>
+</section>
+
+<!-- スライド3: 前回の振り返り -->
+<section>
+<h2>前回の振り返り（第12回）</h2>
+<div class="card">
+<h3>キーワード3つ</h3>
+<ul>
+<li><span class="accent">トルクコンバーター</span> — AT/CVTの流体継手</li>
+<li><span class="accent">変速比</span> — 入力回転数÷出力回転数</li>
+<li><span class="accent">ATF・CVTF</span> — 混ぜてはいけない</li>
+</ul>
+</div>
+</section>
+
+<!-- スライド4: 油圧ブレーキの構成 -->
+<section>
+<h2>油圧ブレーキの構成</h2>
+<div class="card">
+<p>ブレーキペダルの力を<span class="accent">油圧</span>で各車輪に伝える仕組み</p>
+<table>
+<tr><th>部品名</th><th>役割</th></tr>
+<tr><td><span class="accent">マスターシリンダー</span></td><td>ペダルの力を油圧に変換する</td></tr>
+<tr><td><span class="accent">ブレーキホース/配管</span></td><td>油圧を各車輪に伝える</td></tr>
+<tr><td><span class="accent">キャリパー</span>（ディスク式）</td><td>パッドをローターに押し付ける</td></tr>
+<tr><td><span class="accent">ホイールシリンダー</span>（ドラム式）</td><td>シューをドラム内面に押し付ける</td></tr>
+<tr><td><span class="accent">ブレーキフルード</span></td><td>油圧を伝達する液体（DOT3/4）</td></tr>
+</table>
+</div>
+</section>
+
+<!-- スライド5: ディスクとドラムの違い -->
+<section>
+<h2>ディスクブレーキ vs ドラムブレーキ</h2>
+<div class="card-grid">
+<div class="card">
+<h3><span class="accent">ディスクブレーキ</span></h3>
+<ul>
+<li>ローター（円盤）をパッドで挟む</li>
+<li>放熱性が<span class="accent">良い</span></li>
+<li>フェード現象が起きにくい</li>
+<li>前輪に多く使用</li>
+</ul>
+</div>
+<div class="card">
+<h3><span class="accent">ドラムブレーキ</span></h3>
+<ul>
+<li>ドラム内面にシューを押し付ける</li>
+<li>自己倍力作用（セルフサーボ）あり</li>
+<li>コストが低い</li>
+<li>後輪やサイドブレーキに使用</li>
+</ul>
+</div>
+</div>
+</section>
+
+<!-- スライド6: ABS・ESCの仕組み -->
+<section>
+<h2>ABS・ESCの仕組み</h2>
+<div class="card">
+<h3><span class="accent">ABS</span>（アンチロック・ブレーキ・システム）</h3>
+<ul>
+<li>急ブレーキ時にタイヤの<span class="accent">ロック（スリップ）を防止</span>する</li>
+<li>各車輪の<span class="accent">車輪速センサー</span>で回転を監視</li>
+<li>ロック検知 → 油圧を自動的に減圧・保持・増圧</li>
+</ul>
+</div>
+<div class="card">
+<h3><span class="accent">ESC</span>（横滑り防止装置）</h3>
+<ul>
+<li>車両の<span class="accent">横滑りを検知・制御</span>する</li>
+<li>ヨーレートセンサー、操舵角センサーを使用</li>
+<li>個別の車輪にブレーキをかけて姿勢を安定させる</li>
+</ul>
+</div>
+</section>
+
+<!-- スライド7: ブレーキフルードの管理 -->
+<section>
+<h2>ブレーキフルードの管理</h2>
+<div class="card">
+<ul>
+<li>規格：<span class="accent">DOT3</span>または<span class="accent">DOT4</span>が一般的</li>
+<li>交換時期：<span class="accent">2年ごと</span>（車検時に交換が推奨）</li>
+<li>ブレーキフルードは<span class="accent">吸湿性</span>がある → 水分を吸うと沸点が低下</li>
+<li>沸点低下 → <span class="accent">ベーパーロック現象</span>（制動力が効かなくなる）</li>
+<li>フルードレベルの低下 → パッド摩耗または漏れの可能性</li>
+</ul>
+</div>
+<p class="subtitle">Cairan rem bersifat higroskopis - menyerap air dari udara</p>
+</section>
+
+<!-- スライド8: 実務での点検ポイント -->
+<section>
+<h2>実務での点検ポイント</h2>
+<div class="card-grid">
+<div class="card">
+<h3>日常点検</h3>
+<ul>
+<li>ブレーキフルードの<span class="accent">液面レベル</span>確認</li>
+<li>ブレーキペダルの<span class="accent">踏みしろ</span>（遊び）確認</li>
+<li>ABS警告灯の確認</li>
+</ul>
+</div>
+<div class="card">
+<h3>定期点検</h3>
+<ul>
+<li>パッド残量の<span class="accent">測定</span>（限界値：1mm以下で交換）</li>
+<li>ローター厚さの測定</li>
+<li>ブレーキホースの<span class="accent">ひび割れ・漏れ</span>確認</li>
+</ul>
+</div>
+</div>
+</section>
+
+<!-- スライド9: 重要用語一覧 -->
+<section>
+<h2>重要用語一覧</h2>
+<table>
+<tr><th>日本語（読み仮名）</th><th>Bahasa Indonesia</th></tr>
+<tr><td>制動装置（せいどうそうち）</td><td>Sistem pengereman</td></tr>
+<tr><td>油圧ブレーキ（ゆあつブレーキ）</td><td>Rem hidrolik</td></tr>
+<tr><td>マスターシリンダー</td><td>Master silinder</td></tr>
+<tr><td>キャリパー</td><td>Kaliper</td></tr>
+<tr><td>パッド</td><td>Bantalan rem / Pad</td></tr>
+<tr><td>ローター</td><td>Rotor / Piringan</td></tr>
+<tr><td>ABS（エービーエス）</td><td>Anti-lock Braking System</td></tr>
+<tr><td>ブレーキフルード</td><td>Cairan rem</td></tr>
+<tr><td>ベーパーロック</td><td>Vapor lock</td></tr>
+</table>
+</section>
+
+<!-- スライド10: 確認クイズ -->
+<section>
+<h2>確認クイズ</h2>
+<div class="quiz-box">
+<p><strong>Q1. ABSの主な役割は？</strong></p>
+<p>A. エンジン回転数を制御する</p>
+<p>B. 急ブレーキ時にタイヤのロックを防止する</p>
+<p>C. エアコンの温度を制御する</p>
+<p>D. 車両のスピードを自動制御する</p>
+<p class="fragment answer">正解: B — ABSは急制動時のタイヤロックを防ぎ、操舵性を確保します</p>
+</div>
+<div class="quiz-box">
+<p><strong>Q2. ブレーキフルードの交換が必要な理由は？</strong></p>
+<p>A. 色が変わるから</p>
+<p>B. 吸湿して沸点が低下し、ベーパーロックの原因になるから</p>
+<p>C. 匂いが変わるから</p>
+<p>D. 量が自然に増えるから</p>
+<p class="fragment answer">正解: B — ブレーキフルードは吸湿性があり、水分を吸うと沸点が下がりベーパーロックの原因になります</p>
+</div>
+</section>
+
+<!-- スライド11: まとめ -->
+<section>
+<h2>まとめ / Ringkasan</h2>
+<div class="card">
+<ul>
+<li>油圧ブレーキは<span class="accent">マスターシリンダー</span>でペダル力を油圧に変換する</li>
+<li><span class="accent">ディスクブレーキ</span>は放熱性が良く、<span class="accent">ドラムブレーキ</span>は自己倍力作用がある</li>
+<li><span class="accent">ABS</span>はタイヤロック防止、<span class="accent">ESC</span>は横滑り防止</li>
+<li>ブレーキフルードは<span class="accent">吸湿性</span>があるため定期交換（2年ごと）が必要</li>
+</ul>
+</div>
+</section>
+
+<!-- スライド12: 宿題 -->
+<section>
+<h2>宿題 / Pekerjaan Rumah</h2>
+<div class="card" style="text-align:center">
+<p style="font-size:1.2em"><span class="accent">homework.html?lesson=13</span> にアクセスして<br>3問解いてください</p>
+<p class="subtitle">Akses homework.html?lesson=13 dan jawab 3 soal</p>
+</div>
+</section>
+
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+Reveal.initialize({hash:true,transition:'slide',pdfSeparateFragments:false});
+if(location.search.includes('print-pdf')){document.querySelector('.reveal').classList.add('print-pdf')}
+</script>
+</body>
+</html>

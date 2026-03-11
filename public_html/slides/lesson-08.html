@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第8回 測定機器の取り扱い（ノギス・マイクロメーター）</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<style>
+:root{--bg:#0F172A;--accent:#EA580C;--text:#F8FAFC;--card:#1E293B;}
+.reveal{background:var(--bg);color:var(--text);font-family:'Segoe UI','Hiragino Sans',sans-serif;}
+.reveal h1,.reveal h2,.reveal h3{color:var(--text);text-transform:none;}
+.reveal h1{font-size:1.8em;}
+.reveal h2{font-size:1.4em;}
+.reveal h3{font-size:1.1em;color:var(--accent);}
+.reveal .accent{color:var(--accent);font-weight:bold;}
+.reveal .card{background:var(--card);border-radius:12px;padding:24px;margin:12px 0;text-align:left;}
+.reveal table{margin:0 auto;border-collapse:collapse;font-size:0.7em;}
+.reveal th{background:var(--accent);color:#fff;padding:8px 14px;}
+.reveal td{background:var(--card);padding:8px 14px;border:1px solid #334155;}
+.reveal ul,.reveal ol{text-align:left;display:inline-block;font-size:0.85em;}
+.reveal .subtitle{font-size:0.6em;color:#94A3B8;margin-top:8px;}
+.reveal .quiz-answer{color:#22C55E;font-weight:bold;}
+.reveal .highlight-box{border-left:4px solid var(--accent);padding:12px 20px;background:var(--card);border-radius:0 8px 8px 0;margin:12px 0;text-align:left;}
+.reveal .logo{font-size:0.5em;color:var(--accent);letter-spacing:2px;}
+.reveal .diagram{background:var(--card);border-radius:8px;padding:16px;font-family:monospace;font-size:0.65em;line-height:1.6;white-space:pre;text-align:left;margin:12px auto;display:inline-block;}
+@media print{.reveal .slide-background{background:var(--bg)!important;}}
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- スライド1: タイトル -->
+<section data-timing="0">
+<p class="logo">WBT ― WithBrightTomorrow</p>
+<h1>第8回<br>測定機器の取り扱い<br>ノギス・マイクロメーター</h1>
+<p class="subtitle">Penggunaan Alat Ukur: Jangka Sorong &amp; Mikrometer</p>
+<p style="margin-top:24px;font-size:0.6em;color:#94A3B8;">ブロック：実技基礎 ／ Blok: Dasar Praktik</p>
+</section>
+
+<!-- スライド2: 今日の目標 -->
+<section data-timing="30">
+<h2>今日の目標 ／ Tujuan Hari Ini</h2>
+<div class="card">
+<ol>
+<li><span class="accent">ノギス</span>の構造と正しい読み取り方を習得する</li>
+<li><span class="accent">マイクロメーター</span>の使い方と最小読取値を理解する</li>
+<li><span class="accent">測定誤差</span>の原因と対策を知る</li>
+</ol>
+</div>
+</section>
+
+<!-- スライド3: 前回の振り返り -->
+<section data-timing="120">
+<h2>前回の振り返り（第7回）</h2>
+<div class="card">
+<p>キーワード復習：</p>
+<ul>
+<li><span class="accent">24ヶ月点検</span> → 12ヶ月の全項目 ＋ ブレーキ分解・下回り追加</li>
+<li><span class="accent">車検</span> → 24ヶ月点検と同時に実施</li>
+<li><span class="accent">ブレーキ分解点検</span> → パッドは内側と外側の両方を測定</li>
+</ul>
+</div>
+</section>
+
+<!-- スライド4: ノギスの構造 -->
+<section data-timing="300">
+<h2>ノギスの構造</h2>
+<p class="subtitle">Struktur Jangka Sorong (Vernier Caliper)</p>
+<div class="diagram">
+  外側測定（外径）
+  ┌─────────────────────────┐
+  │    ┌─────────┐          │
+  │    │本尺(mm) │          │
+  ├────┴─────────┴──────────┤
+  │ 0  10  20  30  40  50  │
+  │    ├─┤                  │
+  │    │V│← バーニヤ目盛    │
+  │    │ │  (副尺)          │
+  └────┴─┴──────────────────┘
+       ↑
+   スライダー
+
+  【測定できるもの】
+  ・外側測定（外径）   ← 上のジョウ
+  ・内側測定（内径）   ← 下のジョウ
+  ・深さ測定           ← デプスバー
+</div>
+</section>
+
+<!-- スライド5: ノギスの読み方 -->
+<section data-timing="540">
+<h2>ノギスの読み方</h2>
+<p class="subtitle">Cara Membaca Jangka Sorong</p>
+<div class="card">
+<p><strong>読み取り手順（3ステップ）：</strong></p>
+<ol>
+<li><span class="accent">本尺の値</span>を読む → バーニヤの0線の左側の目盛り</li>
+<li><span class="accent">バーニヤの値</span>を読む → 本尺の線と一致する副尺の目盛り</li>
+<li>本尺 ＋ バーニヤ ＝ <span class="accent">測定値</span></li>
+</ol>
+</div>
+<div class="highlight-box">
+<strong>例：</strong>本尺 = <span class="accent">23mm</span> ＋ バーニヤ = <span class="accent">0.35mm</span> → 測定値 = <span class="accent">23.35mm</span><br>
+<strong>最小読取値：</strong>一般的なノギスは <span class="accent">0.05mm</span>
+</div>
+</section>
+
+<!-- スライド6: マイクロメーターの構造 -->
+<section data-timing="780">
+<h2>マイクロメーターの構造</h2>
+<p class="subtitle">Struktur Mikrometer (Micrometer)</p>
+<div class="diagram">
+  ┌─────────────────────────────────┐
+  │                                 │
+  │   アンビル    スピンドル        │
+  │    ┌─┐      ┌─┐                │
+  │    │ │←────→│ │                │
+  │    └─┘      └─┘                │
+  │     ↑        ↑                 │
+  │   固定側    回転側              │
+  │                                 │
+  │   ┌──────────────────┐         │
+  │   │ スリーブ │シンブル│         │
+  │   │  (固定)  │(回転) │         │
+  │   │  0.5mm   │0.01mm │         │
+  │   │  刻み    │ 刻み  │         │
+  │   └──────────────────┘         │
+  │                                 │
+  │   ラチェットストップ            │
+  │   → 一定の力で測定する仕組み   │
+  └─────────────────────────────────┘
+</div>
+</section>
+
+<!-- スライド7: マイクロメーターの読み方 -->
+<section data-timing="960">
+<h2>マイクロメーターの読み方</h2>
+<p class="subtitle">Cara Membaca Mikrometer</p>
+<div class="card">
+<p><strong>読み取り手順（3ステップ）：</strong></p>
+<ol>
+<li><span class="accent">スリーブの整数部</span>を読む（1mm刻み）</li>
+<li><span class="accent">スリーブの0.5mm線</span>が見えているか確認</li>
+<li><span class="accent">シンブルの目盛り</span>を読む（0.01mm刻み）</li>
+</ol>
+</div>
+<div class="highlight-box">
+<strong>例：</strong>スリーブ = <span class="accent">5.5mm</span> ＋ シンブル = <span class="accent">0.23mm</span> → 測定値 = <span class="accent">5.73mm</span><br>
+<strong>最小読取値：</strong>一般的なマイクロメーターは <span class="accent">0.01mm</span>
+</div>
+</section>
+
+<!-- スライド8: 測定誤差の原因と対策 -->
+<section data-timing="1140">
+<h2>測定誤差の原因と対策</h2>
+<p class="subtitle">Penyebab &amp; Pencegahan Kesalahan Pengukuran</p>
+<div class="card">
+<table>
+<thead>
+<tr><th>原因</th><th>対策</th></tr>
+</thead>
+<tbody>
+<tr><td><span class="accent">ゼロ点のズレ</span></td><td>測定前にゼロ点確認・調整</td></tr>
+<tr><td><span class="accent">汚れ・ゴミ</span></td><td>測定面をウエスで清掃</td></tr>
+<tr><td><span class="accent">温度変化</span></td><td>20°Cの環境で測定（標準温度）</td></tr>
+<tr><td><span class="accent">測定力のバラつき</span></td><td>ラチェットストップを使用</td></tr>
+<tr><td><span class="accent">読み取りミス</span></td><td>正面から目盛りを読む（視差防止）</td></tr>
+</tbody>
+</table>
+</div>
+<div class="highlight-box">
+<strong>実技試験：</strong>測定前の<span class="accent">ゼロ点確認</span>は必ず行う！忘れると減点
+</div>
+</section>
+
+<!-- スライド9: 重要用語一覧 -->
+<section data-timing="1320">
+<h2>重要用語一覧</h2>
+<table>
+<thead>
+<tr><th>日本語（読み方）</th><th>Bahasa Indonesia</th></tr>
+</thead>
+<tbody>
+<tr><td>ノギス</td><td>Jangka Sorong (Vernier Caliper)</td></tr>
+<tr><td>マイクロメーター</td><td>Mikrometer</td></tr>
+<tr><td>最小読取値（さいしょうよみとりち）</td><td>Nilai Baca Minimum</td></tr>
+<tr><td>測定誤差（そくていごさ）</td><td>Kesalahan Pengukuran</td></tr>
+<tr><td>記録（きろく）</td><td>Catatan / Rekaman</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- スライド10: 確認クイズ -->
+<section data-timing="1380">
+<h2>確認クイズ</h2>
+<div class="card">
+<p><strong>Q1.</strong> 一般的なマイクロメーターの最小読取値は？</p>
+<ol type="A">
+<li>0.1mm</li>
+<li>0.05mm</li>
+<li class="fragment"><span class="quiz-answer">C. 0.01mm ← 正解！</span></li>
+<li>0.001mm</li>
+</ol>
+</div>
+<div class="card" style="margin-top:16px;">
+<p><strong>Q2.</strong> 測定前に必ず行うべきことは？</p>
+<ol type="A">
+<li>オイルを塗る</li>
+<li class="fragment"><span class="quiz-answer">B. ゼロ点の確認・調整 ← 正解！</span></li>
+<li>測定対象を加熱する</li>
+<li>目盛りをマーキングする</li>
+</ol>
+</div>
+</section>
+
+<!-- スライド11: まとめ -->
+<section data-timing="1620">
+<h2>まとめ ／ Ringkasan</h2>
+<div class="card">
+<ol>
+<li><span class="accent">ノギス</span>（最小読取値0.05mm）：外径・内径・深さの3種類が測定可能</li>
+<li><span class="accent">マイクロメーター</span>（最小読取値0.01mm）：ラチェットストップで一定の測定力</li>
+<li><span class="accent">測定誤差防止</span>：ゼロ点確認・清掃・標準温度・正面読みが基本</li>
+</ol>
+</div>
+<div class="highlight-box" style="margin-top:16px;">
+<strong>次回予告：</strong>第9回「中間確認テスト①・復習（第1〜8回）」
+</div>
+</section>
+
+<!-- スライド12: 宿題 -->
+<section data-timing="1740">
+<h2>宿題 ／ Pekerjaan Rumah</h2>
+<div class="card" style="text-align:center;">
+<p style="font-size:1.1em;">以下のURLにアクセスして<br><span class="accent">3問</span>解いてください</p>
+<p style="font-size:1.3em;margin:20px 0;"><span class="accent">homework.html?lesson=8</span></p>
+<p style="font-size:0.8em;color:#94A3B8;">次回授業までに提出してください<br>Selesaikan sebelum pelajaran berikutnya</p>
+</div>
+</section>
+
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+Reveal.initialize({hash:true,transition:'slide',pdfSeparateFragments:false});
+if(window.location.search.includes('print-pdf')){document.querySelector('.reveal').classList.add('print-pdf');}
+</script>
+</body>
+</html>

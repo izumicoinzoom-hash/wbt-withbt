@@ -21,15 +21,19 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./public_html/
           server-dir: ${{ format('{0}{1}', secrets.FTP_REMOTE_DIR, endsWith(secrets.FTP_REMOTE_DIR, '/') && '' || '/') }}
-          # トップ・研修LP・kiyota・demodeta など指定パスのみデプロイ（WordPress等は除外）
+          # トップ・研修LP・kiyota・demodeta・WBT など指定パスのみデプロイ（WordPress等は除外）
           include: |
             .htaccess
             .user.ini
             *.html
             *.md
+            *.php
             mail_to_owner.php
             images/**
             data/**
+            api/**
+            slides/**
+            stripe/**
             kiyota/.htaccess
             kiyota/index.html
             kiyota/assets/**

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第18回 バッテリー・始動・充電系</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<style>
+:root {
+  --bg: #0F172A;
+  --accent: #EA580C;
+  --text: #F8FAFC;
+  --card: #1E293B;
+}
+.reveal { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Noto Sans JP', sans-serif; }
+.reveal h1, .reveal h2, .reveal h3 { color: var(--text); text-transform: none; }
+.reveal h1 { font-size: 1.8em; }
+.reveal h2 { font-size: 1.4em; border-bottom: 3px solid var(--accent); padding-bottom: 0.3em; display: inline-block; }
+.reveal .accent { color: var(--accent); font-weight: bold; }
+.reveal .card { background: var(--card); border-radius: 12px; padding: 1.2em; margin: 0.5em 0; text-align: left; }
+.reveal table { margin: 0 auto; border-collapse: collapse; font-size: 0.7em; }
+.reveal th { background: var(--accent); color: #fff; padding: 0.5em 1em; }
+.reveal td { background: var(--card); padding: 0.5em 1em; border: 1px solid #334155; }
+.reveal .quiz-answer { color: #22C55E; font-weight: bold; }
+.reveal .subtitle { color: #94A3B8; font-size: 0.6em; display: block; margin-top: 0.3em; }
+.reveal ul, .reveal ol { display: block; text-align: left; margin-left: 1em; }
+.reveal li { margin-bottom: 0.4em; font-size: 0.85em; }
+.reveal pre { background: var(--card); border-radius: 8px; padding: 1em; font-size: 0.55em; text-align: left; }
+.reveal .highlight-box { background: var(--card); border-left: 4px solid var(--accent); padding: 0.8em 1.2em; margin: 0.5em 0; border-radius: 0 8px 8px 0; text-align: left; }
+@media print { .reveal { background: #fff !important; color: #000 !important; } }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- スライド1: タイトル -->
+<section>
+  <h1>第18回<br>バッテリー・始動・充電系</h1>
+  <span class="subtitle">Baterai, Sistem Starter, dan Sistem Pengisian</span>
+  <p style="margin-top:1.5em; color:#94A3B8;">WBT 特定技能2号・整備士2級 講座</p>
+</section>
+
+<!-- スライド2: 今日の目標 -->
+<section>
+  <h2>今日の目標</h2>
+  <div class="card">
+    <ol>
+      <li><span class="accent">バッテリー</span>の容量表示（Ah・CCA）と選定基準を理解する<br><span class="subtitle">Memahami kapasitas baterai (Ah/CCA) dan kriteria pemilihan</span></li>
+      <li><span class="accent">始動回路</span>（スターター・リレー）の構成を説明できる<br><span class="subtitle">Dapat menjelaskan rangkaian starter (starter, relay)</span></li>
+      <li><span class="accent">充電回路</span>（オルタネーター）の仕組みと点検方法を学ぶ<br><span class="subtitle">Mempelajari sistem pengisian (alternator) dan cara pemeriksaan</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- スライド3: 前回の振り返り -->
+<section>
+  <h2>前回の振り返り（第17回）</h2>
+  <div class="card">
+    <ul>
+      <li><span class="accent">オームの法則</span>：V = I x R</li>
+      <li><span class="accent">直列回路</span>：電流が同じ / <span class="accent">並列回路</span>：電圧が同じ</li>
+      <li>回路図記号と配線図の読み方を学習</li>
+    </ul>
+  </div>
+  <p style="color:#94A3B8; font-size:0.7em;">今回はその知識を使って<span class="accent">実際の電装部品</span>を学びます</p>
+</section>
+
+<!-- スライド4: バッテリーの基礎 -->
+<section>
+  <h2>バッテリーの基礎</h2>
+  <div style="display:flex; gap:1em; justify-content:center; flex-wrap:wrap;">
+    <div class="card" style="flex:1; min-width:250px;">
+      <h3 style="color:var(--accent);">容量表示</h3>
+      <ul>
+        <li><span class="accent">Ah（アンペアアワー）</span><br>電気を蓄える量<br>例: 60Ah = 1Aで60時間</li>
+        <li><span class="accent">CCA（コールドクランキングアンペア）</span><br>-18℃で始動できる電流値<br>寒冷地では重要</li>
+      </ul>
+    </div>
+    <div class="card" style="flex:1; min-width:250px;">
+      <h3 style="color:var(--accent);">型式の読み方</h3>
+      <p style="text-align:center; font-size:1.2em;"><span class="accent">55B24L</span></p>
+      <ul>
+        <li>55 = 性能ランク</li>
+        <li>B = サイズ区分</li>
+        <li>24 = 長さ（cm）</li>
+        <li>L = 端子位置（左）</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- スライド5: 始動回路（スターター） -->
+<section>
+  <h2>始動回路（スターター）</h2>
+  <div class="card">
+    <pre style="font-size:0.6em;">
+  [バッテリー +12V]
+       |
+       ├──→ [イグニッションSW] ──→ [スターターリレー]
+       |                                    |
+       └──────────────────→ [スターターモーター]
+                                            |
+                                     [フライホイール/リングギヤ]
+                                            |
+                                     エンジン始動！
+    </pre>
+  </div>
+  <div class="highlight-box">
+    <span class="accent">仕組み：</span>キーを回す → リレーがON → 大電流がスターターへ → ピニオンギヤがリングギヤと噛み合い → エンジンを回す
+  </div>
+</section>
+
+<!-- スライド6: 充電回路（オルタネーター） -->
+<section>
+  <h2>充電回路（オルタネーター）</h2>
+  <div class="card">
+    <pre style="font-size:0.6em;">
+  [エンジン回転] ─ベルト駆動→ [オルタネーター]
+                                    |
+                              [レギュレーター]
+                              (電圧を13.5〜14.5Vに制御)
+                                    |
+                              [バッテリーへ充電]
+    </pre>
+  </div>
+  <table>
+    <tr><th>点検項目</th><th>正常値</th><th>異常時</th></tr>
+    <tr><td>充電電圧</td><td><span class="accent">13.5〜14.5V</span></td><td>バッテリー上がり/過充電</td></tr>
+    <tr><td>ベルト張力</td><td>適正たわみ量</td><td>異音・充電不良</td></tr>
+    <tr><td>B端子電流</td><td>定格出力以下</td><td>オルタネーター故障</td></tr>
+  </table>
+</section>
+
+<!-- スライド7: バッテリー点検の実務 -->
+<section>
+  <h2>バッテリー点検の実務</h2>
+  <div class="card">
+    <ol>
+      <li><span class="accent">外観確認：</span>端子の腐食・液漏れ・膨張がないか</li>
+      <li><span class="accent">電圧測定：</span>無負荷時 12.4V以上（テスターで測定）</li>
+      <li><span class="accent">比重確認：</span>1.26〜1.28が正常（比重計使用）</li>
+      <li><span class="accent">負荷テスト：</span>大電流を流して電圧降下を確認</li>
+      <li><span class="accent">端子清掃：</span>ワイヤーブラシで腐食を除去</li>
+    </ol>
+  </div>
+  <div class="highlight-box">
+    <span class="accent">注意：</span>バッテリーから水素ガスが発生→火気厳禁！<br>
+    <span style="color:#94A3B8;">Perhatian: Gas hidrogen keluar dari baterai → Dilarang menyalakan api!</span>
+  </div>
+</section>
+
+<!-- スライド8: 始動不良のトラブルシューティング -->
+<section>
+  <h2>始動不良のトラブルシューティング</h2>
+  <div class="card">
+    <table style="font-size:0.65em;">
+      <tr><th>症状</th><th>考えられる原因</th><th>点検箇所</th></tr>
+      <tr><td>セルが回らない</td><td>バッテリー上がり<br>スターターリレー故障</td><td>電圧測定<br>リレー導通確認</td></tr>
+      <tr><td>セルが弱い</td><td>バッテリー劣化<br>端子接触不良</td><td>負荷テスト<br>端子の清掃・増し締め</td></tr>
+      <tr><td>セルは回るが始動しない</td><td>燃料系・点火系の問題</td><td>燃圧・火花確認</td></tr>
+      <tr><td>異音がする</td><td>ピニオン摩耗<br>リングギヤ損傷</td><td>目視確認・交換</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- スライド9: 重要用語一覧 -->
+<section>
+  <h2>重要用語一覧</h2>
+  <table>
+    <tr><th>日本語（読み仮名）</th><th>Bahasa Indonesia</th></tr>
+    <tr><td>バッテリー</td><td>Baterai</td></tr>
+    <tr><td>容量（ようりょう）</td><td>Kapasitas</td></tr>
+    <tr><td>充電（じゅうでん）</td><td>Pengisian</td></tr>
+    <tr><td>始動（しどう）</td><td>Menghidupkan mesin</td></tr>
+    <tr><td>スターター</td><td>Motor starter</td></tr>
+    <tr><td>オルタネーター</td><td>Alternator</td></tr>
+    <tr><td>レギュレーター</td><td>Regulator</td></tr>
+    <tr><td>比重（ひじゅう）</td><td>Berat jenis</td></tr>
+    <tr><td>端子（たんし）</td><td>Terminal</td></tr>
+    <tr><td>充電電圧（じゅうでんでんあつ）</td><td>Tegangan pengisian</td></tr>
+  </table>
+</section>
+
+<!-- スライド10: 確認クイズ -->
+<section>
+  <h2>確認クイズ</h2>
+  <div class="card">
+    <p><strong>Q1. オルタネーターの正常な充電電圧はどれか？</strong></p>
+    <ol type="A">
+      <li>10.0〜11.0V</li>
+      <li>12.0〜12.6V</li>
+      <li>13.5〜14.5V</li>
+      <li>16.0〜17.0V</li>
+    </ol>
+    <p class="fragment quiz-answer">正解: C. 13.5〜14.5V</p>
+  </div>
+  <div class="card" style="margin-top:0.5em;">
+    <p><strong>Q2. バッテリー型式「55B24L」のLは何を示すか？</strong></p>
+    <ol type="A">
+      <li>容量のランク</li>
+      <li>バッテリーの長さ</li>
+      <li>端子の位置（左）</li>
+      <li>電圧の種類</li>
+    </ol>
+    <p class="fragment quiz-answer">正解: C. 端子の位置（左）</p>
+  </div>
+</section>
+
+<!-- スライド11: まとめ -->
+<section>
+  <h2>まとめ</h2>
+  <div class="card">
+    <ul>
+      <li><span class="accent">バッテリー</span>はAh（容量）とCCA（始動性能）で選定する</li>
+      <li><span class="accent">始動回路</span>：キー→リレー→スターター→エンジン回転</li>
+      <li><span class="accent">充電回路</span>：エンジン→オルタネーター→レギュレーター→バッテリー</li>
+      <li>充電電圧の正常値は<span class="accent">13.5〜14.5V</span></li>
+      <li>バッテリー点検は外観・電圧・比重・負荷テストで総合判断</li>
+    </ul>
+  </div>
+  <p style="color:#94A3B8; font-size:0.7em;">次回: センサー・アクチュエーターとCAN通信</p>
+</section>
+
+<!-- スライド12: 宿題 -->
+<section>
+  <h2>宿題</h2>
+  <div class="card" style="text-align:center;">
+    <p style="font-size:1.1em;"><span class="accent">homework.html?lesson=18</span> にアクセスして<br>3問解いてください</p>
+    <p style="color:#94A3B8; font-size:0.8em; margin-top:1em;">次回までに提出しましょう！<br>Selesaikan 3 soal sebelum pelajaran berikutnya!</p>
+  </div>
+</section>
+
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  transition: 'slide',
+  pdfSeparateFragments: false
+});
+if (location.search.match(/print-pdf/gi)) {
+  document.documentElement.classList.add('print-pdf');
+}
+</script>
+</body>
+</html>

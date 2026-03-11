@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第12回 動力伝達装置（AT／CVT／MT） - WBT特定2号塾</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<style>
+:root{--bg:#0F172A;--accent:#EA580C;--text:#F8FAFC;--card:#1E293B}
+.reveal{background:var(--bg);color:var(--text);font-family:'Segoe UI','Hiragino Sans',sans-serif}
+.reveal h1,.reveal h2,.reveal h3{color:var(--text);text-transform:none}
+.reveal h1{font-size:1.8em}
+.reveal h2{font-size:1.4em}
+.reveal h3{font-size:1.2em}
+.reveal .accent{color:var(--accent);font-weight:bold}
+.reveal .card{background:var(--card);border-radius:12px;padding:24px;margin:12px 0;text-align:left}
+.reveal .card-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.reveal ul{text-align:left}
+.reveal li{margin:8px 0;font-size:0.9em}
+.reveal .quiz-box{background:var(--card);border-left:4px solid var(--accent);border-radius:8px;padding:20px;margin:16px 0;text-align:left}
+.reveal .answer{color:#22C55E;font-weight:bold;margin-top:12px}
+.reveal .subtitle{font-size:0.7em;color:#94A3B8;margin-top:8px}
+.reveal .tag{display:inline-block;background:var(--accent);color:#fff;padding:4px 12px;border-radius:999px;font-size:0.6em;margin-bottom:12px}
+.reveal table{margin:0 auto;border-collapse:collapse;font-size:0.7em}
+.reveal th{background:var(--accent);color:#fff;padding:8px 16px}
+.reveal td{padding:8px 16px;border-bottom:1px solid #334155}
+@media print{.reveal .slide-background{background:var(--bg)!important}}
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- スライド1: タイトル -->
+<section>
+<p class="tag">第12回 / Pelajaran 12</p>
+<h1>動力伝達装置</h1>
+<h3>AT／CVT／MT</h3>
+<p class="subtitle">Sistem Transmisi Tenaga - AT / CVT / MT</p>
+</section>
+
+<!-- スライド2: 今日の目標 -->
+<section>
+<h2>今日の目標 / Tujuan Hari Ini</h2>
+<div class="card">
+<ol>
+<li><span class="accent">MT・AT・CVT</span>の構造の違いを理解する<br><small>Memahami perbedaan struktur MT, AT, dan CVT</small></li>
+<li><span class="accent">トルクコンバーター</span>とクラッチの役割を理解する<br><small>Memahami fungsi torque converter dan kopling</small></li>
+<li><span class="accent">ATF・CVTF</span>の管理方法を覚える<br><small>Menghafal cara pengelolaan ATF dan CVTF</small></li>
+</ol>
+</div>
+</section>
+
+<!-- スライド3: 前回の振り返り -->
+<section>
+<h2>前回の振り返り（第11回）</h2>
+<div class="card">
+<h3>キーワード3つ</h3>
+<ul>
+<li><span class="accent">空燃比（14.7:1）</span> — ガソリンエンジンの理論空燃比</li>
+<li><span class="accent">冷却系</span> — ラジエーター・サーモスタット・ウォーターポンプ</li>
+<li><span class="accent">潤滑系</span> — オイルポンプ・オイルフィルター・オイルパン</li>
+</ul>
+</div>
+</section>
+
+<!-- スライド4: MT・AT・CVTの違い -->
+<section>
+<h2>3つの変速機の比較</h2>
+<table>
+<tr><th>項目</th><th>MT</th><th>AT</th><th>CVT</th></tr>
+<tr><td>変速方式</td><td>手動でギア切替</td><td>自動でギア切替</td><td>無段階で連続変速</td></tr>
+<tr><td>動力伝達</td><td><span class="accent">クラッチ</span></td><td><span class="accent">トルクコンバーター</span></td><td>トルクコンバーター</td></tr>
+<tr><td>ギア構造</td><td>歯車の噛み合い</td><td>遊星歯車</td><td>ベルト+プーリー</td></tr>
+<tr><td>使用オイル</td><td>ギアオイル</td><td><span class="accent">ATF</span></td><td><span class="accent">CVTF</span></td></tr>
+<tr><td>日本での普及率</td><td>少ない</td><td>多い</td><td>非常に多い</td></tr>
+</table>
+</section>
+
+<!-- スライド5: トルクコンバーターとクラッチ -->
+<section>
+<h2>トルクコンバーターとクラッチ</h2>
+<div class="card-grid">
+<div class="card">
+<h3><span class="accent">クラッチ</span>（MT）</h3>
+<ul>
+<li>エンジンとトランスミッションを断続する装置</li>
+<li>ドライバーがペダルで操作</li>
+<li>摩擦板（クラッチディスク）で動力を伝達</li>
+<li>摩耗すると滑りが発生</li>
+</ul>
+</div>
+<div class="card">
+<h3><span class="accent">トルクコンバーター</span>（AT/CVT）</h3>
+<ul>
+<li>流体（ATF）を使って動力を伝達</li>
+<li>ポンプ・タービン・ステーターで構成</li>
+<li>発進時にトルクを増幅する</li>
+<li>ロックアップ機構で高速時の効率を向上</li>
+</ul>
+</div>
+</div>
+</section>
+
+<!-- スライド6: 変速比の考え方 -->
+<section>
+<h2>変速比の考え方</h2>
+<div class="card">
+<h3>変速比 = 入力回転数 ÷ 出力回転数</h3>
+<ul>
+<li><span class="accent">変速比が大きい</span>（低速ギア）→ トルクが大きい・速度は遅い → 発進・坂道</li>
+<li><span class="accent">変速比が小さい</span>（高速ギア）→ トルクは小さい・速度が速い → 高速走行</li>
+<li>CVTは<span class="accent">プーリーの径を変える</span>ことで無段階に変速比を変える</li>
+</ul>
+</div>
+<p class="subtitle">Rasio transmisi = putaran input / putaran output</p>
+</section>
+
+<!-- スライド7: ATF・CVTFの管理 -->
+<section>
+<h2>ATF・CVTFの管理</h2>
+<div class="card">
+<table>
+<tr><th>項目</th><th>ATF</th><th>CVTF</th></tr>
+<tr><td>交換時期（目安）</td><td>4〜6万km</td><td>4〜6万km</td></tr>
+<tr><td>色（正常時）</td><td><span class="accent">赤色</span></td><td><span class="accent">緑色または赤色</span></td></tr>
+<tr><td>劣化時の色</td><td>黒褐色</td><td>黒褐色</td></tr>
+<tr><td>注意点</td><td colspan="2">ATFとCVTFは<span class="accent">混ぜてはいけない</span></td></tr>
+</table>
+</div>
+<p class="subtitle">異音・スリップの症状がある場合はフルード劣化を疑う</p>
+</section>
+
+<!-- スライド8: 異音・スリップの原因 -->
+<section>
+<h2>トラブル事例：異音・スリップ</h2>
+<div class="card-grid">
+<div class="card">
+<h3>異音の原因</h3>
+<ul>
+<li>ATF/CVTFの<span class="accent">劣化・不足</span></li>
+<li>ベアリングの摩耗</li>
+<li>CVTベルトの摩耗</li>
+</ul>
+</div>
+<div class="card">
+<h3>スリップの原因</h3>
+<ul>
+<li>ATF/CVTFの<span class="accent">劣化</span></li>
+<li>クラッチ板の摩耗（AT内部）</li>
+<li>トルクコンバーターの不良</li>
+</ul>
+</div>
+</div>
+<p class="subtitle">早期発見・早期対応が大切です</p>
+</section>
+
+<!-- スライド9: 重要用語一覧 -->
+<section>
+<h2>重要用語一覧</h2>
+<table>
+<tr><th>日本語（読み仮名）</th><th>Bahasa Indonesia</th></tr>
+<tr><td>動力伝達装置（どうりょくでんたつそうち）</td><td>Sistem transmisi tenaga</td></tr>
+<tr><td>変速機（へんそくき）</td><td>Transmisi</td></tr>
+<tr><td>トルクコンバーター</td><td>Torque converter</td></tr>
+<tr><td>クラッチ</td><td>Kopling</td></tr>
+<tr><td>変速比（へんそくひ）</td><td>Rasio transmisi</td></tr>
+<tr><td>ATF（エーティーエフ）</td><td>Automatic Transmission Fluid</td></tr>
+<tr><td>CVT（シーブイティー）</td><td>Continuously Variable Transmission</td></tr>
+<tr><td>遊星歯車（ゆうせいはぐるま）</td><td>Planetary gear</td></tr>
+</table>
+</section>
+
+<!-- スライド10: 確認クイズ -->
+<section>
+<h2>確認クイズ</h2>
+<div class="quiz-box">
+<p><strong>Q1. ATの動力伝達に使われる装置は？</strong></p>
+<p>A. クラッチ</p>
+<p>B. トルクコンバーター</p>
+<p>C. ベルト</p>
+<p>D. チェーン</p>
+<p class="fragment answer">正解: B — ATはトルクコンバーター（流体継手）で動力を伝達します</p>
+</div>
+<div class="quiz-box">
+<p><strong>Q2. ATFとCVTFの取り扱いで正しいものは？</strong></p>
+<p>A. どちらも同じなので混ぜてよい</p>
+<p>B. ATFとCVTFは混ぜてはいけない</p>
+<p>C. CVTFは交換不要</p>
+<p>D. ATFは水で薄めて使う</p>
+<p class="fragment answer">正解: B — ATFとCVTFは成分が異なるため、混ぜてはいけません</p>
+</div>
+</section>
+
+<!-- スライド11: まとめ -->
+<section>
+<h2>まとめ / Ringkasan</h2>
+<div class="card">
+<ul>
+<li><span class="accent">MT</span>はクラッチ、<span class="accent">AT/CVT</span>はトルクコンバーターで動力を伝達する</li>
+<li>変速比が大きいほど<span class="accent">トルクが大きく</span>、小さいほど<span class="accent">速度が速い</span></li>
+<li><span class="accent">ATFとCVTF</span>は混ぜてはならず、定期交換が必要</li>
+<li>異音やスリップは<span class="accent">フルード劣化</span>を最初に疑う</li>
+</ul>
+</div>
+</section>
+
+<!-- スライド12: 宿題 -->
+<section>
+<h2>宿題 / Pekerjaan Rumah</h2>
+<div class="card" style="text-align:center">
+<p style="font-size:1.2em"><span class="accent">homework.html?lesson=12</span> にアクセスして<br>3問解いてください</p>
+<p class="subtitle">Akses homework.html?lesson=12 dan jawab 3 soal</p>
+</div>
+</section>
+
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+Reveal.initialize({hash:true,transition:'slide',pdfSeparateFragments:false});
+if(location.search.includes('print-pdf')){document.querySelector('.reveal').classList.add('print-pdf')}
+</script>
+</body>
+</html>

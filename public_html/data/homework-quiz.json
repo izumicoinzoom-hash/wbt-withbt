@@ -1,0 +1,928 @@
+{
+  "lessons": [
+    {
+      "lesson": 1,
+      "title": "オリエンテーション・特定技能2号試験の全体像",
+      "questions": [
+        {
+          "q": "特定技能2号（自動車整備分野）の試験で評価される主な能力として、正しいものはどれか。",
+          "options": [
+            "自動車の販売に関する知識",
+            "自動車の整備に必要な技能と知識",
+            "自動車の運転技術",
+            "自動車保険の知識"
+          ],
+          "correct": 1,
+          "explanation": "特定技能2号（自動車整備分野）の試験では、自動車の整備に必要な技能と知識が評価されます。具体的には、学科試験と実技試験があり、2級自動車整備士相当の能力が求められます。",
+          "explanationId": "Ujian Tokutei Ginou 2 (bidang perawatan kendaraan) mengevaluasi keterampilan dan pengetahuan yang diperlukan untuk perawatan kendaraan. Secara khusus, terdapat ujian teori dan praktik, dan diperlukan kemampuan setara mekanik kelas 2."
+        },
+        {
+          "q": "特定技能2号の在留資格で認められている在留期間の上限はどれか。",
+          "options": [
+            "最長3年",
+            "最長5年",
+            "上限なし（更新可能）",
+            "最長10年"
+          ],
+          "correct": 2,
+          "explanation": "特定技能2号は在留期間の上限がなく、更新が可能です。これは特定技能1号（最長5年）との大きな違いであり、家族の帯同も認められています。",
+          "explanationId": "Tokutei Ginou 2 tidak memiliki batas masa tinggal dan dapat diperpanjang. Ini adalah perbedaan besar dengan Tokutei Ginou 1 (maksimal 5 tahun), dan membawa keluarga juga diperbolehkan."
+        },
+        {
+          "q": "この講座（全22回）で学ぶ内容の範囲として、正しいものはどれか。",
+          "options": [
+            "法規・エンジン・シャシ・電装・故障診断など幅広い分野",
+            "エンジン整備のみ",
+            "法規のみ",
+            "実技のみ"
+          ],
+          "correct": 0,
+          "explanation": "本講座は全22回で、法規、エンジン、シャシ、電装、故障診断など自動車整備士2級試験に必要な幅広い分野をカバーしています。",
+          "explanationId": "Kursus ini terdiri dari 22 pertemuan dan mencakup berbagai bidang yang diperlukan untuk ujian mekanik kelas 2, termasuk hukum, mesin, sasis, kelistrikan, dan diagnosis kerusakan."
+        }
+      ]
+    },
+    {
+      "lesson": 2,
+      "title": "道路運送車両法①（目的・車両区分・車検制度）",
+      "questions": [
+        {
+          "q": "道路運送車両法の目的として、正しいものはどれか。",
+          "options": [
+            "自動車の販売促進",
+            "道路運送車両に関する保安基準を定め、安全性の確保と公害の防止を図る",
+            "自動車税の徴収",
+            "運転免許の管理"
+          ],
+          "correct": 1,
+          "explanation": "道路運送車両法は、道路運送車両に関する保安基準を定め、自動車の安全性の確保及び公害の防止、並びに自動車の整備に関する技術の向上を図ることを目的としています。",
+          "explanationId": "Undang-Undang Kendaraan Bermotor bertujuan untuk menetapkan standar keselamatan kendaraan, memastikan keselamatan kendaraan, mencegah polusi, dan meningkatkan teknologi perawatan kendaraan."
+        },
+        {
+          "q": "道路運送車両法における「小型自動車」の排気量の上限はどれか。",
+          "options": [
+            "660cc以下",
+            "2,000cc以下",
+            "3,000cc以下",
+            "排気量の制限はない"
+          ],
+          "correct": 1,
+          "explanation": "小型自動車は、総排気量が2,000cc以下で、長さ4.7m以下、幅1.7m以下、高さ2.0m以下の四輪自動車です。660cc以下は軽自動車に分類されます。",
+          "explanationId": "Kendaraan kecil adalah kendaraan roda empat dengan kapasitas mesin 2.000cc atau kurang, panjang 4,7m atau kurang, lebar 1,7m atau kurang, dan tinggi 2,0m atau kurang. 660cc atau kurang diklasifikasikan sebagai kei-jidousha."
+        },
+        {
+          "q": "自家用乗用車の車検（継続検査）の有効期間として、正しいものはどれか。",
+          "options": [
+            "初回3年、以降1年ごと",
+            "初回3年、以降2年ごと",
+            "初回2年、以降1年ごと",
+            "すべて1年ごと"
+          ],
+          "correct": 1,
+          "explanation": "自家用乗用車の車検有効期間は、新車登録時は3年間、以降の継続検査は2年ごとです。事業用自動車や大型車両は検査間隔が異なります。",
+          "explanationId": "Masa berlaku inspeksi kendaraan penumpang pribadi adalah 3 tahun untuk pendaftaran baru dan setiap 2 tahun untuk inspeksi lanjutan. Kendaraan komersial dan kendaraan besar memiliki interval inspeksi yang berbeda."
+        }
+      ]
+    },
+    {
+      "lesson": 3,
+      "title": "道路運送車両法②（特定整備制度・法規基礎）",
+      "questions": [
+        {
+          "q": "「特定整備」に含まれる作業として、正しいものはどれか。",
+          "options": [
+            "タイヤの空気圧調整",
+            "エンジンオイルの交換",
+            "自動運行装置（自動ブレーキ等）のエーミング作業",
+            "ワイパーゴムの交換"
+          ],
+          "correct": 2,
+          "explanation": "特定整備とは、従来の「分解整備」に加えて、自動運行装置（衝突被害軽減ブレーキ等の先進安全装置）の整備・エーミング作業を含む制度です。2020年4月から施行されました。",
+          "explanationId": "Tokutei seibi (perawatan khusus) adalah sistem yang mencakup pekerjaan perawatan dan aiming perangkat mengemudi otomatis (seperti pengereman darurat otomatis) selain 'perawatan pembongkaran' konvensional. Berlaku sejak April 2020."
+        },
+        {
+          "q": "自動車の「分解整備」に該当する作業はどれか。",
+          "options": [
+            "ウォッシャー液の補充",
+            "ブレーキドラムを取り外して行うブレーキシューの交換",
+            "エアコンフィルターの交換",
+            "バッテリーの交換"
+          ],
+          "correct": 1,
+          "explanation": "分解整備とは、制動装置や走行装置など重要な装置を取り外して行う整備のことです。ブレーキドラムを取り外してブレーキシューを交換する作業は分解整備に該当します。",
+          "explanationId": "Bunkai seibi (perawatan pembongkaran) adalah perawatan yang dilakukan dengan membongkar perangkat penting seperti sistem pengereman dan sistem penggerak. Melepas drum rem untuk mengganti sepatu rem termasuk dalam kategori ini."
+        },
+        {
+          "q": "特定整備の認証を受けるために必要なものとして、正しいものはどれか。",
+          "options": [
+            "特に要件はない",
+            "整備主任者の選任と作業場の基準を満たすこと",
+            "販売台数の実績",
+            "メーカーとの契約"
+          ],
+          "correct": 1,
+          "explanation": "特定整備の認証を受けるには、整備主任者の選任、作業場の面積・設備基準、電子制御装置整備の整備主任者等資格の要件を満たす必要があります。",
+          "explanationId": "Untuk mendapatkan sertifikasi tokutei seibi, perlu memenuhi persyaratan seperti penunjukan kepala mekanik, standar luas dan peralatan bengkel, dan kualifikasi untuk perawatan perangkat kontrol elektronik."
+        }
+      ]
+    },
+    {
+      "lesson": 4,
+      "title": "整備主任者・責任とコンプライアンス",
+      "questions": [
+        {
+          "q": "整備主任者の役割として、正しいものはどれか。",
+          "options": [
+            "自動車の販売促進",
+            "分解整備・特定整備の作業管理と品質確認",
+            "顧客への見積もり作成",
+            "従業員の給与管理"
+          ],
+          "correct": 1,
+          "explanation": "整備主任者は、分解整備・特定整備に係る作業の管理、品質の確認（完成検査）を行う責任者です。認証工場では整備主任者の選任が義務付けられています。",
+          "explanationId": "Seibi shunin-sha (kepala mekanik) adalah penanggung jawab pengelolaan pekerjaan perawatan pembongkaran dan perawatan khusus, serta konfirmasi kualitas (inspeksi akhir). Bengkel bersertifikat wajib menunjuk kepala mekanik."
+        },
+        {
+          "q": "整備主任者になるために必要な資格要件はどれか。",
+          "options": [
+            "普通自動車運転免許",
+            "自動車整備士の資格（2級以上）",
+            "危険物取扱者資格",
+            "特に資格は不要"
+          ],
+          "correct": 1,
+          "explanation": "整備主任者になるには、自動車整備士の資格（2級以上）を持っていることが必要です。また、地方運輸局長が行う研修を受講する義務があります。",
+          "explanationId": "Untuk menjadi kepala mekanik, diperlukan kualifikasi mekanik kendaraan (kelas 2 atau lebih tinggi). Selain itu, ada kewajiban mengikuti pelatihan yang diselenggarakan oleh kepala biro transportasi daerah."
+        },
+        {
+          "q": "自動車整備事業者のコンプライアンス違反として該当するものはどれか。",
+          "options": [
+            "整備記録簿に正確な記録を残すこと",
+            "点検整備を実施せずに点検整備済みステッカーを貼付すること",
+            "お客様に整備内容を丁寧に説明すること",
+            "部品交換時に純正部品を使用すること"
+          ],
+          "correct": 1,
+          "explanation": "点検整備を実施していないにもかかわらず点検整備済みステッカーを貼付することは、重大なコンプライアンス違反です。不正車検として行政処分の対象となります。",
+          "explanationId": "Menempelkan stiker inspeksi selesai tanpa benar-benar melakukan inspeksi adalah pelanggaran kepatuhan yang serius. Ini merupakan inspeksi palsu dan dapat dikenakan sanksi administratif."
+        }
+      ]
+    },
+    {
+      "lesson": 5,
+      "title": "専門用語（日本語）基礎",
+      "questions": [
+        {
+          "q": "「締め付けトルク」の意味として正しいものはどれか。",
+          "options": [
+            "ボルトを緩める力",
+            "ボルトやナットを締め付ける回転力の大きさ",
+            "エンジンの出力",
+            "タイヤの回転速度"
+          ],
+          "correct": 1,
+          "explanation": "締め付けトルクとは、ボルトやナットを締め付ける際の回転力の大きさを表す値です。単位はN・m（ニュートンメートル）で表されます。適切なトルクで締め付けることが安全な整備の基本です。",
+          "explanationId": "Torsi pengencangan adalah nilai yang menunjukkan besarnya gaya putar saat mengencangkan baut atau mur. Satuannya adalah N・m (Newton meter). Mengencangkan dengan torsi yang tepat adalah dasar perawatan yang aman."
+        },
+        {
+          "q": "「打音検査」とはどの検査方法か。",
+          "options": [
+            "部品を叩いて音の違いで異常を判断する検査",
+            "エンジン音をマイクで録音する検査",
+            "超音波を使った検査",
+            "排気音を測定する検査"
+          ],
+          "correct": 0,
+          "explanation": "打音検査とは、ハンマーなどで部品を叩き、その音の違い（響き方）によって亀裂や緩みなどの異常を判断する検査方法です。ボルトの緩み点検などで使われます。",
+          "explanationId": "Inspeksi ketukan adalah metode inspeksi di mana bagian dipukul dengan palu dan kelainan seperti retakan atau kelonggaran dinilai dari perbedaan suara. Digunakan untuk memeriksa kelonggaran baut."
+        },
+        {
+          "q": "「油圧」を表す日本語の読み方として正しいものはどれか。",
+          "options": [
+            "あぶらあつ",
+            "ゆあつ",
+            "あぶらかわ",
+            "ゆかわ"
+          ],
+          "correct": 1,
+          "explanation": "「油圧」は「ゆあつ」と読みます。自動車整備ではブレーキやパワーステアリングなど多くの装置で油圧が使われています。",
+          "explanationId": "「油圧」dibaca 'yuatsu' yang berarti tekanan hidrolik. Dalam perawatan kendaraan, tekanan hidrolik digunakan di banyak perangkat seperti rem dan power steering."
+        }
+      ]
+    },
+    {
+      "lesson": 6,
+      "title": "法定点検①（12ヶ月点検の手順・記録）",
+      "questions": [
+        {
+          "q": "自家用乗用車の12ヶ月定期点検の点検項目数として、正しいものはどれか。",
+          "options": [
+            "12項目",
+            "26項目",
+            "56項目",
+            "100項目"
+          ],
+          "correct": 1,
+          "explanation": "自家用乗用車の12ヶ月定期点検の点検項目は26項目です。ブレーキ、ハンドル、走行装置、緩衝装置、電気装置、エンジンなどの各部を点検します。",
+          "explanationId": "Inspeksi berkala 12 bulan untuk kendaraan penumpang pribadi terdiri dari 26 item. Meliputi pemeriksaan rem, kemudi, sistem penggerak, peredam kejut, sistem kelistrikan, dan mesin."
+        },
+        {
+          "q": "12ヶ月点検でブレーキの点検項目に含まれるものはどれか。",
+          "options": [
+            "エンジンオイルの量",
+            "ブレーキペダルの遊び・踏み込み時の床板とのすき間",
+            "ワイパーの作動状態",
+            "ホーンの音量"
+          ],
+          "correct": 1,
+          "explanation": "12ヶ月点検のブレーキ関連項目には、ブレーキペダルの遊び・踏み込み時の床板とのすき間、ブレーキの効き具合、パーキングブレーキの引きしろなどが含まれます。",
+          "explanationId": "Item terkait rem dalam inspeksi 12 bulan mencakup kelonggaran pedal rem dan jarak ke lantai saat ditekan, efektivitas pengereman, dan kelonggaran rem parkir."
+        },
+        {
+          "q": "点検整備記録簿の保存期間として、正しいものはどれか。",
+          "options": [
+            "1年間",
+            "2年間",
+            "自動車に備え付けて保存する",
+            "保存義務はない"
+          ],
+          "correct": 2,
+          "explanation": "点検整備記録簿は自動車に備え付けて保存することが義務付けられています。整備の履歴を残すことで、適切な整備管理と次回の点検に役立てます。",
+          "explanationId": "Catatan inspeksi dan perawatan wajib disimpan di dalam kendaraan. Menyimpan riwayat perawatan berguna untuk manajemen perawatan yang tepat dan inspeksi berikutnya."
+        }
+      ]
+    },
+    {
+      "lesson": 7,
+      "title": "法定点検②（24ヶ月点検・チェックリスト実習）",
+      "questions": [
+        {
+          "q": "24ヶ月定期点検の点検項目数は12ヶ月点検と比べてどうか。",
+          "options": [
+            "同じ項目数である",
+            "12ヶ月点検より少ない",
+            "12ヶ月点検より多い（56項目）",
+            "点検項目は法律で定められていない"
+          ],
+          "correct": 2,
+          "explanation": "24ヶ月定期点検は56項目で、12ヶ月点検（26項目）より多くの項目を点検します。車検時に合わせて実施されることが一般的です。",
+          "explanationId": "Inspeksi berkala 24 bulan terdiri dari 56 item, lebih banyak dari inspeksi 12 bulan (26 item). Umumnya dilakukan bersamaan dengan inspeksi kendaraan (shaken)."
+        },
+        {
+          "q": "24ヶ月点検で追加される項目として、正しいものはどれか。",
+          "options": [
+            "バッテリー液の量",
+            "ブレーキドラムとライニングとのすき間",
+            "ホーンの音量",
+            "シートベルトの汚れ"
+          ],
+          "correct": 1,
+          "explanation": "24ヶ月点検では、12ヶ月点検の項目に加えて、ブレーキドラムとライニングとのすき間、ディスクとパッドとのすき間など、より詳細な点検項目が追加されます。",
+          "explanationId": "Dalam inspeksi 24 bulan, selain item inspeksi 12 bulan, ditambahkan item yang lebih detail seperti jarak antara drum rem dan lining, serta jarak antara disk dan pad."
+        },
+        {
+          "q": "点検結果の記録で「×」の意味として正しいものはどれか。",
+          "options": [
+            "点検省略",
+            "異常なし",
+            "整備が必要（不良箇所あり）",
+            "該当なし"
+          ],
+          "correct": 2,
+          "explanation": "点検整備記録簿で「×」は不良箇所があり整備が必要であることを示します。「レ」は良好、「/」は該当なし・点検省略を意味します。",
+          "explanationId": "Dalam catatan inspeksi, '×' menunjukkan ada bagian yang rusak dan perlu diperbaiki. 'レ' berarti baik, '/' berarti tidak berlaku atau inspeksi dilewati."
+        }
+      ]
+    },
+    {
+      "lesson": 8,
+      "title": "測定機器の取り扱い（ノギス・マイクロメーター）",
+      "questions": [
+        {
+          "q": "ノギスの最小読取値として一般的なものはどれか。",
+          "options": [
+            "1mm",
+            "0.1mm",
+            "0.05mm",
+            "0.001mm"
+          ],
+          "correct": 2,
+          "explanation": "一般的なノギスの最小読取値は0.05mmです。本尺の目盛りとバーニヤ（副尺）の目盛りを使って読み取ります。デジタルノギスでは0.01mmまで表示できるものもあります。",
+          "explanationId": "Resolusi minimum jangka sorong umum adalah 0,05mm. Dibaca menggunakan skala utama dan skala vernier. Jangka sorong digital dapat menampilkan hingga 0,01mm."
+        },
+        {
+          "q": "外側マイクロメーターの最小読取値はどれか。",
+          "options": [
+            "0.1mm",
+            "0.05mm",
+            "0.01mm",
+            "0.001mm"
+          ],
+          "correct": 2,
+          "explanation": "外側マイクロメーターの最小読取値は0.01mmです。スリーブの目盛りとシンブルの目盛りを組み合わせて読み取ります。ノギスより高精度な測定が可能です。",
+          "explanationId": "Resolusi minimum mikrometer luar adalah 0,01mm. Dibaca dengan menggabungkan skala sleeve dan skala thimble. Dapat melakukan pengukuran yang lebih presisi daripada jangka sorong."
+        },
+        {
+          "q": "マイクロメーターの使用前に行う「ゼロ点調整」の目的はどれか。",
+          "options": [
+            "測定範囲を変更するため",
+            "測定誤差をなくすため（原点を合わせる）",
+            "電池を節約するため",
+            "測定速度を上げるため"
+          ],
+          "correct": 1,
+          "explanation": "ゼロ点調整は、マイクロメーターの測定面を合わせた状態でゼロを示すことを確認する作業です。これにより測定誤差をなくし、正確な測定を行うことができます。",
+          "explanationId": "Penyesuaian titik nol adalah proses memastikan mikrometer menunjukkan nol saat permukaan pengukuran dipertemukan. Ini menghilangkan kesalahan pengukuran dan memungkinkan pengukuran yang akurat."
+        }
+      ]
+    },
+    {
+      "lesson": 9,
+      "title": "中間確認テスト①・復習（第1〜8回）",
+      "questions": [
+        {
+          "q": "特定整備制度が施行された年はいつか。",
+          "options": [
+            "2018年（平成30年）",
+            "2019年（令和元年）",
+            "2020年（令和2年）",
+            "2022年（令和4年）"
+          ],
+          "correct": 2,
+          "explanation": "特定整備制度は2020年（令和2年）4月1日に施行されました。従来の分解整備に加え、自動運行装置の整備が追加されました。（第3回の復習）",
+          "explanationId": "Sistem tokutei seibi diberlakukan pada 1 April 2020. Selain perawatan pembongkaran konvensional, perawatan perangkat mengemudi otomatis ditambahkan. (Review pertemuan ke-3)"
+        },
+        {
+          "q": "ノギスとマイクロメーターを比較した場合、より高精度な測定ができるのはどちらか。",
+          "options": [
+            "ノギス（0.05mm）",
+            "マイクロメーター（0.01mm）",
+            "どちらも同じ精度",
+            "測定対象による"
+          ],
+          "correct": 1,
+          "explanation": "マイクロメーターの最小読取値は0.01mmで、ノギス（0.05mm）より高精度です。ただし、測定範囲はマイクロメーターの方が限定的です。（第8回の復習）",
+          "explanationId": "Resolusi minimum mikrometer adalah 0,01mm, lebih presisi daripada jangka sorong (0,05mm). Namun, rentang pengukuran mikrometer lebih terbatas. (Review pertemuan ke-8)"
+        },
+        {
+          "q": "整備主任者の選任が義務付けられているのはどのような事業場か。",
+          "options": [
+            "すべての自動車販売店",
+            "認証を受けた整備工場",
+            "ガソリンスタンド",
+            "レンタカー会社"
+          ],
+          "correct": 1,
+          "explanation": "整備主任者の選任は、地方運輸局長の認証を受けた自動車整備工場（認証工場）に義務付けられています。（第4回の復習）",
+          "explanationId": "Penunjukan kepala mekanik diwajibkan di bengkel kendaraan bersertifikat yang mendapat sertifikasi dari kepala biro transportasi daerah. (Review pertemuan ke-4)"
+        }
+      ]
+    },
+    {
+      "lesson": 10,
+      "title": "ガソリン・ディーゼルエンジン基礎①（構造・部品名称）",
+      "questions": [
+        {
+          "q": "4サイクルエンジンの行程順序として正しいものはどれか。",
+          "options": [
+            "吸入→圧縮→燃焼（膨張）→排気",
+            "圧縮→吸入→排気→燃焼（膨張）",
+            "燃焼（膨張）→排気→吸入→圧縮",
+            "排気→吸入→燃焼（膨張）→圧縮"
+          ],
+          "correct": 0,
+          "explanation": "4サイクルエンジンは「吸入→圧縮→燃焼（膨張）→排気」の4行程を繰り返します。クランクシャフト2回転（720度）で1サイクルが完了します。",
+          "explanationId": "Mesin 4-tak mengulangi 4 langkah: hisap → kompresi → pembakaran (ekspansi) → buang. Satu siklus selesai dalam 2 putaran crankshaft (720 derajat)."
+        },
+        {
+          "q": "シリンダーヘッドに組み付けられている部品として、正しいものはどれか。",
+          "options": [
+            "クランクシャフト",
+            "コンロッド",
+            "カムシャフト・バルブ",
+            "オイルパン"
+          ],
+          "correct": 2,
+          "explanation": "シリンダーヘッドには、カムシャフト、吸排気バルブ、バルブスプリング、点火プラグ（ガソリン車）などが組み付けられています。クランクシャフトはシリンダーブロック側です。",
+          "explanationId": "Pada cylinder head terpasang camshaft, katup masuk/buang, pegas katup, busi (mobil bensin), dll. Crankshaft berada di sisi cylinder block."
+        },
+        {
+          "q": "ガソリンエンジンとディーゼルエンジンの点火方式の違いとして、正しいものはどれか。",
+          "options": [
+            "どちらも点火プラグで点火する",
+            "ガソリンエンジンは点火プラグ、ディーゼルエンジンは圧縮着火",
+            "どちらも圧縮着火する",
+            "ガソリンエンジンは圧縮着火、ディーゼルエンジンは点火プラグ"
+          ],
+          "correct": 1,
+          "explanation": "ガソリンエンジンは点火プラグによる火花点火、ディーゼルエンジンは高圧縮による自己着火（圧縮着火）で燃焼します。この違いが構造や燃料の違いにもつながっています。",
+          "explanationId": "Mesin bensin menggunakan percikan busi untuk pembakaran, sedangkan mesin diesel menggunakan kompresi tinggi untuk pembakaran sendiri (kompresi ignisi). Perbedaan ini juga mempengaruhi struktur dan jenis bahan bakar."
+        }
+      ]
+    },
+    {
+      "lesson": 11,
+      "title": "ガソリン・ディーゼルエンジン基礎②（燃焼・整備士試験対策）",
+      "questions": [
+        {
+          "q": "ディーゼルエンジンの圧縮比として一般的な範囲はどれか。",
+          "options": [
+            "6〜8：1",
+            "8〜12：1",
+            "15〜22：1",
+            "30〜40：1"
+          ],
+          "correct": 2,
+          "explanation": "ディーゼルエンジンの圧縮比は一般的に15〜22：1で、ガソリンエンジン（8〜12：1）より高い圧縮比が必要です。これは燃料を圧縮着火させるためです。",
+          "explanationId": "Rasio kompresi mesin diesel umumnya 15-22:1, lebih tinggi dari mesin bensin (8-12:1). Ini diperlukan untuk pembakaran kompresi bahan bakar."
+        },
+        {
+          "q": "ノッキングの説明として、正しいものはどれか。",
+          "options": [
+            "エンジンの正常な燃焼音",
+            "混合気が点火プラグの火花以外で自然着火し、異常な燃焼が起こる現象",
+            "排気管からの異音",
+            "ベアリングの摩耗による音"
+          ],
+          "correct": 1,
+          "explanation": "ノッキングとは、ガソリンエンジンで正常な火炎伝播の前に末端ガスが自己着火し、異常な圧力波が発生する現象です。エンジン損傷の原因となります。",
+          "explanationId": "Knocking adalah fenomena di mana gas ujung menyala sendiri sebelum propagasi api normal pada mesin bensin, menghasilkan gelombang tekanan abnormal. Ini dapat menyebabkan kerusakan mesin."
+        },
+        {
+          "q": "エンジンの「熱効率」を高くするために効果的な方法はどれか。",
+          "options": [
+            "圧縮比を下げる",
+            "圧縮比を高くする",
+            "排気量を小さくする",
+            "アイドリング回転数を上げる"
+          ],
+          "correct": 1,
+          "explanation": "熱効率は圧縮比を高くすることで向上します。ただし、ガソリンエンジンでは圧縮比を上げすぎるとノッキングが発生するため、適切な範囲に設定する必要があります。",
+          "explanationId": "Efisiensi termal meningkat dengan meningkatkan rasio kompresi. Namun, pada mesin bensin, rasio kompresi yang terlalu tinggi menyebabkan knocking, sehingga perlu diatur dalam rentang yang tepat."
+        }
+      ]
+    },
+    {
+      "lesson": 12,
+      "title": "動力伝達装置（AT／CVT／MT）",
+      "questions": [
+        {
+          "q": "トルクコンバーターの3つの主要構成要素はどれか。",
+          "options": [
+            "クラッチディスク・プレッシャープレート・フライホイール",
+            "ポンプ・タービン・ステーター",
+            "サンギヤ・プラネタリギヤ・リングギヤ",
+            "インプットシャフト・カウンターギヤ・アウトプットシャフト"
+          ],
+          "correct": 1,
+          "explanation": "トルクコンバーターは、ポンプ（インペラー）、タービン（ランナー）、ステーターの3つの主要要素で構成されます。ATF（オートマチック・トランスミッション・フルード）を介してトルクを伝達・増大します。",
+          "explanationId": "Torque converter terdiri dari 3 elemen utama: pump (impeller), turbine (runner), dan stator. Mentransmisikan dan meningkatkan torsi melalui ATF (Automatic Transmission Fluid)."
+        },
+        {
+          "q": "CVT（無段変速機）の特徴として、正しいものはどれか。",
+          "options": [
+            "決まったギヤ比のみで変速する",
+            "プーリーとベルトにより無段階に変速比を変えられる",
+            "手動でギヤを切り替える",
+            "トルクコンバーターは使用しない"
+          ],
+          "correct": 1,
+          "explanation": "CVTは、2つの可変径プーリーとベルト（またはチェーン）を使い、プーリーの径を連続的に変えることで、無段階に変速比を変化させます。",
+          "explanationId": "CVT menggunakan dua pulley berdiameter variabel dan sabuk (atau rantai), mengubah diameter pulley secara kontinu untuk mengubah rasio transmisi secara mulus tanpa langkah."
+        },
+        {
+          "q": "MT（マニュアルトランスミッション）のクラッチの役割として、正しいものはどれか。",
+          "options": [
+            "エンジンの回転を上げる",
+            "エンジンとトランスミッション間の動力伝達を断続する",
+            "ブレーキをかける",
+            "ステアリングを補助する"
+          ],
+          "correct": 1,
+          "explanation": "クラッチは、エンジンとトランスミッション間の動力伝達を断続する装置です。変速時やエンジン始動時にクラッチを切り（断）、走行時にクラッチをつなぎ（続）ます。",
+          "explanationId": "Kopling adalah perangkat yang menghubungkan dan memutuskan transmisi daya antara mesin dan transmisi. Kopling dilepas saat perpindahan gigi atau saat mesin dihidupkan, dan dihubungkan saat berkendara."
+        }
+      ]
+    },
+    {
+      "lesson": 13,
+      "title": "制動装置（ブレーキ・ABS）",
+      "questions": [
+        {
+          "q": "ディスクブレーキの構成要素として、正しいものはどれか。",
+          "options": [
+            "ドラム・ブレーキシュー・ホイールシリンダー",
+            "ディスクローター・ブレーキパッド・キャリパー",
+            "マスターシリンダー・ブレーキブースター・リザーバータンク",
+            "プロポーショニングバルブ・ブレーキホース・ブレーキパイプ"
+          ],
+          "correct": 1,
+          "explanation": "ディスクブレーキは、ディスクローター、ブレーキパッド、キャリパーで構成されます。キャリパー内のピストンがパッドをローターに押し付けて制動力を発生させます。",
+          "explanationId": "Rem cakram terdiri dari rotor disk, pad rem, dan kaliper. Piston di dalam kaliper menekan pad ke rotor untuk menghasilkan gaya pengereman."
+        },
+        {
+          "q": "ABS（アンチロック・ブレーキ・システム）の目的として、正しいものはどれか。",
+          "options": [
+            "制動距離を最短にする",
+            "急ブレーキ時にタイヤのロックを防ぎ、操縦安定性を確保する",
+            "ブレーキパッドの摩耗を防ぐ",
+            "エンジンブレーキを強化する"
+          ],
+          "correct": 1,
+          "explanation": "ABSは、急ブレーキ時にタイヤがロックするのを防ぎ、操縦安定性（ステアリング操作）を確保するシステムです。車輪速センサーでタイヤの回転を監視し、ロック傾向を検出すると油圧を制御します。",
+          "explanationId": "ABS adalah sistem yang mencegah roda terkunci saat pengereman mendadak dan memastikan stabilitas kemudi. Sensor kecepatan roda memantau putaran ban dan mengontrol tekanan hidrolik saat mendeteksi kecenderungan terkunci."
+        },
+        {
+          "q": "ブレーキ液（ブレーキフルード）の性質として、正しいものはどれか。",
+          "options": [
+            "沸点が低いほど良い",
+            "吸湿性があり、水分を吸収すると沸点が低下する",
+            "鉱物油系の液体である",
+            "交換の必要はない"
+          ],
+          "correct": 1,
+          "explanation": "ブレーキ液はグリコール系の液体で吸湿性があります。水分を吸収すると沸点が低下し、ベーパーロック（気泡発生によるブレーキ効力低下）の原因となるため、定期的な交換が必要です。",
+          "explanationId": "Cairan rem adalah cairan berbasis glikol yang bersifat higroskopis. Menyerap air menurunkan titik didih dan menyebabkan vapor lock (penurunan efektivitas rem akibat gelembung), sehingga perlu diganti secara berkala."
+        }
+      ]
+    },
+    {
+      "lesson": 14,
+      "title": "シリンダーヘッド分解・組立・トルク管理",
+      "questions": [
+        {
+          "q": "シリンダーヘッドボルトの締め付け順序として、正しいものはどれか。",
+          "options": [
+            "端から順に締める",
+            "中央から外側へ、対角線の順に締める",
+            "ランダムに締める",
+            "左から右へ順番に締める"
+          ],
+          "correct": 1,
+          "explanation": "シリンダーヘッドボルトは、中央から外側へ対角線の順に均等に締め付けます。これにより、ヘッドガスケットの面圧が均一になり、歪みや漏れを防止します。",
+          "explanationId": "Baut cylinder head dikencangkan secara merata dari tengah ke luar dalam urutan diagonal. Ini memastikan tekanan permukaan gasket head merata dan mencegah distorsi dan kebocoran."
+        },
+        {
+          "q": "トルクレンチの使用方法として、正しいものはどれか。",
+          "options": [
+            "素早く一気に締め付ける",
+            "設定トルクに達したら「カチッ」と音がするので、そこで締め付けを止める",
+            "音が鳴った後もさらに締め付ける",
+            "手の感覚で締め付けトルクを判断する"
+          ],
+          "correct": 1,
+          "explanation": "プリセット型トルクレンチは、設定トルクに達すると「カチッ」という音と手応えがあります。その時点で締め付けを止めます。過剰な締め付けはボルト破損の原因となります。",
+          "explanationId": "Kunci torsi tipe preset memberi bunyi 'klik' dan umpan balik saat mencapai torsi yang diatur. Pengencangan harus dihentikan pada titik itu. Pengencangan berlebihan dapat menyebabkan kerusakan baut."
+        },
+        {
+          "q": "シリンダーヘッド組み付け時にヘッドガスケットの役割はどれか。",
+          "options": [
+            "エンジンの振動を吸収する",
+            "シリンダーブロックとシリンダーヘッドの間をシールする",
+            "エンジンオイルを循環させる",
+            "冷却水の温度を調整する"
+          ],
+          "correct": 1,
+          "explanation": "ヘッドガスケットは、シリンダーブロックとシリンダーヘッドの間に挟まれ、燃焼ガス、冷却水、エンジンオイルの漏れを防止するシール部品です。",
+          "explanationId": "Head gasket ditempatkan di antara cylinder block dan cylinder head untuk menyegel dan mencegah kebocoran gas pembakaran, air pendingin, dan oli mesin."
+        }
+      ]
+    },
+    {
+      "lesson": 15,
+      "title": "ブレーキキャリパーO/H・足回り",
+      "questions": [
+        {
+          "q": "ブレーキキャリパーのオーバーホール時に必ず交換する部品はどれか。",
+          "options": [
+            "キャリパーボディ",
+            "ピストンシール（シールキット）",
+            "ディスクローター",
+            "ブレーキホース"
+          ],
+          "correct": 1,
+          "explanation": "ブレーキキャリパーのオーバーホール時には、ピストンシール（ダストシール含む）を必ず新品に交換します。シールの劣化はブレーキ液漏れやピストンの固着の原因になります。",
+          "explanationId": "Saat overhaul kaliper rem, seal piston (termasuk dust seal) harus diganti baru. Kerusakan seal dapat menyebabkan kebocoran cairan rem dan piston macet."
+        },
+        {
+          "q": "キャリパーのピストンを戻す際に使用する工具はどれか。",
+          "options": [
+            "トルクレンチ",
+            "ピストン戻しツール（SST）またはCクランプ",
+            "ソケットレンチ",
+            "プライヤー"
+          ],
+          "correct": 1,
+          "explanation": "キャリパーのピストンを戻すには、ピストン戻しツール（SST）やCクランプを使用します。リヤブレーキの場合、ピストンを回しながら押し戻す専用工具が必要な場合があります。",
+          "explanationId": "Untuk mengembalikan piston kaliper, digunakan alat khusus (SST) atau C-clamp. Untuk rem belakang, mungkin diperlukan alat khusus yang memutar piston sambil mendorongnya kembali."
+        },
+        {
+          "q": "足回り（サスペンション）のショックアブソーバーの役割はどれか。",
+          "options": [
+            "車体を持ち上げる",
+            "スプリングの振動を減衰させる",
+            "タイヤの空気圧を調整する",
+            "ステアリングを回しやすくする"
+          ],
+          "correct": 1,
+          "explanation": "ショックアブソーバー（ダンパー）は、スプリングの振動を減衰させ、車体の揺れを素早く収束させる役割があります。乗り心地と操縦安定性に大きく影響します。",
+          "explanationId": "Shock absorber (damper) berfungsi meredam getaran pegas dan menstabilkan guncangan bodi kendaraan dengan cepat. Sangat mempengaruhi kenyamanan berkendara dan stabilitas kemudi."
+        }
+      ]
+    },
+    {
+      "lesson": 16,
+      "title": "中間確認テスト②・復習（第10〜15回）",
+      "questions": [
+        {
+          "q": "4サイクルエンジンで1サイクルが完了するのに必要なクランクシャフトの回転数はどれか。",
+          "options": [
+            "1回転（360度）",
+            "2回転（720度）",
+            "4回転（1440度）",
+            "半回転（180度）"
+          ],
+          "correct": 1,
+          "explanation": "4サイクルエンジンは、吸入・圧縮・燃焼・排気の4行程でクランクシャフト2回転（720度）が必要です。（第10回の復習）",
+          "explanationId": "Mesin 4-tak memerlukan 2 putaran crankshaft (720 derajat) untuk 4 langkah: hisap, kompresi, pembakaran, dan buang. (Review pertemuan ke-10)"
+        },
+        {
+          "q": "ABSの構成要素に含まれないものはどれか。",
+          "options": [
+            "車輪速センサー",
+            "ハイドロリックユニット",
+            "ECU（コントロールユニット）",
+            "トルクコンバーター"
+          ],
+          "correct": 3,
+          "explanation": "ABSは車輪速センサー、ハイドロリックユニット（油圧制御装置）、ECUで構成されます。トルクコンバーターはAT（オートマチックトランスミッション）の構成要素です。（第13回の復習）",
+          "explanationId": "ABS terdiri dari sensor kecepatan roda, unit hidrolik, dan ECU. Torque converter adalah komponen AT (transmisi otomatis). (Review pertemuan ke-13)"
+        },
+        {
+          "q": "シリンダーヘッドボルトの適切な締め付け方法はどれか。",
+          "options": [
+            "一度に規定トルクまで締める",
+            "数回に分けて中央から外側へ対角線順に締める",
+            "端から順に締める",
+            "締め付け順序は気にしなくてよい"
+          ],
+          "correct": 1,
+          "explanation": "シリンダーヘッドボルトは、数回に分けて（例：1/3→2/3→規定トルク）、中央から外側へ対角線順に締め付けます。均一な面圧を確保するためです。（第14回の復習）",
+          "explanationId": "Baut cylinder head dikencangkan dalam beberapa tahap (misal: 1/3 → 2/3 → torsi penuh) dari tengah ke luar dalam urutan diagonal. Ini untuk memastikan tekanan permukaan yang merata. (Review pertemuan ke-14)"
+        }
+      ]
+    },
+    {
+      "lesson": 17,
+      "title": "電気回路の基礎と回路図読解",
+      "questions": [
+        {
+          "q": "オームの法則（V=IR）で、電圧12V、抵抗4Ωの回路に流れる電流はどれか。",
+          "options": [
+            "2A",
+            "3A",
+            "4A",
+            "48A"
+          ],
+          "correct": 1,
+          "explanation": "オームの法則 V=IR より、I=V/R=12/4=3A です。電圧（V）=電流（I）×抵抗（R）の関係は電気回路の基本です。",
+          "explanationId": "Menurut Hukum Ohm V=IR, I=V/R=12/4=3A. Hubungan Tegangan (V) = Arus (I) x Hambatan (R) adalah dasar sirkuit listrik."
+        },
+        {
+          "q": "自動車の電気回路図で「アース」を示す記号の意味はどれか。",
+          "options": [
+            "バッテリーのプラス端子",
+            "車体（ボディ）に接続された回路のマイナス側",
+            "ヒューズ",
+            "リレー"
+          ],
+          "correct": 1,
+          "explanation": "自動車の電気回路でアースとは、車体（ボディ）をマイナス側の導体として利用する接続のことです。配線を簡略化するために車体をマイナス配線として共用しています。",
+          "explanationId": "Dalam sirkuit listrik kendaraan, ground (earth) adalah koneksi yang menggunakan bodi kendaraan sebagai konduktor sisi negatif. Bodi kendaraan digunakan bersama sebagai kabel negatif untuk menyederhanakan pengkabelan."
+        },
+        {
+          "q": "直列回路と並列回路の違いとして、正しいものはどれか。",
+          "options": [
+            "直列回路では各負荷にかかる電圧は同じである",
+            "並列回路では各負荷にかかる電圧は同じで、電流は分かれる",
+            "直列回路と並列回路に違いはない",
+            "並列回路では全体の抵抗が増加する"
+          ],
+          "correct": 1,
+          "explanation": "並列回路では各負荷（抵抗）にかかる電圧は同じで、電流は各経路に分かれます。直列回路では電流は同じで、電圧が各抵抗で分圧されます。",
+          "explanationId": "Dalam sirkuit paralel, tegangan pada setiap beban (hambatan) sama dan arus terbagi ke setiap jalur. Dalam sirkuit seri, arus sama dan tegangan terbagi pada setiap hambatan."
+        }
+      ]
+    },
+    {
+      "lesson": 18,
+      "title": "バッテリー・始動・充電系",
+      "questions": [
+        {
+          "q": "自動車用12Vバッテリーのセル数はいくつか。",
+          "options": [
+            "3個",
+            "6個",
+            "12個",
+            "1個"
+          ],
+          "correct": 1,
+          "explanation": "自動車用12Vバッテリーは、1セルあたり約2.1Vの鉛蓄電池セルを6個直列に接続して約12.6Vを発生させます。",
+          "explanationId": "Baterai kendaraan 12V terdiri dari 6 sel baterai timbal-asam yang dihubungkan seri, masing-masing menghasilkan sekitar 2,1V, total sekitar 12,6V."
+        },
+        {
+          "q": "スターターモーター（セルモーター）の役割として、正しいものはどれか。",
+          "options": [
+            "走行中にエンジン回転を維持する",
+            "エンジン始動時にクランクシャフトを回転させる",
+            "バッテリーを充電する",
+            "ヘッドライトを点灯させる"
+          ],
+          "correct": 1,
+          "explanation": "スターターモーターは、エンジン始動時にバッテリーの電力を使ってクランクシャフトを回転させ、エンジンを始動させる電動モーターです。",
+          "explanationId": "Starter motor adalah motor listrik yang menggunakan daya baterai untuk memutar crankshaft saat menghidupkan mesin."
+        },
+        {
+          "q": "オルタネーター（発電機）の主な役割はどれか。",
+          "options": [
+            "エンジンを始動する",
+            "エンジン回転中に発電し、バッテリーの充電と電装品への電力供給を行う",
+            "エンジンの冷却",
+            "排気ガスの浄化"
+          ],
+          "correct": 1,
+          "explanation": "オルタネーターは、エンジンの回転力をベルトで受けて交流電気を発電し、整流器で直流に変換してバッテリーの充電と各電装品への電力供給を行います。",
+          "explanationId": "Alternator menghasilkan listrik AC dari putaran mesin melalui sabuk, mengubahnya menjadi DC melalui penyearah, dan menyuplai daya untuk mengisi baterai dan perangkat kelistrikan."
+        }
+      ]
+    },
+    {
+      "lesson": 19,
+      "title": "センサー・アクチュエーターとCAN通信",
+      "questions": [
+        {
+          "q": "エンジンのクランク角センサーの役割として、正しいものはどれか。",
+          "options": [
+            "エンジンの温度を測定する",
+            "クランクシャフトの回転位置と回転速度を検出する",
+            "排気ガスの酸素濃度を測定する",
+            "スロットルの開度を検出する"
+          ],
+          "correct": 1,
+          "explanation": "クランク角センサーは、クランクシャフトの回転位置と回転速度をECUに送信します。点火時期や燃料噴射タイミングの制御に不可欠なセンサーです。",
+          "explanationId": "Sensor sudut engkol mengirimkan posisi rotasi dan kecepatan crankshaft ke ECU. Ini adalah sensor penting untuk mengontrol waktu pengapian dan timing injeksi bahan bakar."
+        },
+        {
+          "q": "CAN通信の特徴として、正しいものはどれか。",
+          "options": [
+            "1対1の通信のみ可能",
+            "複数のECUが2本の線（CAN-H, CAN-L）でデータを共有できる",
+            "光ファイバーを使用する",
+            "無線通信である"
+          ],
+          "correct": 1,
+          "explanation": "CAN通信は、CAN-HとCAN-Lの2本の線（ツイストペアケーブル）で複数のECUが情報を共有できるシリアル通信規格です。自動車の電子制御で広く使われています。",
+          "explanationId": "Komunikasi CAN adalah standar komunikasi serial di mana beberapa ECU dapat berbagi informasi melalui 2 kabel (CAN-H dan CAN-L, kabel twisted pair). Banyak digunakan dalam kontrol elektronik kendaraan."
+        },
+        {
+          "q": "O2センサー（酸素センサー）の設置場所と役割として、正しいものはどれか。",
+          "options": [
+            "吸気管に設置され、吸入空気量を測定する",
+            "排気管に設置され、排気ガス中の酸素濃度を測定する",
+            "燃料タンクに設置され、燃料の残量を測定する",
+            "ラジエーターに設置され、冷却水温を測定する"
+          ],
+          "correct": 1,
+          "explanation": "O2センサーは排気管に設置され、排気ガス中の酸素濃度を測定します。ECUはこの情報を基に空燃比（A/F比）をフィードバック制御し、触媒の浄化効率を最適に保ちます。",
+          "explanationId": "Sensor O2 dipasang di pipa buang dan mengukur konsentrasi oksigen dalam gas buang. ECU menggunakan informasi ini untuk mengontrol rasio udara-bahan bakar (A/F) secara umpan balik dan menjaga efisiensi pemurnian katalitik."
+        }
+      ]
+    },
+    {
+      "lesson": 20,
+      "title": "故障診断①（OBD・DTC・診断フロー）",
+      "questions": [
+        {
+          "q": "OBD（車載式故障診断装置）の役割として、正しいものはどれか。",
+          "options": [
+            "自動車の速度を制限する",
+            "排出ガス関連の異常を検出し、DTCとして記録する",
+            "エンジンオイルを自動交換する",
+            "タイヤの空気圧を自動調整する"
+          ],
+          "correct": 1,
+          "explanation": "OBDは、エンジンや排出ガス制御システムの異常を監視し、異常を検出するとDTC（故障コード）を記録し、警告灯（MIL）を点灯させるシステムです。",
+          "explanationId": "OBD adalah sistem yang memantau kelainan pada mesin dan sistem kontrol emisi, mencatat DTC (kode kerusakan) saat kelainan terdeteksi, dan menyalakan lampu peringatan (MIL)."
+        },
+        {
+          "q": "DTC「P0300」が示す故障内容はどれか。",
+          "options": [
+            "O2センサーの異常",
+            "ランダムミスファイア（複数シリンダーの失火）",
+            "車速センサーの異常",
+            "エアコンの故障"
+          ],
+          "correct": 1,
+          "explanation": "P0300はランダム/マルチプルシリンダーミスファイアを示すDTCです。DTCの「P」はパワートレイン、最初の「0」は汎用コード、「3」はミスファイア関連、「00」は複数シリンダーを意味します。",
+          "explanationId": "P0300 adalah DTC yang menunjukkan random/multiple cylinder misfire. 'P' berarti powertrain, '0' pertama adalah kode umum, '3' terkait misfire, dan '00' berarti beberapa silinder."
+        },
+        {
+          "q": "故障診断の基本フローとして、正しい順序はどれか。",
+          "options": [
+            "部品交換→問診→DTC確認",
+            "問診→DTC読み取り→点検・測定→原因特定→修理",
+            "修理→点検→問診",
+            "DTC消去→修理→問診"
+          ],
+          "correct": 1,
+          "explanation": "故障診断の基本フローは、①問診（お客様からの症状聞き取り）→②DTC読み取り→③点検・測定→④原因特定→⑤修理→⑥DTC消去・確認走行の順です。",
+          "explanationId": "Alur dasar diagnosis kerusakan: (1) Wawancara (mendengar gejala dari pelanggan) → (2) Membaca DTC → (3) Inspeksi/pengukuran → (4) Identifikasi penyebab → (5) Perbaikan → (6) Hapus DTC dan test drive."
+        }
+      ]
+    },
+    {
+      "lesson": 21,
+      "title": "故障診断②（スキャンツール実習・記録）",
+      "questions": [
+        {
+          "q": "OBD-IIコネクター（DLC）の設置場所として一般的なのはどれか。",
+          "options": [
+            "エンジンルーム内",
+            "運転席の足元付近（ダッシュボード下部）",
+            "トランク内",
+            "給油口付近"
+          ],
+          "correct": 1,
+          "explanation": "OBD-IIコネクター（DLC：Data Link Connector）は、法規により運転席の足元付近（ダッシュボード下部、ステアリングコラム付近）に設置されています。",
+          "explanationId": "Konektor OBD-II (DLC: Data Link Connector) dipasang di dekat kaki pengemudi (bagian bawah dashboard, dekat steering column) sesuai peraturan."
+        },
+        {
+          "q": "スキャンツールで確認できる「フリーズフレームデータ」とは何か。",
+          "options": [
+            "現在のリアルタイムデータ",
+            "DTCが記録された瞬間のエンジン運転状態のスナップショット",
+            "過去の整備記録",
+            "メーカーの設計データ"
+          ],
+          "correct": 1,
+          "explanation": "フリーズフレームデータは、DTCが記録された瞬間のエンジン回転数、冷却水温、車速、燃料噴射量などの運転条件のスナップショットです。故障発生時の状況把握に役立ちます。",
+          "explanationId": "Freeze frame data adalah snapshot kondisi operasi seperti putaran mesin, suhu air pendingin, kecepatan kendaraan, dan jumlah injeksi bahan bakar pada saat DTC dicatat. Berguna untuk memahami situasi saat kerusakan terjadi."
+        },
+        {
+          "q": "故障診断の記録で必ず含めるべき項目はどれか。",
+          "options": [
+            "天気予報",
+            "車両情報・DTC・点検結果・修理内容・確認結果",
+            "お客様の趣味",
+            "作業者の食事内容"
+          ],
+          "correct": 1,
+          "explanation": "故障診断記録には、車両情報（車名・型式・走行距離）、DTC、症状、点検・測定結果、原因、修理内容、修理後の確認結果を記録します。これは品質管理と再発防止に重要です。",
+          "explanationId": "Catatan diagnosis kerusakan harus mencakup informasi kendaraan (nama, model, jarak tempuh), DTC, gejala, hasil inspeksi/pengukuran, penyebab, isi perbaikan, dan hasil konfirmasi setelah perbaikan."
+        }
+      ]
+    },
+    {
+      "lesson": 22,
+      "title": "試験直前対策・総合模擬試験",
+      "questions": [
+        {
+          "q": "特定技能2号の学科試験で出題される分野として、含まれないものはどれか。",
+          "options": [
+            "エンジン",
+            "シャシ",
+            "自動車の販売営業テクニック",
+            "法規"
+          ],
+          "correct": 2,
+          "explanation": "特定技能2号の学科試験では、エンジン、シャシ、電装、法規などが出題されます。自動車の販売営業テクニックは試験範囲に含まれません。",
+          "explanationId": "Ujian teori Tokutei Ginou 2 mencakup mesin, sasis, kelistrikan, dan hukum. Teknik penjualan kendaraan tidak termasuk dalam cakupan ujian."
+        },
+        {
+          "q": "試験当日の心構えとして、正しいものはどれか。",
+          "options": [
+            "分からない問題に時間をかけすぎる",
+            "全問を一通り解いてから、見直しの時間を確保する",
+            "最初の3問だけ丁寧に解く",
+            "マークシートは最後にまとめて記入する"
+          ],
+          "correct": 1,
+          "explanation": "試験では、まず全問を一通り解き、分からない問題はマークをつけて飛ばし、最後に見直しの時間を確保することが大切です。時間配分を意識しましょう。",
+          "explanationId": "Dalam ujian, penting untuk menjawab semua pertanyaan terlebih dahulu, tandai pertanyaan yang sulit dan lewati, lalu sisakan waktu untuk review di akhir. Perhatikan manajemen waktu."
+        },
+        {
+          "q": "整備士試験の「実技試験」で評価されるポイントとして、正しいものはどれか。",
+          "options": [
+            "作業のスピードのみ",
+            "正確な作業手順・安全管理・工具の適切な使用",
+            "声の大きさ",
+            "作業服のデザイン"
+          ],
+          "correct": 1,
+          "explanation": "実技試験では、正確な作業手順、安全管理（保護具の着用等）、工具の適切な使用、測定の正確性などが総合的に評価されます。",
+          "explanationId": "Dalam ujian praktik, dinilai secara komprehensif: prosedur kerja yang benar, manajemen keselamatan (pemakaian alat pelindung), penggunaan alat yang tepat, dan akurasi pengukuran."
+        }
+      ]
+    }
+  ]
+}

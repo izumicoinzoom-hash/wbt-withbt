@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>会員ログイン | WithBrightTomorrow</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { navy: '#0F172A', dark: '#020617', orange: '#EA580C', red: '#DC2626', slate: '#F1F5F9' }
+                    },
+                    fontFamily: { sans: ['"Noto Sans JP"', 'sans-serif'], mono: ['"JetBrains Mono"', 'monospace'], display: ['"Oswald"', 'sans-serif'] },
+                    backgroundImage: { 'grid-pattern': "radial-gradient(circle, #334155 1px, transparent 1px)" }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #0F172A; color: #F8FAFC; }
+        .bg-grid { background-size: 40px 40px; opacity: 0.1; }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-orange selection:text-white flex flex-col min-h-screen">
+
+    <header class="w-full py-4 lg:py-6 absolute top-0 z-20 bg-brand-navy/90 backdrop-blur-sm border-b border-slate-700/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2 hover:opacity-80 transition">
+                <div class="bg-brand-orange p-1 rounded text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </div>
+                <span class="font-sans font-bold text-xl text-white">WithBrightTomorrow</span>
+            </a>
+            <a href="index.html" class="text-sm text-slate-400 hover:text-white transition flex items-center gap-1 border border-slate-600 rounded px-3 py-1">TOPへ</a>
+        </div>
+    </header>
+
+    <main class="flex-grow flex items-center justify-center relative pt-32 pb-12">
+        <div class="absolute inset-0 bg-grid-pattern bg-grid z-0"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-brand-navy/50 to-brand-navy z-0"></div>
+
+        <div class="relative z-10 w-full max-w-md px-4">
+            <div class="bg-slate-800/80 backdrop-blur-md border border-slate-700 rounded-2xl shadow-2xl overflow-hidden">
+                <div class="h-2 bg-brand-orange w-full"></div>
+                <div class="p-8 md:p-10">
+                    <h1 class="text-2xl font-bold text-white mb-2">会員ログイン</h1>
+                    <p class="text-slate-400 text-sm mb-6">学習ページへ進むにはログインしてください。</p>
+
+                    <form id="loginForm" class="space-y-5">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 mb-1">メールアドレス</label>
+                            <input type="email" id="email" name="email" required placeholder="example@company.com"
+                                class="w-full bg-slate-900/50 border border-slate-600 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange placeholder-slate-600">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 mb-1">パスワード</label>
+                            <input type="password" id="password" name="password" required placeholder="••••••••"
+                                class="w-full bg-slate-900/50 border border-slate-600 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange placeholder-slate-600">
+                        </div>
+                        <p id="loginError" class="text-brand-red text-sm hidden"></p>
+                        <button type="submit" class="w-full bg-brand-orange text-white font-bold py-4 rounded-lg shadow-lg hover:bg-orange-600 transition-all transform hover:scale-[1.02] active:scale-95">
+                            ログインして学習を始める
+                        </button>
+                    </form>
+
+                    <p class="mt-6 text-center text-xs text-slate-500">
+                        会員登録がお済みでない方は <a href="download.html" class="text-brand-orange hover:underline">資料ダウンロード</a> からお問い合わせください。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-brand-dark py-6 border-t border-slate-800 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 text-center text-slate-500 text-xs">&copy; 2026 WithBrightTomorrow Inc.</div>
+    </footer>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var email = document.getElementById('email').value;
+            var errEl = document.getElementById('loginError');
+            errEl.classList.add('hidden');
+            // デモ用: 任意のメール・パスワードでログイン可能
+            sessionStorage.setItem('wbt_logged_in', 'true');
+            sessionStorage.setItem('wbt_user_email', email || 'guest');
+            window.location.href = 'learning.html';
+        });
+    </script>
+</body>
+</html>

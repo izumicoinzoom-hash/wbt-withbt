@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第14回 シリンダーヘッド分解・組立・トルク管理 - WBT特定2号塾</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<style>
+:root{--bg:#0F172A;--accent:#EA580C;--text:#F8FAFC;--card:#1E293B}
+.reveal{background:var(--bg);color:var(--text);font-family:'Segoe UI','Hiragino Sans',sans-serif}
+.reveal h1,.reveal h2,.reveal h3{color:var(--text);text-transform:none}
+.reveal h1{font-size:1.8em}
+.reveal h2{font-size:1.4em}
+.reveal h3{font-size:1.2em}
+.reveal .accent{color:var(--accent);font-weight:bold}
+.reveal .card{background:var(--card);border-radius:12px;padding:24px;margin:12px 0;text-align:left}
+.reveal .card-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.reveal ul{text-align:left}
+.reveal li{margin:8px 0;font-size:0.9em}
+.reveal .quiz-box{background:var(--card);border-left:4px solid var(--accent);border-radius:8px;padding:20px;margin:16px 0;text-align:left}
+.reveal .answer{color:#22C55E;font-weight:bold;margin-top:12px}
+.reveal .subtitle{font-size:0.7em;color:#94A3B8;margin-top:8px}
+.reveal .tag{display:inline-block;background:var(--accent);color:#fff;padding:4px 12px;border-radius:999px;font-size:0.6em;margin-bottom:12px}
+.reveal table{margin:0 auto;border-collapse:collapse;font-size:0.7em}
+.reveal th{background:var(--accent);color:#fff;padding:8px 16px}
+.reveal td{padding:8px 16px;border-bottom:1px solid #334155}
+@media print{.reveal .slide-background{background:var(--bg)!important}}
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- スライド1: タイトル -->
+<section>
+<p class="tag">第14回 / Pelajaran 14</p>
+<h1>シリンダーヘッド分解・組立</h1>
+<h3>トルク管理</h3>
+<p class="subtitle">Pembongkaran & Perakitan Cylinder Head - Manajemen Torsi</p>
+</section>
+
+<!-- スライド2: 今日の目標 -->
+<section>
+<h2>今日の目標 / Tujuan Hari Ini</h2>
+<div class="card">
+<ol>
+<li>シリンダーヘッドの<span class="accent">分解手順と注意点</span>を理解する<br><small>Memahami prosedur dan perhatian pembongkaran cylinder head</small></li>
+<li><span class="accent">トルクレンチ</span>の使い方と締め付け順序の意味を学ぶ<br><small>Mempelajari penggunaan kunci torsi dan urutan pengencangan</small></li>
+<li><span class="accent">ガスケット</span>の種類と役割を覚える<br><small>Menghafal jenis dan fungsi gasket</small></li>
+</ol>
+</div>
+</section>
+
+<!-- スライド3: 前回の振り返り -->
+<section>
+<h2>前回の振り返り（第13回）</h2>
+<div class="card">
+<h3>キーワード3つ</h3>
+<ul>
+<li><span class="accent">油圧ブレーキ</span> — マスターシリンダーで油圧に変換</li>
+<li><span class="accent">ABS</span> — タイヤロック防止システム</li>
+<li><span class="accent">ブレーキフルード</span> — 吸湿性があり定期交換が必要</li>
+</ul>
+</div>
+</section>
+
+<!-- スライド4: シリンダーヘッドの分解手順 -->
+<section>
+<h2>シリンダーヘッドの分解手順</h2>
+<div class="card">
+<ol>
+<li><span class="accent">冷却水を抜く</span> — ドレンプラグからの排出</li>
+<li><span class="accent">補機類を外す</span> — インテークマニホールド、エキゾーストマニホールド、配線等</li>
+<li><span class="accent">カムシャフト関連を外す</span> — タイミングベルト/チェーン、カムカバー</li>
+<li><span class="accent">ヘッドボルトを緩める</span> — 外側から内側へ、対角線の逆順で少しずつ</li>
+<li><span class="accent">シリンダーヘッドを外す</span> — ガスケットを傷つけないよう注意</li>
+</ol>
+</div>
+<p class="subtitle">分解は「外から内へ」、組立は「内から外へ」が基本です</p>
+</section>
+
+<!-- スライド5: トルクレンチの使い方 -->
+<section>
+<h2>トルクレンチの使い方</h2>
+<div class="card">
+<h3>トルクレンチとは？</h3>
+<p>ボルトを<span class="accent">規定の締め付けトルク</span>で正確に締めるための工具</p>
+<ul>
+<li><span class="accent">プリセット型</span>：設定トルクに達すると「カチッ」と音がする</li>
+<li><span class="accent">デジタル型</span>：デジタル表示でトルク値を確認</li>
+<li>使用後は必ず<span class="accent">最低値に戻す</span>（スプリングの劣化防止）</li>
+</ul>
+</div>
+<p class="subtitle">Kunci torsi harus di-reset setelah digunakan</p>
+</section>
+
+<!-- スライド6: 締め付け順序の重要性 -->
+<section>
+<h2>締め付け順序の重要性</h2>
+<div class="card">
+<h3>なぜ<span class="accent">対角線順</span>で締めるのか？</h3>
+<ul>
+<li>ヘッドの<span class="accent">歪み</span>を防止する</li>
+<li><span class="accent">均等な面圧</span>をガスケット全体にかける</li>
+<li>冷却水・オイルの<span class="accent">漏れ</span>を防ぐ</li>
+</ul>
+<h3>締め付け手順</h3>
+<ol>
+<li><span class="accent">中央</span>のボルトから開始</li>
+<li><span class="accent">対角線</span>に交互に締めていく</li>
+<li><span class="accent">2〜3回に分けて</span>徐々に規定トルクまで上げる</li>
+</ol>
+</div>
+</section>
+
+<!-- スライド7: ガスケットの種類と役割 -->
+<section>
+<h2>ガスケットの種類と役割</h2>
+<div class="card">
+<table>
+<tr><th>種類</th><th>特徴</th><th>使用箇所</th></tr>
+<tr><td><span class="accent">メタルガスケット</span></td><td>金属製、高い耐熱性</td><td>シリンダーヘッド</td></tr>
+<tr><td><span class="accent">ゴムガスケット</span></td><td>柔軟性がある</td><td>カムカバー等</td></tr>
+<tr><td><span class="accent">液体ガスケット</span></td><td>塗布して使用</td><td>合わせ面の補助</td></tr>
+</table>
+<h3 style="margin-top:16px">ガスケット交換の注意点</h3>
+<ul>
+<li>分解時にガスケットは<span class="accent">必ず新品に交換</span></li>
+<li>合わせ面の<span class="accent">清掃</span>を徹底する（旧ガスケットの残りを除去）</li>
+<li>面の<span class="accent">歪み</span>がないか確認（ストレートエッジ+シクネスゲージ）</li>
+</ul>
+</div>
+</section>
+
+<!-- スライド8: 組立後の確認項目 -->
+<section>
+<h2>組立後の確認項目</h2>
+<div class="card">
+<ol>
+<li><span class="accent">冷却水の補充</span>とエア抜き</li>
+<li><span class="accent">エンジンオイル</span>のレベル確認</li>
+<li><span class="accent">エンジン始動</span>後のアイドリング確認</li>
+<li><span class="accent">冷却水・オイルの漏れ</span>がないか確認</li>
+<li><span class="accent">異音</span>がないか確認</li>
+<li>暖機後に<span class="accent">再度トルク確認</span>（増し締め）</li>
+</ol>
+</div>
+<p class="subtitle">組立後の確認を怠ると重大なエンジン損傷につながります</p>
+</section>
+
+<!-- スライド9: 重要用語一覧 -->
+<section>
+<h2>重要用語一覧</h2>
+<table>
+<tr><th>日本語（読み仮名）</th><th>Bahasa Indonesia</th></tr>
+<tr><td>締め付けトルク（しめつけトルク）</td><td>Torsi pengencangan</td></tr>
+<tr><td>締め付け順序（しめつけじゅんじょ）</td><td>Urutan pengencangan</td></tr>
+<tr><td>ガスケット</td><td>Gasket</td></tr>
+<tr><td>トルクレンチ</td><td>Kunci torsi</td></tr>
+<tr><td>ヘッドボルト</td><td>Baut kepala silinder</td></tr>
+<tr><td>対角線（たいかくせん）</td><td>Diagonal</td></tr>
+<tr><td>増し締め（ましじめ）</td><td>Pengencangan ulang</td></tr>
+<tr><td>歪み（ゆがみ）</td><td>Distorsi / Bengkok</td></tr>
+</table>
+</section>
+
+<!-- スライド10: 確認クイズ -->
+<section>
+<h2>確認クイズ</h2>
+<div class="quiz-box">
+<p><strong>Q1. ヘッドボルトの締め付けで正しい方法は？</strong></p>
+<p>A. 外側から内側へ一気に締める</p>
+<p>B. 中央から対角線順に、2〜3回に分けて規定トルクまで締める</p>
+<p>C. 手の感覚で締める</p>
+<p>D. どこからでも順番に関係なく締める</p>
+<p class="fragment answer">正解: B — 中央から対角線順に、数回に分けて徐々にトルクを上げていきます</p>
+</div>
+<div class="quiz-box">
+<p><strong>Q2. シリンダーヘッドガスケット交換時に最も重要なことは？</strong></p>
+<p>A. ガスケットを再利用する</p>
+<p>B. 合わせ面の清掃と新品ガスケットへの交換</p>
+<p>C. ボルトを最大トルクで締める</p>
+<p>D. 冷却水を入れない</p>
+<p class="fragment answer">正解: B — 旧ガスケットの残りを確実に除去し、必ず新品に交換します</p>
+</div>
+</section>
+
+<!-- スライド11: まとめ -->
+<section>
+<h2>まとめ / Ringkasan</h2>
+<div class="card">
+<ul>
+<li>分解は<span class="accent">外側→内側</span>、組立は<span class="accent">内側→外側</span>が基本</li>
+<li>ヘッドボルトは<span class="accent">対角線順</span>に<span class="accent">2〜3回に分けて</span>規定トルクまで締める</li>
+<li>ガスケットは<span class="accent">必ず新品</span>に交換し、合わせ面を<span class="accent">清掃</span>する</li>
+<li>組立後は<span class="accent">漏れ・異音の確認</span>と<span class="accent">増し締め</span>を行う</li>
+</ul>
+</div>
+</section>
+
+<!-- スライド12: 宿題 -->
+<section>
+<h2>宿題 / Pekerjaan Rumah</h2>
+<div class="card" style="text-align:center">
+<p style="font-size:1.2em"><span class="accent">homework.html?lesson=14</span> にアクセスして<br>3問解いてください</p>
+<p class="subtitle">Akses homework.html?lesson=14 dan jawab 3 soal</p>
+</div>
+</section>
+
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+Reveal.initialize({hash:true,transition:'slide',pdfSeparateFragments:false});
+if(location.search.includes('print-pdf')){document.querySelector('.reveal').classList.add('print-pdf')}
+</script>
+</body>
+</html>

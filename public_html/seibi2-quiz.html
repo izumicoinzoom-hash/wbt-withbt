@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#1a1a2e">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>自動車整備士2級 問題集 | クイズ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #FAFAF8;
+            --card: #FFFFFF;
+            --card-shadow: rgba(0,0,0,0.06);
+            --text: #1a1a2e;
+            --text-muted: #64748b;
+            --accent: #2563eb;
+            --accent-light: #eff6ff;
+            --correct: #059669;
+            --correct-bg: #ecfdf5;
+            --incorrect: #dc2626;
+            --incorrect-bg: #fef2f2;
+            --border: #e5e7eb;
+            --radius: 16px;
+            --radius-sm: 12px;
+            --safe-top: env(safe-area-inset-top, 0);
+            --safe-bottom: env(safe-area-inset-bottom, 0);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            min-height: 100dvh;
+            padding-top: var(--safe-top);
+            padding-bottom: var(--safe-bottom);
+            line-height: 1.7;
+        }
+        .app { max-width: 520px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; }
+
+        /* Header - NotebookLM style minimal */
+        header {
+            padding: 16px 20px 12px;
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+        .header-right { display: flex; align-items: center; gap: 8px; }
+        .exam-filter {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 6px 12px;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+        .logout-btn {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 6px 12px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+        .logout-btn:hover { color: var(--incorrect); border-color: var(--incorrect); }
+
+        /* Progress */
+        .progress-wrap { padding: 16px 20px 8px; }
+        .progress-text { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px; }
+        .progress-bar {
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 2px;
+            transition: width 0.4s ease;
+        }
+
+        /* Main content */
+        main { flex: 1; padding: 12px 20px 24px; }
+
+        .question-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: 0 2px 12px var(--card-shadow);
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .question-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+        }
+        .question-text {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 20px;
+            line-height: 1.75;
+        }
+
+        /* Options - touch friendly */
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 16px 18px;
+            background: var(--bg);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: 0.95rem;
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+        .option:hover, .option:focus { border-color: var(--accent); background: var(--accent-light); outline: none; }
+        .option.selected { border-color: var(--accent); background: var(--accent-light); }
+        .option.correct { border-color: var(--correct); background: var(--correct-bg); color: var(--correct); }
+        .option.incorrect { border-color: var(--incorrect); background: var(--incorrect-bg); color: var(--incorrect); }
+        .option.disabled { pointer-events: none; opacity: 0.85; }
+
+        /* Explanation - NotebookLM style expandable */
+        .explanation-panel {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            display: none;
+        }
+        .explanation-panel.visible { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+        .explanation-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+        .explanation-text {
+            font-size: 0.9rem;
+            color: var(--text);
+            line-height: 1.8;
+            white-space: pre-line;
+        }
+        .answer-badge {
+            display: inline-block;
+            margin-bottom: 10px;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .answer-badge.correct { background: var(--correct-bg); color: var(--correct); }
+        .answer-badge.incorrect { background: var(--incorrect-bg); color: var(--incorrect); }
+
+        /* Language toggle */
+        .lang-toggle {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+        .lang-btn {
+            font-size: 0.78rem;
+            padding: 5px 12px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: var(--bg);
+            color: var(--text-muted);
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+        .lang-btn.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        /* Next button */
+        .next-btn {
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            padding: 16px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            transition: background 0.2s;
+        }
+        .next-btn:hover { background: #1d4ed8; }
+        .next-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* Stats */
+        .stats {
+            display: flex;
+            gap: 16px;
+            padding: 12px 20px;
+            background: var(--card);
+            border-top: 1px solid var(--border);
+        }
+        .stat { flex: 1; text-align: center; }
+        .stat-value { font-size: 1.25rem; font-weight: 700; color: var(--text); }
+        .stat-label { font-size: 0.75rem; color: var(--text-muted); }
+
+        /* Complete screen */
+        .complete-screen {
+            display: none;
+            text-align: center;
+            padding: 40px 24px;
+        }
+        .complete-screen.visible { display: block; }
+        .complete-icon {
+            width: 72px;
+            height: 72px;
+            background: var(--correct-bg);
+            color: var(--correct);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 2rem;
+        }
+        .complete-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
+        .complete-desc { color: var(--text-muted); margin-bottom: 28px; }
+        .complete-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .btn { padding: 14px 24px; border-radius: var(--radius-sm); font-size: 0.95rem; font-weight: 600; cursor: pointer; font-family: inherit; text-decoration: none; border: none; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn-secondary { background: var(--bg); color: var(--text); border: 2px solid var(--border); }
+
+        /* Start screen */
+        .start-screen { padding: 24px 20px; }
+        .start-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: 0 2px 12px var(--card-shadow);
+            padding: 28px;
+        }
+        .start-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; }
+        .start-desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 24px; line-height: 1.7; }
+        .start-meta { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px; }
+        .start-btn { width: 100%; padding: 18px; }
+
+        .hidden { display: none !important; }
+
+        /* Loading overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: var(--bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.3s;
+        }
+        .loading-overlay.fade-out { opacity: 0; pointer-events: none; }
+        .loading-spinner {
+            width: 40px; height: 40px;
+            border: 3px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 16px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading-text { font-size: 0.9rem; color: var(--text-muted); }
+
+        /* Ruby styling */
+        ruby { ruby-align: center; }
+        rt { font-size: 0.55em; color: var(--text-muted); font-weight: 400; }
+    </style>
+</head>
+<body>
+    <!-- Loading overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">読み込み中...</div>
+    </div>
+
+    <div class="app">
+        <header>
+            <div class="header-inner">
+                <span class="logo">自動車整備士2級</span>
+                <div class="header-right">
+                    <select id="examFilter" class="exam-filter" title="試験時期でフィルタ">
+                        <option value="">全期間</option>
+                        <option value="令和2年3月">令和2年3月</option>
+                        <option value="令和2年10月">令和2年10月</option>
+                        <option value="令和3年3月">令和3年3月</option>
+                        <option value="令和3年10月">令和3年10月</option>
+                        <option value="令和4年3月">令和4年3月</option>
+                        <option value="令和4年10月">令和4年10月</option>
+                        <option value="令和5年3月">令和5年3月</option>
+                    </select>
+                    <button type="button" id="logoutBtn" class="logout-btn">ログアウト</button>
+                </div>
+            </div>
+        </header>
+
+        <div id="startScreen" class="start-screen">
+            <div class="start-card">
+                <h1 class="start-title">問題集クイズ</h1>
+                <p class="start-desc">令和2年3月〜令和5年3月の自動車整備士2級学科試験の過去問をクイズ形式で学習できます。解答後に解説が表示されます。</p>
+                <p class="start-meta"><span id="totalCount">0</span> 問</p>
+                <button type="button" id="startBtn" class="btn btn-primary start-btn">スタート</button>
+            </div>
+        </div>
+
+        <div id="quizScreen" class="hidden">
+            <div class="progress-wrap">
+                <div class="progress-text"><span id="currentNum">1</span> / <span id="totalNum">0</span> 問</div>
+                <div class="progress-bar"><div id="progressFill" class="progress-fill" style="width: 0%"></div></div>
+            </div>
+            <main>
+                <div class="question-card">
+                    <div class="question-label">Question</div>
+                    <h2 id="questionText" class="question-text"></h2>
+                    <div id="optionsList" class="options"></div>
+                    <div id="explanationPanel" class="explanation-panel">
+                        <div id="answerBadge" class="answer-badge"></div>
+                        <div class="lang-toggle">
+                            <button type="button" id="langJa" class="lang-btn active">JP 日本語</button>
+                            <button type="button" id="langId" class="lang-btn">ID Bahasa Indonesia</button>
+                        </div>
+                        <div class="explanation-label">解説</div>
+                        <div id="explanationText" class="explanation-text"></div>
+                    </div>
+                    <button type="button" id="nextBtn" class="next-btn hidden">次の問題へ</button>
+                </div>
+            </main>
+            <div class="stats">
+                <div class="stat"><span id="statCorrect" class="stat-value">0</span><div class="stat-label">正解</div></div>
+                <div class="stat"><span id="statAccuracy" class="stat-value">—</span><div class="stat-label">正答率</div></div>
+            </div>
+        </div>
+
+        <div id="completeScreen" class="complete-screen hidden">
+            <div class="complete-icon">✓</div>
+            <h2 class="complete-title">全問完了</h2>
+            <p class="complete-desc">正答率 <span id="finalAccuracy" class="stat-value">0</span>%</p>
+            <div class="complete-actions">
+                <button type="button" id="retryBtn" class="btn btn-primary">もう一度挑戦</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/kuroshiro@1.2.0/dist/kuroshiro.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/kuroshiro-analyzer-kuromoji@1.1.0/dist/kuroshiro-analyzer-kuromoji.min.js"></script>
+    <script>
+(function() {
+    'use strict';
+
+    // --- Authentication check ---
+    if (sessionStorage.getItem('wbt_logged_in') !== 'true') {
+        window.location.href = 'login.html';
+        return;
+    }
+
+    document.getElementById('logoutBtn').addEventListener('click', function() {
+        sessionStorage.clear();
+        window.location.href = 'login.html';
+    });
+
+    // --- State ---
+    var quizData = [];
+    var filteredData = [];
+    var examQuizMap = {};
+    var state = { index: 0, correct: 0, answered: 0 };
+    var currentExplanationJa = '';
+    var currentExplanationId = '';
+    var currentLang = 'ja';
+    var kuroshiroInstance = null;
+    var kuroshiroReady = false;
+
+    // --- Kuroshiro initialization ---
+    function initKuroshiro() {
+        return new Promise(function(resolve) {
+            try {
+                kuroshiroInstance = new Kuroshiro();
+                kuroshiroInstance.init(new KuromojiAnalyzer({
+                    dictPath: 'https://cdn.jsdelivr.net/npm/kuromoji@0.1.2/dict/'
+                })).then(function() {
+                    kuroshiroReady = true;
+                    resolve();
+                }).catch(function(err) {
+                    console.warn('Kuroshiro init failed:', err);
+                    kuroshiroReady = false;
+                    resolve();
+                });
+            } catch (e) {
+                console.warn('Kuroshiro not available:', e);
+                kuroshiroReady = false;
+                resolve();
+            }
+        });
+    }
+
+    function addRuby(text) {
+        if (!kuroshiroReady || !kuroshiroInstance) {
+            return Promise.resolve(text);
+        }
+        return kuroshiroInstance.convert(text, { mode: 'furigana', to: 'hiragana' })
+            .catch(function() { return text; });
+    }
+
+    // --- Data loading ---
+    function loadData() {
+        return fetch('data/seibi2-quiz.json')
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                quizData = data.questions || [];
+                return quizData;
+            })
+            .catch(function() {
+                console.warn('JSON load failed, using empty data');
+                quizData = [];
+                return [];
+            });
+    }
+
+    function loadExamQuizData() {
+        return fetch('data/exam-quiz-data.json')
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                var questions = data.questions || [];
+                questions.forEach(function(q) {
+                    var key = q.q.trim();
+                    examQuizMap[key] = {
+                        explanationJa: q.explanationJa || '',
+                        explanationId: q.explanationId || ''
+                    };
+                });
+            })
+            .catch(function() {
+                console.warn('exam-quiz-data.json load failed');
+            });
+    }
+
+    function getIndonesianExplanation(questionText) {
+        var key = questionText.trim();
+        if (examQuizMap[key] && examQuizMap[key].explanationId) {
+            return examQuizMap[key].explanationId;
+        }
+        return '準備中 / Sedang disiapkan';
+    }
+
+    // --- Filter ---
+    function filterByExam() {
+        var val = document.getElementById('examFilter').value;
+        filteredData = val ? quizData.filter(function(q) { return q.source === val; }) : quizData.slice();
+        return filteredData;
+    }
+
+    // --- Screen management ---
+    function showStart() {
+        document.getElementById('startScreen').classList.remove('hidden');
+        document.getElementById('quizScreen').classList.add('hidden');
+        document.getElementById('completeScreen').classList.add('hidden');
+    }
+
+    function showQuiz() {
+        document.getElementById('startScreen').classList.add('hidden');
+        document.getElementById('completeScreen').classList.add('hidden');
+        document.getElementById('quizScreen').classList.remove('hidden');
+    }
+
+    function showComplete() {
+        document.getElementById('quizScreen').classList.add('hidden');
+        document.getElementById('completeScreen').classList.remove('hidden');
+        var pct = state.answered ? Math.round((state.correct / state.answered) * 100) : 0;
+        document.getElementById('finalAccuracy').textContent = pct;
+    }
+
+    // --- Render question with ruby ---
+    function renderQuestion() {
+        if (state.index >= filteredData.length) {
+            showComplete();
+            return;
+        }
+        var q = filteredData[state.index];
+        document.getElementById('currentNum').textContent = state.index + 1;
+        document.getElementById('totalNum').textContent = filteredData.length;
+        document.getElementById('progressFill').style.width = ((state.index / filteredData.length) * 100) + '%';
+
+        // Apply ruby to question text
+        addRuby(q.q).then(function(rubyText) {
+            document.getElementById('questionText').innerHTML = rubyText;
+        });
+
+        var opts = document.getElementById('optionsList');
+        opts.innerHTML = '';
+        q.options.forEach(function(opt, i) {
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'option';
+            btn.dataset.index = i;
+            // Apply ruby to option text
+            addRuby(opt).then(function(rubyOpt) {
+                btn.innerHTML = rubyOpt;
+            });
+            btn.addEventListener('click', function() { onSelect(btn, i, q); });
+            opts.appendChild(btn);
+        });
+
+        document.getElementById('explanationPanel').classList.remove('visible');
+        document.getElementById('nextBtn').classList.add('hidden');
+        // Reset language toggle
+        currentLang = 'ja';
+        document.getElementById('langJa').classList.add('active');
+        document.getElementById('langId').classList.remove('active');
+        updateStats();
+    }
+
+    function onSelect(btn, chosen, q) {
+        var opts = document.querySelectorAll('.option');
+        opts.forEach(function(o) { o.classList.add('disabled'); });
+        btn.classList.add('selected');
+
+        var correct = q.correct;
+        if (chosen === correct) {
+            btn.classList.add('correct');
+            state.correct++;
+        } else {
+            btn.classList.add('incorrect');
+            if (opts[correct]) opts[correct].classList.add('correct');
+        }
+        state.answered++;
+
+        var panel = document.getElementById('explanationPanel');
+        var badge = document.getElementById('answerBadge');
+        var textEl = document.getElementById('explanationText');
+        badge.textContent = chosen === correct ? '正解' : '不正解（正解: ' + (correct + 1) + '）';
+        badge.className = 'answer-badge ' + (chosen === correct ? 'correct' : 'incorrect');
+
+        // Store both explanations
+        currentExplanationJa = q.explanation || '（解説なし）';
+        currentExplanationId = getIndonesianExplanation(q.q);
+        currentLang = 'ja';
+        document.getElementById('langJa').classList.add('active');
+        document.getElementById('langId').classList.remove('active');
+
+        // Show Japanese explanation with ruby
+        addRuby(currentExplanationJa).then(function(rubyExpl) {
+            textEl.innerHTML = rubyExpl;
+        });
+
+        panel.classList.add('visible');
+        document.getElementById('nextBtn').classList.remove('hidden');
+        updateStats();
+    }
+
+    // --- Language toggle ---
+    document.getElementById('langJa').addEventListener('click', function() {
+        if (currentLang === 'ja') return;
+        currentLang = 'ja';
+        this.classList.add('active');
+        document.getElementById('langId').classList.remove('active');
+        var textEl = document.getElementById('explanationText');
+        addRuby(currentExplanationJa).then(function(rubyExpl) {
+            textEl.innerHTML = rubyExpl;
+        });
+    });
+
+    document.getElementById('langId').addEventListener('click', function() {
+        if (currentLang === 'id') return;
+        currentLang = 'id';
+        this.classList.add('active');
+        document.getElementById('langJa').classList.remove('active');
+        document.getElementById('explanationText').textContent = currentExplanationId;
+    });
+
+    function updateStats() {
+        document.getElementById('statCorrect').textContent = state.correct;
+        var pct = state.answered ? Math.round((state.correct / state.answered) * 100) : '—';
+        document.getElementById('statAccuracy').textContent = pct;
+    }
+
+    function nextQuestion() {
+        state.index++;
+        renderQuestion();
+    }
+
+    // --- Hide loading overlay ---
+    function hideLoading() {
+        var overlay = document.getElementById('loadingOverlay');
+        overlay.classList.add('fade-out');
+        setTimeout(function() { overlay.style.display = 'none'; }, 300);
+    }
+
+    // --- Initialize everything ---
+    Promise.all([loadData(), loadExamQuizData(), initKuroshiro()]).then(function() {
+        filterByExam();
+        document.getElementById('totalCount').textContent = filteredData.length;
+
+        document.getElementById('startBtn').addEventListener('click', function() {
+            state = { index: 0, correct: 0, answered: 0 };
+            filterByExam();
+            if (filteredData.length === 0) {
+                alert('表示する問題がありません。別の試験時期を選択してください。');
+                return;
+            }
+            showQuiz();
+            renderQuestion();
+        });
+
+        document.getElementById('examFilter').addEventListener('change', function() {
+            filterByExam();
+            document.getElementById('totalCount').textContent = filteredData.length;
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', nextQuestion);
+        document.getElementById('retryBtn').addEventListener('click', function() {
+            showStart();
+        });
+
+        hideLoading();
+    });
+})();
+    </script>
+</body>
+</html>

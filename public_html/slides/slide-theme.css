@@ -1,0 +1,469 @@
+/**
+ * WBT Reveal.js Custom Theme
+ * 特定2号塾 スライドテーマ
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;900&display=swap');
+
+:root {
+  --wbt-bg: #0F172A;
+  --wbt-accent: #EA580C;
+  --wbt-text: #F8FAFC;
+  --wbt-card: #1E293B;
+  --wbt-card-border: #334155;
+  --wbt-muted: #94A3B8;
+  --wbt-correct: #22C55E;
+  --wbt-incorrect: #EF4444;
+  --wbt-radius: 12px;
+}
+
+/*********************************************
+ * GLOBAL STYLES
+ *********************************************/
+.reveal {
+  font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--wbt-text);
+}
+
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal .slides section {
+  padding: 40px 60px;
+}
+
+::selection {
+  color: #fff;
+  background: var(--wbt-accent);
+}
+
+/*********************************************
+ * BACKGROUNDS
+ *********************************************/
+.reveal .slide-background {
+  background: var(--wbt-bg);
+}
+
+body {
+  background: var(--wbt-bg);
+}
+
+/*********************************************
+ * TITLE SLIDE (.slide-title)
+ *********************************************/
+.slide-title {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.slide-title h1 {
+  font-size: 2.2em;
+  font-weight: 900;
+  color: var(--wbt-text);
+  margin-bottom: 0.2em;
+  line-height: 1.3;
+}
+
+.slide-title h2 {
+  font-size: 1.1em;
+  font-weight: 500;
+  color: var(--wbt-accent);
+  margin-bottom: 0.5em;
+}
+
+.slide-title .lesson-number {
+  display: inline-block;
+  background: var(--wbt-accent);
+  color: #fff;
+  font-size: 0.7em;
+  font-weight: 700;
+  padding: 0.2em 0.8em;
+  border-radius: 20px;
+  margin-bottom: 0.6em;
+}
+
+.slide-title .subtitle {
+  font-size: 0.65em;
+  color: var(--wbt-muted);
+  margin-top: 0.3em;
+}
+
+/*********************************************
+ * HEADINGS
+ *********************************************/
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 700;
+  color: var(--wbt-text);
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  margin: 0 0 0.6em 0;
+}
+
+.reveal h1 { font-size: 1.8em; }
+.reveal h2 { font-size: 1.4em; }
+.reveal h3 { font-size: 1.1em; color: var(--wbt-accent); }
+
+/*********************************************
+ * CONTENT CARD (.content-card)
+ *********************************************/
+.content-card {
+  background: var(--wbt-card);
+  border: 1px solid var(--wbt-card-border);
+  border-radius: var(--wbt-radius);
+  padding: 1.2em 1.5em;
+  margin: 0.5em 0;
+}
+
+.content-card h3 {
+  font-size: 0.9em;
+  color: var(--wbt-accent);
+  margin-bottom: 0.5em;
+  border-bottom: 2px solid var(--wbt-accent);
+  padding-bottom: 0.3em;
+  display: inline-block;
+}
+
+.content-card ul,
+.content-card ol {
+  margin-left: 1.2em;
+  line-height: 1.8;
+}
+
+.content-card li {
+  margin-bottom: 0.3em;
+  font-size: 0.85em;
+}
+
+/*********************************************
+ * KEYWORD BOX (.keyword-box)
+ *********************************************/
+.keyword-box {
+  background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+  border-left: 4px solid var(--wbt-accent);
+  border-radius: 0 var(--wbt-radius) var(--wbt-radius) 0;
+  padding: 1em 1.5em;
+  margin: 0.8em 0;
+}
+
+.keyword-box .keyword {
+  font-size: 1.1em;
+  font-weight: 700;
+  color: var(--wbt-accent);
+  margin-bottom: 0.3em;
+}
+
+.keyword-box .definition {
+  font-size: 0.85em;
+  color: var(--wbt-text);
+  line-height: 1.7;
+}
+
+/*********************************************
+ * QUIZ BOX (.quiz-box)
+ *********************************************/
+.quiz-box {
+  background: var(--wbt-card);
+  border: 2px solid var(--wbt-accent);
+  border-radius: var(--wbt-radius);
+  padding: 1.2em 1.5em;
+  margin: 0.6em 0;
+}
+
+.quiz-box .quiz-label {
+  font-size: 0.7em;
+  font-weight: 700;
+  color: var(--wbt-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5em;
+}
+
+.quiz-box .quiz-question {
+  font-size: 0.95em;
+  font-weight: 600;
+  color: var(--wbt-text);
+  margin-bottom: 0.8em;
+  line-height: 1.6;
+}
+
+.quiz-box .quiz-options {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.quiz-box .quiz-options li {
+  background: var(--wbt-bg);
+  border: 1px solid var(--wbt-card-border);
+  border-radius: 8px;
+  padding: 0.5em 1em;
+  margin-bottom: 0.4em;
+  font-size: 0.8em;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.quiz-box .quiz-options li:hover {
+  border-color: var(--wbt-accent);
+  background: rgba(234, 88, 12, 0.1);
+}
+
+.quiz-box .quiz-options li.correct {
+  border-color: var(--wbt-correct);
+  background: rgba(34, 197, 94, 0.15);
+  color: var(--wbt-correct);
+}
+
+.quiz-box .quiz-options li.incorrect {
+  border-color: var(--wbt-incorrect);
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--wbt-incorrect);
+}
+
+/*********************************************
+ * INDONESIAN TRANSLATION (.lang-id)
+ *********************************************/
+.lang-id {
+  font-size: 0.75em;
+  color: var(--wbt-muted);
+  font-style: italic;
+  margin-top: 0.2em;
+  padding-left: 0.5em;
+  border-left: 2px solid var(--wbt-card-border);
+}
+
+.lang-id::before {
+  content: 'ID: ';
+  font-weight: 600;
+  color: #64748B;
+}
+
+/*********************************************
+ * TWO COLUMN LAYOUT (.two-col)
+ *********************************************/
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5em;
+  align-items: start;
+}
+
+.two-col > * {
+  min-width: 0;
+}
+
+/*********************************************
+ * TEXT & PARAGRAPHS
+ *********************************************/
+.reveal p {
+  line-height: 1.8;
+  margin-bottom: 0.6em;
+  font-size: 0.9em;
+}
+
+.reveal strong {
+  color: var(--wbt-accent);
+  font-weight: 700;
+}
+
+.reveal em {
+  color: var(--wbt-muted);
+  font-style: italic;
+}
+
+/*********************************************
+ * LISTS
+ *********************************************/
+.reveal ul,
+.reveal ol {
+  margin-left: 1em;
+  line-height: 1.8;
+}
+
+.reveal li {
+  margin-bottom: 0.3em;
+  font-size: 0.88em;
+}
+
+.reveal ul li::marker {
+  color: var(--wbt-accent);
+}
+
+.reveal ol li::marker {
+  color: var(--wbt-accent);
+  font-weight: 700;
+}
+
+/*********************************************
+ * TABLES
+ *********************************************/
+.reveal table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8em;
+  margin: 0.8em 0;
+}
+
+.reveal table th {
+  background: var(--wbt-accent);
+  color: #fff;
+  font-weight: 600;
+  padding: 0.6em 1em;
+  text-align: left;
+}
+
+.reveal table td {
+  background: var(--wbt-card);
+  color: var(--wbt-text);
+  padding: 0.5em 1em;
+  border-bottom: 1px solid var(--wbt-card-border);
+}
+
+.reveal table tr:hover td {
+  background: #263248;
+}
+
+/*********************************************
+ * IMAGES
+ *********************************************/
+.reveal img {
+  border-radius: var(--wbt-radius);
+  max-width: 100%;
+}
+
+/*********************************************
+ * CODE / PRE
+ *********************************************/
+.reveal code {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.85em;
+  background: var(--wbt-card);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+}
+
+/*********************************************
+ * FOOTER (lesson number + WBT logo)
+ *********************************************/
+.slide-footer {
+  position: fixed;
+  bottom: 16px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  font-size: 0.55em;
+  color: var(--wbt-muted);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.slide-footer .footer-left {
+  font-weight: 600;
+}
+
+.slide-footer .footer-right {
+  font-weight: 700;
+  color: var(--wbt-accent);
+  letter-spacing: 0.05em;
+}
+
+/*********************************************
+ * FRAGMENT ANIMATIONS
+ *********************************************/
+.reveal .fragment {
+  transition: all 0.3s ease;
+}
+
+.reveal .fragment.visible {
+  opacity: 1;
+}
+
+/*********************************************
+ * PROGRESS BAR
+ *********************************************/
+.reveal .progress {
+  height: 4px;
+  color: var(--wbt-accent);
+}
+
+.reveal .controls {
+  color: var(--wbt-accent);
+}
+
+/*********************************************
+ * PRINT / PDF EXPORT
+ *********************************************/
+@media print {
+  :root {
+    --wbt-bg: #ffffff;
+    --wbt-text: #1a1a1a;
+    --wbt-card: #f5f5f5;
+    --wbt-card-border: #e0e0e0;
+    --wbt-muted: #666666;
+  }
+
+  .reveal .slide-background {
+    background: #ffffff !important;
+  }
+
+  body {
+    background: #ffffff !important;
+  }
+
+  .reveal h1,
+  .reveal h2,
+  .reveal h3,
+  .reveal h4 {
+    color: #1a1a1a;
+  }
+
+  .reveal p,
+  .reveal li {
+    color: #333333;
+  }
+
+  .reveal strong {
+    color: var(--wbt-accent);
+  }
+
+  .content-card {
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+  }
+
+  .keyword-box {
+    background: #f8f8f8;
+    border-left: 4px solid var(--wbt-accent);
+  }
+
+  .quiz-box {
+    background: #f8f8f8;
+    border: 2px solid var(--wbt-accent);
+  }
+
+  .slide-footer {
+    position: static;
+    padding: 10px 0;
+    border-top: 1px solid #ddd;
+    margin-top: 20px;
+  }
+
+  .lang-id {
+    color: #888;
+  }
+}
