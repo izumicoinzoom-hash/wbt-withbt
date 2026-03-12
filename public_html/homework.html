@@ -68,6 +68,50 @@
         .back-btn:hover { border-color: var(--accent); color: var(--accent); }
         .logout-btn:hover { color: var(--incorrect); border-color: var(--incorrect); }
 
+        .day-selector {
+            padding: 12px 20px;
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+        .day-selector-label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+        .day-tabs {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding-bottom: 2px;
+        }
+        .day-tabs::-webkit-scrollbar { display: none; }
+        .day-tab {
+            flex-shrink: 0;
+            padding: 8px 16px;
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            background: var(--bg);
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .day-tab:hover { border-color: var(--accent); color: var(--accent); }
+        .day-tab.active { background: var(--accent); color: white; border-color: var(--accent); }
+        .day-tab.done { background: var(--correct-bg); color: var(--correct); border-color: var(--correct); }
+        .day-tab.done::after {
+            content: '\2713';
+            margin-left: 4px;
+            font-size: 0.7rem;
+        }
+
         .progress-wrap { padding: 16px 20px 8px; }
         .progress-text { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px; }
         .progress-bar { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
@@ -266,18 +310,23 @@
             </div>
         </header>
 
+        <div id="daySelector" class="day-selector hidden">
+            <div class="day-selector-label" id="daySelectorLabel">Day を選択</div>
+            <div id="dayTabs" class="day-tabs"></div>
+        </div>
+
         <div id="startScreen" class="start-screen">
             <div class="start-card">
                 <h1 id="lessonTitle" class="start-title">宿題</h1>
                 <p class="start-desc">授業の復習問題です。全問正解を目指しましょう。</p>
-                <p class="start-meta"><span id="totalCount">3</span> 問</p>
+                <p class="start-meta"><span id="totalCount">10</span> 問</p>
                 <button type="button" id="startBtn" class="btn btn-primary start-btn">スタート</button>
             </div>
         </div>
 
         <div id="quizScreen" class="hidden">
             <div class="progress-wrap">
-                <div class="progress-text"><span id="currentNum">1</span> / <span id="totalNum">3</span> 問</div>
+                <div class="progress-text"><span id="currentNum">1</span> / <span id="totalNum">10</span> 問</div>
                 <div class="progress-bar"><div id="progressFill" class="progress-fill" style="width: 0%"></div></div>
             </div>
             <main>
@@ -310,6 +359,7 @@
             <p id="completeMessage" class="complete-desc"></p>
             <div class="complete-actions">
                 <button type="button" id="retryBtn" class="btn btn-primary">もう一度</button>
+                <button type="button" id="nextDayBtn" class="btn btn-secondary hidden">次の Day へ</button>
                 <a href="learning.html" class="btn btn-secondary">学習メニューへ</a>
             </div>
         </div>
@@ -336,12 +386,15 @@
         window.location.href = 'login.html';
     });
 
-    // Get lesson number from URL
+    // Get params from URL
     var params = new URLSearchParams(window.location.search);
     var lessonNum = parseInt(params.get('lesson'), 10);
+    var dayNum = parseInt(params.get('day'), 10) || 1;
 
     // State
     var questions = [];
+    var allDays = [];
+    var totalDays = 0;
     var state = { index: 0, correct: 0, answered: 0 };
     var currentExplanationJa = '';
     var currentExplanationId = '';
@@ -357,6 +410,42 @@
         document.getElementById('startScreen').classList.add('hidden');
         document.getElementById('emptyScreen').classList.remove('hidden');
         hideLoading();
+    }
+
+    // Storage key for completion tracking
+    function storageKey(lesson, day) {
+        return 'wbt_hw_' + lesson + '_' + day;
+    }
+
+    function isDayDone(lesson, day) {
+        try { return localStorage.getItem(storageKey(lesson, day)) === 'done'; } catch(e) { return false; }
+    }
+
+    function markDayDone(lesson, day) {
+        try { localStorage.setItem(storageKey(lesson, day), 'done'); } catch(e) {}
+    }
+
+    // Build day tabs
+    function buildDayTabs() {
+        var container = document.getElementById('dayTabs');
+        container.innerHTML = '';
+        for (var d = 1; d <= totalDays; d++) {
+            var tab = document.createElement('button');
+            tab.type = 'button';
+            tab.className = 'day-tab';
+            tab.textContent = 'Day ' + d;
+            tab.dataset.day = d;
+            if (d === dayNum) tab.classList.add('active');
+            if (isDayDone(lessonNum, d) && d !== dayNum) tab.classList.add('done');
+            (function(dayVal) {
+                tab.addEventListener('click', function() {
+                    window.location.href = 'homework.html?lesson=' + lessonNum + '&day=' + dayVal;
+                });
+            })(d);
+            container.appendChild(tab);
+        }
+        document.getElementById('daySelector').classList.remove('hidden');
+        document.getElementById('daySelectorLabel').textContent = '第' + lessonNum + '回 宿題 (' + totalDays + ' Days)';
     }
 
     // Load data
@@ -376,14 +465,43 @@
                 }
             }
 
-            if (!lessonData || !lessonData.questions || lessonData.questions.length === 0) {
+            if (!lessonData) {
                 showEmpty();
                 return;
             }
 
-            questions = lessonData.questions;
-            document.getElementById('lessonTitle').textContent = '第' + lessonNum + '回 宿題';
-            document.title = '第' + lessonNum + '回 宿題 | WBT特定2号塾';
+            // Support both old format (flat questions) and new format (days array)
+            if (lessonData.days && lessonData.days.length > 0) {
+                allDays = lessonData.days;
+                totalDays = allDays.length;
+
+                // Find the selected day
+                var dayData = null;
+                for (var d = 0; d < allDays.length; d++) {
+                    if (allDays[d].day === dayNum) {
+                        dayData = allDays[d];
+                        break;
+                    }
+                }
+
+                if (!dayData || !dayData.questions || dayData.questions.length === 0) {
+                    showEmpty();
+                    return;
+                }
+
+                questions = dayData.questions;
+                buildDayTabs();
+            } else if (lessonData.questions && lessonData.questions.length > 0) {
+                // Legacy flat format
+                questions = lessonData.questions;
+                totalDays = 0;
+            } else {
+                showEmpty();
+                return;
+            }
+
+            document.getElementById('lessonTitle').textContent = '第' + lessonNum + '回 宿題' + (totalDays > 0 ? ' - Day ' + dayNum : '');
+            document.title = '第' + lessonNum + '回 宿題' + (totalDays > 0 ? ' Day ' + dayNum : '') + ' | WBT特定2号塾';
             document.getElementById('totalCount').textContent = questions.length;
             document.getElementById('totalNum').textContent = questions.length;
 
@@ -404,6 +522,13 @@
             document.getElementById('retryBtn').addEventListener('click', function() {
                 document.getElementById('completeScreen').classList.add('hidden');
                 document.getElementById('startScreen').classList.remove('hidden');
+            });
+
+            // Next day button
+            document.getElementById('nextDayBtn').addEventListener('click', function() {
+                if (dayNum < totalDays) {
+                    window.location.href = 'homework.html?lesson=' + lessonNum + '&day=' + (dayNum + 1);
+                }
             });
 
             // Language toggle
@@ -501,6 +626,25 @@
         screen.classList.add('visible');
         var pct = state.answered ? Math.round((state.correct / state.answered) * 100) : 0;
         document.getElementById('finalAccuracy').textContent = pct;
+
+        // Mark day as done
+        if (totalDays > 0) {
+            markDayDone(lessonNum, dayNum);
+            // Update tab style
+            var tabs = document.querySelectorAll('.day-tab');
+            tabs.forEach(function(t) {
+                if (parseInt(t.dataset.day) === dayNum) {
+                    t.classList.add('done');
+                }
+            });
+        }
+
+        // Show next day button if applicable
+        if (totalDays > 0 && dayNum < totalDays) {
+            document.getElementById('nextDayBtn').classList.remove('hidden');
+            document.getElementById('nextDayBtn').textContent = 'Day ' + (dayNum + 1) + ' へ';
+        }
+
         var msg = document.getElementById('completeMessage');
         if (pct === 100) {
             msg.textContent = '全問正解です! お疲れ様でした!';
