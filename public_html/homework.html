@@ -375,21 +375,39 @@
 (function() {
     'use strict';
 
-    // Auth check
-    if (sessionStorage.getItem('wbt_logged_in') !== 'true') {
-        window.location.href = 'login.html';
-        return;
-    }
-
+    // Auth check (サーバーセッション優先、フォールバックでsessionStorage)
     document.getElementById('logoutBtn').addEventListener('click', function() {
-        sessionStorage.clear();
-        window.location.href = 'login.html';
+        fetch('logout.php').then(function() {
+            sessionStorage.clear();
+            window.location.href = 'login.html';
+        });
     });
 
     // Get params from URL
     var params = new URLSearchParams(window.location.search);
     var lessonNum = parseInt(params.get('lesson'), 10);
     var dayNum = parseInt(params.get('day'), 10) || 1;
+
+    // サーバーから進捗を取得してレッスンロックチェック
+    fetch('api/progress.php')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (!data.loggedIn) {
+                sessionStorage.clear();
+                window.location.href = 'login.html';
+                return;
+            }
+            if (lessonNum > (data.currentLesson || 1)) {
+                alert('このレッスンはまだ解放されていません。');
+                window.location.href = 'learning.html';
+            }
+        })
+        .catch(function() {
+            // API接続できない場合はsessionStorageフォールバック
+            if (sessionStorage.getItem('wbt_logged_in') !== 'true') {
+                window.location.href = 'login.html';
+            }
+        });
 
     // State
     var questions = [];

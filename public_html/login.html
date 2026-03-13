@@ -85,13 +85,32 @@
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            var email = document.getElementById('email').value;
-            var errEl = document.getElementById('loginError');
+            var email    = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            var errEl    = document.getElementById('loginError');
             errEl.classList.add('hidden');
-            // デモ用: 任意のメール・パスワードでログイン可能
-            sessionStorage.setItem('wbt_logged_in', 'true');
-            sessionStorage.setItem('wbt_user_email', email || 'guest');
-            window.location.href = 'learning.html';
+
+            var formData = new FormData();
+            formData.append('email', email);
+            formData.append('password', password);
+
+            fetch('login.php', { method: 'POST', body: formData })
+                .then(function(res) { return res.json(); })
+                .then(function(data) {
+                    if (data.success) {
+                        // セッションCookieが設定されたので sessionStorage にもマーク
+                        sessionStorage.setItem('wbt_logged_in', 'true');
+                        sessionStorage.setItem('wbt_user_email', email);
+                        window.location.href = 'learning.html';
+                    } else {
+                        errEl.textContent = data.error || 'ログインに失敗しました。';
+                        errEl.classList.remove('hidden');
+                    }
+                })
+                .catch(function() {
+                    errEl.textContent = 'サーバーに接続できませんでした。';
+                    errEl.classList.remove('hidden');
+                });
         });
     </script>
 </body>

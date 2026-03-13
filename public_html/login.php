@@ -26,7 +26,7 @@ if ($email === '' || $password === '') {
 
 try {
     $pdo  = getPDO();
-    $stmt = $pdo->prepare('SELECT id, email, password_hash, subscription_status FROM users WHERE email = :email LIMIT 1');
+    $stmt = $pdo->prepare('SELECT id, email, password_hash, subscription_status, current_lesson, is_admin FROM users WHERE email = :email LIMIT 1');
     $stmt->execute([':email' => $email]);
     $user = $stmt->fetch();
 

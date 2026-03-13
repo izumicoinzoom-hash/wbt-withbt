@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理画面 | WBT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: { extend: {
+                colors: { brand: { navy: '#0F172A', orange: '#EA580C' } },
+                fontFamily: { sans: ['"Noto Sans JP"', 'sans-serif'] }
+            }}
+        }
+    </script>
+    <style>
+        body { background: #0F172A; color: #F8FAFC; }
+        .modal-bg { background: rgba(0,0,0,0.6); }
+    </style>
+</head>
+<body class="antialiased min-h-screen font-sans">
+
+    <header class="border-b border-slate-700 bg-slate-900/80 backdrop-blur-sm sticky top-0 z-30">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <a href="learning.html" class="text-slate-400 hover:text-white text-sm">← 学習ページ</a>
+                <h1 class="text-lg font-bold text-white">管理画面</h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="advanceAll()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs px-4 py-2 rounded-lg font-bold transition">全員レッスン+1</button>
+                <button onclick="showCreateModal()" class="bg-brand-orange hover:bg-orange-600 text-white text-xs px-4 py-2 rounded-lg font-bold transition">会員追加</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-6">
+        <!-- 統計 -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6" id="stats"></div>
+
+        <!-- ユーザーテーブル -->
+        <div class="bg-slate-800 border border-slate-700 rounded-xl overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead class="bg-slate-900/50 text-slate-400 text-xs">
+                        <tr>
+                            <th class="text-left px-4 py-3">ID</th>
+                            <th class="text-left px-4 py-3">名前</th>
+                            <th class="text-left px-4 py-3">メール</th>
+                            <th class="text-center px-4 py-3">解放レッスン</th>
+                            <th class="text-center px-4 py-3">ステータス</th>
+                            <th class="text-center px-4 py-3">最終ログイン</th>
+                            <th class="text-center px-4 py-3">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userTable" class="divide-y divide-slate-700/50"></tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- 作成/編集モーダル -->
+    <div id="modal" class="hidden fixed inset-0 modal-bg z-50 flex items-center justify-center p-4">
+        <div class="bg-slate-800 border border-slate-700 rounded-2xl w-full max-w-md shadow-2xl">
+            <div class="h-1 bg-brand-orange rounded-t-2xl"></div>
+            <div class="p-6">
+                <h2 id="modalTitle" class="text-lg font-bold mb-4">会員追加</h2>
+                <form id="userForm" class="space-y-4">
+                    <input type="hidden" id="formId">
+                    <input type="hidden" id="formMode" value="create">
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">名前</label>
+                        <input type="text" id="formName" placeholder="田中 太郎"
+                            class="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-orange">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">メールアドレス</label>
+                        <input type="email" id="formEmail" required placeholder="user@example.com"
+                            class="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-orange">
+                    </div>
+                    <div id="passwordField">
+                        <label class="block text-xs text-slate-400 mb-1">パスワード</label>
+                        <input type="text" id="formPassword" placeholder="初期パスワード"
+                            class="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-orange font-mono">
+                        <button type="button" onclick="generatePassword()" class="text-brand-orange text-xs mt-1 hover:underline">ランダム生成</button>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">解放レッスン（第N回まで）</label>
+                        <input type="number" id="formLesson" min="1" max="22" value="1"
+                            class="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-orange">
+                        <p class="text-slate-500 text-xs mt-1">この回までの宿題が解けるようになります</p>
+                    </div>
+                    <p id="formError" class="text-red-400 text-sm hidden"></p>
+                    <div class="flex gap-2 pt-2">
+                        <button type="submit" class="flex-1 bg-brand-orange hover:bg-orange-600 text-white font-bold py-3 rounded-lg transition">保存</button>
+                        <button type="button" onclick="closeModal()" class="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 rounded-lg transition">キャンセル</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var API = 'api/admin.php';
+
+        // ── データ読み込み ──
+        function loadUsers() {
+            fetch(API + '?action=list')
+                .then(function(r) {
+                    if (r.status === 401) { window.location.href = 'login.html'; return; }
+                    if (r.status === 403) { alert('管理者権限がありません。'); window.location.href = 'learning.html'; return; }
+                    return r.json();
+                })
+                .then(function(data) {
+                    if (!data || !data.success) return;
+                    renderUsers(data.users);
+                    renderStats(data.users);
+                });
+        }
+
+        function renderStats(users) {
+            var total = users.filter(function(u) { return !u.is_admin; }).length;
+            var active = users.filter(function(u) { return !u.is_admin && u.subscription_status === 'active'; }).length;
+            var lessons = users.filter(function(u) { return !u.is_admin; }).map(function(u) { return u.current_lesson; });
+            var avgLesson = lessons.length ? Math.round(lessons.reduce(function(a,b){return a+b;},0) / lessons.length) : 0;
+            document.getElementById('stats').innerHTML =
+                statCard('会員数', total + '人') +
+                statCard('アクティブ', active + '人') +
+                statCard('平均レッスン', '第' + avgLesson + '回') +
+                statCard('全22回', Math.round(avgLesson/22*100) + '%');
+        }
+
+        function statCard(label, value) {
+            return '<div class="bg-slate-800 border border-slate-700 rounded-xl p-4">' +
+                '<p class="text-slate-400 text-xs">' + label + '</p>' +
+                '<p class="text-white text-xl font-bold mt-1">' + value + '</p></div>';
+        }
+
+        function renderUsers(users) {
+            var html = '';
+            users.forEach(function(u) {
+                var isAdmin = u.is_admin == 1;
+                var statusColor = u.subscription_status === 'active' ? 'text-emerald-400' : 'text-slate-500';
+                var loginDate = u.last_login ? u.last_login.slice(0,10) : '—';
+                html += '<tr class="hover:bg-slate-700/30">' +
+                    '<td class="px-4 py-3 text-slate-500 font-mono text-xs">' + u.id + '</td>' +
+                    '<td class="px-4 py-3">' + esc(u.name) + (isAdmin ? ' <span class="text-brand-orange text-xs">管理者</span>' : '') + '</td>' +
+                    '<td class="px-4 py-3 text-slate-400 text-xs">' + esc(u.email) + '</td>' +
+                    '<td class="px-4 py-3 text-center"><span class="bg-slate-700 text-white text-xs px-2 py-1 rounded font-mono">第' + u.current_lesson + '回</span></td>' +
+                    '<td class="px-4 py-3 text-center ' + statusColor + ' text-xs">' + u.subscription_status + '</td>' +
+                    '<td class="px-4 py-3 text-center text-slate-500 text-xs">' + loginDate + '</td>' +
+                    '<td class="px-4 py-3 text-center">' +
+                        '<div class="flex items-center justify-center gap-1">' +
+                        '<button onclick="showEditModal(' + u.id + ')" class="text-xs text-slate-400 hover:text-white px-2 py-1 rounded bg-slate-700 hover:bg-slate-600">編集</button>' +
+                        '<button onclick="resetPw(' + u.id + ')" class="text-xs text-slate-400 hover:text-white px-2 py-1 rounded bg-slate-700 hover:bg-slate-600">PW</button>' +
+                        (!isAdmin ? '<button onclick="deleteUser(' + u.id + ',\'' + esc(u.name) + '\')" class="text-xs text-red-400 hover:text-red-300 px-2 py-1 rounded bg-slate-700 hover:bg-red-900/50">削除</button>' : '') +
+                        '</div>' +
+                    '</td>' +
+                '</tr>';
+            });
+            document.getElementById('userTable').innerHTML = html;
+            // ユーザーデータをグローバルに保持
+            window._users = users;
+        }
+
+        function esc(s) { var d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+
+        // ── モーダル ──
+        function showCreateModal() {
+            document.getElementById('modalTitle').textContent = '会員追加';
+            document.getElementById('formMode').value = 'create';
+            document.getElementById('formId').value = '';
+            document.getElementById('formName').value = '';
+            document.getElementById('formEmail').value = '';
+            document.getElementById('formPassword').value = '';
+            document.getElementById('formLesson').value = '1';
+            document.getElementById('passwordField').style.display = '';
+            document.getElementById('formError').classList.add('hidden');
+            document.getElementById('modal').classList.remove('hidden');
+        }
+
+        function showEditModal(id) {
+            var u = window._users.find(function(x) { return x.id == id; });
+            if (!u) return;
+            document.getElementById('modalTitle').textContent = '会員編集';
+            document.getElementById('formMode').value = 'update';
+            document.getElementById('formId').value = u.id;
+            document.getElementById('formName').value = u.name || '';
+            document.getElementById('formEmail').value = u.email;
+            document.getElementById('formLesson').value = u.current_lesson;
+            document.getElementById('passwordField').style.display = 'none';
+            document.getElementById('formError').classList.add('hidden');
+            document.getElementById('modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.add('hidden');
+        }
+
+        // ── フォーム送信 ──
+        document.getElementById('userForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var mode = document.getElementById('formMode').value;
+            var errEl = document.getElementById('formError');
+            errEl.classList.add('hidden');
+
+            var fd = new FormData();
+            fd.append('action', mode);
+
+            if (mode === 'create') {
+                fd.append('name', document.getElementById('formName').value);
+                fd.append('email', document.getElementById('formEmail').value);
+                fd.append('password', document.getElementById('formPassword').value);
+                fd.append('current_lesson', document.getElementById('formLesson').value);
+            } else {
+                fd.append('id', document.getElementById('formId').value);
+                fd.append('name', document.getElementById('formName').value);
+                fd.append('email', document.getElementById('formEmail').value);
+                fd.append('current_lesson', document.getElementById('formLesson').value);
+                fd.append('subscription_status', 'active');
+            }
+
+            fetch(API, { method: 'POST', body: fd })
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    if (data.success) {
+                        closeModal();
+                        loadUsers();
+                    } else {
+                        errEl.textContent = data.error;
+                        errEl.classList.remove('hidden');
+                    }
+                });
+        });
+
+        // ── パスワードリセット ──
+        function resetPw(id) {
+            var pw = prompt('新しいパスワードを入力：');
+            if (!pw) return;
+            var fd = new FormData();
+            fd.append('action', 'reset_password');
+            fd.append('id', id);
+            fd.append('password', pw);
+            fetch(API, { method: 'POST', body: fd })
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    if (data.success) alert('パスワードを変更しました。');
+                    else alert('エラー: ' + data.error);
+                });
+        }
+
+        // ── 削除 ──
+        function deleteUser(id, name) {
+            if (!confirm(name + ' を削除しますか？')) return;
+            var fd = new FormData();
+            fd.append('action', 'delete');
+            fd.append('id', id);
+            fetch(API, { method: 'POST', body: fd })
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    if (data.success) loadUsers();
+                    else alert('エラー: ' + data.error);
+                });
+        }
+
+        // ── 全員レッスン+1 ──
+        function advanceAll() {
+            if (!confirm('全生徒の解放レッスンを+1しますか？\n（管理者は対象外）')) return;
+            var fd = new FormData();
+            fd.append('action', 'advance_all');
+            fetch(API, { method: 'POST', body: fd })
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    if (data.success) { alert('全員のレッスンを+1しました！'); loadUsers(); }
+                    else alert('エラー: ' + data.error);
+                });
+        }
+
+        // ── パスワード生成 ──
+        function generatePassword() {
+            var chars = 'abcdefghjkmnpqrstuvwxyz23456789';
+            var pw = '';
+            for (var i = 0; i < 8; i++) pw += chars[Math.floor(Math.random() * chars.length)];
+            document.getElementById('formPassword').value = pw;
+        }
+
+        // ── 初期化 ──
+        loadUsers();
+    </script>
+</body>
+</html>

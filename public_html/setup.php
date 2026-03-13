@@ -33,10 +33,13 @@ if (PHP_SAPI !== 'cli') {
 $sql = <<<SQL
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL DEFAULT '',
     email VARCHAR(255) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
+    current_lesson INT NOT NULL DEFAULT 1,
+    is_admin TINYINT(1) NOT NULL DEFAULT 0,
     stripe_customer_id VARCHAR(255) DEFAULT NULL,
-    subscription_status ENUM('active', 'inactive', 'trialing', 'past_due', 'canceled') NOT NULL DEFAULT 'inactive',
+    subscription_status ENUM('active', 'inactive', 'trialing', 'past_due', 'canceled') NOT NULL DEFAULT 'active',
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     last_login TIMESTAMP NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -50,16 +53,27 @@ try {
     $pdo = getPDO();
     $pdo->exec($sql);
     $results[] = ['status' => 'ok', 'msg' => 'usersテーブル: 作成完了（または既存）'];
+
+    // 管理者ユーザーがまだいなければ作成
+    $stmt = $pdo->query('SELECT COUNT(*) as cnt FROM users WHERE is_admin = 1');
+    $row = $stmt->fetch();
+    if ((int)$row['cnt'] === 0) {
+        $adminEmail = 'admin@withbt.com';
+        $adminPass  = 'wbt-admin-2026';
+        $hash = password_hash($adminPass, PASSWORD_DEFAULT);
+        $ins = $pdo->prepare('INSERT INTO users (name, email, password_hash, current_lesson, is_admin, subscription_status) VALUES (?, ?, ?, 22, 1, ?)');
+        $ins->execute(['管理者', $adminEmail, $hash, 'active']);
+        $results[] = ['status' => 'ok', 'msg' => "管理者アカウント作成: $adminEmail / $adminPass"];
+    } else {
+        $results[] = ['status' => 'ok', 'msg' => '管理者アカウント: 既に存在'];
+    }
 } catch (PDOException $e) {
-    $results[] = ['status' => 'error', 'msg' => 'usersテーブル作成失敗: ' . $e->getMessage()];
+    $results[] = ['status' => 'error', 'msg' => 'テーブル作成失敗: ' . $e->getMessage()];
     $success = false;
 }
 
-// ── 自己削除 ────────────────────────────────────────
+// ── 自己削除（しない：管理用に残す） ─────────────────
 $selfDeleted = false;
-if ($success) {
-    $selfDeleted = @unlink(__FILE__);
-}
 
 // ── 結果表示 ────────────────────────────────────────
 if (PHP_SAPI === 'cli') {
