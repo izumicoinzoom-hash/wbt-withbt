@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>学習 | WithBrightTomorrow</title>
+    <title>学習 | WBT特定2号塾</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
@@ -23,7 +23,32 @@
         body { background-color: #0F172A; color: #F8FAFC; }
         .bg-grid { background-size: 40px 40px; opacity: 0.08; }
         .card-link { transition: all 0.2s; }
-        .card-link:hover { border-color: #EA580C; transform: translateY(-2px); box-shadow: 0 10px 40px -10px rgba(234, 88, 12, 0.25); }
+        .card-link:hover { transform: translateY(-2px); box-shadow: 0 10px 40px -10px rgba(234, 88, 12, 0.25); }
+        .block-導入 { border-color: #6366f1; } .block-導入:hover { border-color: #818cf8; }
+        .block-法規 { border-color: #3b82f6; } .block-法規:hover { border-color: #60a5fa; }
+        .block-言語 { border-color: #8b5cf6; } .block-言語:hover { border-color: #a78bfa; }
+        .block-点検 { border-color: #14b8a6; } .block-点検:hover { border-color: #2dd4bf; }
+        .block-実技基礎 { border-color: #f59e0b; } .block-実技基礎:hover { border-color: #fbbf24; }
+        .block-復習 { border-color: #64748b; } .block-復習:hover { border-color: #94a3b8; }
+        .block-エンジン { border-color: #ef4444; } .block-エンジン:hover { border-color: #f87171; }
+        .block-シャシ { border-color: #f97316; } .block-シャシ:hover { border-color: #fb923c; }
+        .block-実技 { border-color: #eab308; } .block-実技:hover { border-color: #facc15; }
+        .block-電装 { border-color: #06b6d4; } .block-電装:hover { border-color: #22d3ee; }
+        .block-診断 { border-color: #ec4899; } .block-診断:hover { border-color: #f472b6; }
+        .block-総仕上げ { border-color: #10b981; } .block-総仕上げ:hover { border-color: #34d399; }
+        .tag-導入 { background: #6366f1; }
+        .tag-法規 { background: #3b82f6; }
+        .tag-言語 { background: #8b5cf6; }
+        .tag-点検 { background: #14b8a6; }
+        .tag-実技基礎 { background: #f59e0b; }
+        .tag-復習 { background: #64748b; }
+        .tag-エンジン { background: #ef4444; }
+        .tag-シャシ { background: #f97316; }
+        .tag-実技 { background: #eab308; }
+        .tag-電装 { background: #06b6d4; }
+        .tag-診断 { background: #ec4899; }
+        .tag-総仕上げ { background: #10b981; }
+        .completed-badge { background: #059669; }
     </style>
 </head>
 <body class="antialiased selection:bg-brand-orange selection:text-white flex flex-col min-h-screen">
@@ -34,7 +59,7 @@
                 <div class="bg-brand-orange p-1 rounded text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
                 </div>
-                <span class="font-sans font-bold text-lg text-white">学習</span>
+                <span class="font-sans font-bold text-lg text-white">WBT特定2号塾</span>
             </a>
             <button type="button" id="logoutBtn" class="text-slate-400 hover:text-white text-sm bg-transparent border-none cursor-pointer">ログアウト</button>
         </div>
@@ -45,173 +70,351 @@
         <div class="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
 
             <div class="mb-6">
-                <h1 class="text-2xl md:text-3xl font-bold text-white mb-2">カリキュラム別 問題（全16項目）</h1>
-                <p class="text-slate-400 text-sm">各項目を選択して、理解度チェックのクイズに挑戦してください。</p>
+                <h1 class="text-2xl md:text-3xl font-bold text-white mb-1">カリキュラム（全22回）</h1>
+                <p class="text-slate-400 text-sm">特定技能2号「自動車整備」＋ 整備士2級 対策 / 1コマ30分・全12時間</p>
+                <div class="mt-3 flex items-center gap-3 text-xs text-slate-500">
+                    <span id="overallProgress"></span>
+                </div>
             </div>
 
-            <a href="exam-quiz.html" class="block mb-4 p-4 rounded-xl border-2 border-amber-500/50 bg-amber-500/10 hover:border-amber-400 hover:bg-amber-500/20 transition">
-                <span class="text-amber-400 font-bold text-sm">特定技能2号向け</span>
-                <h2 class="text-lg font-bold text-white mt-1">試験問題クイズ（解説：日本語・インドネシア語）</h2>
-                <p class="text-slate-400 text-xs mt-1">過去の整備士試験問題。解説をBahasa Indonesiaで表示できます。</p>
-            </a>
-
-            <a href="homework.html?lesson=1&day=1" class="block mb-6 p-4 rounded-xl border-2 border-emerald-500/50 bg-emerald-500/10 hover:border-emerald-400 hover:bg-emerald-500/20 transition">
-                <span class="text-emerald-400 font-bold text-sm">毎日コツコツ</span>
-                <h2 class="text-lg font-bold text-white mt-1">毎日10問（宿題クイズ）</h2>
-                <p class="text-slate-400 text-xs mt-1">レッスンごとにDay別の10問クイズ。日本語・インドネシア語の解説付き。</p>
-            </a>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4" id="cardGrid">
-                <a href="learning-quiz.html?c=1" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="1">
-                    <div class="absolute top-3 right-3 text-right" id="cardStats1"></div>
-                    <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">1</span>
-                    <h2 class="text-sm font-bold text-white mb-1 leading-snug">道路運送車両法と特定整備制度</h2>
-                    <span class="text-brand-orange text-xs font-bold">問題を始める →</span>
+            <!-- 特別リンク -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+                <a href="exam-quiz.html" class="block p-4 rounded-xl border-2 border-amber-500/50 bg-amber-500/10 hover:border-amber-400 hover:bg-amber-500/20 transition">
+                    <span class="text-amber-400 font-bold text-xs">過去問</span>
+                    <h2 class="text-sm font-bold text-white mt-1">試験問題クイズ</h2>
+                    <p class="text-slate-400 text-xs mt-1">解説：日本語・インドネシア語</p>
                 </a>
-                <a href="learning-quiz.html?c=2" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="2">
-                    <div class="absolute top-3 right-3 text-right" id="cardStats2"></div>
-                    <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">2</span>
-                    <h2 class="text-sm font-bold text-white mb-1 leading-snug">整備主任者・責任とコンプライアンス</h2>
-                    <span class="text-brand-orange text-xs font-bold">問題を始める →</span>
-                </a>
-                <a href="learning-quiz.html?c=3" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="3">
-                    <div class="absolute top-3 right-3 text-right" id="cardStats3"></div>
-                    <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">3</span>
-                    <h2 class="text-sm font-bold text-white mb-1 leading-snug">専門用語（日本語）基礎</h2>
-                    <span class="text-brand-orange text-xs font-bold">問題を始める →</span>
-                </a>
-                <a href="learning-quiz.html?c=4" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="4">
-                    <div class="absolute top-3 right-3 text-right" id="cardStats4"></div>
-                    <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">4</span>
-                    <h2 class="text-sm font-bold text-white mb-1 leading-snug">法定点検（12ヶ月・24ヶ月）の手順</h2>
-                    <span class="text-brand-orange text-xs font-bold">問題を始める →</span>
-                </a>
-                <a href="learning-quiz.html?c=5" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="5">
-                    <div class="absolute top-3 right-3 text-right" id="cardStats5"></div>
-                    <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">5</span>
-                    <h2 class="text-sm font-bold text-white mb-1 leading-snug">測定機器の取り扱い（ノギス・マイクロメーター）</h2>
-                    <span class="text-brand-orange text-xs font-bold">問題を始める →</span>
-                </a>
-                <a href="learning-quiz.html?c=6" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="6">
-                    <div class="absolute top-3 right-3 text-right" id="cardStats6"></div>
-                    <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">6</span>
-                    <h2 class="text-sm font-bold text-white mb-1 leading-snug">ガソリン・ジーゼルエンジン基礎</h2>
-                    <span class="text-brand-orange text-xs font-bold">問題を始める →</span>
-                </a>
-                <a href="learning-quiz.html?c=7" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="7">
-                    <div class="absolute top-3 right-3 text-right" id="cardStats7"></div>
-                    <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">7</span>
-                    <h2 class="text-sm font-bold text-white mb-1 leading-snug">動力伝達装置（AT／CVT／MT）</h2>
-                    <span class="text-brand-orange text-xs font-bold">問題を始める →</span>
-                </a>
-                <a href="learning-quiz.html?c=8" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="8">
-                    <div class="absolute top-3 right-3 text-right" id="cardStats8"></div>
-                    <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">8</span>
-                    <h2 class="text-sm font-bold text-white mb-1 leading-snug">制動装置（ブレーキ・ABS）</h2>
-                    <span class="text-brand-orange text-xs font-bold">問題を始める →</span>
-                </a>
-                <a href="learning-quiz.html?c=9" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="9">
-                    <div class="absolute top-3 right-3 text-right" id="cardStats9"></div>
-                    <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">9</span>
-                    <h2 class="text-sm font-bold text-white mb-1 leading-snug">シリンダーヘッド分解・組立・トルク管理</h2>
-                    <span class="text-brand-orange text-xs font-bold">問題を始める →</span>
-                </a>
-                <a href="learning-quiz.html?c=10" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="10">
-                    <div class="absolute top-3 right-3 text-right" id="cardStats10"></div>
-                    <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">10</span>
-                    <h2 class="text-sm font-bold text-white mb-1 leading-snug">ブレーキキャリパーO/Hと足回り</h2>
-                    <span class="text-brand-orange text-xs font-bold">問題を始める →</span>
-                </a>
-                <a href="learning-quiz.html?c=11" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="11">
-                    <div class="absolute top-3 right-3 text-right" id="cardStats11"></div>
-                    <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">11</span>
-                    <h2 class="text-sm font-bold text-white mb-1 leading-snug">電気回路の基礎と回路図読解</h2>
-                    <span class="text-brand-orange text-xs font-bold">問題を始める →</span>
-                </a>
-                <a href="learning-quiz.html?c=12" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="12">
-                    <div class="absolute top-3 right-3 text-right" id="cardStats12"></div>
-                    <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">12</span>
-                    <h2 class="text-sm font-bold text-white mb-1 leading-snug">バッテリー・始動・充電系</h2>
-                    <span class="text-brand-orange text-xs font-bold">問題を始める →</span>
-                </a>
-                <a href="learning-quiz.html?c=13" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="13">
-                    <div class="absolute top-3 right-3 text-right" id="cardStats13"></div>
-                    <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">13</span>
-                    <h2 class="text-sm font-bold text-white mb-1 leading-snug">センサー・アクチュエーターとCAN通信</h2>
-                    <span class="text-brand-orange text-xs font-bold">問題を始める →</span>
-                </a>
-                <a href="learning-quiz.html?c=14" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="14">
-                    <div class="absolute top-3 right-3 text-right" id="cardStats14"></div>
-                    <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">14</span>
-                    <h2 class="text-sm font-bold text-white mb-1 leading-snug">故障診断（OBD・スキャンツール実習）</h2>
-                    <span class="text-brand-orange text-xs font-bold">問題を始める →</span>
-                </a>
-                <a href="learning-quiz.html?c=15" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="15">
-                    <div class="absolute top-3 right-3 text-right" id="cardStats15"></div>
-                    <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">15</span>
-                    <h2 class="text-sm font-bold text-white mb-1 leading-snug">特定技能2号試験対策（学科・実技の要点）</h2>
-                    <span class="text-brand-orange text-xs font-bold">問題を始める →</span>
-                </a>
-                <a href="learning-quiz.html?c=16" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="16">
-                    <div class="absolute top-3 right-3 text-right" id="cardStats16"></div>
-                    <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">16</span>
-                    <h2 class="text-sm font-bold text-white mb-1 leading-snug">総合演習・模擬試験</h2>
-                    <span class="text-brand-orange text-xs font-bold">問題を始める →</span>
+                <a href="homework.html?lesson=1&day=1" class="block p-4 rounded-xl border-2 border-emerald-500/50 bg-emerald-500/10 hover:border-emerald-400 hover:bg-emerald-500/20 transition">
+                    <span class="text-emerald-400 font-bold text-xs">毎日コツコツ</span>
+                    <h2 class="text-sm font-bold text-white mt-1">毎日10問（宿題）</h2>
+                    <p class="text-slate-400 text-xs mt-1">レッスン別Day形式・解説付き</p>
                 </a>
             </div>
+
+            <!-- 1ヶ月目: 導入・法規・専門用語・法定点検① -->
+            <section class="mb-8">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="text-xs font-mono text-slate-500 bg-slate-800 px-2 py-0.5 rounded">1ヶ月目</span>
+                    <h2 class="text-lg font-bold text-white">導入・法規・言語・点検</h2>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3" id="month1">
+
+                    <a href="homework.html?lesson=1" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg block-導入" data-lesson="1">
+                        <div class="flex items-start justify-between mb-2">
+                            <span class="inline-flex items-center justify-center bg-brand-orange text-white w-7 h-7 rounded-lg text-xs font-mono font-bold shrink-0">1</span>
+                            <span class="tag-導入 text-white text-xs px-2 py-0.5 rounded-full font-bold">導入</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1 leading-snug">オリエンテーション・試験の全体像</h3>
+                        <p class="text-slate-500 text-xs mb-2">特定技能2号制度・試験構成・学習計画</p>
+                        <span class="text-brand-orange text-xs font-bold">宿題を始める →</span>
+                    </a>
+
+                    <a href="homework.html?lesson=2" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg block-法規" data-lesson="2">
+                        <div class="flex items-start justify-between mb-2">
+                            <span class="inline-flex items-center justify-center bg-brand-orange text-white w-7 h-7 rounded-lg text-xs font-mono font-bold shrink-0">2</span>
+                            <span class="tag-法規 text-white text-xs px-2 py-0.5 rounded-full font-bold">法規</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1 leading-snug">道路運送車両法①</h3>
+                        <p class="text-slate-500 text-xs mb-2">目的・車両区分・車検制度</p>
+                        <span class="text-brand-orange text-xs font-bold">宿題を始める →</span>
+                    </a>
+
+                    <a href="homework.html?lesson=3" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg block-法規" data-lesson="3">
+                        <div class="flex items-start justify-between mb-2">
+                            <span class="inline-flex items-center justify-center bg-brand-orange text-white w-7 h-7 rounded-lg text-xs font-mono font-bold shrink-0">3</span>
+                            <span class="tag-法規 text-white text-xs px-2 py-0.5 rounded-full font-bold">法規</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1 leading-snug">道路運送車両法②</h3>
+                        <p class="text-slate-500 text-xs mb-2">特定整備制度・認証工場・指定工場</p>
+                        <span class="text-brand-orange text-xs font-bold">宿題を始める →</span>
+                    </a>
+
+                    <a href="homework.html?lesson=4" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg block-法規" data-lesson="4">
+                        <div class="flex items-start justify-between mb-2">
+                            <span class="inline-flex items-center justify-center bg-brand-orange text-white w-7 h-7 rounded-lg text-xs font-mono font-bold shrink-0">4</span>
+                            <span class="tag-法規 text-white text-xs px-2 py-0.5 rounded-full font-bold">法規</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1 leading-snug">整備主任者・コンプライアンス</h3>
+                        <p class="text-slate-500 text-xs mb-2">役割・資格要件・罰則</p>
+                        <span class="text-brand-orange text-xs font-bold">宿題を始める →</span>
+                    </a>
+
+                    <a href="homework.html?lesson=5" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg block-言語" data-lesson="5">
+                        <div class="flex items-start justify-between mb-2">
+                            <span class="inline-flex items-center justify-center bg-brand-orange text-white w-7 h-7 rounded-lg text-xs font-mono font-bold shrink-0">5</span>
+                            <span class="tag-言語 text-white text-xs px-2 py-0.5 rounded-full font-bold">言語</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1 leading-snug">専門用語（日本語）基礎</h3>
+                        <p class="text-slate-500 text-xs mb-2">整備用語の読み方・意味・部品名称</p>
+                        <span class="text-brand-orange text-xs font-bold">宿題を始める →</span>
+                    </a>
+
+                    <a href="homework.html?lesson=6" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg block-点検" data-lesson="6">
+                        <div class="flex items-start justify-between mb-2">
+                            <span class="inline-flex items-center justify-center bg-brand-orange text-white w-7 h-7 rounded-lg text-xs font-mono font-bold shrink-0">6</span>
+                            <span class="tag-点検 text-white text-xs px-2 py-0.5 rounded-full font-bold">点検</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1 leading-snug">法定点検①（12ヶ月点検）</h3>
+                        <p class="text-slate-500 text-xs mb-2">点検項目・手順・記録簿</p>
+                        <span class="text-brand-orange text-xs font-bold">宿題を始める →</span>
+                    </a>
+
+                </div>
+            </section>
+
+            <!-- 2ヶ月目: 法定点検②・中間テスト①・エンジン・制動 -->
+            <section class="mb-8">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="text-xs font-mono text-slate-500 bg-slate-800 px-2 py-0.5 rounded">2ヶ月目</span>
+                    <h2 class="text-lg font-bold text-white">点検・実技基礎・エンジン・シャシ</h2>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3" id="month2">
+
+                    <a href="homework.html?lesson=7" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg block-点検" data-lesson="7">
+                        <div class="flex items-start justify-between mb-2">
+                            <span class="inline-flex items-center justify-center bg-brand-orange text-white w-7 h-7 rounded-lg text-xs font-mono font-bold shrink-0">7</span>
+                            <span class="tag-点検 text-white text-xs px-2 py-0.5 rounded-full font-bold">点検</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1 leading-snug">法定点検②（24ヶ月点検）</h3>
+                        <p class="text-slate-500 text-xs mb-2">追加項目・車検との関係・チェックリスト</p>
+                        <span class="text-brand-orange text-xs font-bold">宿題を始める →</span>
+                    </a>
+
+                    <a href="homework.html?lesson=8" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg block-実技基礎" data-lesson="8">
+                        <div class="flex items-start justify-between mb-2">
+                            <span class="inline-flex items-center justify-center bg-brand-orange text-white w-7 h-7 rounded-lg text-xs font-mono font-bold shrink-0">8</span>
+                            <span class="tag-実技基礎 text-white text-xs px-2 py-0.5 rounded-full font-bold">実技基礎</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1 leading-snug">測定機器の取り扱い</h3>
+                        <p class="text-slate-500 text-xs mb-2">ノギス・マイクロメーター・読み取り</p>
+                        <span class="text-brand-orange text-xs font-bold">宿題を始める →</span>
+                    </a>
+
+                    <a href="homework.html?lesson=9" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg block-復習" data-lesson="9">
+                        <div class="flex items-start justify-between mb-2">
+                            <span class="inline-flex items-center justify-center bg-brand-orange text-white w-7 h-7 rounded-lg text-xs font-mono font-bold shrink-0">9</span>
+                            <span class="tag-復習 text-white text-xs px-2 py-0.5 rounded-full font-bold">復習</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1 leading-snug">中間確認テスト①</h3>
+                        <p class="text-slate-500 text-xs mb-2">第1〜8回の復習・弱点把握</p>
+                        <span class="text-brand-orange text-xs font-bold">宿題を始める →</span>
+                    </a>
+
+                    <a href="homework.html?lesson=10" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg block-エンジン" data-lesson="10">
+                        <div class="flex items-start justify-between mb-2">
+                            <span class="inline-flex items-center justify-center bg-brand-orange text-white w-7 h-7 rounded-lg text-xs font-mono font-bold shrink-0">10</span>
+                            <span class="tag-エンジン text-white text-xs px-2 py-0.5 rounded-full font-bold">エンジン</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1 leading-snug">エンジン基礎①（構造・部品）</h3>
+                        <p class="text-slate-500 text-xs mb-2">4サイクル・主要部品・ガソリン/ディーゼル</p>
+                        <span class="text-brand-orange text-xs font-bold">宿題を始める →</span>
+                    </a>
+
+                    <a href="homework.html?lesson=11" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg block-エンジン" data-lesson="11">
+                        <div class="flex items-start justify-between mb-2">
+                            <span class="inline-flex items-center justify-center bg-brand-orange text-white w-7 h-7 rounded-lg text-xs font-mono font-bold shrink-0">11</span>
+                            <span class="tag-エンジン text-white text-xs px-2 py-0.5 rounded-full font-bold">エンジン</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1 leading-snug">エンジン基礎②（燃焼・試験対策）</h3>
+                        <p class="text-slate-500 text-xs mb-2">圧縮比・ノッキング・冷却/潤滑系</p>
+                        <span class="text-brand-orange text-xs font-bold">宿題を始める →</span>
+                    </a>
+
+                    <a href="homework.html?lesson=12" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg block-シャシ" data-lesson="12">
+                        <div class="flex items-start justify-between mb-2">
+                            <span class="inline-flex items-center justify-center bg-brand-orange text-white w-7 h-7 rounded-lg text-xs font-mono font-bold shrink-0">12</span>
+                            <span class="tag-シャシ text-white text-xs px-2 py-0.5 rounded-full font-bold">シャシ</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1 leading-snug">動力伝達装置</h3>
+                        <p class="text-slate-500 text-xs mb-2">AT/CVT/MT・トルクコンバーター</p>
+                        <span class="text-brand-orange text-xs font-bold">宿題を始める →</span>
+                    </a>
+
+                    <a href="homework.html?lesson=13" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg block-シャシ" data-lesson="13">
+                        <div class="flex items-start justify-between mb-2">
+                            <span class="inline-flex items-center justify-center bg-brand-orange text-white w-7 h-7 rounded-lg text-xs font-mono font-bold shrink-0">13</span>
+                            <span class="tag-シャシ text-white text-xs px-2 py-0.5 rounded-full font-bold">シャシ</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1 leading-snug">制動装置（ブレーキ・ABS）</h3>
+                        <p class="text-slate-500 text-xs mb-2">ディスク/ドラム・ABS・ブレーキ液</p>
+                        <span class="text-brand-orange text-xs font-bold">宿題を始める →</span>
+                    </a>
+
+                </div>
+            </section>
+
+            <!-- 3ヶ月目: 実技・中間テスト②・電装系 -->
+            <section class="mb-8">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="text-xs font-mono text-slate-500 bg-slate-800 px-2 py-0.5 rounded">3ヶ月目</span>
+                    <h2 class="text-lg font-bold text-white">実技・電装</h2>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3" id="month3">
+
+                    <a href="homework.html?lesson=14" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg block-実技" data-lesson="14">
+                        <div class="flex items-start justify-between mb-2">
+                            <span class="inline-flex items-center justify-center bg-brand-orange text-white w-7 h-7 rounded-lg text-xs font-mono font-bold shrink-0">14</span>
+                            <span class="tag-実技 text-white text-xs px-2 py-0.5 rounded-full font-bold">実技</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1 leading-snug">シリンダーヘッド分解・組立</h3>
+                        <p class="text-slate-500 text-xs mb-2">トルク管理・ガスケット・締め付け順序</p>
+                        <span class="text-brand-orange text-xs font-bold">宿題を始める →</span>
+                    </a>
+
+                    <a href="homework.html?lesson=15" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg block-実技" data-lesson="15">
+                        <div class="flex items-start justify-between mb-2">
+                            <span class="inline-flex items-center justify-center bg-brand-orange text-white w-7 h-7 rounded-lg text-xs font-mono font-bold shrink-0">15</span>
+                            <span class="tag-実技 text-white text-xs px-2 py-0.5 rounded-full font-bold">実技</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1 leading-snug">ブレーキキャリパーO/H・足回り</h3>
+                        <p class="text-slate-500 text-xs mb-2">シール交換・パッド残量・アライメント</p>
+                        <span class="text-brand-orange text-xs font-bold">宿題を始める →</span>
+                    </a>
+
+                    <a href="homework.html?lesson=16" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg block-復習" data-lesson="16">
+                        <div class="flex items-start justify-between mb-2">
+                            <span class="inline-flex items-center justify-center bg-brand-orange text-white w-7 h-7 rounded-lg text-xs font-mono font-bold shrink-0">16</span>
+                            <span class="tag-復習 text-white text-xs px-2 py-0.5 rounded-full font-bold">復習</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1 leading-snug">中間確認テスト②</h3>
+                        <p class="text-slate-500 text-xs mb-2">第10〜15回の復習・弱点把握</p>
+                        <span class="text-brand-orange text-xs font-bold">宿題を始める →</span>
+                    </a>
+
+                    <a href="homework.html?lesson=17" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg block-電装" data-lesson="17">
+                        <div class="flex items-start justify-between mb-2">
+                            <span class="inline-flex items-center justify-center bg-brand-orange text-white w-7 h-7 rounded-lg text-xs font-mono font-bold shrink-0">17</span>
+                            <span class="tag-電装 text-white text-xs px-2 py-0.5 rounded-full font-bold">電装</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1 leading-snug">電気回路の基礎と回路図読解</h3>
+                        <p class="text-slate-500 text-xs mb-2">オームの法則・直列/並列・回路図記号</p>
+                        <span class="text-brand-orange text-xs font-bold">宿題を始める →</span>
+                    </a>
+
+                    <a href="homework.html?lesson=18" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg block-電装" data-lesson="18">
+                        <div class="flex items-start justify-between mb-2">
+                            <span class="inline-flex items-center justify-center bg-brand-orange text-white w-7 h-7 rounded-lg text-xs font-mono font-bold shrink-0">18</span>
+                            <span class="tag-電装 text-white text-xs px-2 py-0.5 rounded-full font-bold">電装</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1 leading-snug">バッテリー・始動・充電系</h3>
+                        <p class="text-slate-500 text-xs mb-2">セル数・スターター・オルタネーター</p>
+                        <span class="text-brand-orange text-xs font-bold">宿題を始める →</span>
+                    </a>
+
+                    <a href="homework.html?lesson=19" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg block-電装" data-lesson="19">
+                        <div class="flex items-start justify-between mb-2">
+                            <span class="inline-flex items-center justify-center bg-brand-orange text-white w-7 h-7 rounded-lg text-xs font-mono font-bold shrink-0">19</span>
+                            <span class="tag-電装 text-white text-xs px-2 py-0.5 rounded-full font-bold">電装</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1 leading-snug">センサー・アクチュエーター・CAN通信</h3>
+                        <p class="text-slate-500 text-xs mb-2">O2/水温/クランク角センサー・ECU</p>
+                        <span class="text-brand-orange text-xs font-bold">宿題を始める →</span>
+                    </a>
+
+                </div>
+            </section>
+
+            <!-- 4ヶ月目: 故障診断・過去問演習・模擬試験 -->
+            <section class="mb-8">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="text-xs font-mono text-slate-500 bg-slate-800 px-2 py-0.5 rounded">4ヶ月目</span>
+                    <h2 class="text-lg font-bold text-white">故障診断・総仕上げ</h2>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3" id="month4">
+
+                    <a href="homework.html?lesson=20" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg block-診断" data-lesson="20">
+                        <div class="flex items-start justify-between mb-2">
+                            <span class="inline-flex items-center justify-center bg-brand-orange text-white w-7 h-7 rounded-lg text-xs font-mono font-bold shrink-0">20</span>
+                            <span class="tag-診断 text-white text-xs px-2 py-0.5 rounded-full font-bold">診断</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1 leading-snug">故障診断①（OBD・DTC）</h3>
+                        <p class="text-slate-500 text-xs mb-2">OBD-II・故障コード・診断フロー</p>
+                        <span class="text-brand-orange text-xs font-bold">宿題を始める →</span>
+                    </a>
+
+                    <a href="homework.html?lesson=21" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg block-診断" data-lesson="21">
+                        <div class="flex items-start justify-between mb-2">
+                            <span class="inline-flex items-center justify-center bg-brand-orange text-white w-7 h-7 rounded-lg text-xs font-mono font-bold shrink-0">21</span>
+                            <span class="tag-診断 text-white text-xs px-2 py-0.5 rounded-full font-bold">診断</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1 leading-snug">故障診断②（スキャンツール実習）</h3>
+                        <p class="text-slate-500 text-xs mb-2">DTC読み取り・フリーズフレーム・記録</p>
+                        <span class="text-brand-orange text-xs font-bold">宿題を始める →</span>
+                    </a>
+
+                    <a href="homework.html?lesson=22" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg block-総仕上げ" data-lesson="22">
+                        <div class="flex items-start justify-between mb-2">
+                            <span class="inline-flex items-center justify-center bg-brand-orange text-white w-7 h-7 rounded-lg text-xs font-mono font-bold shrink-0">22</span>
+                            <span class="tag-総仕上げ text-white text-xs px-2 py-0.5 rounded-full font-bold">総仕上げ</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1 leading-snug">試験直前対策・総合模擬試験</h3>
+                        <p class="text-slate-500 text-xs mb-2">全分野総復習・時間配分・当日対策</p>
+                        <span class="text-brand-orange text-xs font-bold">宿題を始める →</span>
+                    </a>
+
+                </div>
+            </section>
+
         </div>
     </main>
 
+    <footer class="border-t border-slate-800 py-4 text-center text-slate-600 text-xs">
+        WithBrightTomorrow | Engineering Bridge カリキュラム（全22回・12時間）
+    </footer>
+
     <script>
         (function() {
-            var curriculumCounts = { 1:9, 2:7, 3:8, 4:7, 5:7, 6:16, 7:11, 8:12, 9:7, 10:12, 11:11, 12:11, 13:12, 14:9, 15:7, 16:7 };
             var userEmail = (sessionStorage.getItem('wbt_user_email') || 'guest').replace(/[^a-zA-Z0-9@._-]/g, '_');
 
-            function getCardStats(c) {
-                var total = curriculumCounts[c] || 1;
-                var answered = 0, correct = 0;
-                try {
-                    var s = sessionStorage.getItem('wbt_quiz_state_' + userEmail + '_' + c);
-                    if (s) {
-                        var st = JSON.parse(s);
-                        answered = st.answered || 0;
-                        correct = st.correct || 0;
-                    } else {
-                        var ls = localStorage.getItem('wbt_quiz_' + userEmail + '_' + c);
-                        if (ls) {
-                            var d = JSON.parse(ls);
-                            answered = d.answered || 0;
-                            correct = d.correct || 0;
-                        }
-                    }
-                } catch (e) {}
-                var prog = total ? Math.round((answered / total) * 100) : 0;
-                var acc = answered ? Math.round((correct / answered) * 100) : 0;
-                return { progress: prog, accuracy: acc, answered: answered, total: total };
-            }
-
-            function updateCardStats() {
-                for (var i = 1; i <= 16; i++) {
-                    var el = document.getElementById('cardStats' + i);
-                    if (!el) continue;
-                    var st = getCardStats(i);
-                    if (st.answered > 0) {
-                        el.innerHTML = '<span class="text-slate-400 text-xs block">進捗 ' + st.progress + '%</span><span class="text-brand-orange font-mono font-bold text-sm">正答 ' + st.accuracy + '%</span>';
-                    } else {
-                        el.innerHTML = '<span class="text-slate-500 text-xs">—</span>';
-                    }
-                }
-            }
-
+            // ログアウト
             document.getElementById('logoutBtn').addEventListener('click', function() {
-                for (var i = 1; i <= 16; i++) sessionStorage.removeItem('wbt_quiz_state_' + userEmail + '_' + i);
                 sessionStorage.removeItem('wbt_logged_in');
                 sessionStorage.removeItem('wbt_user_email');
-                for (var i = 1; i <= 16; i++) sessionStorage.removeItem('wbt_quiz_state_' + i);
                 window.location.href = 'login.html';
             });
-            if (!sessionStorage.getItem('wbt_logged_in')) { window.location.href = 'login.html'; return; }
-            updateCardStats();
+
+            // ログインチェック
+            if (!sessionStorage.getItem('wbt_logged_in')) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // 宿題の完了状況を表示
+            var cards = document.querySelectorAll('[data-lesson]');
+            var completedCount = 0;
+            cards.forEach(function(card) {
+                var lesson = card.getAttribute('data-lesson');
+                var completedDays = 0;
+                var totalDays = 0;
+                // localStorageからDay完了状況をチェック
+                for (var d = 1; d <= 20; d++) {
+                    var key = 'wbt_hw_' + lesson + '_' + d;
+                    var val = localStorage.getItem(key);
+                    if (val !== null) {
+                        totalDays = d;
+                        if (val === 'done' || val === '1' || val === 'true') {
+                            completedDays++;
+                        }
+                    }
+                }
+                if (completedDays > 0) {
+                    var badge = document.createElement('div');
+                    badge.className = 'mt-2 text-xs';
+                    if (completedDays >= totalDays && totalDays > 0) {
+                        badge.innerHTML = '<span class="completed-badge text-white px-2 py-0.5 rounded-full">完了</span>';
+                        completedCount++;
+                    } else {
+                        badge.innerHTML = '<span class="text-slate-400">' + completedDays + '/' + totalDays + ' Day完了</span>';
+                    }
+                    card.querySelector('span:last-child').before(badge);
+                }
+            });
+
+            // 全体進捗
+            var el = document.getElementById('overallProgress');
+            if (el) {
+                el.textContent = '進捗: ' + completedCount + ' / 22 レッスン完了';
+            }
         })();
     </script>
 </body>
