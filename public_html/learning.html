@@ -1,4 +1,3 @@
-<?php require_once __DIR__ . '/auth_check.php'; ?>
 <!DOCTYPE html>
 <html lang="ja" class="scroll-smooth">
 <head>
@@ -37,7 +36,7 @@
                 </div>
                 <span class="font-sans font-bold text-lg text-white">学習</span>
             </a>
-            <a href="logout.php" class="text-slate-400 hover:text-white text-sm">ログアウト</a>
+            <button type="button" id="logoutBtn" class="text-slate-400 hover:text-white text-sm bg-transparent border-none cursor-pointer">ログアウト</button>
         </div>
     </header>
 
@@ -63,97 +62,97 @@
             </a>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4" id="cardGrid">
-                <a href="learning-quiz.php?c=1" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="1">
+                <a href="learning-quiz.html?c=1" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="1">
                     <div class="absolute top-3 right-3 text-right" id="cardStats1"></div>
                     <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">1</span>
                     <h2 class="text-sm font-bold text-white mb-1 leading-snug">道路運送車両法と特定整備制度</h2>
                     <span class="text-brand-orange text-xs font-bold">問題を始める →</span>
                 </a>
-                <a href="learning-quiz.php?c=2" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="2">
+                <a href="learning-quiz.html?c=2" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="2">
                     <div class="absolute top-3 right-3 text-right" id="cardStats2"></div>
                     <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">2</span>
                     <h2 class="text-sm font-bold text-white mb-1 leading-snug">整備主任者・責任とコンプライアンス</h2>
                     <span class="text-brand-orange text-xs font-bold">問題を始める →</span>
                 </a>
-                <a href="learning-quiz.php?c=3" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="3">
+                <a href="learning-quiz.html?c=3" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="3">
                     <div class="absolute top-3 right-3 text-right" id="cardStats3"></div>
                     <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">3</span>
                     <h2 class="text-sm font-bold text-white mb-1 leading-snug">専門用語（日本語）基礎</h2>
                     <span class="text-brand-orange text-xs font-bold">問題を始める →</span>
                 </a>
-                <a href="learning-quiz.php?c=4" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="4">
+                <a href="learning-quiz.html?c=4" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="4">
                     <div class="absolute top-3 right-3 text-right" id="cardStats4"></div>
                     <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">4</span>
                     <h2 class="text-sm font-bold text-white mb-1 leading-snug">法定点検（12ヶ月・24ヶ月）の手順</h2>
                     <span class="text-brand-orange text-xs font-bold">問題を始める →</span>
                 </a>
-                <a href="learning-quiz.php?c=5" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="5">
+                <a href="learning-quiz.html?c=5" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="5">
                     <div class="absolute top-3 right-3 text-right" id="cardStats5"></div>
                     <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">5</span>
                     <h2 class="text-sm font-bold text-white mb-1 leading-snug">測定機器の取り扱い（ノギス・マイクロメーター）</h2>
                     <span class="text-brand-orange text-xs font-bold">問題を始める →</span>
                 </a>
-                <a href="learning-quiz.php?c=6" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="6">
+                <a href="learning-quiz.html?c=6" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="6">
                     <div class="absolute top-3 right-3 text-right" id="cardStats6"></div>
                     <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">6</span>
                     <h2 class="text-sm font-bold text-white mb-1 leading-snug">ガソリン・ジーゼルエンジン基礎</h2>
                     <span class="text-brand-orange text-xs font-bold">問題を始める →</span>
                 </a>
-                <a href="learning-quiz.php?c=7" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="7">
+                <a href="learning-quiz.html?c=7" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="7">
                     <div class="absolute top-3 right-3 text-right" id="cardStats7"></div>
                     <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">7</span>
                     <h2 class="text-sm font-bold text-white mb-1 leading-snug">動力伝達装置（AT／CVT／MT）</h2>
                     <span class="text-brand-orange text-xs font-bold">問題を始める →</span>
                 </a>
-                <a href="learning-quiz.php?c=8" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="8">
+                <a href="learning-quiz.html?c=8" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="8">
                     <div class="absolute top-3 right-3 text-right" id="cardStats8"></div>
                     <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">8</span>
                     <h2 class="text-sm font-bold text-white mb-1 leading-snug">制動装置（ブレーキ・ABS）</h2>
                     <span class="text-brand-orange text-xs font-bold">問題を始める →</span>
                 </a>
-                <a href="learning-quiz.php?c=9" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="9">
+                <a href="learning-quiz.html?c=9" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="9">
                     <div class="absolute top-3 right-3 text-right" id="cardStats9"></div>
                     <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">9</span>
                     <h2 class="text-sm font-bold text-white mb-1 leading-snug">シリンダーヘッド分解・組立・トルク管理</h2>
                     <span class="text-brand-orange text-xs font-bold">問題を始める →</span>
                 </a>
-                <a href="learning-quiz.php?c=10" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="10">
+                <a href="learning-quiz.html?c=10" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="10">
                     <div class="absolute top-3 right-3 text-right" id="cardStats10"></div>
                     <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">10</span>
                     <h2 class="text-sm font-bold text-white mb-1 leading-snug">ブレーキキャリパーO/Hと足回り</h2>
                     <span class="text-brand-orange text-xs font-bold">問題を始める →</span>
                 </a>
-                <a href="learning-quiz.php?c=11" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="11">
+                <a href="learning-quiz.html?c=11" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="11">
                     <div class="absolute top-3 right-3 text-right" id="cardStats11"></div>
                     <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">11</span>
                     <h2 class="text-sm font-bold text-white mb-1 leading-snug">電気回路の基礎と回路図読解</h2>
                     <span class="text-brand-orange text-xs font-bold">問題を始める →</span>
                 </a>
-                <a href="learning-quiz.php?c=12" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="12">
+                <a href="learning-quiz.html?c=12" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="12">
                     <div class="absolute top-3 right-3 text-right" id="cardStats12"></div>
                     <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">12</span>
                     <h2 class="text-sm font-bold text-white mb-1 leading-snug">バッテリー・始動・充電系</h2>
                     <span class="text-brand-orange text-xs font-bold">問題を始める →</span>
                 </a>
-                <a href="learning-quiz.php?c=13" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="13">
+                <a href="learning-quiz.html?c=13" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="13">
                     <div class="absolute top-3 right-3 text-right" id="cardStats13"></div>
                     <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">13</span>
                     <h2 class="text-sm font-bold text-white mb-1 leading-snug">センサー・アクチュエーターとCAN通信</h2>
                     <span class="text-brand-orange text-xs font-bold">問題を始める →</span>
                 </a>
-                <a href="learning-quiz.php?c=14" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="14">
+                <a href="learning-quiz.html?c=14" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="14">
                     <div class="absolute top-3 right-3 text-right" id="cardStats14"></div>
                     <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">14</span>
                     <h2 class="text-sm font-bold text-white mb-1 leading-snug">故障診断（OBD・スキャンツール実習）</h2>
                     <span class="text-brand-orange text-xs font-bold">問題を始める →</span>
                 </a>
-                <a href="learning-quiz.php?c=15" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="15">
+                <a href="learning-quiz.html?c=15" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="15">
                     <div class="absolute top-3 right-3 text-right" id="cardStats15"></div>
                     <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">15</span>
                     <h2 class="text-sm font-bold text-white mb-1 leading-snug">特定技能2号試験対策（学科・実技の要点）</h2>
                     <span class="text-brand-orange text-xs font-bold">問題を始める →</span>
                 </a>
-                <a href="learning-quiz.php?c=16" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="16">
+                <a href="learning-quiz.html?c=16" class="card-link block relative bg-slate-800/80 border-2 border-slate-700 rounded-xl p-4 shadow-lg" data-c="16">
                     <div class="absolute top-3 right-3 text-right" id="cardStats16"></div>
                     <span class="inline-block bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold mb-3">16</span>
                     <h2 class="text-sm font-bold text-white mb-1 leading-snug">総合演習・模擬試験</h2>
@@ -204,6 +203,14 @@
                 }
             }
 
+            document.getElementById('logoutBtn').addEventListener('click', function() {
+                for (var i = 1; i <= 16; i++) sessionStorage.removeItem('wbt_quiz_state_' + userEmail + '_' + i);
+                sessionStorage.removeItem('wbt_logged_in');
+                sessionStorage.removeItem('wbt_user_email');
+                for (var i = 1; i <= 16; i++) sessionStorage.removeItem('wbt_quiz_state_' + i);
+                window.location.href = 'login.html';
+            });
+            if (!sessionStorage.getItem('wbt_logged_in')) { window.location.href = 'login.html'; return; }
             updateCardStats();
         })();
     </script>
