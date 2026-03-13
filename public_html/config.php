@@ -1,9 +1,9 @@
 <?php
 // DB設定（Xserverに合わせて変更）
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'YOUR_DB_NAME');
-define('DB_USER', 'YOUR_DB_USER');
-define('DB_PASS', 'YOUR_DB_PASS');
+define('DB_NAME', 'withbt_wbt');
+define('DB_USER', 'withbt_wbt');
+define('DB_PASS', 'Prologue514');
 define('DB_CHARSET', 'utf8mb4');
 
 // セッション設定
