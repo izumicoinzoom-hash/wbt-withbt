@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>試験問題クイズ（特定技能2号） | WithBrightTomorrow</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { brand: { navy: '#0F172A', dark: '#020617', orange: '#EA580C', red: '#DC2626', slate: '#F1F5F9' } },
+                    fontFamily: { sans: ['"Noto Sans JP"', 'sans-serif'], mono: ['"JetBrains Mono"', 'monospace'], display: ['"Oswald"', 'sans-serif'] },
+                    backgroundImage: { 'grid-pattern': "radial-gradient(circle, #334155 1px, transparent 1px)" }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #0F172A; color: #F8FAFC; }
+        .bg-grid { background-size: 40px 40px; opacity: 0.08; }
+        .quiz-option { transition: all 0.2s; }
+        .quiz-option:hover { background-color: rgba(234, 88, 12, 0.15); border-color: rgba(234, 88, 12, 0.5); }
+        .quiz-option.selected { border-color: #EA580C; background-color: rgba(234, 88, 12, 0.2); }
+        .quiz-option.correct { border-color: #22c55e; background-color: rgba(34, 197, 94, 0.2); }
+        .quiz-option.incorrect { border-color: #DC2626; background-color: rgba(220, 38, 38, 0.15); }
+        .quiz-option.disabled { pointer-events: none; opacity: 0.8; }
+        .explain-tab { transition: all 0.2s; }
+        .explain-tab.active { background-color: rgba(234, 88, 12, 0.3); border-color: #EA580C; color: white; }
+        .explain-tab:not(.active) { color: #94a3b8; border-color: #475569; }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-orange selection:text-white flex flex-col min-h-screen">
+
+    <header class="w-full py-4 border-b border-slate-700/50 bg-brand-navy/95 backdrop-blur-sm sticky top-0 z-30">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <a href="learning.html" class="text-slate-400 hover:text-white text-sm flex items-center gap-1">← 学習トップ</a>
+                <span class="text-slate-600">|</span>
+                <span id="headerTitle" class="text-white font-bold text-sm md:text-base">試験問題クイズ（特定技能2号）</span>
+            </div>
+            <button type="button" id="logoutBtn" class="text-slate-400 hover:text-white text-sm bg-transparent border-none cursor-pointer">ログアウト</button>
+        </div>
+    </header>
+
+    <main class="flex-grow relative pt-6 pb-16">
+        <div class="absolute inset-0 bg-grid-pattern bg-grid z-0"></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
+
+            <!-- 開始画面: 試験選択 -->
+            <div id="startArea" class="space-y-6">
+                <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-6">
+                    <h1 class="text-xl md:text-2xl font-bold text-white mb-2">試験問題クイズ（特定技能2号向け）</h1>
+                    <p class="text-slate-400 text-sm mb-4">過去の整備士試験問題です。解説は<strong class="text-brand-orange">日本語</strong>と<strong class="text-amber-400">インドネシア語（Bahasa Indonesia）</strong>で表示できます。</p>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">受験する試験を選んでください</label>
+                    <select id="sourceSelect" class="w-full max-w-md bg-slate-700 border border-slate-600 text-white rounded-lg px-4 py-2 focus:ring-2 focus:ring-brand-orange">
+                        <option value="">— 選択 —</option>
+                        <option value="all">全試験から出題（ランダム）</option>
+                    </select>
+                    <button type="button" id="startBtn" class="mt-4 px-6 py-3 bg-brand-orange text-white font-bold rounded-lg hover:bg-orange-600 transition disabled:opacity-50" disabled>開始</button>
+                </div>
+            </div>
+
+            <!-- クイズ画面 -->
+            <div id="quizArea" class="hidden space-y-6">
+                <div class="grid grid-cols-2 gap-4 mb-8">
+                    <div class="bg-slate-800/80 border border-slate-700 rounded-xl p-4">
+                        <div class="text-slate-400 text-xs font-bold mb-1">進捗</div>
+                        <div class="flex items-baseline gap-2">
+                            <span id="progressCount" class="text-2xl font-bold text-white font-mono">0</span>
+                            <span class="text-slate-400 text-sm">/ <span id="totalCount">0</span> 問</span>
+                        </div>
+                        <div class="mt-2 h-2 bg-slate-700 rounded-full overflow-hidden">
+                            <div id="progressBar" class="h-full bg-brand-orange rounded-full transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800/80 border border-slate-700 rounded-xl p-4">
+                        <div class="text-slate-400 text-xs font-bold mb-1">正答率</div>
+                        <div class="flex items-baseline gap-2">
+                            <span id="accuracyPercent" class="text-2xl font-bold text-white font-mono">—</span>
+                            <span class="text-slate-400 text-sm">%</span>
+                        </div>
+                        <p id="accuracySub" class="text-slate-500 text-xs mt-1">回答後に表示</p>
+                    </div>
+                </div>
+
+                <div id="questionCard" class="bg-slate-800/80 border border-slate-700 rounded-2xl p-6 md:p-8 shadow-xl">
+                    <div class="text-brand-orange font-mono text-xs font-bold mb-3">QUESTION <span id="currentNum">1</span></div>
+                    <p id="questionSource" class="text-slate-500 text-xs mb-2"></p>
+                    <h2 id="questionText" class="text-xl md:text-2xl font-bold text-white mb-6 leading-relaxed"></h2>
+                    <div id="optionsList" class="space-y-3"></div>
+                    <div id="feedbackArea" class="mt-6 hidden">
+                        <div class="flex gap-2 mb-3">
+                            <button type="button" id="tabJa" class="explain-tab active px-4 py-2 rounded-lg border-2 text-sm font-bold">日本語</button>
+                            <button type="button" id="tabId" class="explain-tab px-4 py-2 rounded-lg border-2 text-sm font-bold">Bahasa Indonesia</button>
+                        </div>
+                        <div id="feedbackMessage" class="p-4 rounded-lg text-sm font-medium min-h-[4rem]"></div>
+                        <div id="explanationBox" class="mt-3 p-4 rounded-lg bg-slate-700/50 border border-slate-600 text-sm whitespace-pre-wrap"></div>
+                        <button type="button" id="nextBtn" class="mt-4 w-full md:w-auto px-8 py-3 bg-brand-orange text-white font-bold rounded-lg hover:bg-orange-600 transition">次の問題へ</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 完了画面 -->
+            <div id="completeArea" class="hidden text-center py-12">
+                <div class="w-20 h-20 bg-brand-orange/20 text-brand-orange rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <h2 class="text-2xl font-bold text-white mb-2">全問完了</h2>
+                <p class="text-slate-400 mb-6">正答率は <span id="finalAccuracy" class="text-brand-orange font-bold font-mono">0</span>% でした。</p>
+                <a href="learning.html" class="inline-block px-6 py-3 bg-slate-700 text-white font-bold rounded-lg hover:bg-slate-600 transition mr-3">カリキュラム一覧へ</a>
+                <button type="button" id="retryBtn" class="px-6 py-3 bg-brand-orange text-white font-bold rounded-lg hover:bg-orange-600 transition">もう一度挑戦する</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="data/exam-quiz-data.js"></script>
+    <script>
+        (function() {
+            var rawData = null;
+            var quizData = [];
+            var sourceIdToNum = {}; // sourceId -> 表示用番号（試験1, 試験2, ...）
+            var state = { current: 0, answered: 0, correct: 0, answers: [] };
+            var explainLang = 'ja'; // 'ja' | 'id'
+
+            function getData() { return rawData; }
+            function getQuestions() { return quizData; }
+
+            function updateProgress() {
+                var total = quizData.length;
+                var done = state.answered;
+                var pct = total ? Math.round((done / total) * 100) : 0;
+                document.getElementById('totalCount').textContent = total;
+                document.getElementById('progressCount').textContent = done;
+                document.getElementById('progressBar').style.width = pct + '%';
+                var correctRate = state.answered ? Math.round((state.correct / state.answered) * 100) : 0;
+                var accEl = document.getElementById('accuracyPercent');
+                var subEl = document.getElementById('accuracySub');
+                if (state.answered) {
+                    accEl.textContent = correctRate;
+                    accEl.className = 'text-2xl font-bold font-mono ' + (correctRate >= 70 ? 'text-green-400' : correctRate >= 50 ? 'text-brand-orange' : 'text-red-400');
+                    subEl.textContent = state.correct + ' / ' + state.answered + ' 問正解';
+                } else {
+                    accEl.textContent = '—';
+                    subEl.textContent = '回答後に表示';
+                }
+            }
+
+            function setExplanationText(item) {
+                var box = document.getElementById('explanationBox');
+                if (explainLang === 'id') {
+                    if (item.explanationId) {
+                        box.textContent = item.explanationId;
+                    } else {
+                        box.textContent = '（インドネシア語の解説はまだ生成されていません。管理者がクイズシステムのREADMEに従い、GEMINI_API_KEY を設定して parse-exam-md.js を実行すると生成されます。）';
+                    }
+                } else {
+                    box.textContent = item.explanationJa || '(解説なし)';
+                }
+            }
+
+            function showQuestion() {
+                if (state.current >= quizData.length) {
+                    document.getElementById('quizArea').classList.add('hidden');
+                    document.getElementById('completeArea').classList.remove('hidden');
+                    document.getElementById('finalAccuracy').textContent = state.answered ? Math.round((state.correct / state.answered) * 100) : 0;
+                    return;
+                }
+                var item = quizData[state.current];
+                document.getElementById('currentNum').textContent = state.current + 1;
+                document.getElementById('questionSource').textContent = '試験' + (sourceIdToNum[item.sourceId] || '?') + ' No.' + item.no;
+                document.getElementById('questionText').textContent = item.q;
+                document.getElementById('optionsList').innerHTML = '';
+                document.getElementById('feedbackArea').classList.add('hidden');
+                item.options.forEach(function(opt, i) {
+                    var div = document.createElement('button');
+                    div.type = 'button';
+                    div.className = 'quiz-option w-full text-left p-4 rounded-xl border-2 border-slate-600 bg-slate-800/50 text-white font-medium';
+                    div.dataset.index = i;
+                    div.textContent = opt;
+                    div.addEventListener('click', function() { onSelect(div, i, item.correct, item); });
+                    document.getElementById('optionsList').appendChild(div);
+                });
+                updateProgress();
+            }
+
+            function onSelect(clickedEl, chosenIndex, correctIndex, item) {
+                var list = document.getElementById('optionsList');
+                var opts = list.querySelectorAll('.quiz-option');
+                opts.forEach(function(o) { o.classList.add('disabled'); });
+                clickedEl.classList.add('selected');
+                if (chosenIndex === correctIndex) {
+                    clickedEl.classList.add('correct');
+                    state.correct++;
+                } else {
+                    clickedEl.classList.add('incorrect');
+                    if (opts[correctIndex]) opts[correctIndex].classList.add('correct');
+                }
+                state.answered++;
+                state.answers[state.current] = chosenIndex === correctIndex;
+
+                var fb = document.getElementById('feedbackArea');
+                var msg = document.getElementById('feedbackMessage');
+                if (chosenIndex === correctIndex) {
+                    msg.className = 'p-4 rounded-lg text-sm font-medium bg-green-500/20 text-green-400 border border-green-500/30';
+                    msg.textContent = '正解です。';
+                } else {
+                    msg.className = 'p-4 rounded-lg text-sm font-medium bg-red-500/20 text-red-400 border border-red-500/30';
+                    msg.textContent = '不正解です。正解は「' + item.options[correctIndex] + '」です。';
+                }
+                explainLang = 'ja';
+                document.getElementById('tabJa').classList.add('active');
+                document.getElementById('tabId').classList.remove('active');
+                setExplanationText(item);
+                fb.classList.remove('hidden');
+            }
+
+            document.getElementById('tabJa').addEventListener('click', function() {
+                explainLang = 'ja';
+                document.getElementById('tabJa').classList.add('active');
+                document.getElementById('tabId').classList.remove('active');
+                if (quizData[state.current]) setExplanationText(quizData[state.current]);
+            });
+            document.getElementById('tabId').addEventListener('click', function() {
+                explainLang = 'id';
+                document.getElementById('tabId').classList.add('active');
+                document.getElementById('tabJa').classList.remove('active');
+                if (quizData[state.current]) setExplanationText(quizData[state.current]);
+            });
+
+            document.getElementById('nextBtn').addEventListener('click', function() {
+                state.current++;
+                showQuestion();
+            });
+
+            function shuffleArray(arr) {
+                var a = arr.slice();
+                for (var i = a.length - 1; i > 0; i--) {
+                    var j = Math.floor(Math.random() * (i + 1));
+                    var t = a[i]; a[i] = a[j]; a[j] = t;
+                }
+                return a;
+            }
+
+            document.getElementById('startBtn').addEventListener('click', function() {
+                var sid = document.getElementById('sourceSelect').value;
+                if (!sid || !rawData || !rawData.questions.length) return;
+                if (sid === 'all') {
+                    quizData = shuffleArray(rawData.questions);
+                } else {
+                    quizData = shuffleArray(rawData.questions.filter(function(q) { return q.sourceId === sid; }));
+                }
+                if (quizData.length === 0) { alert('この試験には問題がありません。'); return; }
+                state = { current: 0, answered: 0, correct: 0, answers: [] };
+                document.getElementById('startArea').classList.add('hidden');
+                document.getElementById('quizArea').classList.remove('hidden');
+                document.getElementById('completeArea').classList.add('hidden');
+                showQuestion();
+            });
+
+            document.getElementById('retryBtn').addEventListener('click', function() {
+                quizData = shuffleArray(quizData);
+                state.current = 0;
+                state.answered = 0;
+                state.correct = 0;
+                state.answers = [];
+                document.getElementById('completeArea').classList.add('hidden');
+                document.getElementById('quizArea').classList.remove('hidden');
+                showQuestion();
+            });
+
+            document.getElementById('logoutBtn').addEventListener('click', function() {
+                sessionStorage.removeItem('wbt_logged_in');
+                sessionStorage.removeItem('wbt_user_email');
+                window.location.href = 'login.html';
+            });
+
+            if (!sessionStorage.getItem('wbt_logged_in')) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            function applyData(data) {
+                if (!data || !data.sources || !data.questions) return false;
+                rawData = data;
+                sourceIdToNum = {};
+                var sel = document.getElementById('sourceSelect');
+                sel.innerHTML = '<option value="">— 選択 —</option><option value="all">全試験から出題（ランダム）</option>';
+                (data.sources || []).forEach(function(s, idx) {
+                    var num = idx + 1;
+                    sourceIdToNum[s.id] = num;
+                    var opt = document.createElement('option');
+                    opt.value = s.id;
+                    opt.textContent = '試験' + num;
+                    sel.appendChild(opt);
+                });
+                document.getElementById('startBtn').disabled = data.questions.length === 0;
+                return true;
+            }
+
+            // URL パラメータ ?set=1 or ?set=2 で自動フィルタ＆開始
+            var urlParams = new URLSearchParams(window.location.search);
+            var setParam = urlParams.get('set');
+            var SET_FILTERS = {
+                '1': { ids: ['r2-10', 'r2-3', 'r3-10', 'r3-3'], title: '過去問演習①（令和2〜3年度）' },
+                '2': { ids: ['r4-10', 'r4-3', 'r5-3'], title: '過去問演習②（令和4〜5年度）' }
+            };
+
+            function autoStartWithSet(data) {
+                if (!applyData(data)) return false;
+                var setInfo = SET_FILTERS[setParam];
+                if (!setInfo) return true; // no set param, show selector as usual
+                // Update title
+                document.getElementById('headerTitle').textContent = setInfo.title;
+                document.title = setInfo.title + ' | WithBrightTomorrow';
+                // Filter questions by source IDs
+                var filtered = rawData.questions.filter(function(q) {
+                    return setInfo.ids.indexOf(q.sourceId) !== -1;
+                });
+                if (filtered.length === 0) { alert('この試験セットには問題がありません。'); return true; }
+                quizData = shuffleArray(filtered);
+                state = { current: 0, answered: 0, correct: 0, answers: [] };
+                document.getElementById('startArea').classList.add('hidden');
+                document.getElementById('quizArea').classList.remove('hidden');
+                showQuestion();
+                return true;
+            }
+
+            if (window.EXAM_QUIZ_DATA && autoStartWithSet(window.EXAM_QUIZ_DATA)) {
+                return;
+            }
+            fetch('data/exam-quiz-data.json')
+                .then(function(r) { return r.ok ? r.json() : Promise.reject(); })
+                .then(function(data) {
+                    if (!autoStartWithSet(data)) throw new Error();
+                })
+                .catch(function() {
+                    document.getElementById('startBtn').disabled = true;
+                    var msg = 'クイズデータを読み込めませんでした。\n\n';
+                    msg += '【確認すること】\n';
+                    msg += '1. ブラウザで「ファイルを直接開く」(file://) の場合は、簡易サーバーで開いてください。\n';
+                    msg += '   例: WBTフォルダで「npx serve public_html」を実行し、表示されたURLから learning.html にアクセス\n';
+                    msg += '2. data/exam-quiz-data.json があるか確認し、なければ「試験問題/クイズシステム」で「node parse-exam-md.js」を実行してください。';
+                    alert(msg);
+                });
+        })();
+    </script>
+</body>
+</html>

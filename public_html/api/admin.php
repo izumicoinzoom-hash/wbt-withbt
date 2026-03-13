@@ -125,7 +125,7 @@ try {
 
         // ── 全生徒のレッスンを+1 ──
         case 'advance_all':
-            $pdo->exec('UPDATE users SET current_lesson = LEAST(current_lesson + 1, 22) WHERE is_admin = 0');
+            $pdo->exec('UPDATE users SET current_lesson = LEAST(current_lesson + 1, 24) WHERE is_admin = 0');
             echo json_encode(['success' => true]);
             break;
 
